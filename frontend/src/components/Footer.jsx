@@ -17,7 +17,7 @@ function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-xs text-gray-600">
-          Built with React · Node.js · MongoDB · OpenAI &nbsp;·&nbsp; © 2025 SkillSprint
+          Built with React · Node.js · MongoDB · Asad &nbsp;·&nbsp; © 2026 SkillSprint
         </div>
       </div>
     </footer>
