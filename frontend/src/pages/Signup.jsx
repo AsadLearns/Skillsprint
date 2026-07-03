@@ -52,7 +52,7 @@ function Signup() {
           <div>
             <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1.5 ml-1">Full name</label>
             <input
-              type="text" name="name" placeholder="Asad Jiwani"
+              type="text" name="name" placeholder="Enter your name"
               value={form.name} onChange={handleChange} required
               className="w-full bg-white/50 border border-gray-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/40 focus:border-purple-600 focus:bg-white transition-all duration-300"
             />
