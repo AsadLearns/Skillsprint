@@ -58,7 +58,10 @@ function Login() {
             />
           </div>
           <div>
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1.5 ml-1">Password</label>
+            <div className="flex justify-between items-center mb-1.5 px-1">
+              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Password</label>
+              <Link to="/forgot-password" className="text-xs font-semibold text-purple-600 hover:text-purple-800 transition">Forgot password?</Link>
+            </div>
             <input
               type="password" name="password" placeholder="••••••••"
               value={form.password} onChange={handleChange} required

@@ -105,3 +105,63 @@ export const getMe = async (req, res) => {
     user: req.user,
   })
 }
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' })
+    }
+
+    const user = await User.findOne({ email })
+    if (!user) {
+      return res.status(404).json({ message: 'User not found with this email' })
+    }
+
+    // Generate a secure 6-digit random code
+    const resetToken = Math.floor(100000 + Math.random() * 900000).toString()
+
+    user.resetPasswordToken = resetToken
+    user.resetPasswordExpires = Date.now() + 3600000 // 1 hour
+
+    await user.save()
+
+    res.status(200).json({
+      message: 'Password reset code generated successfully',
+      demoToken: resetToken
+    })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body
+    if (!token || !newPassword) {
+      return res.status(400).json({ message: 'Code and new password are required' })
+    }
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    })
+
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid or expired reset code' })
+    }
+
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(newPassword, salt)
+
+    user.password = hashedPassword
+    user.resetPasswordToken = null
+    user.resetPasswordExpires = null
+
+    await user.save()
+
+    res.status(200).json({ message: 'Password reset successful' })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
