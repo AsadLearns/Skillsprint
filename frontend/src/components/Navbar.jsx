@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import Logo from './Logo'
 
 function Navbar() {
   const { user, logout } = useAuth()
@@ -16,7 +17,7 @@ function Navbar() {
   return (
     <nav className="nav-blur border-b border-purple-100 px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 backdrop-blur-md">
       <Link to="/" className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">S</div>
+        <Logo />
         <span className="text-xl font-bold gradient-text">SkillSprint</span>
       </Link>
 

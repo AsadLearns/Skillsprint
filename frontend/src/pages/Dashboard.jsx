@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
+import Logo from '../components/Logo'
 
 const skillColors = {
   'Java': 'from-orange-400 to-red-500',
@@ -58,7 +59,7 @@ export default function Dashboard() {
 
       <nav className="nav-blur border-b border-purple-100/50 px-4 md:px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 backdrop-blur-md">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-          <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white font-black text-sm md:text-base shadow-lg shadow-purple-500/20">S</div>
+          <Logo size="w-8 h-8 md:w-9 md:h-9" />
           <span className="text-lg md:text-2xl font-black gradient-text tracking-tight">SkillSprint</span>
         </div>
         <div className="flex items-center gap-2 md:gap-3">

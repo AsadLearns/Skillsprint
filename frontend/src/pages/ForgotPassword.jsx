@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import api from '../services/api'
+import Logo from '../components/Logo'
 
 function ForgotPassword() {
   const [email, setEmail] = useState('')
@@ -61,9 +62,7 @@ function ForgotPassword() {
 
       <div className="w-full max-w-md bg-gray-900/40 border border-gray-800 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-2xl relative z-10 animate-fade-in">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-white font-black text-xl mb-4 shadow-lg shadow-purple-500/20">
-            S
-          </div>
+          <Logo size="w-12 h-12 mb-4 mx-auto" />
           <h1 className="text-2xl font-black text-white tracking-tight">Reset Password</h1>
           <p className="text-gray-400 text-sm mt-2">
             {step === 1 ? 'Enter your email to request a reset code.' : 'Enter the code and set your new password.'}

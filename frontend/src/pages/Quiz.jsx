@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import api from '../services/api'
+import Logo from '../components/Logo'
 
 const skills = ['Java', 'Python', 'React', 'Web Development', 'Node.js', 'AI/ML', 'MongoDB', 'DevOps']
 
@@ -86,7 +87,7 @@ export default function Quiz() {
 
       <nav className="nav-blur border-b border-purple-100/50 px-4 md:px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 backdrop-blur-md">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-          <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md">S</div>
+          <Logo />
           <span className="text-lg md:text-xl font-bold gradient-text tracking-tight">SkillSprint</span>
         </div>
         <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-gray-500 hover:text-purple-700 transition cursor-pointer">← Dashboard</button>

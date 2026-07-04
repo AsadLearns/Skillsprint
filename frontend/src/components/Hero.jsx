@@ -39,14 +39,16 @@ function Hero() {
           ✨ Powered by AI — Free to start
         </div>
 
-        <h1 className="text-6xl font-extrabold text-gray-900 leading-tight max-w-3xl mx-auto mb-6">
-          Learn smarter,{" "}
-          <span className="shimmer">one sprint at a time.</span>
+        <h1 className="text-5xl md:text-7xl font-black text-gray-950 leading-tight max-w-4xl mx-auto mb-6 tracking-tight">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500">Learn smarter,</span>{" "}
+          <span className="relative inline-block">
+            <span className="absolute -inset-1.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-20"></span>
+            <span className="relative shimmer">one sprint at a time.</span>
+          </span>
         </h1>
 
-        <p className="text-gray-500 text-xl mt-4 max-w-xl mx-auto leading-relaxed">
-          Pick a skill, get an AI-generated roadmap, track your progress,
-          and take quizzes — all in one place.
+        <p className="text-gray-600 text-lg md:text-xl mt-4 max-w-2xl mx-auto leading-relaxed font-medium">
+          Generate <span className="text-purple-600 font-bold bg-purple-50 px-2.5 py-0.5 rounded-lg border border-purple-100/30">personalized AI roadmaps</span>, test your skills with <span className="text-pink-600 font-bold bg-pink-50 px-2.5 py-0.5 rounded-lg border border-pink-100/30">interactive quizzes</span>, and master any discipline step-by-step.
         </p>
 
         <div className="flex items-center justify-center gap-4 mt-10 flex-wrap">

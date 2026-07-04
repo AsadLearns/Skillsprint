@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Logo from '../components/Logo'
 
 function Signup() {
   const [form, setForm] = useState({ name: '', email: '', password: '' })
@@ -35,9 +36,7 @@ function Signup() {
 
       <div className="glass-panel rounded-3xl p-8 w-full max-w-md relative z-10 transition-all hover:shadow-2xl hover:shadow-purple-500/5">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-500 rounded-2xl flex items-center justify-center text-white font-black text-2xl mx-auto mb-4 shadow-lg shadow-purple-500/20 animate-float">
-            S
-          </div>
+          <Logo size="w-14 h-14 mx-auto mb-4 animate-float" />
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Create account</h1>
           <p className="text-gray-500 text-sm mt-2">Start learning smarter in just 30 seconds</p>
         </div>
