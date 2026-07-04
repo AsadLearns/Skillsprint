@@ -55,27 +55,33 @@ export default function Dashboard() {
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl animate-pulse-slow"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-400/5 rounded-full blur-3xl animate-pulse-slow"></div>
 
-      <nav className="nav-blur border-b border-purple-100/50 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+      <nav className="nav-blur border-b border-purple-100/50 px-4 md:px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 backdrop-blur-md">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-          <div className="w-9 h-9 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white font-black text-base shadow-lg shadow-purple-500/20">S</div>
-          <span className="text-2xl font-black gradient-text tracking-tight">SkillSprint</span>
+          <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white font-black text-sm md:text-base shadow-lg shadow-purple-500/20">S</div>
+          <span className="text-lg md:text-2xl font-black gradient-text tracking-tight">SkillSprint</span>
         </div>
-        <div className="flex items-center gap-3">
-          <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-xs px-4 py-2.5 rounded-xl font-bold shadow-md shadow-purple-500/10 cursor-pointer">+ New Roadmap</button>
-          <button onClick={() => navigate('/quiz')} className="bg-white/80 border border-purple-200 text-purple-700 text-xs px-4 py-2.5 rounded-xl font-bold hover:bg-purple-50 transition cursor-pointer">🧠 Take Quiz</button>
-          <button onClick={handleLogout} className="text-xs text-gray-500 hover:text-red-500 font-bold transition px-3 py-2 cursor-pointer">Log out</button>
+        <div className="flex items-center gap-2 md:gap-3">
+          <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-bold shadow-md shadow-purple-500/10 cursor-pointer">
+            <span className="md:inline hidden">+ New Roadmap</span>
+            <span className="md:hidden">🗺️ New</span>
+          </button>
+          <button onClick={() => navigate('/quiz')} className="bg-white/80 border border-purple-200 text-purple-700 text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-bold hover:bg-purple-50 transition cursor-pointer">
+            <span className="md:inline hidden">🧠 Take Quiz</span>
+            <span className="md:hidden">🧠 Quiz</span>
+          </button>
+          <button onClick={handleLogout} className="text-[10px] md:text-xs text-gray-500 hover:text-red-500 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
         </div>
       </nav>
 
       <div className="max-w-6xl mx-auto px-6 py-10 relative z-10">
         
         {/* Header section */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-10 animate-slide-up">
           <div>
-            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
               Welcome back, <span className="gradient-text">{user?.name}</span> 👋
             </h1>
-            <p className="text-gray-500 mt-1.5 font-medium">Track your learning sprints, complete milestones, and crush your goals.</p>
+            <p className="text-gray-500 mt-1.5 font-medium text-sm md:text-base">Track your learning sprints, complete milestones, and crush your goals.</p>
           </div>
           <div className="flex items-center gap-3 bg-white/70 backdrop-blur-md border border-white/50 px-5 py-3 rounded-2xl shadow-sm">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-inner">
@@ -89,18 +95,18 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 mb-10">
           {[
-            { label: 'Active Roadmaps', value: roadmaps.length, color: 'text-purple-600', border: 'border-purple-100', bg: 'bg-purple-500/10 text-purple-600', icon: '🗺️' },
-            { label: 'Weeks Completed', value: completedWeeks, color: 'text-emerald-600', border: 'border-emerald-100', bg: 'bg-emerald-500/10 text-emerald-600', icon: '✅' },
-            { label: 'Avg Progress', value: totalProgress + '%', color: 'text-blue-600', border: 'border-blue-100', bg: 'bg-blue-500/10 text-blue-600', icon: '📈' },
-            { label: 'Quiz Avg Score', value: avgQuizScore + '%', color: 'text-pink-600', border: 'border-pink-100', bg: 'bg-pink-500/10 text-pink-600', icon: '🧠' },
-          ].map(s => (
-            <div key={s.label} className="glass-panel rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:scale-[1.02] border border-white/50">
-              <div className={`${s.bg} w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shadow-sm`}>{s.icon}</div>
+            { label: 'Active Roadmaps', value: roadmaps.length, color: 'text-purple-600', border: 'border-purple-100', bg: 'bg-purple-500/10 text-purple-600', icon: '🗺️', delay: 'animation-delay-100' },
+            { label: 'Weeks Completed', value: completedWeeks, color: 'text-emerald-600', border: 'border-emerald-100', bg: 'bg-emerald-500/10 text-emerald-600', icon: '✅', delay: 'animation-delay-200' },
+            { label: 'Avg Progress', value: totalProgress + '%', color: 'text-blue-600', border: 'border-blue-100', bg: 'bg-blue-500/10 text-blue-600', icon: '📈', delay: 'animation-delay-300' },
+            { label: 'Quiz Avg Score', value: avgQuizScore + '%', color: 'text-pink-600', border: 'border-pink-100', bg: 'bg-pink-500/10 text-pink-600', icon: '🧠', delay: 'animation-delay-500' },
+          ].map((s, index) => (
+            <div key={s.label} className={`glass-panel rounded-2xl p-4 md:p-5 flex items-center gap-3 md:gap-4 transition-all duration-300 hover:scale-[1.02] border border-white/50 animate-slide-up ${s.delay}`}>
+              <div className={`${s.bg} w-10 h-10 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-xl md:text-3xl shadow-sm`}>{s.icon}</div>
               <div>
-                <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">{s.label}</p>
-                <p className={`text-2xl font-black mt-1 ${s.color}`}>{s.value}</p>
+                <p className="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-wider">{s.label}</p>
+                <p className={`text-xl md:text-2xl font-black mt-0.5 md:mt-1 ${s.color}`}>{s.value}</p>
               </div>
             </div>
           ))}

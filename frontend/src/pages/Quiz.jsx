@@ -83,12 +83,12 @@ export default function Quiz() {
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl animate-pulse-slow"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-400/5 rounded-full blur-3xl animate-pulse-slow"></div>
 
-      <nav className="nav-blur border-b border-purple-100/50 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+      <nav className="nav-blur border-b border-purple-100/50 px-4 md:px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 backdrop-blur-md">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
           <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md">S</div>
-          <span className="text-xl font-bold gradient-text tracking-tight">SkillSprint</span>
+          <span className="text-lg md:text-xl font-bold gradient-text tracking-tight">SkillSprint</span>
         </div>
-        <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-gray-500 hover:text-purple-700 font-bold transition cursor-pointer">← Dashboard</button>
+        <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-gray-500 hover:text-purple-700 transition cursor-pointer">← Dashboard</button>
       </nav>
 
       <div className="max-w-2xl mx-auto px-6 py-10 relative z-10">
@@ -192,18 +192,32 @@ export default function Quiz() {
               </div>
             </div>
 
+            {/* Sleek Progress Bar */}
+            <div className="w-full bg-slate-200/50 h-1.5 rounded-full overflow-hidden mb-6 border border-slate-200/20 shadow-inner">
+              <div 
+                className="bg-gradient-to-r from-purple-600 to-pink-500 h-full transition-all duration-500 ease-out" 
+                style={{ width: `${((current + 1) / quiz.questions.length) * 100}%` }}
+              />
+            </div>
+
             {/* Pagination nodes */}
             <div className="flex gap-2 mb-6">
               {quiz.questions.map((_, i) => (
                 <button key={i} onClick={() => setCurrent(i)}
                   className={`w-9 h-9 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md' : answers[i] !== undefined ? 'bg-green-500/10 text-green-700 border border-green-200' : 'bg-white border border-slate-200 text-gray-500 hover:border-purple-300'}`}>
-                  {i + 1}
+                  {current === i ? (
+                    <span className="relative flex h-2 w-2 mx-auto mb-0.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                    </span>
+                  ) : null}
+                  {current === i ? '' : i + 1}
                 </button>
               ))}
             </div>
 
             {/* Question Panel */}
-            <div className="glass-panel rounded-3xl p-8 mb-6 border border-white/50 shadow-md">
+            <div key={current} className="glass-panel rounded-3xl p-8 mb-6 border border-white/50 shadow-md animate-slide-up">
               <p className="text-[10px] text-purple-600 font-black uppercase tracking-wider mb-2">Question {current + 1} of {quiz.questions.length}</p>
               <h2 className="text-xl font-bold text-gray-950 leading-snug mb-8">{quiz.questions[current].question}</h2>
               <div className="space-y-3.5">

@@ -306,7 +306,7 @@ function Roadmap() {
                 return (
                   <div key={i} className="relative group">
                     {/* Timeline Node Icon */}
-                    <div className="absolute -left-[45px] md:-left-[53px] top-1 z-20">
+                    <div className="absolute -left-[49px] md:-left-[61px] top-1 z-20">
                       {isCompleted ? (
                         <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm md:text-base border-4 border-white shadow-md">
                           ✓
@@ -383,7 +383,7 @@ function Roadmap() {
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={() => setStudyWeek(null)}></div>
           
           {/* Panel */}
-          <div className="relative w-full max-w-2xl bg-white h-full shadow-2xl flex flex-col z-10 border-l border-purple-100/50">
+          <div className="relative w-full max-w-2xl bg-white h-full shadow-2xl flex flex-col z-10 border-l border-purple-100/50 animate-slide-in-right">
             {/* Header */}
             <div className="p-6 border-b border-purple-100 flex items-center justify-between bg-gradient-to-r from-purple-50 to-pink-50">
               <div>
