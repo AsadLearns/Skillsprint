@@ -78,10 +78,11 @@ export default function Quiz() {
   }
 
   return (
-    <div className="min-h-screen hero-bg">
-      {/* Background Blobs */}
-      <div className="absolute top-10 left-10 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl animate-pulse-slow"></div>
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-400/5 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div className="min-h-screen hero-bg relative overflow-hidden">
+      {/* Drifting Neon Blobs */}
+      <div className="absolute -top-10 -left-10 w-96 h-96 bg-purple-400/20 rounded-full blur-[100px] animate-float-orb-1 pointer-events-none"></div>
+      <div className="absolute -bottom-20 -right-20 w-[450px] h-[450px] bg-pink-400/15 rounded-full blur-[120px] animate-float-orb-2 pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-cyan-400/10 rounded-full blur-[90px] animate-float-orb-1 pointer-events-none"></div>
 
       <nav className="nav-blur border-b border-purple-100/50 px-4 md:px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 backdrop-blur-md">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>

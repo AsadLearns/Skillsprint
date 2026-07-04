@@ -28,9 +28,10 @@ function Hero() {
 
   return (
     <section className="hero-bg py-28 px-6 text-center relative overflow-hidden">
-
-      <div className="orb absolute top-10 left-10 w-72 h-72 bg-purple-300 rounded-full opacity-20"></div>
-      <div className="orb absolute bottom-10 right-10 w-96 h-96 bg-pink-300 rounded-full opacity-15"></div>
+      {/* Drifting Neon Blobs */}
+      <div className="absolute -top-10 -left-10 w-96 h-96 bg-purple-400/25 rounded-full blur-[110px] animate-float-orb-1 pointer-events-none"></div>
+      <div className="absolute -bottom-20 -right-20 w-[450px] h-[450px] bg-pink-400/20 rounded-full blur-[130px] animate-float-orb-2 pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-cyan-400/15 rounded-full blur-[100px] animate-float-orb-1 pointer-events-none"></div>
 
       <div className="relative z-10">
         <div className="floating-badge inline-flex items-center gap-2 bg-white border border-purple-200 text-purple-700 text-sm font-semibold px-5 py-2 rounded-full mb-8 shadow-lg shadow-purple-100">
