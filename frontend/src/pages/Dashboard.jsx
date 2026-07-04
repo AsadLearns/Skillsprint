@@ -22,8 +22,22 @@ export default function Dashboard() {
   const [quizzes, setQuizzes] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
+  const [generatingDemo, setGeneratingDemo] = useState(false)
 
   useEffect(() => { fetchData() }, [])
+
+  const handleStartCuratedTrack = async (skill, level, duration) => {
+    setGeneratingDemo(true)
+    try {
+      const res = await api.post('/roadmap/generate', { skill, level, duration })
+      await fetchData()
+      navigate('/roadmap', { state: { autoLoadRoadmapId: res.data.roadmap._id } })
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setGeneratingDemo(false)
+    }
+  }
 
   const fetchData = async () => {
     try {
@@ -148,7 +162,7 @@ export default function Dashboard() {
                       <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white text-xs px-5 py-3 rounded-xl font-bold shadow-md shadow-purple-600/10 cursor-pointer">Generate first roadmap →</button>
                     </div>
                   ) : roadmaps.slice(0, 3).map(r => (
-                    <div key={r._id} onClick={() => navigate('/roadmap')} className="flex items-center gap-4 p-3.5 rounded-2xl bg-white/40 hover:bg-white/80 border border-transparent hover:border-purple-100 cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
+                    <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="flex items-center gap-4 p-3.5 rounded-2xl bg-white/40 hover:bg-white/80 border border-transparent hover:border-purple-100 cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${skillColors[r.skill] || 'from-purple-500 to-pink-500'} flex items-center justify-center text-white font-black text-sm shadow-md`}>
                         {r.skill.charAt(0)}
                       </div>
@@ -215,16 +229,50 @@ export default function Dashboard() {
             {activeTab === 'roadmaps' && (
               <div>
                 {roadmaps.length === 0 ? (
-                  <div className="text-center py-20 glass-panel rounded-3xl border-dashed border-purple-200 max-w-xl mx-auto p-8">
-                    <div className="text-6xl mb-4">🗺️</div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">No active roadmaps</h2>
-                    <p className="text-gray-500 mb-6 font-medium text-sm">Generate your customized learning path mapping today.</p>
-                    <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white px-8 py-3.5 rounded-xl font-extrabold text-sm shadow-lg shadow-purple-600/20 cursor-pointer">🤖 Generate Roadmap →</button>
+                  <div className="flex flex-col gap-8">
+                    <div className="text-center py-12 glass-panel rounded-3xl border border-dashed border-purple-200 max-w-2xl mx-auto p-8">
+                      <div className="text-5xl mb-4 animate-float inline-block">🗺️</div>
+                      <h2 className="text-xl font-bold text-gray-900 mb-2">No active roadmaps yet</h2>
+                      <p className="text-gray-500 mb-6 font-medium text-sm">Generate a custom AI-guided path or pick one of our speed templates below!</p>
+                      <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white px-8 py-3.5 rounded-xl font-extrabold text-sm shadow-lg shadow-purple-600/20 cursor-pointer">🤖 Generate Roadmap →</button>
+                    </div>
+
+                    {/* Curated Speed Templates */}
+                    <div className="animate-slide-up">
+                      <h3 className="font-extrabold text-xs text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-1.5 justify-center">
+                        <span>⚡</span> Launch a Curated Speed Template
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        {[
+                          { skill: 'React', desc: 'Master state, hooks, responsive layouts & Vercel deployment', level: 'Intermediate', duration: 4, color: 'from-cyan-400 to-blue-500' },
+                          { skill: 'Python', desc: 'Understand basics, OOP, automation, lists & ML basics', level: 'Beginner', duration: 4, color: 'from-blue-400 to-indigo-600' },
+                          { skill: 'DevOps', desc: 'Build Docker pipelines, CI/CD, Git, cloud basics & k8s', level: 'Advanced', duration: 4, color: 'from-purple-500 to-pink-500' }
+                        ].map((tmpl, idx) => (
+                          <div key={idx} className="glass-panel rounded-2xl p-5 border border-white/60 hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-md">
+                            <div>
+                              <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${tmpl.color} flex items-center justify-center text-white font-black text-sm mb-3 shadow-inner`}>
+                                {tmpl.skill.charAt(0)}
+                              </div>
+                              <h4 className="font-extrabold text-gray-950 text-base">{tmpl.skill} Sprint</h4>
+                              <p className="text-xs font-semibold text-purple-600 mt-0.5">{tmpl.level} · {tmpl.duration} Weeks</p>
+                              <p className="text-xs text-gray-400 mt-2 leading-relaxed font-medium">{tmpl.desc}</p>
+                            </div>
+                            <button 
+                              onClick={() => handleStartCuratedTrack(tmpl.skill, tmpl.level, tmpl.duration)}
+                              disabled={generatingDemo}
+                              className="mt-4 w-full bg-white/80 border border-purple-200 hover:bg-purple-50 text-purple-700 font-bold text-xs py-2.5 rounded-xl transition cursor-pointer flex items-center justify-center gap-1 shadow-sm"
+                            >
+                              {generatingDemo ? 'Spawning...' : 'Launch Track 🚀'}
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {roadmaps.map(r => (
-                      <div key={r._id} onClick={() => navigate('/roadmap')} className="glass-panel card-hover rounded-3xl p-6 cursor-pointer border border-white/50 hover:scale-[1.01]">
+                      <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="glass-panel card-hover rounded-3xl p-6 cursor-pointer border border-white/50 hover:scale-[1.01]">
                         <div className="flex items-center gap-4 mb-5">
                           <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${skillColors[r.skill] || 'from-purple-500 to-pink-500'} flex items-center justify-center text-white font-black text-lg shadow-md`}>
                             {r.skill.charAt(0)}

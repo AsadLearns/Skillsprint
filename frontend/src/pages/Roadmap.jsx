@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import api from '../services/api'
 import Logo from '../components/Logo'
 
@@ -28,6 +28,7 @@ function Roadmap() {
   const [error, setError] = useState('')
   const [myRoadmaps, setMyRoadmaps] = useState([])
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [studyWeek, setStudyWeek] = useState(null)
   const [studyTopic, setStudyTopic] = useState('')
@@ -68,6 +69,18 @@ function Roadmap() {
     // Inline Code
     html = html.replace(/`(.*?)`/g, '<code class="bg-purple-50 text-purple-700 font-mono text-xs px-1.5 py-0.5 rounded border border-purple-100">$1</code>');
     
+    // Links (with YouTube styling support)
+    html = html.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+      const isYoutube = url.includes('youtube.com');
+      if (isYoutube) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-rose-50 border border-rose-200 text-rose-700 hover:bg-rose-100 font-black text-xs rounded-xl shadow-sm transition hover:scale-102 my-1 mr-2 cursor-pointer">
+          <svg class="w-4 h-4 text-red-600 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.107C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.388.556a3.003 3.003 0 0 0-2.11 2.107C0 8.053 0 12 0 12s0 3.947.502 5.837a3.003 3.003 0 0 0 2.11 2.107C4.5 20.5 12 20.5 12 20.5s7.5 0 9.388-.556a3.003 3.003 0 0 0 2.11-2.107C24 15.947 24 12 24 12s0-3.947-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          ${text}
+        </a>`;
+      }
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-purple-600 hover:text-purple-800 font-bold underline inline-flex items-center gap-1">🔗 ${text}</a>`;
+    });
+
     // Code Blocks
     html = html.replace(/```[a-z]*\n([\s\S]*?)\n```/g, '<pre class="bg-slate-950 text-slate-200 font-mono text-xs p-4 rounded-2xl border border-slate-800 my-4 overflow-x-auto select-text"><code class="select-text">$1</code></pre>');
     
@@ -82,7 +95,10 @@ function Roadmap() {
 
   useEffect(() => {
     fetchMyRoadmaps()
-  }, [])
+    if (location.state?.autoLoadRoadmapId) {
+      viewRoadmap(location.state.autoLoadRoadmapId)
+    }
+  }, [location.state])
 
   const fetchMyRoadmaps = async () => {
     try {
