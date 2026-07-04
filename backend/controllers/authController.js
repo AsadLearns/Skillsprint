@@ -165,3 +165,46 @@ export const resetPassword = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 }
+
+export const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user._id
+    const { name, bio, title, linkedin, github } = req.body
+
+    const user = await User.findById(userId)
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+
+    if (name) user.name = name
+    if (bio !== undefined) user.bio = bio
+    if (title !== undefined) user.title = title
+    if (linkedin !== undefined) user.linkedin = linkedin
+    if (github !== undefined) user.github = github
+
+    await user.save()
+
+    // Sign new token to keep session valid
+    const jwtSecret = process.env.JWT_SECRET || 'fallbacksecret'
+    const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '7d' })
+
+    res.status(200).json({
+      message: 'Profile updated successfully',
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+        title: user.title,
+        linkedin: user.linkedin,
+        github: user.github,
+        streak: user.streak,
+        quizScore: user.quizScore,
+        currentSkill: user.currentSkill,
+        token
+      }
+    })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}

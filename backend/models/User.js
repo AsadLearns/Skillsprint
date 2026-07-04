@@ -38,6 +38,26 @@ const userSchema = new mongoose.Schema(
       default: 0,
     },
 
+    bio: {
+      type: String,
+      default: "",
+    },
+
+    title: {
+      type: String,
+      default: "Learner Pro",
+    },
+
+    linkedin: {
+      type: String,
+      default: "",
+    },
+
+    github: {
+      type: String,
+      default: "",
+    },
+
     resetPasswordToken: {
       type: String,
       default: null,

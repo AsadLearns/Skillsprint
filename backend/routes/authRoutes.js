@@ -6,6 +6,7 @@ import {
   getMe,
   forgotPassword,
   resetPassword,
+  updateProfile,
 } from '../controllers/authController.js'
 
 import protect from '../middleware/authMiddleware.js'
@@ -21,5 +22,7 @@ router.post('/forgot-password', forgotPassword)
 router.post('/reset-password', resetPassword)
 
 router.get('/me', protect, getMe)
+
+router.put('/update-profile', protect, updateProfile)
 
 export default router

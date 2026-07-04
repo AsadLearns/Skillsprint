@@ -31,6 +31,7 @@ function Navbar() {
         {user ? (
           <>
             <Link to="/dashboard" className="text-sm text-purple-600 font-semibold hover:underline">Dashboard</Link>
+            <Link to="/profile" className="text-sm text-gray-600 font-semibold hover:underline px-2">Profile</Link>
             <button onClick={handleLogout} className="text-sm text-gray-600 hover:text-red-500 transition font-medium px-3 py-2">Log out</button>
           </>
         ) : (
@@ -61,6 +62,7 @@ function Navbar() {
           {user ? (
             <>
               <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-purple-600 font-bold py-2 border-b border-gray-50">Dashboard</Link>
+              <Link to="/profile" onClick={() => setIsOpen(false)} className="text-gray-600 font-bold py-2 border-b border-gray-50">Profile</Link>
               <button onClick={() => { handleLogout(); setIsOpen(false); }} className="text-left text-gray-600 hover:text-red-500 font-bold transition py-2">Log out</button>
             </>
           ) : (

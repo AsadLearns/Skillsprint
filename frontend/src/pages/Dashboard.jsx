@@ -99,13 +99,13 @@ export default function Dashboard() {
             </h1>
             <p className="text-gray-500 mt-1.5 font-medium text-sm md:text-base">Track your learning sprints, complete milestones, and crush your goals.</p>
           </div>
-          <div className="flex items-center gap-3 bg-white/70 backdrop-blur-md border border-white/50 px-5 py-3 rounded-2xl shadow-sm">
+          <div onClick={() => navigate('/profile')} className="flex items-center gap-3 bg-white/70 backdrop-blur-md border border-white/50 px-5 py-3 rounded-2xl shadow-sm cursor-pointer hover:bg-purple-50/50 hover:border-purple-200 transition-all duration-300">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-inner">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div>
               <p className="text-sm font-bold text-gray-800">{user?.name}</p>
-              <p className="text-xs font-semibold text-purple-600 uppercase tracking-wider">Learner Pro</p>
+              <p className="text-xs font-semibold text-purple-600 uppercase tracking-wider">{user?.title || 'Learner Pro'}</p>
             </div>
           </div>
         </div>
