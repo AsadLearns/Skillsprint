@@ -31,6 +31,22 @@ const features = [
     bg: "bg-pink-950/40",
     border: "border-pink-900/40",
   },
+  {
+    icon: "💬",
+    title: "Sprinty AI Assistant",
+    desc: "Chat with Sprinty for guidance, motivation, or to spin up a brand new roadmap right from the conversation.",
+    gradient: "from-cyan-500 to-blue-600",
+    bg: "bg-cyan-950/40",
+    border: "border-cyan-900/40",
+  },
+  {
+    icon: "🎓",
+    title: "Mastery certificates",
+    desc: "Finish 100% of a roadmap and score 60%+ on its quiz to unlock a certificate you can show off on your profile.",
+    gradient: "from-violet-500 to-fuchsia-600",
+    bg: "bg-violet-950/40",
+    border: "border-violet-900/40",
+  },
 ]
 
 function Features() {
@@ -50,7 +66,7 @@ function Features() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
         {features.map(f => (
           <div key={f.title} className="glass-panel card-hover rounded-2xl p-6 relative overflow-hidden">
             <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${f.gradient} opacity-5 rounded-full -mr-8 -mt-8`}></div>

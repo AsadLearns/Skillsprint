@@ -1,7 +1,11 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import StatsBar from "../components/StatsBar";
 import Features from "../components/Features";
 import HowItWorks from "../components/HowItWorks";
+import Testimonials from "../components/Testimonials";
+import FAQ from "../components/FAQ";
+import CTABanner from "../components/CTABanner";
 import Footer from "../components/Footer";
 
 function Home() {
@@ -9,8 +13,12 @@ function Home() {
     <>
       <Navbar />
       <Hero />
+      <StatsBar />
       <Features />
       <HowItWorks />
+      <Testimonials />
+      <FAQ />
+      <CTABanner />
       <Footer />
     </>
   );
