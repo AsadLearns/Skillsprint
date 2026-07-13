@@ -7,17 +7,20 @@ const steps = [
 
 function HowItWorks() {
   return (
-    <section id="how" className="bg-white py-24 px-6">
-      <div className="text-center mb-16">
-        <span className="text-purple-600 font-semibold text-sm uppercase tracking-widest">The process</span>
-        <h2 className="text-4xl font-extrabold text-gray-900 mt-3">
+    <section id="how" className="bg-[#030008] py-24 px-6 relative overflow-hidden">
+      {/* Drifting Neon Blobs for depth */}
+      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div className="text-center mb-16 relative z-10">
+        <span className="text-purple-400 font-semibold text-sm uppercase tracking-widest">The process</span>
+        <h2 className="text-4xl font-extrabold text-slate-100 mt-3">
           How it <span className="gradient-text">works</span>
         </h2>
-        <p className="text-gray-500 mt-4 text-lg">From zero to skilled in four simple steps.</p>
+        <p className="text-slate-400 mt-4 text-lg">From zero to skilled in four simple steps.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto relative">
-        <div className="hidden md:block absolute top-12 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-purple-200 via-pink-200 to-emerald-200 z-0"></div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto relative z-10">
+        <div className="hidden md:block absolute top-10 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-purple-900/60 via-pink-900/60 to-emerald-900/60 z-0"></div>
 
         {steps.map((s, i) => (
           <div key={s.n} className="step-card text-center relative z-10">
@@ -27,8 +30,8 @@ function HowItWorks() {
             <div className={`inline-block text-xs font-bold bg-gradient-to-r ${s.color} text-transparent bg-clip-text mb-2`}>
               STEP {s.n}
             </div>
-            <h3 className="font-bold text-gray-900 text-lg mb-2">{s.title}</h3>
-            <p className="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
+            <h3 className="font-bold text-slate-100 text-lg mb-2">{s.title}</h3>
+            <p className="text-sm text-slate-400 leading-relaxed font-medium">{s.desc}</p>
           </div>
         ))}
       </div>

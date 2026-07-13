@@ -34,12 +34,12 @@ function Hero() {
       <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-cyan-400/15 rounded-full blur-[100px] animate-float-orb-1 pointer-events-none"></div>
 
       <div className="relative z-10">
-        <div className="floating-badge inline-flex items-center gap-2 bg-white border border-purple-200 text-purple-700 text-sm font-semibold px-5 py-2 rounded-full mb-8 shadow-lg shadow-purple-100">
+        <div className="floating-badge inline-flex items-center gap-2 bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 text-sm font-semibold px-5 py-2 rounded-full mb-8 shadow-2xl">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
           ✨ Powered by AI — Free to start
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-black text-gray-950 leading-tight max-w-4xl mx-auto mb-6 tracking-tight">
+        <h1 className="text-5xl md:text-7xl font-black text-slate-100 leading-tight max-w-4xl mx-auto mb-6 tracking-tight animate-slide-up">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500">Learn smarter,</span>{" "}
           <span className="relative inline-block">
             <span className="absolute -inset-1.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-20"></span>
@@ -47,20 +47,20 @@ function Hero() {
           </span>
         </h1>
 
-        <p className="text-gray-600 text-lg md:text-xl mt-4 max-w-2xl mx-auto leading-relaxed font-medium">
-          Generate <span className="text-purple-600 font-bold bg-purple-50 px-2.5 py-0.5 rounded-lg border border-purple-100/30">personalized AI roadmaps</span>, test your skills with <span className="text-pink-600 font-bold bg-pink-50 px-2.5 py-0.5 rounded-lg border border-pink-100/30">interactive quizzes</span>, and master any discipline step-by-step.
+        <p className="text-slate-400 text-lg md:text-xl mt-4 max-w-2xl mx-auto leading-relaxed font-medium">
+          Generate <span className="text-purple-400 font-bold bg-purple-950/40 px-2.5 py-0.5 rounded-lg border border-purple-900/50">personalized AI roadmaps</span>, test your skills with <span className="text-pink-400 font-bold bg-pink-950/40 px-2.5 py-0.5 rounded-lg border border-pink-900/50">interactive quizzes</span>, and master any discipline step-by-step.
         </p>
 
         <div className="flex items-center justify-center gap-4 mt-10 flex-wrap">
-          <button onClick={handleStart} className="glow-btn bg-gradient-to-r from-purple-600 to-purple-800 text-white px-8 py-4 rounded-xl font-bold text-base cursor-pointer">
+          <button onClick={handleStart} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-base cursor-pointer">
             🚀 Start learning free
           </button>
-          <a href="#how" className="bg-white border-2 border-purple-200 text-purple-700 px-8 py-4 rounded-xl font-bold text-base hover:bg-purple-50 transition inline-block">
+          <a href="#how" className="bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 hover:bg-purple-950/40 px-8 py-4 rounded-xl font-bold text-base transition inline-block">
             ▶ See how it works
           </a>
         </div>
 
-        <div className="flex items-center justify-center gap-6 mt-8 text-sm text-gray-400">
+        <div className="flex items-center justify-center gap-6 mt-8 text-sm text-slate-500">
           <span>✅ No credit card</span>
           <span>✅ Free forever plan</span>
           <span>✅ AI-powered</span>

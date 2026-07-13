@@ -37,52 +37,52 @@ function Signup() {
       <div className="glass-panel rounded-3xl p-8 w-full max-w-md relative z-10 transition-all hover:shadow-2xl hover:shadow-purple-500/5">
         <div className="text-center mb-8">
           <Logo size="w-14 h-14 mx-auto mb-4 animate-float" />
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Create account</h1>
-          <p className="text-gray-500 text-sm mt-2">Start learning smarter in just 30 seconds</p>
+          <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Create account</h1>
+          <p className="text-slate-400 text-sm mt-2">Start learning smarter in just 30 seconds</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3.5 rounded-2xl mb-6 flex items-center gap-2">
+          <div className="bg-red-950/40 border border-red-900/50 text-red-400 text-sm px-4 py-3.5 rounded-2xl mb-6 flex items-center gap-2 animate-shake">
             <span>⚠️</span> {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1.5 ml-1">Full name</label>
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5 ml-1">Full name</label>
             <input
               type="text" name="name" placeholder="Enter your name"
               value={form.name} onChange={handleChange} required
-              className="w-full bg-white/50 border border-gray-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/40 focus:border-purple-600 focus:bg-white transition-all duration-300"
+              className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition-all duration-300 outline-none"
             />
           </div>
           <div>
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1.5 ml-1">Email address</label>
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5 ml-1">Email address</label>
             <input
               type="email" name="email" placeholder="you@example.com"
               value={form.email} onChange={handleChange} required
-              className="w-full bg-white/50 border border-gray-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/40 focus:border-purple-600 focus:bg-white transition-all duration-300"
+              className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition-all duration-300 outline-none"
             />
           </div>
           <div>
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1.5 ml-1">Password</label>
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5 ml-1">Password</label>
             <input
               type="password" name="password" placeholder="Minimum 6 characters"
               value={form.password} onChange={handleChange} required
-              className="w-full bg-white/50 border border-gray-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/40 focus:border-purple-600 focus:bg-white transition-all duration-300"
+              className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition-all duration-300 outline-none"
             />
           </div>
           <button
             type="submit" disabled={loading}
-            className="glow-btn w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3.5 rounded-2xl font-bold text-sm mt-4 disabled:opacity-50 cursor-pointer shadow-lg shadow-purple-600/20"
+            className="glow-btn w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white py-3.5 rounded-2xl font-bold text-sm mt-4 disabled:opacity-50 cursor-pointer shadow-lg shadow-purple-600/20"
           >
             {loading ? 'Creating account...' : 'Create Account →'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-8">
+        <p className="text-center text-sm text-slate-400 mt-8">
           Already have an account?{' '}
-          <Link to="/login" className="text-purple-600 font-bold hover:text-purple-800 hover:underline transition">Log in</Link>
+          <Link to="/login" className="text-purple-400 font-bold hover:text-purple-300 hover:underline transition">Log in</Link>
         </p>
       </div>
     </div>
