@@ -139,23 +139,33 @@ export default function Dashboard() {
       <div className="absolute -bottom-20 -right-20 w-[450px] h-[450px] bg-pink-400/15 rounded-full blur-[120px] animate-float-orb-2 pointer-events-none"></div>
       <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-cyan-400/10 rounded-full blur-[90px] animate-float-orb-1 pointer-events-none"></div>
 
-      <nav className="nav-blur border-b border-purple-100/50 px-4 md:px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 backdrop-blur-md">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-          <Logo size="w-8 h-8 md:w-9 md:h-9" />
-          <span className="text-lg md:text-2xl font-black gradient-text tracking-tight">SkillSprint</span>
+      <div className="sticky top-0 z-50 w-full">
+        {/* Streetwear Announcement Marquee Ticker */}
+        <div className="w-full bg-gradient-to-r from-purple-950/90 via-pink-950/90 to-purple-950/90 text-[10px] uppercase font-black tracking-widest py-1 border-b border-white/[0.04] overflow-hidden whitespace-nowrap select-none relative z-50">
+          <div className="inline-block animate-marquee">
+            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
         </div>
-        <div className="flex items-center gap-2 md:gap-3">
-          <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-bold shadow-md shadow-purple-500/10 cursor-pointer">
-            <span className="md:inline hidden">+ New Roadmap</span>
-            <span className="md:hidden">🗺️ New</span>
-          </button>
-          <button onClick={() => navigate('/quiz')} className="bg-white/80 border border-purple-200 text-purple-700 text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-bold hover:bg-purple-50 transition cursor-pointer">
-            <span className="md:inline hidden">🧠 Take Quiz</span>
-            <span className="md:hidden">🧠 Quiz</span>
-          </button>
-          <button onClick={handleLogout} className="text-[10px] md:text-xs text-gray-500 hover:text-red-500 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
-        </div>
-      </nav>
+
+        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#030008]/75 backdrop-blur-xl">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
+            <Logo size="w-8 h-8 md:w-9 md:h-9" />
+            <span className="text-lg md:text-2xl font-black gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
+          </div>
+          <div className="flex items-center gap-2 md:gap-3">
+            <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-bold shadow-md shadow-purple-600/10 cursor-pointer">
+              <span className="md:inline hidden">+ New Roadmap</span>
+              <span className="md:hidden">🗺️ New</span>
+            </button>
+            <button onClick={() => navigate('/quiz')} className="bg-[#160d33]/85 hover:bg-[#25194f] text-purple-300 border border-purple-500/20 text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-bold transition cursor-pointer">
+              <span className="md:inline hidden">🧠 Take Quiz</span>
+              <span className="md:hidden">🧠 Quiz</span>
+            </button>
+            <button onClick={handleLogout} className="text-[10px] md:text-xs text-slate-400 hover:text-red-400 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
+          </div>
+        </nav>
+      </div>
 
       <div className="max-w-6xl mx-auto px-6 py-10 relative z-10">
         

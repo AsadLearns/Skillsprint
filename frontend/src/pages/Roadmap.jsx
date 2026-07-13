@@ -173,16 +173,26 @@ function Roadmap() {
       <div className="absolute -bottom-20 -right-20 w-[450px] h-[450px] bg-pink-400/15 rounded-full blur-[120px] animate-float-orb-2 pointer-events-none"></div>
       <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-cyan-400/10 rounded-full blur-[90px] animate-float-orb-1 pointer-events-none"></div>
 
-      <nav className="nav-blur border-b border-purple-100/50 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-          <Logo />
-          <span className="text-xl font-bold gradient-text tracking-tight">SkillSprint</span>
+      <div className="sticky top-0 z-50 w-full">
+        {/* Streetwear Announcement Marquee Ticker */}
+        <div className="w-full bg-gradient-to-r from-purple-950/90 via-pink-950/90 to-purple-950/90 text-[10px] uppercase font-black tracking-widest py-1 border-b border-white/[0.04] overflow-hidden whitespace-nowrap select-none relative z-50">
+          <div className="inline-block animate-marquee">
+            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <button onClick={() => navigate('/quiz')} className="bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 text-xs px-4 py-2 rounded-xl font-bold hover:bg-purple-950/40 transition cursor-pointer">🧠 Take Quiz</button>
-          <button onClick={() => navigate('/dashboard')} className="text-xs text-slate-400 hover:text-purple-300 font-bold transition cursor-pointer">← Dashboard</button>
-        </div>
-      </nav>
+
+        <nav className="nav-blur border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#030008]/75 backdrop-blur-xl">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
+            <Logo />
+            <span className="text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <button onClick={() => navigate('/quiz')} className="bg-[#160d33]/85 hover:bg-[#25194f] text-purple-300 border border-purple-500/20 text-xs px-4 py-2 rounded-xl font-bold transition cursor-pointer">🧠 Take Quiz</button>
+            <button onClick={() => navigate('/dashboard')} className="text-xs text-slate-400 hover:text-purple-300 font-bold transition cursor-pointer">← Dashboard</button>
+          </div>
+        </nav>
+      </div>
 
       <div className="max-w-4xl mx-auto px-6 py-10 relative z-10">
 
