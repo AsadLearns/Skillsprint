@@ -4,16 +4,17 @@ import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import Logo from '../components/Logo'
 import ChatBot from '../components/ChatBot'
+import AnimatedCounter from '../components/AnimatedCounter'
 
 const skillColors = {
-  'Java': 'from-orange-400 to-red-500',
-  'Python': 'from-blue-400 to-blue-600',
-  'React': 'from-cyan-400 to-blue-500',
-  'Web Development': 'from-purple-400 to-pink-500',
-  'Node.js': 'from-green-400 to-emerald-600',
-  'AI/ML': 'from-pink-400 to-rose-500',
-  'MongoDB': 'from-emerald-400 to-teal-600',
-  'DevOps': 'from-amber-400 to-orange-500',
+  'Java': 'from-orange-400 to-red-500 shadow-orange-500/10',
+  'Python': 'from-blue-400 to-blue-600 shadow-blue-500/10',
+  'React': 'from-cyan-400 to-blue-500 shadow-cyan-500/10',
+  'Web Development': 'from-purple-400 to-pink-500 shadow-purple-500/10',
+  'Node.js': 'from-green-400 to-emerald-600 shadow-emerald-500/10',
+  'AI/ML': 'from-pink-400 to-rose-500 shadow-rose-500/10',
+  'MongoDB': 'from-emerald-400 to-teal-600 shadow-teal-500/10',
+  'DevOps': 'from-amber-400 to-orange-500 shadow-orange-500/10',
 }
 
 export default function Dashboard() {
@@ -24,6 +25,72 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
   const [generatingDemo, setGeneratingDemo] = useState(false)
+
+  // Onboarding Sprint Finder States
+  const [finderStep, setFinderStep] = useState(1) // 1: Build, 2: Language, 3: Recommendation
+  const [finderBuild, setFinderBuild] = useState('')
+  const [finderLang, setFinderLang] = useState('')
+  const [finderResult, setFinderResult] = useState(null)
+
+  const handleFinderSelectBuild = (choice) => {
+    setFinderBuild(choice)
+    // If DevOps or Web Dev (no language step needed), go straight to result
+    if (choice === 'devops') {
+      setFinderResult({
+        skill: 'DevOps',
+        level: 'Advanced',
+        explanation: 'Since you want to build automation pipelines and cloud environments, DevOps is your perfect sprint!'
+      })
+      setFinderStep(3)
+    } else {
+      setFinderStep(2)
+    }
+  }
+
+  const handleFinderSelectLang = (lang) => {
+    setFinderLang(lang)
+    let recommendedSkill = 'Web Development'
+    let recommendedLevel = 'Beginner'
+    let explanation = ''
+
+    if (finderBuild === 'web') {
+      recommendedSkill = 'React'
+      recommendedLevel = 'Intermediate'
+      explanation = 'Since you want to build interactive web apps using JavaScript/React, this sprint will teach you frontend state management and API integrations!'
+    } else if (finderBuild === 'mobile') {
+      recommendedSkill = 'Java'
+      recommendedLevel = 'Intermediate'
+      explanation = 'Since you want to write mobile applications, learning Java OOP foundations and mobile layout structures is the perfect route.'
+    } else if (finderBuild === 'backend') {
+      if (lang === 'js') {
+        recommendedSkill = 'Node.js'
+        recommendedLevel = 'Intermediate'
+        explanation = 'Since you want to build server APIs in JavaScript, Node.js and Express is the best back-end roadmap for you!'
+      } else if (lang === 'py') {
+        recommendedSkill = 'Python'
+        recommendedLevel = 'Intermediate'
+        explanation = 'Since you want to build server backends with Python, learning Python structures and scripting is your best starting sprint!'
+      } else {
+        recommendedSkill = 'Java'
+        recommendedLevel = 'Advanced'
+        explanation = 'Since you want to build enterprise backend systems, Java databases and servers is your recommended path!'
+      }
+    } else if (finderBuild === 'ai') {
+      recommendedSkill = 'AI/ML'
+      recommendedLevel = 'Advanced'
+      explanation = 'Since you want to train AI and ML models with Python, this advanced AI/ML foundations sprint is the exact path you need!'
+    }
+
+    setFinderResult({ skill: recommendedSkill, level: recommendedLevel, explanation })
+    setFinderStep(3)
+  }
+
+  const handleFinderReset = () => {
+    setFinderStep(1)
+    setFinderBuild('')
+    setFinderLang('')
+    setFinderResult(null)
+  }
 
   useEffect(() => { fetchData() }, [])
 
@@ -95,18 +162,18 @@ export default function Dashboard() {
         {/* Header section */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-10 animate-slide-up">
           <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
               Welcome back, <span className="gradient-text">{user?.name}</span> 👋
             </h1>
-            <p className="text-gray-500 mt-1.5 font-medium text-sm md:text-base">Track your learning sprints, complete milestones, and crush your goals.</p>
+            <p className="text-slate-400 mt-1.5 font-medium text-sm md:text-base">Track your learning sprints, complete milestones, and crush your goals.</p>
           </div>
-          <div onClick={() => navigate('/profile')} className="flex items-center gap-3 bg-white/70 backdrop-blur-md border border-white/50 px-5 py-3 rounded-2xl shadow-sm cursor-pointer hover:bg-purple-50/50 hover:border-purple-200 transition-all duration-300">
+          <div onClick={() => navigate('/profile')} className="flex items-center gap-3 bg-[#0f0923]/60 backdrop-blur-xl border border-white/[0.05] px-5 py-3 rounded-2xl shadow-lg cursor-pointer hover:bg-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-inner">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="text-sm font-bold text-gray-800">{user?.name}</p>
-              <p className="text-xs font-semibold text-purple-600 uppercase tracking-wider">{user?.title || 'Learner Pro'}</p>
+              <p className="text-sm font-bold text-slate-200">{user?.name}</p>
+              <p className="text-xs font-semibold text-purple-400 uppercase tracking-wider">{user?.title || 'Learner Pro'}</p>
             </div>
           </div>
         </div>
@@ -114,26 +181,28 @@ export default function Dashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 mb-10">
           {[
-            { label: 'Active Roadmaps', value: roadmaps.length, color: 'text-purple-600', border: 'border-purple-100', bg: 'bg-purple-500/10 text-purple-600', icon: '🗺️', delay: 'animation-delay-100' },
-            { label: 'Weeks Completed', value: completedWeeks, color: 'text-emerald-600', border: 'border-emerald-100', bg: 'bg-emerald-500/10 text-emerald-600', icon: '✅', delay: 'animation-delay-200' },
-            { label: 'Avg Progress', value: totalProgress + '%', color: 'text-blue-600', border: 'border-blue-100', bg: 'bg-blue-500/10 text-blue-600', icon: '📈', delay: 'animation-delay-300' },
-            { label: 'Quiz Avg Score', value: avgQuizScore + '%', color: 'text-pink-600', border: 'border-pink-100', bg: 'bg-pink-500/10 text-pink-600', icon: '🧠', delay: 'animation-delay-500' },
+            { label: 'Active Roadmaps', rawVal: roadmaps.length, suffix: '', color: 'text-purple-400', bg: 'bg-purple-500/10 text-purple-400', icon: '🗺️', delay: 'animation-delay-100' },
+            { label: 'Weeks Completed', rawVal: completedWeeks, suffix: '', color: 'text-emerald-400', bg: 'bg-emerald-500/10 text-emerald-400', icon: '✅', delay: 'animation-delay-200' },
+            { label: 'Avg Progress', rawVal: totalProgress, suffix: '%', color: 'text-blue-400', bg: 'bg-blue-500/10 text-blue-400', icon: '📈', delay: 'animation-delay-300' },
+            { label: 'Quiz Avg Score', rawVal: avgQuizScore, suffix: '%', color: 'text-pink-400', bg: 'bg-pink-500/10 text-pink-400', icon: '🧠', delay: 'animation-delay-500' },
           ].map((s, index) => (
-            <div key={s.label} className={`glass-panel rounded-2xl p-4 md:p-5 flex items-center gap-3 md:gap-4 transition-all duration-300 hover:scale-[1.02] border border-white/50 animate-slide-up ${s.delay}`}>
+            <div key={s.label} className={`glass-panel rounded-2xl p-4 md:p-5 flex items-center gap-3 md:gap-4 transition-all duration-300 hover:scale-[1.02] animate-slide-up ${s.delay}`}>
               <div className={`${s.bg} w-10 h-10 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-xl md:text-3xl shadow-sm`}>{s.icon}</div>
               <div>
-                <p className="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-wider">{s.label}</p>
-                <p className={`text-xl md:text-2xl font-black mt-0.5 md:mt-1 ${s.color}`}>{s.value}</p>
+                <p className="text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-wider">{s.label}</p>
+                <p className={`text-xl md:text-2xl font-black mt-0.5 md:mt-1 ${s.color}`}>
+                  <AnimatedCounter value={s.rawVal} suffix={s.suffix} />
+                </p>
               </div>
             </div>
           ))}
         </div>
 
         {/* High-tech toggle switches */}
-        <div className="flex gap-2 mb-8 bg-slate-200/50 backdrop-blur-md p-1.5 rounded-2xl w-fit shadow-inner border border-slate-200/20">
+        <div className="flex gap-2 mb-8 bg-[#0e0722]/60 backdrop-blur-xl p-1.5 rounded-2xl w-fit shadow-2xl border border-white/[0.05]">
           {tabs.map(t => (
             <button key={t} onClick={() => setActiveTab(t)}
-              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === t ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md shadow-purple-600/20' : 'text-gray-500 hover:text-purple-700'}`}>
+              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === t ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md shadow-purple-600/20' : 'text-slate-400 hover:text-purple-300'}`}>
               {t}
             </button>
           ))}
@@ -151,28 +220,28 @@ export default function Dashboard() {
             {activeTab === 'overview' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                <div className="glass-panel rounded-3xl p-6 border border-white/50">
+                <div className="glass-panel rounded-3xl p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-extrabold text-gray-900 text-xl tracking-tight">Active Roadmaps</h2>
-                    <button onClick={() => navigate('/roadmap')} className="text-sm text-purple-600 font-bold hover:text-purple-800 transition cursor-pointer">View all →</button>
+                    <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Active Roadmaps</h2>
+                    <button onClick={() => navigate('/roadmap')} className="text-sm text-purple-400 font-bold hover:text-purple-300 transition cursor-pointer">View all →</button>
                   </div>
                   {roadmaps.length === 0 ? (
-                    <div className="text-center py-10 bg-white/30 rounded-2xl border border-dashed border-purple-200/70 p-6">
+                    <div className="text-center py-10 bg-[#0e0722]/40 border border-dashed border-purple-500/20 rounded-2xl p-6">
                       <div className="text-5xl mb-4">🗺️</div>
-                      <p className="text-gray-500 font-medium text-sm mb-5">No roadmap tracks created yet</p>
+                      <p className="text-slate-400 font-medium text-sm mb-5">No roadmap tracks created yet</p>
                       <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white text-xs px-5 py-3 rounded-xl font-bold shadow-md shadow-purple-600/10 cursor-pointer">Generate first roadmap →</button>
                     </div>
                   ) : roadmaps.slice(0, 3).map(r => (
-                    <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="flex items-center gap-4 p-3.5 rounded-2xl bg-white/40 hover:bg-white/80 border border-transparent hover:border-purple-100 cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
+                    <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="flex items-center gap-4 p-3.5 rounded-2xl bg-[#130b2c]/40 hover:bg-[#180f38]/60 border border-white/[0.04] hover:border-purple-500/20 cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${skillColors[r.skill] || 'from-purple-500 to-pink-500'} flex items-center justify-center text-white font-black text-sm shadow-md`}>
                         {r.skill.charAt(0)}
                       </div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="font-bold text-gray-800 text-sm">{r.skill}</span>
-                          <span className="text-xs font-black text-purple-600">{r.progress}%</span>
+                          <span className="font-bold text-slate-200 text-sm">{r.skill}</span>
+                          <span className="text-xs font-black text-purple-400">{r.progress}%</span>
                         </div>
-                        <div className="bg-gray-100 rounded-full h-2 shadow-inner overflow-hidden">
+                        <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden">
                           <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                         </div>
                       </div>
@@ -180,44 +249,44 @@ export default function Dashboard() {
                   ))}
                 </div>
 
-                <div className="glass-panel rounded-3xl p-6 border border-white/50">
+                <div className="glass-panel rounded-3xl p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-extrabold text-gray-900 text-xl tracking-tight">Recent Quizzes</h2>
-                    <button onClick={() => navigate('/quiz')} className="text-sm text-purple-600 font-bold hover:text-purple-800 transition cursor-pointer">Take quiz →</button>
+                    <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Recent Quizzes</h2>
+                    <button onClick={() => navigate('/quiz')} className="text-sm text-purple-400 font-bold hover:text-purple-300 transition cursor-pointer">Take quiz →</button>
                   </div>
                   {quizzes.length === 0 ? (
-                    <div className="text-center py-10 bg-white/30 rounded-2xl border border-dashed border-purple-200/70 p-6">
+                    <div className="text-center py-10 bg-[#0e0722]/40 border border-dashed border-purple-500/20 rounded-2xl p-6">
                       <div className="text-5xl mb-4">🧠</div>
-                      <p className="text-gray-500 font-medium text-sm mb-5">No quiz logs recorded</p>
-                      <button onClick={() => navigate('/quiz')} className="bg-white text-purple-700 border border-purple-200 text-xs px-5 py-3 rounded-xl font-bold hover:bg-purple-50 transition cursor-pointer">Start a quiz →</button>
+                      <p className="text-slate-400 font-medium text-sm mb-5">No quiz logs recorded</p>
+                      <button onClick={() => navigate('/quiz')} className="bg-[#1b1236]/80 hover:bg-[#281c4e] border border-purple-500/20 text-purple-400 text-xs px-5 py-3 rounded-xl font-bold transition cursor-pointer">Start a quiz →</button>
                     </div>
                   ) : quizzes.slice(0, 4).map(q => (
-                    <div key={q._id} className="flex items-center justify-between p-3.5 rounded-2xl bg-white/40 hover:bg-white/70 border border-transparent hover:border-purple-100 transition-all duration-300 mb-3">
+                    <div key={q._id} className="flex items-center justify-between p-3.5 rounded-2xl bg-[#130b2c]/40 hover:bg-[#180f38]/50 border border-white/[0.03] transition-all duration-300 mb-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-xl shadow-inner">🧠</div>
+                        <div className="w-10 h-10 bg-purple-950/50 rounded-xl flex items-center justify-center text-xl shadow-inner">🧠</div>
                         <div>
-                          <p className="font-bold text-gray-800 text-sm leading-tight">{q.topic}</p>
-                          <p className="text-xs text-gray-400 font-bold mt-0.5">{q.skill}</p>
+                          <p className="font-bold text-slate-200 text-sm leading-tight">{q.topic}</p>
+                          <p className="text-xs text-slate-400 font-bold mt-0.5">{q.skill}</p>
                         </div>
                       </div>
-                      <div className={`text-xs font-black px-3 py-1.5 rounded-full shadow-sm ${q.score >= 80 ? 'bg-green-50 text-green-700 border border-green-100' : q.score >= 50 ? 'bg-yellow-50 text-yellow-700 border border-yellow-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                      <div className={`text-xs font-black px-3 py-1.5 rounded-full shadow-sm border ${q.score >= 80 ? 'bg-green-950/40 text-green-400 border-green-900/50' : q.score >= 50 ? 'bg-yellow-950/40 text-yellow-400 border-yellow-900/50' : 'bg-red-950/40 text-red-400 border-red-900/50'}`}>
                         {q.completed ? q.score + '%' : 'Pending'}
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="md:col-span-2 bg-gradient-to-r from-purple-900 to-slate-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+                <div className="md:col-span-2 bg-gradient-to-r from-purple-950/80 to-indigo-950/80 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl border border-purple-500/15">
                   {/* Decorative element */}
                   <div className="absolute right-0 bottom-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl -mr-20 -mb-20"></div>
-                  
+
                   <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div>
                       <h2 className="text-2xl font-extrabold mb-2 tracking-tight">Ready to learn something new?</h2>
                       <p className="text-purple-200 text-sm font-medium">Generate an advanced, structured learning roadmap for any technical skill instantly.</p>
                     </div>
                     <div className="flex gap-3 flex-wrap">
-                      <button onClick={() => navigate('/roadmap')} className="glow-btn bg-white text-purple-900 font-extrabold text-xs px-5 py-3.5 rounded-xl hover:bg-purple-50 transition cursor-pointer shadow-lg shadow-white/5">🗺️ New Roadmap</button>
+                      <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white font-extrabold text-xs px-5 py-3.5 rounded-xl cursor-pointer">🗺️ New Roadmap</button>
                       <button onClick={() => navigate('/quiz')} className="bg-white/10 border border-white/20 hover:bg-white/20 text-white font-extrabold text-xs px-5 py-3.5 rounded-xl transition cursor-pointer">🧠 Take Quiz</button>
                     </div>
                   </div>
@@ -231,17 +300,109 @@ export default function Dashboard() {
               <div>
                 {roadmaps.length === 0 ? (
                   <div className="flex flex-col gap-8">
-                    <div className="text-center py-12 glass-panel rounded-3xl border border-dashed border-purple-200 max-w-2xl mx-auto p-8">
-                      <div className="text-5xl mb-4 animate-float inline-block">🗺️</div>
-                      <h2 className="text-xl font-bold text-gray-900 mb-2">No active roadmaps yet</h2>
-                      <p className="text-gray-500 mb-6 font-medium text-sm">Generate a custom AI-guided path or pick one of our speed templates below!</p>
-                      <button onClick={() => navigate('/roadmap')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white px-8 py-3.5 rounded-xl font-extrabold text-sm shadow-lg shadow-purple-600/20 cursor-pointer">🤖 Generate Roadmap →</button>
+                    
+                    {/* Onboarding Sprint Finder Wizard */}
+                    <div className="glass-panel rounded-3xl p-6 md:p-8 max-w-2xl mx-auto w-full text-center relative overflow-hidden border border-white/[0.06] shadow-2xl">
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+
+                      {finderStep === 1 && (
+                        <div className="animate-fade-in">
+                          <span className="text-3xl inline-block mb-3 animate-bounce">⚡</span>
+                          <h2 className="text-2xl font-black text-slate-100 tracking-tight mb-2">Find Your Perfect Learning Path</h2>
+                          <p className="text-slate-400 font-medium text-xs md:text-sm mb-8">Choose what you want to create and build:</p>
+                          
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                            {[
+                              { id: 'web', title: '🎨 Web & UI Frontends', desc: 'Build modern, responsive websites & web apps.' },
+                              { id: 'mobile', title: '📱 Mobile Applications', desc: 'Build Android/iOS native or cross-platform apps.' },
+                              { id: 'backend', title: '🛠️ Server APIs & Databases', desc: 'Write backend routes, models & databases.' },
+                              { id: 'devops', title: '🚀 DevOps & Deployments', desc: 'Configure cloud deployments & CI/CD servers.' },
+                              { id: 'ai', title: '🤖 AI, Machine Learning & Scripts', desc: 'Write models, data scripts & automations.' }
+                            ].map((opt) => (
+                              <div 
+                                key={opt.id}
+                                onClick={() => handleFinderSelectBuild(opt.id)}
+                                className="p-4 bg-[#140c2a]/50 hover:bg-[#1f1440]/60 border border-white/[0.05] hover:border-purple-500/30 rounded-2xl cursor-pointer hover:scale-[1.01] transition-all duration-300 shadow-sm"
+                              >
+                                <h4 className="font-extrabold text-slate-100 text-sm">{opt.title}</h4>
+                                <p className="text-[11px] text-slate-400 mt-1 font-medium">{opt.desc}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {finderStep === 2 && (
+                        <div className="animate-fade-in">
+                          <span className="text-3xl inline-block mb-3">💻</span>
+                          <h2 className="text-2xl font-black text-slate-100 tracking-tight mb-2">Preferred Coding Language</h2>
+                          <p className="text-slate-400 font-medium text-xs md:text-sm mb-8">Select the programming language you want to write code in:</p>
+                          
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                            {[
+                              { id: 'js', name: 'JavaScript / React', desc: 'Great for Web & APIs', icon: '💛' },
+                              { id: 'py', name: 'Python', desc: 'Great for AI & Scripting', icon: '🐍' },
+                              { id: 'java', name: 'Java', desc: 'Great for Android & Backends', icon: '☕' }
+                            ].map((lang) => (
+                              <div 
+                                key={lang.id}
+                                onClick={() => handleFinderSelectLang(lang.id)}
+                                className="p-5 bg-[#140c2a]/50 hover:bg-[#1f1440]/60 border border-white/[0.05] hover:border-purple-500/30 rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300 shadow-sm flex flex-col items-center text-center"
+                              >
+                                <span className="text-3xl mb-2">{lang.icon}</span>
+                                <h4 className="font-extrabold text-slate-100 text-xs">{lang.name}</h4>
+                                <p className="text-[10px] text-slate-400 mt-1 font-semibold">{lang.desc}</p>
+                              </div>
+                            ))}
+                          </div>
+
+                          <button 
+                            onClick={() => setFinderStep(1)}
+                            className="text-xs font-bold text-slate-400 hover:text-white transition cursor-pointer"
+                          >
+                            ← Back to choices
+                          </button>
+                        </div>
+                      )}
+
+                      {finderStep === 3 && finderResult && (
+                        <div className="animate-scale-up py-4">
+                          <span className="text-4xl inline-block mb-4">🏆</span>
+                          <span className="text-[10px] font-bold text-purple-400 uppercase tracking-widest block mb-1">Recommended Sprint</span>
+                          <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 tracking-tight mb-2 animate-pulse">
+                            {finderResult.skill} Roadmap
+                          </h2>
+                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+                            Level: {finderResult.level} · 4-Week Track
+                          </p>
+                          
+                          <div className="bg-[#110924]/80 p-5 rounded-2xl border border-purple-500/10 mb-8 max-w-md mx-auto text-left">
+                            <p className="text-xs text-slate-300 font-semibold leading-relaxed">{finderResult.explanation}</p>
+                          </div>
+
+                          <div className="flex gap-4 max-w-sm mx-auto flex-col sm:flex-row">
+                            <button 
+                              disabled={generatingDemo}
+                              onClick={() => handleStartCuratedTrack(finderResult.skill, finderResult.level, 4)}
+                              className="flex-1 glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white font-extrabold text-xs py-3 rounded-xl cursor-pointer shadow-lg transition-all"
+                            >
+                              {generatingDemo ? 'Generating Sprint...' : '🚀 Launch This Sprint'}
+                            </button>
+                            <button 
+                              onClick={handleFinderReset}
+                              className="px-6 py-3 border border-white/[0.08] hover:bg-white/[0.04] text-slate-400 hover:text-white font-bold text-xs rounded-xl cursor-pointer transition"
+                            >
+                              Restart Finder
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Curated Speed Templates */}
                     <div className="animate-slide-up">
-                      <h3 className="font-extrabold text-xs text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-1.5 justify-center">
-                        <span>⚡</span> Launch a Curated Speed Template
+                      <h3 className="font-extrabold text-xs text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-1.5 justify-center">
+                        <span>⚡</span> Or Quick-Launch a Curated Speed Template
                       </h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         {[
@@ -249,19 +410,19 @@ export default function Dashboard() {
                           { skill: 'Python', desc: 'Understand basics, OOP, automation, lists & ML basics', level: 'Beginner', duration: 4, color: 'from-blue-400 to-indigo-600' },
                           { skill: 'DevOps', desc: 'Build Docker pipelines, CI/CD, Git, cloud basics & k8s', level: 'Advanced', duration: 4, color: 'from-purple-500 to-pink-500' }
                         ].map((tmpl, idx) => (
-                          <div key={idx} className="glass-panel rounded-2xl p-5 border border-white/60 hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-md">
+                          <div key={idx} className="glass-panel rounded-2xl p-5 border border-white/[0.05] hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-md">
                             <div>
                               <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${tmpl.color} flex items-center justify-center text-white font-black text-sm mb-3 shadow-inner`}>
                                 {tmpl.skill.charAt(0)}
                               </div>
-                              <h4 className="font-extrabold text-gray-950 text-base">{tmpl.skill} Sprint</h4>
-                              <p className="text-xs font-semibold text-purple-600 mt-0.5">{tmpl.level} · {tmpl.duration} Weeks</p>
-                              <p className="text-xs text-gray-400 mt-2 leading-relaxed font-medium">{tmpl.desc}</p>
+                              <h4 className="font-extrabold text-slate-100 text-base">{tmpl.skill} Sprint</h4>
+                              <p className="text-xs font-semibold text-purple-400 mt-0.5">{tmpl.level} · {tmpl.duration} Weeks</p>
+                              <p className="text-xs text-slate-400 mt-2 leading-relaxed font-medium">{tmpl.desc}</p>
                             </div>
                             <button 
                               onClick={() => handleStartCuratedTrack(tmpl.skill, tmpl.level, tmpl.duration)}
                               disabled={generatingDemo}
-                              className="mt-4 w-full bg-white/80 border border-purple-200 hover:bg-purple-50 text-purple-700 font-bold text-xs py-2.5 rounded-xl transition cursor-pointer flex items-center justify-center gap-1 shadow-sm"
+                              className="mt-4 w-full bg-[#1b1236]/80 hover:bg-[#281c4e] border border-purple-500/20 text-purple-400 font-bold text-xs py-2.5 rounded-xl transition cursor-pointer flex items-center justify-center gap-1 shadow-sm"
                             >
                               {generatingDemo ? 'Spawning...' : 'Launch Track 🚀'}
                             </button>
@@ -273,29 +434,29 @@ export default function Dashboard() {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {roadmaps.map(r => (
-                      <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="glass-panel card-hover rounded-3xl p-6 cursor-pointer border border-white/50 hover:scale-[1.01]">
+                      <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="glass-panel card-hover rounded-3xl p-6 cursor-pointer hover:scale-[1.01] transition-all duration-300">
                         <div className="flex items-center gap-4 mb-5">
                           <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${skillColors[r.skill] || 'from-purple-500 to-pink-500'} flex items-center justify-center text-white font-black text-lg shadow-md`}>
                             {r.skill.charAt(0)}
                           </div>
                           <div>
-                            <h3 className="font-extrabold text-gray-950 tracking-tight text-lg">{r.skill}</h3>
-                            <p className="text-xs font-semibold text-gray-400 mt-0.5">{r.level} · {r.duration} weeks</p>
+                            <h3 className="font-extrabold text-slate-100 tracking-tight text-lg">{r.skill}</h3>
+                            <p className="text-xs font-semibold text-slate-400 mt-0.5">{r.level} · {r.duration} weeks</p>
                           </div>
-                          <span className={`ml-auto text-xs font-black px-3 py-1.5 rounded-full shadow-sm border ${r.progress === 100 ? 'bg-green-50 text-green-700 border-green-100' : 'bg-purple-50 text-purple-700 border-purple-100'}`}>
+                          <span className={`ml-auto text-xs font-black px-3 py-1.5 rounded-full shadow-sm border ${r.progress === 100 ? 'bg-green-950/40 text-green-400 border-green-900/50' : 'bg-purple-950/40 text-purple-400 border-purple-900/50'}`}>
                             {r.progress === 100 ? '✅ Done' : 'In Progress'}
                           </span>
                         </div>
                         <div className="mb-3">
                           <div className="flex justify-between items-center text-xs font-bold mb-1.5">
-                            <span className="text-gray-400 uppercase tracking-wider">Progress</span>
-                            <span className="font-black text-purple-600">{r.progress}%</span>
+                            <span className="text-slate-400 uppercase tracking-wider">Progress</span>
+                            <span className="font-black text-purple-400">{r.progress}%</span>
                           </div>
-                          <div className="bg-gray-100 rounded-full h-2 shadow-inner overflow-hidden">
+                          <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden">
                             <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                           </div>
                         </div>
-                        <p className="text-xs text-gray-400 font-bold mt-4">{r.weeks.filter(w => w.completed).length} of {r.weeks.length} milestones complete</p>
+                        <p className="text-xs text-slate-400 font-bold mt-4">{r.weeks.filter(w => w.completed).length} of {r.weeks.length} milestones complete</p>
                       </div>
                     ))}
                   </div>
@@ -307,33 +468,33 @@ export default function Dashboard() {
             {activeTab === 'quizzes' && (
               <div>
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-extrabold text-gray-900 tracking-tight">Quiz Dashboard</h2>
+                  <h2 className="text-xl font-extrabold text-slate-100 tracking-tight">Quiz Dashboard</h2>
                   <button onClick={() => navigate('/quiz')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-xs px-5 py-3 rounded-xl font-bold shadow-md shadow-purple-500/15 cursor-pointer">🧠 New Quiz</button>
                 </div>
                 {quizzes.length === 0 ? (
-                  <div className="text-center py-20 glass-panel rounded-3xl border-dashed border-purple-200 max-w-xl mx-auto p-8">
+                  <div className="text-center py-20 glass-panel rounded-3xl border-dashed border-purple-500/20 max-w-xl mx-auto p-8 animate-fade-in">
                     <div className="text-6xl mb-4">🧠</div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">No quiz sessions yet</h2>
-                    <p className="text-gray-500 mb-6 font-medium text-sm">Test your technical milestone knowledge with instant feedback.</p>
+                    <h2 className="text-xl font-bold text-slate-100 mb-2">No quiz sessions yet</h2>
+                    <p className="text-slate-400 mb-6 font-medium text-sm">Test your technical milestone knowledge with instant feedback.</p>
                     <button onClick={() => navigate('/quiz')} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 text-white px-8 py-3.5 rounded-xl font-extrabold text-sm shadow-lg shadow-purple-600/20 cursor-pointer">Start First Quiz →</button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 animate-fade-in">
                     {quizzes.map(q => (
-                      <div key={q._id} className="glass-panel rounded-3xl p-5 border border-white/50 flex flex-col justify-between">
+                      <div key={q._id} className="glass-panel rounded-3xl p-5 border border-white/[0.04] flex flex-col justify-between hover:scale-[1.01] transition-all duration-300">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">🧠</div>
+                            <div className="w-12 h-12 bg-purple-950/50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">🧠</div>
                             <div>
-                              <p className="font-extrabold text-gray-900 tracking-tight leading-tight">{q.topic}</p>
-                              <p className="text-xs text-gray-400 font-bold mt-0.5">{q.skill} · {q.questions.length} Qs</p>
+                              <p className="font-extrabold text-slate-100 tracking-tight leading-tight">{q.topic}</p>
+                              <p className="text-xs text-slate-400 font-bold mt-0.5">{q.skill} · {q.questions.length} Qs</p>
                             </div>
                           </div>
-                          <div className={`text-lg font-black ${q.score >= 80 ? 'text-green-600' : q.score >= 50 ? 'text-yellow-500' : 'text-red-500'}`}>
+                          <div className={`text-lg font-black ${q.score >= 80 ? 'text-green-400' : q.score >= 50 ? 'text-yellow-400' : 'text-red-400'}`}>
                             {q.completed ? q.score + '%' : '—'}
                           </div>
                         </div>
-                        <div className="bg-gray-100 rounded-full h-2 shadow-inner overflow-hidden mt-3">
+                        <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden mt-3">
                           <div className={`h-2 rounded-full transition-all duration-500 ${q.score >= 80 ? 'bg-green-500' : q.score >= 50 ? 'bg-yellow-500' : 'bg-red-400'}`} style={{ width: `${q.score}%` }} />
                         </div>
                       </div>

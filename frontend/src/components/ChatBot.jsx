@@ -59,7 +59,7 @@ export default function ChatBot() {
       
       // Auto redirect to Roadmap timeline
       if (res.data.success && res.data.roadmap) {
-        navigate('/roadmap', { state: { autoOpen: res.data.roadmap._id } })
+        navigate('/roadmap', { state: { autoLoadRoadmapId: res.data.roadmap._id } })
       }
     } catch (err) {
       console.error("Failed to generate sprint from ChatBot:", err)
