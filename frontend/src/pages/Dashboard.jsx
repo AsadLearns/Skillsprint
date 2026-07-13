@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import Logo from '../components/Logo'
+import ChatBot from '../components/ChatBot'
 
 const skillColors = {
   'Java': 'from-orange-400 to-red-500',
@@ -345,6 +346,7 @@ export default function Dashboard() {
           </div>
         )}
       </div>
+      <ChatBot />
     </div>
   )
 }

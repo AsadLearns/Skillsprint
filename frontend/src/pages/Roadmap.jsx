@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import api from '../services/api'
 import Logo from '../components/Logo'
+import ChatBot from '../components/ChatBot'
 
 const skills = ['Java', 'Python', 'React', 'Web Development', 'Node.js', 'AI/ML', 'MongoDB', 'DevOps']
 const levels = ['Beginner', 'Intermediate', 'Advanced']
@@ -437,6 +438,7 @@ function Roadmap() {
           </div>
         </div>
       )}
+      <ChatBot />
     </div>
   )
 }

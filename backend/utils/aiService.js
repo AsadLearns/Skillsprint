@@ -70,6 +70,59 @@ export const askOpenRouterWithFallback = async (prompt) => {
   throw new Error(`All models failed. Last error: ${lastError?.message}`);
 };
 
+export const askOpenRouterChat = async (messages) => {
+  let lastError = null;
+
+  for (const model of models) {
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
+
+      try {
+        console.log(`🤖 Requesting OpenRouter Chat with model: ${model} (Attempt ${attempt}/2)`);
+        const response = await fetch(
+          "https://openrouter.ai/api/v1/chat/completions",
+          {
+            method: "POST",
+            signal: controller.signal,
+            headers: {
+              Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: messages,
+            }),
+          }
+        );
+
+        clearTimeout(timeoutId);
+
+        const data = await response.json();
+
+        if (response.status === 200 && data.choices && data.choices[0]) {
+          console.log(`✅ Success with chat model: ${model}`);
+          return data.choices[0].message.content.trim();
+        } else {
+          const errMsg = data.error?.message || `Status code ${response.status}`;
+          console.warn(`⚠️ Chat Model ${model} attempt ${attempt} failed: ${errMsg}`);
+          lastError = new Error(errMsg);
+        }
+      } catch (error) {
+        clearTimeout(timeoutId);
+        console.warn(`⚠️ Chat Model ${model} attempt ${attempt} error: ${error.message}`);
+        lastError = error;
+      }
+
+      if (attempt < 2) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+    }
+  }
+
+  throw new Error(`All chat models failed. Last error: ${lastError?.message}`);
+};
+
 export const cleanAndParseJSON = (text) => {
   let cleaned = text.trim();
   

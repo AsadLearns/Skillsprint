@@ -7,6 +7,7 @@ import connectDB from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import roadmapRoutes from './routes/roadmapRoutes.js'
 import quizRoutes from './routes/quizRoutes.js'
+import chatRoutes from './routes/chatRoutes.js'
 
 console.log('Gemini Key loaded:', process.env.GEMINI_API_KEY ? '✅ ' + process.env.GEMINI_API_KEY.substring(0, 8) + '...' : '❌ Missing')
 
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/roadmap', roadmapRoutes)
 app.use('/api/quiz', quizRoutes)
+app.use('/api/chat', chatRoutes)
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' })
