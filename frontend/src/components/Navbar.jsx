@@ -24,7 +24,7 @@ function Navbar() {
         </div>
       </div>
 
-      <nav className="border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#0a0a0a]/85 backdrop-blur-xl">
+      <nav className="relative border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#0a0a0a]/85 backdrop-blur-xl">
         <Link to="/" className="flex items-center gap-2">
           <Logo />
           <span className="text-xl font-bold text-slate-100 tracking-tight">SkillSprint</span>
@@ -64,7 +64,7 @@ function Navbar() {
 
         {/* Mobile Drawer Menu */}
         {isOpen && (
-          <div className="absolute top-[68px] left-0 w-full bg-[#0f0f10]/95 backdrop-blur-lg border-b border-white/[0.06] px-6 py-6 md:hidden flex flex-col gap-4 z-40 animate-slide-down shadow-2xl">
+          <div className="absolute top-full left-0 w-full bg-[#0f0f10]/95 backdrop-blur-lg border-b border-white/[0.06] px-6 py-6 md:hidden flex flex-col gap-4 z-40 animate-slide-down shadow-2xl">
             <a href="#features" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-2 border-b border-white/[0.03]">Features</a>
             <a href="#how" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-2 border-b border-white/[0.03]">Process</a>
             <a href="#faq" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-2 border-b border-white/[0.03]">FAQ</a>

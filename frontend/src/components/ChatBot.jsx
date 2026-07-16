@@ -129,7 +129,7 @@ export default function ChatBot() {
 
       {/* Expanded Chat Widget */}
       {isOpen && (
-        <div className="w-[340px] md:w-[380px] h-[480px] mb-4 bg-[#0f0f10]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 rounded-2xl overflow-hidden flex flex-col">
+        <div className="w-[min(380px,calc(100vw-3rem))] h-[min(480px,calc(100vh-8rem))] mb-4 bg-[#0f0f10]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 rounded-2xl overflow-hidden flex flex-col">
 
           {/* Header */}
           <div className="bg-[#141415] p-4 flex items-center justify-between text-white border-b border-white/[0.06]">

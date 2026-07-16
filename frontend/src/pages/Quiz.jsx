@@ -222,7 +222,7 @@ export default function Quiz() {
             </div>
 
             {/* Pagination nodes */}
-            <div className="flex gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-6">
               {quiz.questions.map((_, i) => (
                 <button key={i} onClick={() => setCurrent(i)}
                   className={`w-9 h-9 rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-white text-zinc-950' : answers[i] !== undefined ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30' : 'bg-white/[0.03] border border-white/[0.08] text-slate-500 hover:border-white/[0.2]'}`}>

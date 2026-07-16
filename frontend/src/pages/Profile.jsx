@@ -341,7 +341,7 @@ export default function Profile() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
           <div className="absolute inset-0 cursor-default" onClick={() => setActiveCert(null)}></div>
           
-          <div className="relative w-full max-w-3xl bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-8 border-double border-amber-400/60 z-10 flex flex-col items-center justify-center text-center select-none overflow-hidden max-h-[90vh]">
+          <div className="relative w-full max-w-3xl bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-8 border-double border-amber-400/60 z-10 flex flex-col items-center justify-center text-center select-none overflow-y-auto max-h-[90vh]">
             {/* Elegant Background Crest overlay */}
             <div className="absolute opacity-[0.02] text-amber-500 text-[250px] font-black pointer-events-none">🎓</div>
             
