@@ -5,6 +5,11 @@ const api = axios.create({
   timeout: 60000,
 })
 
+// ponytail: free-tier Render sleeps after ~15 min idle and takes 30-60s to wake.
+// Ping the health root as soon as the app loads so the server warms up while the
+// user is still on the landing page, instead of when they hit "Log in".
+fetch(api.defaults.baseURL.replace(/\/api\/?$/, '/')).catch(() => {})
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {

@@ -92,7 +92,13 @@ export default function Dashboard() {
     setFinderResult(null)
   }
 
-  useEffect(() => { fetchData() }, [])
+  const [slowLoad, setSlowLoad] = useState(false)
+
+  useEffect(() => {
+    fetchData()
+    const t = setTimeout(() => setSlowLoad(true), 4000)
+    return () => clearTimeout(t)
+  }, [])
 
   const handleStartCuratedTrack = async (skill, level, duration) => {
     setGeneratingDemo(true)
@@ -217,6 +223,11 @@ export default function Dashboard() {
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
             <p className="text-slate-400 font-bold animate-pulse text-sm uppercase tracking-widest">Retrieving your stats...</p>
+            {slowLoad && (
+              <p className="text-slate-500 text-xs mt-3 max-w-xs leading-relaxed">
+                ⏳ The server is waking up after a quiet period — this can take up to a minute. It'll be fast once it's awake.
+              </p>
+            )}
           </div>
         ) : (
           <div className="fade-up">

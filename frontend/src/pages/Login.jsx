@@ -7,6 +7,7 @@ function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [waking, setWaking] = useState(false)
   const { login } = useAuth()
   const navigate = useNavigate()
 
@@ -18,12 +19,15 @@ function Login() {
     e.preventDefault()
     setError('')
     setLoading(true)
+    const wakeTimer = setTimeout(() => setWaking(true), 4000)
     try {
       await login(form.email, form.password)
       navigate('/dashboard')
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong')
     } finally {
+      clearTimeout(wakeTimer)
+      setWaking(false)
       setLoading(false)
     }
   }
@@ -70,6 +74,12 @@ function Login() {
           >
             {loading ? 'Logging in...' : 'Log In →'}
           </button>
+
+          {loading && waking && (
+            <p className="text-center text-xs text-slate-500 animate-pulse">
+              ⏳ Waking up the server — the first request after a quiet period can take up to a minute. Hang tight!
+            </p>
+          )}
         </form>
 
         <p className="text-center text-sm text-slate-400 mt-8">

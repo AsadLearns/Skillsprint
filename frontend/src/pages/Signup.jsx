@@ -7,6 +7,7 @@ function Signup() {
   const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [waking, setWaking] = useState(false)
   const { register } = useAuth()
   const navigate = useNavigate()
 
@@ -18,12 +19,15 @@ function Signup() {
     e.preventDefault()
     setError('')
     setLoading(true)
+    const wakeTimer = setTimeout(() => setWaking(true), 4000)
     try {
       await register(form.name, form.email, form.password)
       navigate('/dashboard')
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong')
     } finally {
+      clearTimeout(wakeTimer)
+      setWaking(false)
       setLoading(false)
     }
   }
@@ -74,6 +78,12 @@ function Signup() {
           >
             {loading ? 'Creating account...' : 'Create Account →'}
           </button>
+
+          {loading && waking && (
+            <p className="text-center text-xs text-slate-500 animate-pulse">
+              ⏳ Waking up the server — the first request after a quiet period can take up to a minute. Hang tight!
+            </p>
+          )}
         </form>
 
         <p className="text-center text-sm text-slate-400 mt-8">
