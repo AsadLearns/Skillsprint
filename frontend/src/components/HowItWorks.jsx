@@ -1,39 +1,36 @@
 const steps = [
-  { n: "01", title: "Sign up free", desc: "Create your account in 30 seconds. No credit card needed.", icon: "👤", color: "from-purple-500 to-purple-700" },
-  { n: "02", title: "Pick a skill", desc: "Choose from Java, Python, React, Web Dev, AI/ML, and more.", icon: "🎯", color: "from-blue-500 to-blue-700" },
-  { n: "03", title: "Get your roadmap", desc: "AI generates a personalised week-by-week plan just for you.", icon: "🤖", color: "from-pink-500 to-rose-600" },
-  { n: "04", title: "Track & quiz", desc: "Complete milestones, take quizzes, and earn badges as you grow.", icon: "🏆", color: "from-emerald-500 to-teal-600" },
+  { n: "01", title: "Pick a skill & level", desc: "Choose from 8 curated tracks or type any skill. Tell us if you're starting fresh or leveling up." },
+  { n: "02", title: "Get your sprint plan", desc: "AI generates a week-by-week roadmap with a study guide and resources for every milestone." },
+  { n: "03", title: "Learn, quiz, repeat", desc: "Work through each week, then prove it with an AI-generated milestone quiz before moving on." },
+  { n: "04", title: "Earn your certificate", desc: "Finish the timeline with 60%+ quiz accuracy and claim your mastery certificate." },
 ]
 
 function HowItWorks() {
   return (
-    <section id="how" className="bg-[#030008] py-24 px-6 relative overflow-hidden">
-      {/* Drifting Neon Blobs for depth */}
-      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <section id="how" className="bg-[#0a0a0a] py-24 px-6">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1.4fr] gap-14">
+        <div>
+          <p className="font-mono text-[11px] text-slate-500 uppercase tracking-[0.25em] mb-4">02 / Process</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight leading-tight mb-4">
+            From zero to certified in <span className="text-emerald-400">four steps.</span>
+          </h2>
+          <p className="text-slate-400 leading-relaxed max-w-sm">
+            No endless course catalogs. One clear path per skill, one week at a time.
+          </p>
+        </div>
 
-      <div className="text-center mb-16 relative z-10">
-        <span className="text-purple-400 font-semibold text-sm uppercase tracking-widest">The process</span>
-        <h2 className="text-4xl font-extrabold text-slate-100 mt-3">
-          How it <span className="gradient-text">works</span>
-        </h2>
-        <p className="text-slate-400 mt-4 text-lg">From zero to skilled in four simple steps.</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto relative z-10">
-        <div className="hidden md:block absolute top-10 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-purple-900/60 via-pink-900/60 to-emerald-900/60 z-0"></div>
-
-        {steps.map((s, i) => (
-          <div key={s.n} className="step-card text-center relative z-10">
-            <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${s.color} text-white text-4xl flex items-center justify-center mx-auto mb-5 shadow-lg`}>
-              {s.icon}
+        <div className="ml-2">
+          {steps.map((s, i) => (
+            <div key={s.n} className={`relative pl-10 border-l ${i === steps.length - 1 ? "border-transparent" : "border-white/[0.08] pb-10"}`}>
+              <span className="absolute -left-[13px] top-0 w-[26px] h-[26px] rounded-full bg-[#0a0a0a] border border-emerald-500/40 flex items-center justify-center">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              </span>
+              <p className="font-mono text-[10px] text-emerald-400/80 tracking-[0.25em] mb-1">STEP {s.n}</p>
+              <h3 className="text-lg font-bold text-slate-100 mb-1.5">{s.title}</h3>
+              <p className="text-sm text-slate-400 leading-relaxed max-w-md">{s.desc}</p>
             </div>
-            <div className={`inline-block text-xs font-bold bg-gradient-to-r ${s.color} text-transparent bg-clip-text mb-2`}>
-              STEP {s.n}
-            </div>
-            <h3 className="font-bold text-slate-100 text-lg mb-2">{s.title}</h3>
-            <p className="text-sm text-slate-400 leading-relaxed font-medium">{s.desc}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

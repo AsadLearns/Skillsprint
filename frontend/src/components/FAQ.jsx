@@ -23,52 +23,44 @@ const faqs = [
   },
 ]
 
-function FAQItem({ item, isOpen, onClick }) {
-  return (
-    <div className="glass-panel rounded-2xl overflow-hidden">
-      <button
-        onClick={onClick}
-        className="w-full flex items-center justify-between gap-4 text-left px-6 py-5 cursor-pointer"
-      >
-        <span className="font-bold text-slate-100">{item.q}</span>
-        <span className={`text-purple-400 text-xl shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
-          +
-        </span>
-      </button>
-      <div
-        className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
-      >
-        <div className="overflow-hidden">
-          <p className="px-6 pb-5 text-slate-400 text-sm leading-relaxed font-medium">{item.a}</p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="bg-[#030008] py-24 px-6 relative overflow-hidden">
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <section id="faq" className="bg-[#0a0a0a] py-24 px-6">
+      <div className="max-w-3xl mx-auto">
+        <div className="flex items-end justify-between gap-4 border-b border-white/[0.06] pb-5 mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
+            Questions, <span className="text-emerald-400">answered</span>
+          </h2>
+          <span className="font-mono text-[11px] text-slate-500 uppercase tracking-[0.25em] shrink-0 hidden sm:block">04 / FAQ</span>
+        </div>
 
-      <div className="text-center mb-16 relative z-10">
-        <span className="text-purple-400 font-semibold text-sm uppercase tracking-widest">Got questions?</span>
-        <h2 className="text-4xl font-extrabold text-slate-100 mt-3">
-          Frequently asked <span className="gradient-text">questions</span>
-        </h2>
-      </div>
-
-      <div className="max-w-2xl mx-auto flex flex-col gap-4 relative z-10">
-        {faqs.map((item, i) => (
-          <FAQItem
-            key={item.q}
-            item={item}
-            isOpen={openIndex === i}
-            onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-          />
-        ))}
+        <div className="rounded-xl border border-white/[0.07] divide-y divide-white/[0.06] bg-[#0d0d0e] overflow-hidden">
+          {faqs.map((item, i) => {
+            const isOpen = openIndex === i
+            return (
+              <div key={item.q}>
+                <button
+                  onClick={() => setOpenIndex(isOpen ? -1 : i)}
+                  aria-expanded={isOpen}
+                  className="w-full flex items-center gap-4 text-left px-6 py-5 cursor-pointer hover:bg-white/[0.02] transition-colors"
+                >
+                  <span className="font-mono text-[10px] text-emerald-400/70 w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-semibold text-slate-100 flex-1 text-sm md:text-base">{item.q}</span>
+                  <span aria-hidden="true" className={`text-slate-400 text-xl shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                    +
+                  </span>
+                </button>
+                <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                  <div className="overflow-hidden">
+                    <p className="pl-16 pr-6 pb-5 text-slate-400 text-sm leading-relaxed">{item.a}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

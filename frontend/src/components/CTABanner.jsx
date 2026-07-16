@@ -5,38 +5,25 @@ function CTABanner() {
   const { user } = useAuth()
   const navigate = useNavigate()
 
-  const handleStart = () => {
-    navigate(user ? "/dashboard" : "/signup")
-  }
-
   return (
-    <section className="bg-[#030008] py-20 px-6 relative overflow-hidden">
-      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-72 bg-purple-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+    <section className="bg-[#0a0a0a] pb-24 px-6">
+      <div className="max-w-4xl mx-auto rounded-2xl border border-white/[0.08] bg-[#0d0d0e] grid-bg px-8 py-16 text-center relative overflow-hidden">
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-56 bg-emerald-500/[0.06] rounded-full blur-[110px] pointer-events-none"></div>
 
-      <div className="glass-panel max-w-4xl mx-auto rounded-3xl px-8 py-16 text-center relative overflow-hidden">
-        <div className="absolute -top-10 -left-10 w-56 h-56 bg-purple-500/10 rounded-full blur-[80px] pointer-events-none"></div>
-        <div className="absolute -bottom-10 -right-10 w-56 h-56 bg-pink-500/10 rounded-full blur-[80px] pointer-events-none"></div>
-
-        <h2 className="text-3xl md:text-5xl font-black text-slate-100 relative z-10">
-          Ready to start your <span className="gradient-text">first sprint?</span>
-        </h2>
-        <p className="text-slate-400 mt-4 text-lg max-w-xl mx-auto relative z-10">
-          Join thousands of learners building real skills with AI-generated roadmaps. Free forever, no credit card needed.
-        </p>
-
-        <div className="flex items-center justify-center gap-4 mt-10 flex-wrap relative z-10">
+        <div className="relative z-10">
+          <p className="font-mono text-[11px] text-emerald-400 uppercase tracking-[0.25em] mb-5">Ready when you are</p>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-100 tracking-tight mb-4">
+            Your first sprint starts today.
+          </h2>
+          <p className="text-slate-400 text-lg max-w-md mx-auto mb-9">
+            Free forever. No credit card. A full roadmap in under a minute.
+          </p>
           <button
-            onClick={handleStart}
-            className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-base cursor-pointer"
+            onClick={() => navigate(user ? "/dashboard" : "/signup")}
+            className="bg-white text-zinc-950 hover:bg-zinc-200 px-7 py-3.5 rounded-lg font-semibold text-base transition-colors cursor-pointer"
           >
-            🚀 Get started free
+            Start learning free
           </button>
-          <a
-            href="#faq"
-            className="bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 hover:bg-purple-950/40 px-8 py-4 rounded-xl font-bold text-base transition inline-block"
-          >
-            Still have questions?
-          </a>
         </div>
       </div>
     </section>

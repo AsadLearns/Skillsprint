@@ -56,12 +56,7 @@ function ForgotPassword() {
 
   return (
     <div className="min-h-screen hero-bg flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-400/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-400/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-cyan-400/10 rounded-full blur-[90px] animate-float-orb-1 pointer-events-none" />
-
-      <div className="glass-panel w-full max-w-md rounded-3xl p-8 md:p-10 relative z-10 transition-all hover:shadow-2xl hover:shadow-purple-500/5">
+      <div className="glass-panel w-full max-w-md rounded-2xl p-8 md:p-10 relative z-10">
         <div className="text-center mb-8">
           <Logo size="w-12 h-12 mb-4 mx-auto" />
           <h1 className="text-2xl font-black text-slate-100 tracking-tight">Reset Password</h1>
@@ -71,22 +66,22 @@ function ForgotPassword() {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-900/50 text-red-400 text-sm flex items-center gap-2 animate-shake">
+          <div className="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-900/50 text-red-400 text-sm flex items-center gap-2">
             <span>⚠️</span> {error}
           </div>
         )}
 
         {success && (
-          <div className="mb-6 p-4 rounded-xl bg-green-950/40 border border-green-900/50 text-green-400 text-sm flex items-center gap-2 animate-pulse">
+          <div className="mb-6 p-4 rounded-xl bg-emerald-950/40 border border-emerald-900/50 text-emerald-400 text-sm flex items-center gap-2">
             <span>✅</span> {success}
           </div>
         )}
 
         {/* Demo Helper Banner */}
         {step === 2 && demoCode && (
-          <div className="mb-6 p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs">
-            <span className="font-bold text-purple-400 uppercase tracking-wider block mb-1">🛠️ Portfolio Demo Mode</span>
-            We generated a mock reset code: <strong className="text-white text-sm bg-[#030008] px-2 py-0.5 rounded border border-white/[0.08] select-all">{demoCode}</strong>. Use it below to simulate the flow!
+          <div className="mb-6 p-4 rounded-xl bg-emerald-500/[0.07] border border-emerald-500/20 text-slate-300 text-xs">
+            <span className="font-bold text-emerald-400 uppercase tracking-wider block mb-1">🛠️ Portfolio Demo Mode</span>
+            We generated a mock reset code: <strong className="text-white text-sm bg-[#0a0a0a] px-2 py-0.5 rounded border border-white/[0.08] select-all">{demoCode}</strong>. Use it below to simulate the flow!
           </div>
         )}
 
@@ -102,17 +97,17 @@ function ForgotPassword() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition"
+                className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-purple-500/20 disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold py-3.5 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
             >
               {loading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-zinc-400 border-t-zinc-900 rounded-full animate-spin" />
               ) : (
                 'Send Reset Code'
               )}
@@ -130,7 +125,7 @@ function ForgotPassword() {
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
                 placeholder="6-digit reset code"
-                className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition text-center font-mono letter-spacing-widest"
+                className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition text-center font-mono tracking-widest"
               />
             </div>
 
@@ -144,17 +139,17 @@ function ForgotPassword() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition"
+                className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-purple-500/20 disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold py-3.5 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
             >
               {loading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-zinc-400 border-t-zinc-900 rounded-full animate-spin" />
               ) : (
                 'Reset Password'
               )}
@@ -163,7 +158,7 @@ function ForgotPassword() {
         )}
 
         <div className="mt-8 pt-6 border-t border-white/[0.05] text-center">
-          <Link to="/login" className="text-sm text-purple-400 hover:text-purple-300 font-medium transition">
+          <Link to="/login" className="text-sm text-emerald-400 hover:text-emerald-300 font-medium transition">
             ← Back to Login
           </Link>
         </div>

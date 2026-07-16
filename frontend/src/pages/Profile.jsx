@@ -5,14 +5,14 @@ import api from '../services/api'
 import Logo from '../components/Logo'
 
 const skillColors = {
-  'Java': 'from-orange-400 to-red-500 shadow-orange-500/10',
-  'Python': 'from-blue-400 to-blue-600 shadow-blue-500/10',
-  'React': 'from-cyan-400 to-blue-500 shadow-cyan-500/10',
-  'Web Development': 'from-purple-400 to-pink-500 shadow-purple-500/10',
-  'Node.js': 'from-green-400 to-emerald-600 shadow-emerald-500/10',
-  'AI/ML': 'from-pink-500 to-rose-600 shadow-rose-500/10',
-  'MongoDB': 'from-emerald-400 to-teal-600 shadow-teal-500/10',
-  'DevOps': 'from-amber-400 to-orange-500 shadow-orange-500/10',
+  'Java': 'bg-orange-500/15 text-orange-300 border border-orange-500/25',
+  'Python': 'bg-sky-500/15 text-sky-300 border border-sky-500/25',
+  'React': 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/25',
+  'Web Development': 'bg-violet-500/15 text-violet-300 border border-violet-500/25',
+  'Node.js': 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/25',
+  'AI/ML': 'bg-rose-500/15 text-rose-300 border border-rose-500/25',
+  'MongoDB': 'bg-teal-500/15 text-teal-300 border border-teal-500/25',
+  'DevOps': 'bg-amber-500/15 text-amber-300 border border-amber-500/25',
 }
 
 export default function Profile() {
@@ -109,26 +109,21 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen hero-bg relative overflow-hidden">
-      {/* Drifting Neon Blobs */}
-      <div className="absolute -top-10 -left-10 w-96 h-96 bg-purple-400/20 rounded-full blur-[100px] animate-float-orb-1 pointer-events-none"></div>
-      <div className="absolute -bottom-20 -right-20 w-[450px] h-[450px] bg-pink-400/15 rounded-full blur-[120px] animate-float-orb-2 pointer-events-none"></div>
-      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-cyan-400/10 rounded-full blur-[90px] animate-float-orb-1 pointer-events-none"></div>
-
       <div className="sticky top-0 z-50 w-full animate-fade-in">
-        {/* Streetwear Announcement Marquee Ticker */}
-        <div className="w-full bg-gradient-to-r from-purple-950/90 via-pink-950/90 to-purple-950/90 text-[10px] uppercase font-black tracking-widest py-1 border-b border-white/[0.04] overflow-hidden whitespace-nowrap select-none relative z-50">
+        {/* Announcement Marquee Ticker */}
+        <div className="w-full bg-[#0f0f10] font-mono text-[10px] uppercase tracking-widest text-slate-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
           <div className="inline-block animate-marquee">
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </div>
 
-        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#030008]/75 backdrop-blur-xl">
+        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#0a0a0a]/75 backdrop-blur-xl">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
             <Logo />
             <span className="text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
-          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-400 hover:text-purple-300 transition cursor-pointer">← Dashboard</button>
+          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-400 hover:text-slate-200 transition cursor-pointer">← Dashboard</button>
         </nav>
       </div>
 
@@ -140,15 +135,15 @@ export default function Profile() {
           {/* Left card: details & avatar */}
           <div className="md:col-span-1 flex flex-col gap-6">
             <div className="glass-panel rounded-3xl p-6 text-center animate-slide-up">
-              <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-black text-4xl mx-auto mb-4 shadow-lg shadow-purple-500/20">
+              <div className="w-24 h-24 bg-white/[0.08] border border-white/[0.12] rounded-2xl flex items-center justify-center text-slate-100 font-black text-4xl mx-auto mb-4">
                 {user?.name?.charAt(0).toUpperCase()}
               </div>
               <h2 className="text-2xl font-black text-slate-100 tracking-tight leading-tight">{user?.name}</h2>
-              <p className="text-xs font-bold text-purple-400 uppercase tracking-widest mt-1">{form.title}</p>
+              <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest mt-1">{form.title}</p>
               
               <div className="flex justify-center gap-3 mt-4 text-xs font-bold text-slate-400">
-                {form.github && <a href={form.github} target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition">💻 GitHub</a>}
-                {form.linkedin && <a href={form.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition">🔗 LinkedIn</a>}
+                {form.github && <a href={form.github} target="_blank" rel="noopener noreferrer" className="hover:text-slate-200 transition">💻 GitHub</a>}
+                {form.linkedin && <a href={form.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-slate-200 transition">🔗 LinkedIn</a>}
               </div>
 
               {form.bio && (
@@ -157,7 +152,7 @@ export default function Profile() {
 
               <button 
                 onClick={() => setEditMode(!editMode)}
-                className="mt-6 w-full py-2.5 bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 font-extrabold text-xs hover:bg-purple-950/40 transition cursor-pointer rounded-xl"
+                className="mt-6 w-full py-2.5 bg-[#111112]/80 border border-white/[0.08] text-emerald-400 font-extrabold text-xs hover:bg-white/[0.06] transition cursor-pointer rounded-xl"
               >
                 {editMode ? 'Cancel Edit' : 'Edit Profile Details'}
               </button>
@@ -169,11 +164,11 @@ export default function Profile() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center text-sm font-semibold">
                   <span className="text-slate-400">Completed Tracks</span>
-                  <span className="text-purple-400 font-bold">{roadmaps.filter(r => r.progress === 100).length}</span>
+                  <span className="text-emerald-400 font-bold">{roadmaps.filter(r => r.progress === 100).length}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm font-semibold">
                   <span className="text-slate-400">Average Quiz Accuracy</span>
-                  <span className="text-pink-400 font-bold">{avgQuizScore}%</span>
+                  <span className="text-amber-400 font-bold">{avgQuizScore}%</span>
                 </div>
                 <div className="flex justify-between items-center text-sm font-semibold">
                   <span className="text-slate-400">Certificates Earned</span>
@@ -201,7 +196,7 @@ export default function Profile() {
                       required
                       value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                      className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white focus:border-purple-500 focus:bg-[#110926]/90 rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-[#101011]/65 border border-white/[0.08] text-white focus:border-emerald-500/60 focus:bg-[#131314] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                     />
                   </div>
                   <div>
@@ -210,7 +205,7 @@ export default function Profile() {
                       type="text" 
                       value={form.title}
                       onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-                      className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white focus:border-purple-500 focus:bg-[#110926]/90 rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-[#101011]/65 border border-white/[0.08] text-white focus:border-emerald-500/60 focus:bg-[#131314] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                     />
                   </div>
                   <div>
@@ -219,7 +214,7 @@ export default function Profile() {
                       rows="3"
                       value={form.bio}
                       onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
-                      className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white focus:border-purple-500 focus:bg-[#110926]/90 rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none leading-relaxed"
+                      className="w-full bg-[#101011]/65 border border-white/[0.08] text-white focus:border-emerald-500/60 focus:bg-[#131314] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none leading-relaxed"
                       placeholder="Tell recruiters/friends about your learning goal..."
                     />
                   </div>
@@ -230,7 +225,7 @@ export default function Profile() {
                         type="url" 
                         value={form.linkedin}
                         onChange={e => setForm(f => ({ ...f, linkedin: e.target.value }))}
-                        className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white focus:border-purple-500 focus:bg-[#110926]/90 rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                        className="w-full bg-[#101011]/65 border border-white/[0.08] text-white focus:border-emerald-500/60 focus:bg-[#131314] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                         placeholder="https://linkedin.com/in/username"
                       />
                     </div>
@@ -240,7 +235,7 @@ export default function Profile() {
                         type="url" 
                         value={form.github}
                         onChange={e => setForm(f => ({ ...f, github: e.target.value }))}
-                        className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white focus:border-purple-500 focus:bg-[#110926]/90 rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                        className="w-full bg-[#101011]/65 border border-white/[0.08] text-white focus:border-emerald-500/60 focus:bg-[#131314] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                         placeholder="https://github.com/username"
                       />
                     </div>
@@ -251,14 +246,14 @@ export default function Profile() {
                   <button 
                     type="submit" 
                     disabled={saving}
-                    className="flex-1 glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-extrabold text-xs py-3.5 rounded-xl cursor-pointer"
+                    className="flex-1 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs py-3.5 rounded-lg cursor-pointer transition-colors"
                   >
                     {saving ? 'Saving...' : 'Save Profile Changes'}
                   </button>
                   <button 
                     type="button" 
                     onClick={() => setEditMode(false)}
-                    className="bg-[#130b2c]/85 border border-white/[0.08] text-slate-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl cursor-pointer"
+                    className="bg-[#111112]/85 border border-white/[0.08] text-slate-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -275,10 +270,10 @@ export default function Profile() {
                   {loading ? (
                     <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse">Calculating certificates...</div>
                   ) : certificates.length === 0 ? (
-                    <div className="text-center py-10 bg-[#0e0722]/40 rounded-2xl border border-dashed border-purple-500/20 p-6">
+                    <div className="text-center py-10 bg-[#0f0f10]/40 rounded-2xl border border-dashed border-white/[0.12] p-6">
                       <div className="text-4xl mb-3">🎓</div>
                       <p className="text-xs text-slate-400 font-bold leading-relaxed mb-4">No master certificates earned yet.<br />Finish a study guide roadmap and pass the quiz to claim your first reward!</p>
-                      <button onClick={() => navigate('/dashboard')} className="bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-purple-950/40 transition cursor-pointer">Start Learning</button>
+                      <button onClick={() => navigate('/dashboard')} className="bg-[#111112]/80 border border-white/[0.08] text-emerald-400 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-white/[0.06] transition cursor-pointer">Start Learning</button>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -291,7 +286,7 @@ export default function Profile() {
                           <div className="text-3xl mt-0.5">🏆</div>
                           <div>
                             <h4 className="font-extrabold text-sm text-slate-100 leading-tight">Mastery Certificate</h4>
-                            <p className="text-[10px] font-bold text-purple-400 mt-0.5 uppercase tracking-wider">{cert.skill}</p>
+                            <p className="text-[10px] font-bold text-emerald-400 mt-0.5 uppercase tracking-wider">{cert.skill}</p>
                             <p className="text-[10px] text-slate-400 font-semibold mt-1">Accuracy: {cert.quizScore}%</p>
                             <span className="text-[8px] bg-amber-950/40 text-amber-400 border border-amber-900/50 px-2 py-0.5 rounded-full mt-2 inline-block">Click to view</span>
                           </div>
@@ -312,18 +307,18 @@ export default function Profile() {
                   ) : (
                     <div className="space-y-4">
                       {roadmaps.map(r => (
-                        <div key={r._id} className="p-4 bg-[#130b2c]/40 rounded-2xl border border-white/[0.04] flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                        <div key={r._id} className="p-4 bg-[#111112]/40 rounded-2xl border border-white/[0.04] flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                           <div>
                             <h4 className="font-extrabold text-sm text-slate-100">{r.skill} Roadmap</h4>
                             <p className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{r.level} · {r.duration} weeks</p>
                           </div>
                           <div className="flex-1 sm:max-w-xs">
-                            <div className="flex justify-between text-[10px] font-bold text-purple-400 mb-1">
+                            <div className="flex justify-between text-[10px] font-bold text-emerald-400 mb-1">
                               <span>Progress</span>
                               <span>{r.progress}%</span>
                             </div>
                             <div className="bg-slate-950/60 shadow-inner rounded-full h-1.5 overflow-hidden">
-                              <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
+                              <div className="bg-emerald-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                             </div>
                           </div>
                         </div>
@@ -365,12 +360,12 @@ export default function Profile() {
             <h2 className="text-3xl md:text-4.5xl font-black text-gray-950 mt-4 font-serif tracking-tight">{user?.name}</h2>
             
             <p className="text-xs text-gray-500 max-w-lg mt-4 leading-relaxed font-medium">
-              has successfully completed all learning roadmap sprints and met the academic evaluation milestones with an accuracy score of <span className="font-extrabold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-100">{activeCert.quizScore}%</span>, thereby achieving complete mastery of the core discipline of
+              has successfully completed all learning roadmap sprints and met the academic evaluation milestones with an accuracy score of <span className="font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">{activeCert.quizScore}%</span>, thereby achieving complete mastery of the core discipline of
             </p>
 
-            <h3 className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-pink-600 mt-4 uppercase tracking-wide">{activeCert.skill}</h3>
+            <h3 className="text-2xl md:text-3xl font-black text-zinc-900 mt-4 uppercase tracking-wide">{activeCert.skill}</h3>
 
-            <div className="w-24 h-0.5 bg-gradient-to-r from-amber-400 to-pink-500 my-8"></div>
+            <div className="w-24 h-0.5 bg-amber-400 my-8"></div>
 
             <div className="grid grid-cols-2 gap-12 text-left w-full max-w-md text-xs font-semibold text-gray-400">
               <div>
@@ -386,7 +381,7 @@ export default function Profile() {
             <div className="flex gap-3 mt-10 w-full max-w-sm justify-center">
               <button 
                 onClick={() => window.print()}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-extrabold text-xs py-3 rounded-xl cursor-pointer hover:scale-102 transition shadow-md shadow-purple-600/10"
+                className="flex-1 bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs py-3 rounded-lg cursor-pointer transition"
               >
                 🖨️ Print / Save PDF
               </button>

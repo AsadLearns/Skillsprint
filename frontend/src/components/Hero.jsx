@@ -1,83 +1,126 @@
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
-const skills = ["Java", "Python", "React", "Web Dev", "Node.js", "AI/ML", "MongoDB", "DevOps"]
-
-const skillColors = [
-  "from-orange-400 to-red-500",
-  "from-blue-400 to-blue-600",
-  "from-cyan-400 to-blue-500",
-  "from-purple-400 to-pink-500",
-  "from-green-400 to-emerald-600",
-  "from-pink-400 to-rose-500",
-  "from-emerald-400 to-teal-600",
-  "from-amber-400 to-orange-500",
+const weeks = [
+  { n: 1, topic: "Components & JSX", state: "done" },
+  { n: 2, topic: "Hooks & State", state: "active", pct: 45 },
+  { n: 3, topic: "Routing & Data Fetching", state: "locked" },
+  { n: 4, topic: "Testing & Deployment", state: "locked" },
 ]
+
+const skills = ["React", "Python", "Java", "Web Dev", "Node.js", "AI/ML", "MongoDB", "DevOps"]
 
 function Hero() {
   const { user } = useAuth()
   const navigate = useNavigate()
-
-  const handleStart = () => {
-    if (user) {
-      navigate('/dashboard')
-    } else {
-      navigate('/signup')
-    }
-  }
+  const handleStart = () => navigate(user ? "/dashboard" : "/signup")
 
   return (
-    <section className="hero-bg py-28 px-6 text-center relative overflow-hidden">
-      {/* Drifting Neon Blobs */}
-      <div className="absolute -top-10 -left-10 w-96 h-96 bg-purple-400/25 rounded-full blur-[110px] animate-float-orb-1 pointer-events-none"></div>
-      <div className="absolute -bottom-20 -right-20 w-[450px] h-[450px] bg-pink-400/20 rounded-full blur-[130px] animate-float-orb-2 pointer-events-none"></div>
-      <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-cyan-400/15 rounded-full blur-[100px] animate-float-orb-1 pointer-events-none"></div>
+    <section className="bg-[#0a0a0a] grid-bg relative overflow-hidden">
+      {/* single static glow — no drifting blobs */}
+      <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-emerald-500/[0.05] rounded-full blur-[140px] pointer-events-none"></div>
 
-      <div className="relative z-10">
-        <div className="floating-badge inline-flex items-center gap-2 bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 text-sm font-semibold px-5 py-2 rounded-full mb-8 shadow-2xl">
-          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-          ✨ Powered by AI — Free to start
-        </div>
-
-        <h1 className="text-5xl md:text-7xl font-black text-slate-100 leading-tight max-w-4xl mx-auto mb-6 tracking-tight animate-slide-up">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500">Learn smarter,</span>{" "}
-          <span className="relative inline-block">
-            <span className="absolute -inset-1.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-20"></span>
-            <span className="relative shimmer">one sprint at a time.</span>
-          </span>
-        </h1>
-
-        <p className="text-slate-400 text-lg md:text-xl mt-4 max-w-2xl mx-auto leading-relaxed font-medium">
-          Generate <span className="text-purple-400 font-bold bg-purple-950/40 px-2.5 py-0.5 rounded-lg border border-purple-900/50">personalized AI roadmaps</span>, test your skills with <span className="text-pink-400 font-bold bg-pink-950/40 px-2.5 py-0.5 rounded-lg border border-pink-900/50">interactive quizzes</span>, and master any discipline step-by-step.
-        </p>
-
-        <div className="flex items-center justify-center gap-4 mt-10 flex-wrap">
-          <button onClick={handleStart} className="glow-btn bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-base cursor-pointer">
-            🚀 Start learning free
-          </button>
-          <a href="#how" className="bg-[#130b2c]/80 border border-white/[0.08] text-purple-400 hover:bg-purple-950/40 px-8 py-4 rounded-xl font-bold text-base transition inline-block">
-            ▶ See how it works
-          </a>
-        </div>
-
-        <div className="flex items-center justify-center gap-6 mt-8 text-sm text-slate-500">
-          <span>✅ No credit card</span>
-          <span>✅ Free forever plan</span>
-          <span>✅ AI-powered</span>
-        </div>
-
-        <div id="skills" className="flex flex-wrap justify-center gap-3 mt-14">
-          {skills.map((skill, i) => (
-            <span
-              key={skill}
-              className={`skill-pill bg-gradient-to-r ${skillColors[i]} text-white text-sm font-semibold px-5 py-2 rounded-full shadow-md`}
+      <div className="max-w-6xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-2 gap-14 lg:gap-16 items-center relative z-10">
+        {/* Left: copy */}
+        <div className="animate-slide-up">
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-emerald-400 mb-6">
+            {"// AI-powered learning sprints"}
+          </p>
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+            <span className="text-slate-500">Stop collecting tutorials.</span>{" "}
+            <span className="text-slate-100">Start finishing skills.</span>
+          </h1>
+          <p className="text-slate-400 text-lg leading-relaxed max-w-md mb-9">
+            Pick a skill. Get an AI-built weekly roadmap with study guides,
+            milestone quizzes, and a certificate when you finish.
+          </p>
+          <div className="flex items-center gap-3 flex-wrap mb-9">
+            <button
+              onClick={handleStart}
+              className="bg-white text-zinc-950 hover:bg-zinc-200 px-6 py-3 rounded-lg font-semibold text-sm transition-colors cursor-pointer"
             >
-              {skill}
-            </span>
-          ))}
+              Start your first sprint
+            </button>
+            <a
+              href="#how"
+              className="border border-white/[0.12] text-slate-300 hover:bg-white/[0.06] px-6 py-3 rounded-lg font-semibold text-sm transition-colors inline-block"
+            >
+              See how it works
+            </a>
+          </div>
+          <p className="font-mono text-[11px] text-slate-500 tracking-[0.15em] uppercase">
+            Free forever · No credit card · 8+ skill tracks
+          </p>
+        </div>
+
+        {/* Right: terminal-style product mockup */}
+        <div className="relative">
+          <div className="rounded-xl border border-white/[0.08] bg-[#0f0f10] shadow-2xl shadow-black/60 overflow-hidden animate-slide-up animation-delay-200">
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+              <span className="ml-3 font-mono text-[10px] text-slate-500">sprinty — react-sprint</span>
+            </div>
+            <div className="p-5 font-mono text-[12px] md:text-[13px]">
+              <p className="text-slate-500 mb-1.5">
+                $ <span className="text-slate-100">sprint new</span>{" "}
+                <span className="text-sky-400">--skill</span> react{" "}
+                <span className="text-sky-400">--level</span> intermediate
+              </p>
+              <p className="text-emerald-400 mb-4">✓ 4-week roadmap generated</p>
+
+              <div className="divide-y divide-white/[0.04] border-t border-white/[0.04]">
+                {weeks.map((w, i) => (
+                  <div
+                    key={w.n}
+                    className="flex items-center gap-3 py-2.5 animate-slide-up"
+                    style={{ animationDelay: `${300 + i * 120}ms` }}
+                  >
+                    <span className="text-slate-600 w-7 shrink-0">W{w.n}</span>
+                    <span className={w.state === "active" ? "text-slate-100" : "text-slate-400"}>
+                      {w.topic}
+                    </span>
+                    {w.state === "done" && (
+                      <span className="ml-auto text-emerald-400 shrink-0">done ✓</span>
+                    )}
+                    {w.state === "active" && (
+                      <span className="ml-auto flex items-center gap-2 shrink-0">
+                        <span className="w-16 h-1 bg-white/[0.07] rounded-full overflow-hidden">
+                          <span className="block w-[45%] h-full bg-emerald-500 rounded-full"></span>
+                        </span>
+                        <span className="text-emerald-400">{w.pct}%</span>
+                      </span>
+                    )}
+                    {w.state === "locked" && (
+                      <span className="ml-auto text-slate-600 shrink-0">locked</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-slate-500 mt-4">
+                ${" "}
+                <span aria-hidden="true" className="inline-block w-2 h-4 bg-slate-300 align-middle animate-blink"></span>
+              </p>
+            </div>
+          </div>
+
+          {/* floating quiz chip */}
+          <div className="absolute -bottom-5 -left-3 md:-left-7 rounded-lg border border-white/[0.08] bg-[#0f0f10] px-4 py-3 shadow-xl shadow-black/50 animate-slide-up animation-delay-500">
+            <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-0.5">Milestone quiz</p>
+            <p className="text-sm font-bold text-emerald-400">Passed · 80%</p>
+          </div>
         </div>
       </div>
 
+      {/* Skills marquee strip */}
+      <div id="skills" className="border-t border-white/[0.06] py-4 overflow-hidden whitespace-nowrap relative z-10 select-none">
+        <div className="animate-marquee font-mono text-[11px] tracking-[0.3em] text-slate-600 uppercase">
+          <span>{skills.join(" · ")} · </span>
+          <span>{skills.join(" · ")} · </span>
+        </div>
+      </div>
     </section>
   )
 }

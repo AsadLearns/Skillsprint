@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -21,10 +22,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/roadmap" element={<Roadmap />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/roadmap" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
+          <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Routes>
       </Suspense>
     </AuthProvider>

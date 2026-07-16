@@ -30,19 +30,15 @@ function Login() {
 
   return (
     <div className="min-h-screen hero-bg flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Decorative Blur Blobs */}
-      <div className="absolute -top-10 -left-10 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl animate-pulse-slow"></div>
-      <div className="absolute -bottom-10 -right-10 w-96 h-96 bg-pink-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
-
-      <div className="glass-panel rounded-3xl p-8 w-full max-w-md relative z-10 transition-all hover:shadow-2xl hover:shadow-purple-500/5">
+      <div className="glass-panel rounded-2xl p-8 w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <Logo size="w-14 h-14 mx-auto mb-4 animate-float" />
+          <Logo size="w-14 h-14 mx-auto mb-4" />
           <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Welcome back</h1>
           <p className="text-slate-400 text-sm mt-2">Log in to continue your learning sprint</p>
         </div>
 
         {error && (
-          <div className="bg-red-950/40 border border-red-900/50 text-red-400 text-sm px-4 py-3.5 rounded-2xl mb-6 flex items-center gap-2 animate-shake">
+          <div className="bg-red-950/40 border border-red-900/50 text-red-400 text-sm px-4 py-3.5 rounded-xl mb-6 flex items-center gap-2">
             <span>⚠️</span> {error}
           </div>
         )}
@@ -53,24 +49,24 @@ function Login() {
             <input
               type="email" name="email" placeholder="you@example.com"
               value={form.email} onChange={handleChange} required
-              className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition-all duration-300 outline-none"
+              className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition-all duration-300 outline-none"
             />
           </div>
           <div>
             <div className="flex justify-between items-center mb-1.5 px-1">
               <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Password</label>
-              <Link to="/forgot-password" className="text-xs font-semibold text-purple-400 hover:text-purple-300 transition">Forgot password?</Link>
+              <Link to="/forgot-password" className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition">Forgot password?</Link>
             </div>
             <input
               type="password" name="password" placeholder="••••••••"
               value={form.password} onChange={handleChange} required
-              className="w-full bg-[#0a0518]/65 border border-white/[0.08] text-white rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:bg-[#110926]/90 transition-all duration-300 outline-none"
+              className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition-all duration-300 outline-none"
             />
           </div>
-          
+
           <button
             type="submit" disabled={loading}
-            className="glow-btn w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white py-3.5 rounded-2xl font-bold text-sm mt-3 disabled:opacity-50 cursor-pointer shadow-lg shadow-purple-600/20"
+            className="w-full bg-white hover:bg-zinc-200 text-zinc-950 py-3.5 rounded-lg font-semibold text-sm mt-3 disabled:opacity-50 cursor-pointer transition-colors"
           >
             {loading ? 'Logging in...' : 'Log In →'}
           </button>
@@ -78,7 +74,7 @@ function Login() {
 
         <p className="text-center text-sm text-slate-400 mt-8">
           Don't have an account?{' '}
-          <Link to="/signup" className="text-purple-400 font-bold hover:text-purple-300 hover:underline transition">Sign up free</Link>
+          <Link to="/signup" className="text-emerald-400 font-bold hover:text-emerald-300 hover:underline transition">Sign up free</Link>
         </p>
       </div>
     </div>
