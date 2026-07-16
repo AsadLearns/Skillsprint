@@ -31,6 +31,18 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 8000
 
+// ponytail: Render's free tier sleeps the service after ~15 min without inbound
+// traffic, giving mobile users a 30-60s cold start. Self-ping the public URL
+// every 14 min so it never idles. One always-on free instance (~744h/mo) fits
+// Render's 750h free allowance. Upgrade path: paid tier, then delete this.
+if (process.env.RENDER_EXTERNAL_URL) {
+  const { get } = await import('https')
+  setInterval(() => {
+    get(process.env.RENDER_EXTERNAL_URL, (res) => res.resume()).on('error', () => {})
+  }, 14 * 60 * 1000)
+  console.log(`⏰ Keep-alive self-ping enabled for ${process.env.RENDER_EXTERNAL_URL}`)
+}
+
 const startServer = async () => {
   await connectDB()
   app.listen(PORT, () => {
