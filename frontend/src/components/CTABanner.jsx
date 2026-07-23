@@ -8,7 +8,7 @@ function CTABanner() {
   return (
     <section className="bg-[#0a0a0a] pb-24 px-6">
       <div className="max-w-4xl mx-auto rounded-2xl border border-white/[0.08] bg-[#0d0d0e] grid-bg px-8 py-16 text-center relative overflow-hidden">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-56 bg-emerald-500/[0.06] rounded-full blur-[110px] pointer-events-none"></div>
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[300px] h-40 bg-emerald-500/[0.04] rounded-full blur-[80px] pointer-events-none sm:w-[400px] sm:h-52 sm:blur-[90px] lg:w-[500px] lg:h-56 lg:blur-[110px]"></div>
 
         <div className="relative z-10">
           <p className="font-mono text-[11px] text-emerald-400 uppercase tracking-[0.25em] mb-5">Ready when you are</p>

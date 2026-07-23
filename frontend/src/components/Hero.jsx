@@ -5,7 +5,7 @@ const weeks = [
   { n: 1, topic: "Components & JSX", state: "done" },
   { n: 2, topic: "Hooks & State", state: "active", pct: 45 },
   { n: 3, topic: "Routing & Data Fetching", state: "locked" },
-  { n: 4, topic: "Testing & Deployment", state: "locked" },
+  { n: 4, topic: "Testing & Deployment", state: "locked" }
 ]
 
 const skills = ["React", "Python", "Java", "Web Dev", "Node.js", "AI/ML", "MongoDB", "DevOps"]
@@ -18,7 +18,7 @@ function Hero() {
   return (
     <section className="bg-[#0a0a0a] grid-bg relative overflow-hidden">
       {/* single static glow — no drifting blobs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-emerald-500/[0.05] rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[300px] h-[200px] bg-emerald-500/[0.03] rounded-full blur-[80px] pointer-events-none sm:w-[400px] sm:h-[250px] sm:blur-[100px] lg:w-[600px] lg:h-[400px] lg:blur-[140px]"></div>
 
       <div className="max-w-6xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-2 gap-14 lg:gap-16 items-center relative z-10">
         {/* Left: copy */}
@@ -64,7 +64,7 @@ function Hero() {
             </div>
             <div className="p-5 font-mono text-[12px] md:text-[13px]">
               <p className="text-slate-500 mb-1.5">
-                $ <span className="text-slate-100">sprint new</span>{" "}
+                $ <span className="text-sky-400">sprint new</span>{" "}
                 <span className="text-sky-400">--skill</span> react{" "}
                 <span className="text-sky-400">--level</span> intermediate
               </p>
@@ -115,12 +115,6 @@ function Hero() {
       </div>
 
       {/* Skills marquee strip */}
-      <div id="skills" className="border-t border-white/[0.06] py-4 overflow-hidden whitespace-nowrap relative z-10 select-none">
-        <div className="animate-marquee font-mono text-[11px] tracking-[0.3em] text-slate-600 uppercase">
-          <span>{skills.join(" · ")} · </span>
-          <span>{skills.join(" · ")} · </span>
-        </div>
-      </div>
     </section>
   )
 }
