@@ -32,7 +32,8 @@ export default function Profile() {
     title: user?.title || 'Learner Pro',
     bio: user?.bio || '',
     linkedin: user?.linkedin || '',
-    github: user?.github || ''
+    github: user?.github || '',
+    interest: user?.interest || ''
   })
 
   // Selected certificate for modal overlay
@@ -140,6 +141,9 @@ export default function Profile() {
               {form.bio && (
                 <p className="text-xs text-slate-400 font-medium leading-relaxed mt-4 pt-4 border-t border-white/[0.05]">{form.bio}</p>
               )}
+              {form.interest && (
+                <p className="text-xs text-slate-400 font-medium leading-relaxed mt-2">{form.interest}</p>
+              )}
 
               <button
                 onClick={() => setEditMode(!editMode)}
@@ -230,6 +234,16 @@ export default function Profile() {
                         placeholder="https://github.com/username"
                       />
                     </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Interest</label>
+                    <input
+                      type="text"
+                      value={form.interest}
+                      onChange={e => setForm(f => ({ ...f, interest: e.target.value }))}
+                      className="w-full bg-[#101011]/65 border border-white/[0.08] text-white focus:border-emerald-500/60 focus:bg-[#131314] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      placeholder="e.g. AI, Web Development, Game Dev"
+                    />
                   </div>
                 </div>
 

@@ -25,6 +25,16 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
   const [generatingDemo, setGeneratingDemo] = useState(false)
+  const getSuggestedSkill = (interest) => {
+    const lower = interest.toLowerCase();
+    if (lower.includes('web') || lower.includes('frontend') || lower.includes('javascript') || lower.includes('react')) return 'Web Development';
+    if (lower.includes('mobile') || lower.includes('android') || lower.includes('ios') || lower.includes('java')) return 'Java';
+    if (lower.includes('backend') || lower.includes('server') || lower.includes('api') || lower.includes('node') || lower.includes('python')) return 'Python';
+    if (lower.includes('ai') || lower.includes('ml') || lower.includes('machine learning')) return 'AI/ML';
+    if (lower.includes('devops') || lower.includes('cloud') || lower.includes('docker') || lower.includes('kubernetes')) return 'DevOps';
+    if (lower.includes('data') || lower.includes('database') || lower.includes('mongodb')) return 'MongoDB';
+    return 'Web Development';
+  }
 
   // Onboarding Sprint Finder States
   const [finderStep, setFinderStep] = useState(1) // 1: Build, 2: Language, 3: Recommendation
@@ -231,7 +241,34 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="fade-up">
-            
+
+            {/* Interest-based suggestion */}
+            {user.interest && (
+              <div className="glass-panel rounded-3xl p-6 mb-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Based on your interest</h2>
+                </div>
+                <p className="text-slate-400 mb-4">
+                  Based on your interest in <span className="font-semibold">{user.interest}</span>, you might enjoy learning
+                  {getSuggestedSkill(user.interest)}
+                  .
+                </p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => navigate('/roadmap')}
+                    className="flex-1 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs py-3.5 rounded-lg cursor-pointer transition-colors"
+                  >
+                    Explore roadmaps
+                  </button>
+                  <button
+                    onClick={() => handleStartCuratedTrack('Web Development', 'Beginner', 4)}
+                    className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.12] text-white font-semibold text-xs py-3.5 rounded-lg transition cursor-pointer"
+                  >
+                    Create a web app
+                  </button>
+                </div>
+              </div>
+            )}
             {/* Overview tab */}
             {activeTab === 'overview' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
