@@ -270,7 +270,7 @@ export default function Profile() {
                 {/* Certificates Section */}
                 <div className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up">
                   <h3 className="text-xl font-black text-slate-100 tracking-tight mb-2">My Certificates</h3>
-                  <p className="text-xs text-slate-400 font-medium mb-6">Complete all roadmap milestones and score >60% in a quiz for that skill to earn achievements!</p>
+                  <p className="text-xs text-slate-400 font-medium mb-6">Complete all roadmap milestones and score &gt;60% in a quiz for that skill to earn achievements!</p>
 
                   {loading ? (
                     <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse">Calculating certificates...</div>
@@ -291,8 +291,8 @@ export default function Profile() {
                           <div className="text-3xl mt-0.5">🏆</div>
                           <div>
                             <h4 className="font-extrabold text-sm text-slate-100 leading-tight">Mastery Certificate</h4>
-                            <p className="text-[10px] font-bold text-emerald-400 mt-0.5 uppercase tracking-wider>{cert.skill}</p>
-                            <p className="text-[10px] text-slate-400 font-semibold mt-1>Accuracy: {cert.quizScore}%</p>
+                            <p className="text-[10px] font-bold text-emerald-400 mt-0.5 uppercase tracking-wider">{cert.skill}</p>
+                            <p className="text-[10px] text-slate-400 font-semibold mt-1">Accuracy: {cert.quizScore}%</p>
                             <span className="text-[8px] bg-amber-950/40 text-amber-400 border border-amber-900/50 px-2 py-0.5 rounded-full mt-2 inline-block">Click to view</span>
                           </div>
                         </div>
@@ -303,26 +303,26 @@ export default function Profile() {
 
                 {/* Roadmaps in progress */}
                 <div className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up animation-delay-100">
-                  <h3 className="text-xl font-black text-slate-100 tracking-tight mb-5>Learning Progress</h3>
+                  <h3 className="text-xl font-black text-slate-100 tracking-tight mb-5">Learning Progress</h3>
 
                   {loading ? (
-                    <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse>Loading progress...</div>
+                    <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse">Loading progress...</div>
                   ) : roadmaps.length === 0 ? (
-                    <p className="text-xs text-slate-400 text-center py-4 font-bold>No active learning sprint roadmaps.</p>
+                    <p className="text-xs text-slate-400 text-center py-4 font-bold">No active learning sprint roadmaps.</p>
                   ) : (
                     <div className="space-y-4">
                       {roadmaps.map(r => (
-                        <div key={r._id} className="p-4 bg-[#111112]/40 rounded-2xl border border-white/[0.04] flex flex-col sm:flex-row justify-between sm:items-center gap-4>
+                        <div key={r._id} className="p-4 bg-[#111112]/40 rounded-2xl border border-white/[0.04] flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                           <div>
-                            <h4 className="font-extrabod text-sm text-slate-100>{r.skill} Roadmap</h4>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase mt-0.5>{r.level} · {r.duration} weeks</p>
+                            <h4 className="font-extrabold text-sm text-slate-100">{r.skill} Roadmap</h4>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{r.level} · {r.duration} weeks</p>
                           </div>
-                          <div className="flex-1 sm:max-w-xs>
-                            <div className="flex justify-between text-[10px] font-bold text-emerald-400 mb-1>
+                          <div className="flex-1 sm:max-w-xs">
+                            <div className="flex justify-between text-[10px] font-bold text-emerald-400 mb-1">
                               <span>Progress</span>
                               <span>{r.progress}%</span>
                             </div>
-                            <div className="bg-slate-950/60 shadow-inner rounded-full h-1.5 overflow-hidden>
+                            <div className="bg-slate-950/60 shadow-inner rounded-full h-1.5 overflow-hidden">
                               <div className="bg-emerald-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                             </div>
                           </div>
@@ -357,32 +357,32 @@ export default function Profile() {
 
             <Logo size="w-12 h-12 mb-6" />
 
-            <span className="text-[10px] text-amber-600 font-black uppercase tracking-widest border-b-2 border-amber-100 pb-1>Certificate of Achievement</span>
+            <span className="text-[10px] text-amber-600 font-black uppercase tracking-widest border-b-2 border-amber-100 pb-1">Certificate of Achievement</span>
 
-            <p className="text-xs text-gray-400 font-medium italic mt-6>This is to officially certify that</p>
+            <p className="text-xs text-gray-400 font-medium italic mt-6">This is to officially certify that</p>
 
-            <h2 className="text-3xl md:text-4.5xl font-black text-gray-950 mt-4 font-serif tracking-tight>{user?.name}</h2>
+            <h2 className="text-3xl md:text-4.5xl font-black text-gray-950 mt-4 font-serif tracking-tight">{user?.name}</h2>
 
-            <p className="text-xs text-gray-500 max-w-lg mt-4 leading-relaxed font-medium>
-              has successfully completed all learning roadmap sprints and met the academic evaluation milestones with an accuracy score of <span className="font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100>{activeCert.quizScore}%</span>, thereby achieving complete mastery of the core discipline of
+            <p className="text-xs text-gray-500 max-w-lg mt-4 leading-relaxed font-medium">
+              has successfully completed all learning roadmap sprints and met the academic evaluation milestones with an accuracy score of <span className="font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">{activeCert.quizScore}%</span>, thereby achieving complete mastery of the core discipline of
             </p>
 
-            <h3 className="text-2xl md:text-3xl font-black text-zinc-900 mt-4 uppercase tracking-wide>{activeCert.skill}</h3>
+            <h3 className="text-2xl md:text-3xl font-black text-zinc-900 mt-4 uppercase tracking-wide">{activeCert.skill}</h3>
 
             <div className="w-24 h-0.5 bg-amber-400 my-8"></div>
 
-            <div className="grid grid-cols-2 gap-12 text-left w-full max-w-md text-xs font-semibold text-gray-400>
+            <div className="grid grid-cols-2 gap-12 text-left w-full max-w-md text-xs font-semibold text-gray-400">
               <div>
-                <p className="text-[9px] uppercase tracking-wider>Date of Issuance</p>
-                <p className="text-gray-800 font-bold mt-1 text-sm>{activeCert.date}</p>
+                <p className="text-[9px] uppercase tracking-wider">Date of Issuance</p>
+                <p className="text-gray-800 font-bold mt-1 text-sm">{activeCert.date}</p>
               </div>
               <div>
-                <p className="text-[9px] uppercase tracking-wider>Verification Hash</p>
-                <p className="text-gray-800 font-mono font-bold mt-1 text-[10px] tracking-tight>{activeCert.certId}</p>
+                <p className="text-[9px] uppercase tracking-wider">Verification Hash</p>
+                <p className="text-gray-800 font-mono font-bold mt-1 text-[10px] tracking-tight">{activeCert.certId}</p>
               </div>
             </div>
 
-            <div className="flex gap-3 mt-10 w-full max-w-sm justify-center>
+            <div className="flex gap-3 mt-10 w-full max-w-sm justify-center">
               <button
                 onClick={() => window.print()}
                 className="flex-1 bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs py-3 rounded-lg cursor-pointer transition"
@@ -397,7 +397,7 @@ export default function Profile() {
               </button>
             </div>
           </div>
-        )
+        </div>
       )}
     </div>
   )
