@@ -11,6 +11,7 @@ import FeaturesPage from "./pages/FeaturesPage";
 import ProcessPage from "./pages/ProcessPage";
 import FaqPage from "./pages/FaqPage";
 import VantaBackground from "./components/VantaBackground";
+import ScrollReveal from "./components/ScrollReveal";
 
 // BrowserRouter keeps the old scroll position across navigations, so a new
 // page can open halfway down. ScrollRestoration is data-router only.
@@ -34,6 +35,7 @@ function App() {
       <VantaBackground />
       <div aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none bg-[#0b1220]/72"></div>
       <ScrollToTop />
+      <ScrollReveal />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />

@@ -236,6 +236,27 @@ body::after {
   }
 }
 
+/* Fallback for Safari and Firefox, which do not support view() timelines —
+   that means every browser on iOS. ScrollReveal.jsx adds `js-reveal` to
+   <html> and then `revealed` per section as it scrolls into view.
+   The start state is scoped to `js-reveal` on purpose: if that script never
+   runs, these rules never apply and the sections stay plainly visible
+   rather than stuck at opacity 0. */
+@supports not (animation-timeline: view()) {
+  .js-reveal .reveal {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(7deg) translateY(44px) scale(0.985);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .js-reveal .reveal.revealed {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+}
+
 @keyframes revealIn {
   from {
     opacity: 0;
