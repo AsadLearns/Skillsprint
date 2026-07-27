@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import HowItWorks from "../components/HowItWorks";
-import Testimonials from "../components/Testimonials";
+import ProjectStatus from "../components/ProjectStatus";
 import FAQ from "../components/FAQ";
 import CTABanner from "../components/CTABanner";
 import Footer from "../components/Footer";
@@ -14,7 +14,7 @@ function Home() {
       <Hero />
       <Features />
       <HowItWorks />
-      <Testimonials />
+      <ProjectStatus />
       <FAQ />
       <CTABanner />
       <Footer />

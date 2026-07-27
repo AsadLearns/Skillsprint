@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
 const weeks = [
@@ -41,12 +41,12 @@ function Hero() {
             >
               Start your first sprint
             </button>
-            <a
-              href="#how"
+            <Link
+              to="/how-it-works"
               className="border border-white/[0.12] text-slate-300 hover:bg-white/[0.06] px-6 py-3 rounded-lg font-semibold text-sm transition-colors inline-block"
             >
               See how it works
-            </a>
+            </Link>
           </div>
           <p className="font-mono text-[11px] text-slate-500 tracking-[0.15em] uppercase">
             Free forever · No credit card · 8+ skill tracks

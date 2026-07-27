@@ -15,6 +15,9 @@
     @apply bg-[#0d0d0e]/90 backdrop-blur-xl border border-white/[0.05] shadow-2xl;
   }
 
+  /* Unused as of the landing redesign — kept, not deleted, in case a page
+     still needs them: .glow-border, .glow-btn, .glass-panel-dark,
+     .animate-pulse-slow, .animate-float-orb-1, .animate-float-orb-2 */
   .glow-border {
     @apply border border-transparent bg-clip-padding relative;
   }
@@ -211,5 +214,24 @@ body {
   .animate-float-orb-1,
   .animate-float-orb-2 {
     animation-play-state: paused !important;
+  }
+}
+
+/* Respect the OS "reduce motion" setting. Entrance animations run `both`, so
+   they must land at their end state rather than simply being switched off —
+   otherwise anything animated in stays stuck at opacity 0. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-blink {
+    animation: none !important;
+    opacity: 1;
   }
 }

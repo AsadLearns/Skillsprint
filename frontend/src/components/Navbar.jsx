@@ -23,9 +23,9 @@ function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500">
-          <a href="#features" className="hover:text-slate-200 transition">Features</a>
-          <a href="#how" className="hover:text-slate-200 transition">Process</a>
-          <a href="#faq" className="hover:text-slate-200 transition">FAQ</a>
+          <Link to="/features" className="hover:text-slate-200 transition">Features</Link>
+          <Link to="/how-it-works" className="hover:text-slate-200 transition">Process</Link>
+          <Link to="/faq" className="hover:text-slate-200 transition">FAQ</Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -57,9 +57,9 @@ function Navbar() {
         {/* Mobile Drawer Menu */}
         {isOpen && (
           <div className="absolute top-full left-0 w-full bg-[#0f0f10]/95 backdrop-blur-lg border-b border-white/[0.06] px-6 py-6 md:hidden flex flex-col gap-4 z-40 animate-slide-down shadow-2xl">
-            <a href="#features" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Features</a>
-            <a href="#how" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Process</a>
-            <a href="#faq" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">FAQ</a>
+            <Link to="/features" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Features</Link>
+            <Link to="/how-it-works" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Process</Link>
+            <Link to="/faq" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">FAQ</Link>
             {user ? (
               <>
                 <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-slate-100 font-bold py-3 border-b border-white/[0.03]">Dashboard</Link>

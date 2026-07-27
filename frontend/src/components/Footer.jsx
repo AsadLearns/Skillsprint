@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Logo from './Logo'
 
 function Footer() {
@@ -11,9 +12,9 @@ function Footer() {
         <p className="text-slate-400 mb-8 font-medium">Learn smarter, one sprint at a time.</p>
 
         <div className="flex justify-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] mb-8 text-slate-400">
-          <a href="#features" className="hover:text-slate-200 transition">Features</a>
-          <a href="#how" className="hover:text-slate-200 transition">Process</a>
-          <a href="#faq" className="hover:text-slate-200 transition">FAQ</a>
+          <Link to="/features" className="hover:text-slate-200 transition">Features</Link>
+          <Link to="/how-it-works" className="hover:text-slate-200 transition">Process</Link>
+          <Link to="/faq" className="hover:text-slate-200 transition">FAQ</Link>
         </div>
 
         <div className="border-t border-white/[0.05] pt-8 font-mono text-[10px] tracking-wider text-slate-600 uppercase">
