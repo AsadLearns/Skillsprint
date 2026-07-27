@@ -29,30 +29,37 @@
     transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
       translateY(var(--ty, 0px)) scale(var(--cs, 1));
     transform-style: preserve-3d;
+    /* will-change is promoted only while a card is actually being tilted —
+       leaving it on every card permanently costs a compositor layer each. */
+    transition:
+      transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Track the pointer near-instantly while over; the rule above handles the
+     slower settle once .tilting is removed. */
+  .surface-card.tilting {
     will-change: transform;
     transition:
-      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.45s ease,
-      border-color 0.45s ease;
-  }
-
-  /* Snap back slowly when the pointer leaves, but track quickly while over. */
-  .surface-card.tilting {
-    transition:
       transform 0.08s linear,
-      box-shadow 0.45s ease,
-      border-color 0.45s ease;
+      box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .surface-card:hover {
-    --ty: -4px;
-    --cs: 1.015;
-    border-color: rgba(92, 184, 250, 0.32);
-    box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
-      0 2px 8px -2px rgba(0, 0, 0, 0.55),
-      0 28px 52px -22px rgba(0, 0, 0, 0.85),
-      0 14px 40px -20px rgba(92, 184, 250, 0.4);
+  /* Hover motion is gated: on a touch screen :hover sticks after a tap, so
+     the card would stay lifted with no way to dismiss it. */
+  @media (hover: hover) and (pointer: fine) {
+    .surface-card:hover {
+      --ty: -4px;
+      --cs: 1.015;
+      border-color: rgba(92, 184, 250, 0.32);
+      box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+        0 2px 8px -2px rgba(0, 0, 0, 0.55),
+        0 28px 52px -22px rgba(0, 0, 0, 0.85),
+        0 14px 40px -20px rgba(92, 184, 250, 0.4);
+    }
   }
 
   .glass-panel {
@@ -178,7 +185,7 @@ body {
 }
 
 .animate-slide-up {
-  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: slideUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-slide-down {
@@ -316,7 +323,12 @@ body::after {
   .js-reveal .reveal {
     opacity: 0;
     transform: perspective(1000px) rotateX(7deg) translateY(44px) scale(0.985);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    /* 700ms with a built-in `ease` read as sluggish, and `ease` is weak at
+       exactly the moment the eye is watching. Shorter, with a decisive
+       ease-out curve on both properties. */
+    transition:
+      opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
@@ -350,27 +362,21 @@ body::after {
    rather than a flat glyph. Small amplitude on purpose — it sits in the
    sticky navbar on every page, and anything larger becomes a distraction.
    Tilts further on hover. */
-@keyframes logoTilt {
-  0%, 100% { transform: perspective(340px) rotateY(-16deg) rotateX(6deg); }
-  50%      { transform: perspective(340px) rotateY(16deg) rotateX(-4deg); }
-}
-
+/* The logo used to tilt on a 7s loop. It sits in the sticky navbar on every
+   page, so that was permanent decorative motion on a permanently-visible
+   element — motion with no job, competing for attention on every screen.
+   Removed. It now holds a fixed three-quarter angle, which still reads as a
+   solid object, and only responds when you actually point at it. */
 .logo-3d {
   display: inline-block;
   transform-style: preserve-3d;
-  animation: logoTilt 7s ease-in-out infinite;
-  transition: transform 0.35s ease;
+  transform: perspective(340px) rotateY(-14deg) rotateX(5deg);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.logo-3d:hover {
-  animation-play-state: paused;
-  transform: perspective(340px) rotateY(0deg) rotateX(0deg) scale(1.08);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .logo-3d {
-    animation: none !important;
-    transform: none !important;
+@media (hover: hover) and (pointer: fine) {
+  .logo-3d:hover {
+    transform: perspective(340px) rotateY(0deg) rotateX(0deg) scale(1.06);
   }
 }
 
@@ -403,13 +409,18 @@ body::after {
    they must land at their end state rather than simply being switched off —
    otherwise anything animated in stays stuck at opacity 0. */
 @media (prefers-reduced-motion: reduce) {
-  *,
+  * ,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    /* Kill looping and movement, but do NOT collapse everything to 0ms.
+       Reduced motion means gentler, not absent — an interface where every
+       state change happens in a single hard cut is harder to follow, not
+       easier. Opacity and colour still cross-fade; only travel is removed. */
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transition-property: opacity, color, background-color, border-color,
+      box-shadow, fill, stroke !important;
+    transition-duration: 0.16s !important;
   }
 
   .animate-blink {
@@ -417,12 +428,25 @@ body::after {
     opacity: 1;
   }
 
-  /* Scroll-driven reveals are not duration-based, so zeroing the duration
-     above does not stop them — cancel the animation outright. */
-  .reveal {
+  /* Entrance animations run `both`, so switching them off mid-flight would
+     strand elements at opacity 0. Cancel the animation and pin the end
+     state instead. Scroll-driven reveals are not duration-based, so zeroing
+     a duration would not have stopped them anyway. */
+  .reveal,
+  .js-reveal .reveal,
+  .animate-slide-up,
+  .animate-slide-down,
+  .animate-slide-in-right,
+  .animate-fade-in {
     animation: none !important;
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* No pointer/scroll tilt, and no perspective left applied. */
+  .surface-card,
+  .logo-3d {
+    transform: none !important;
   }
 
   body::after { display: none; }
