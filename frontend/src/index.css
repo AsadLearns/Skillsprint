@@ -255,7 +255,29 @@ body {
     linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
   background-size: 100% 100%, 44px 44px, 44px 44px;
-  background-attachment: fixed, fixed, fixed;
+}
+
+/* iOS treats background-attachment: fixed as scroll and janks badly on it, so
+   only pointer devices get the parallax. Everything else keeps the same
+   image, just scrolling with the page. */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    background-attachment: fixed, fixed, fixed;
+  }
+}
+
+/* Nothing on this site may depend on backdrop-filter for legibility. Safari
+   only dropped the -webkit- prefix in 18, and any browser without the filter
+   at all would leave the nav links sitting on moving cloud at 25% opacity.
+   Where it is unsupported, fall back to opaque surfaces. */
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .glass-panel {
+    background-color: rgba(22, 34, 59, 0.95);
+  }
+
+  .nav-surface {
+    background-color: rgba(11, 18, 32, 0.94);
+  }
 }
 
 /* Fine film grain over the page. Stops large dark areas reading as a flat

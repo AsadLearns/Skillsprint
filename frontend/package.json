@@ -3,6 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "browserslist": [
+    ">0.3%",
+    "last 4 versions",
+    "iOS >= 14",
+    "Safari >= 14",
+    "not dead"
+  ],
   "scripts": {
     "dev": "vite",
     "dev:lan": "vite --host",
