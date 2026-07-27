@@ -13,7 +13,12 @@ function VantaBackground() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
 
     let cancelled = false
-    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 300))
+    // requestIdleCallback can be starved indefinitely — a page opened in a
+    // background tab may never see an idle period at all, and the effect
+    // would then simply never load. The timeout makes it fire regardless.
+    const idle = window.requestIdleCallback
+      ? (fn) => window.requestIdleCallback(fn, { timeout: 2000 })
+      : (fn) => setTimeout(fn, 300)
 
     const handle = idle(async () => {
       // vanta ships UMD bundles with no ES export — importing registers the
