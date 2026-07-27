@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import FeaturesPage from "./pages/FeaturesPage";
 import ProcessPage from "./pages/ProcessPage";
 import FaqPage from "./pages/FaqPage";
+import VantaBackground from "./components/VantaBackground";
 
 // BrowserRouter keeps the old scroll position across navigations, so a new
 // page can open halfway down. ScrollRestoration is data-router only.
@@ -27,6 +28,11 @@ const Profile = lazy(() => import("./pages/Profile"));
 function App() {
   return (
     <AuthProvider>
+      {/* Mounted once at the root so the clouds span every route and survive
+          navigation without paying to re-initialise WebGL. The scrim above
+          them holds text contrast site-wide. */}
+      <VantaBackground />
+      <div aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none bg-[#0b1220]/72"></div>
       <ScrollToTop />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>

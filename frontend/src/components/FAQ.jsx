@@ -27,7 +27,7 @@ function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="reveal bg-[#0b1220] py-24 px-6">
+    <section id="faq" className="reveal bg-transparent py-24 px-6">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-end justify-between gap-4 border-b border-white/[0.06] pb-5 mb-10">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">

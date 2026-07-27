@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
-import VantaBackground from "./VantaBackground"
 
 const weeks = [
   { n: 1, topic: "Components & JSX", state: "done" },
@@ -17,16 +16,12 @@ function Hero() {
   const handleStart = () => navigate(user ? "/dashboard" : "/signup")
 
   return (
-    <section className="bg-[#0b1220] grid-bg relative overflow-hidden">
-      {/* Animated cloud layer. Desktop only, loaded after idle — see the
-          component. Sits under the grid texture and all copy. */}
-      <VantaBackground />
-
-      {/* Scrim over the clouds. The effect is bright enough to drop the body
-          copy below readable contrast, so darken hard on the left where the
-          text sits and let the clouds stay visible on the right. */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#0b1220] via-[#0b1220]/70 to-transparent"></div>
-      <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-[#0b1220] to-transparent"></div>
+    <section className="grid-bg relative overflow-hidden">
+      {/* The cloud layer is mounted once in App and fixed behind the whole
+          site, so this section stays transparent to let it through. Copy sits
+          over the left, which is the busiest part of the effect — keep a
+          gradient here so the headline never fights a bright cloud. */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#0b1220] via-[#0b1220]/55 to-transparent"></div>
 
       {/* single static glow — no drifting blobs */}
       <div className="absolute top-0 right-0 w-[300px] h-[200px] bg-accent-500/[0.03] rounded-full blur-[80px] pointer-events-none sm:w-[400px] sm:h-[250px] sm:blur-[100px] lg:w-[600px] lg:h-[400px] lg:blur-[140px]"></div>

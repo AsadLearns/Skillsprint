@@ -35,8 +35,12 @@
     @apply hover:-translate-y-[1px] active:translate-y-0 transition-all duration-300;
   }
 
+  /* Used by the auth and logged-in pages. Semi-transparent so the fixed
+     cloud layer shows through there too — opaque here would cover it and
+     those pages would silently lose the effect. Kept strong because these
+     screens are dense UI, not marketing copy. */
   .hero-bg {
-    background-color: #0b1220;
+    background-color: rgba(11, 18, 32, 0.78);
     background-image:
       radial-gradient(at 80% 0%, rgba(92, 184, 250, 0.04) 0px, transparent 50%),
       linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),

@@ -45,9 +45,19 @@ function VantaBackground() {
       // user-agent sniffing rather than viewport width.
       const dpr = window.devicePixelRatio || 1
       const small = window.matchMedia("(max-width: 767px)").matches
-      // 1.0 on phones, and never above 1.5 on desktop — beyond that a soft
-      // cloud gradient gains nothing visible for a quadratic cost.
-      const targetRatio = small ? 1 : Math.min(dpr, 1.5)
+      // Now that the canvas is fixed and full-viewport it renders constantly,
+      // behind every section, so budget the fragment count outright instead
+      // of trusting a fixed ratio. At 1.25x on a 1440x900 screen this came
+      // out at 2.0MP and 43fps — under the 60 we need.
+      const cssW = window.innerWidth
+      const cssH = window.innerHeight
+      const budget = small ? 0.5e6 : 1.4e6 // device pixels
+      const cap = small ? 1 : Math.min(dpr, 1.5)
+      // never above the cap, never below 0.5 or the gradient turns to mush
+      const targetRatio = Math.max(
+        0.5,
+        Math.min(cap, Math.sqrt(budget / (cssW * cssH)))
+      )
 
       effect.current = CLOUDS2({
         el: el.current,
@@ -80,7 +90,10 @@ function VantaBackground() {
     }
   }, [])
 
-  return <div ref={el} aria-hidden="true" className="absolute inset-0 pointer-events-none" />
+  // Fixed to the viewport rather than sized to a section: the clouds sit
+  // behind the entire site, and the renderer only ever covers one screen no
+  // matter how long the page is.
+  return <div ref={el} aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none" />
 }
 
 export default VantaBackground

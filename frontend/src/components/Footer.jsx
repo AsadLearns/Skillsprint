@@ -3,7 +3,7 @@ import Logo from './Logo'
 
 function Footer() {
   return (
-    <footer className="bg-[#0b1220] text-slate-400 py-16 px-6 border-t border-white/[0.04] relative overflow-hidden">
+    <footer className="bg-transparent text-slate-400 py-16 px-6 border-t border-white/[0.04] relative overflow-hidden">
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div className="flex items-center justify-center gap-2 mb-4">
           <Logo size="w-9 h-9" />

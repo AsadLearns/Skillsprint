@@ -13,7 +13,7 @@ const next = [
 
 function ProjectStatus() {
   return (
-    <section className="reveal bg-[#0f1729] border-y border-white/[0.04] py-24 px-6">
+    <section className="reveal bg-[#0f1729]/55 border-y border-white/[0.04] py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-end justify-between gap-4 border-b border-white/[0.06] pb-5 mb-10">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">

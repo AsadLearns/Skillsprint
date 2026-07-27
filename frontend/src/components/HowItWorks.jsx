@@ -7,7 +7,7 @@ const steps = [
 
 function HowItWorks() {
   return (
-    <section id="how" className="reveal bg-[#0b1220] py-24 px-6">
+    <section id="how" className="reveal bg-transparent py-24 px-6">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1.4fr] gap-14">
         <div>
           <p className="font-mono text-[11px] text-slate-500 uppercase tracking-[0.25em] mb-4">02 / Process</p>
