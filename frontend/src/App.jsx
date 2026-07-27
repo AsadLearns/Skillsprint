@@ -33,9 +33,15 @@ function App() {
           navigation without paying to re-initialise WebGL. The scrim above
           them holds text contrast site-wide. */}
       <VantaBackground />
-      <div aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none bg-[#0b1220]/72"></div>
+      <div aria-hidden="true" className="fixed inset-0 z-0 pointer-events-none bg-[#0b1220]/72"></div>
       <ScrollToTop />
       <ScrollReveal />
+      {/* Content is lifted above the cloud layer explicitly rather than the
+          layer being pushed behind with a negative z-index. Negative z-index
+          is fragile in Safari — any ancestor that forms a stacking context
+          traps the element behind an opaque background and the effect just
+          never appears. */}
+      <div className="relative z-10">
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -51,6 +57,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Routes>
       </Suspense>
+      </div>
     </AuthProvider>
   );
 }
