@@ -152,28 +152,28 @@ export default function Dashboard() {
     <div className="min-h-screen hero-bg relative overflow-hidden">
       <div className="sticky top-0 z-50 w-full">
         {/* Announcement Marquee Ticker */}
-        <div className="w-full bg-[#1a1815] font-mono text-[10px] uppercase tracking-widest text-stone-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
+        <div className="w-full bg-[#131d33] font-mono text-[10px] uppercase tracking-widest text-slate-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
           <div className="inline-block animate-marquee">
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </div>
 
-        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#100f0d]/75 backdrop-blur-xl">
+        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#0b1220]/75 backdrop-blur-xl">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
             <Logo size="w-8 h-8 md:w-9 md:h-9" />
             <span className="text-lg md:text-2xl font-black gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
           <div className="flex items-center gap-2 md:gap-3">
-            <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-stone-200 text-stone-950 text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-lg font-semibold transition-colors cursor-pointer">
+            <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-slate-200 text-slate-950 text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-lg font-semibold transition-colors cursor-pointer">
               <span className="md:inline hidden">+ New Roadmap</span>
               <span className="md:hidden">🗺️ New</span>
             </button>
-            <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] text-stone-300 border border-white/[0.1] text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-lg font-semibold transition cursor-pointer">
+            <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/[0.1] text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-lg font-semibold transition cursor-pointer">
               <span className="md:inline hidden">🧠 Take Quiz</span>
               <span className="md:hidden">🧠 Quiz</span>
             </button>
-            <button onClick={handleLogout} className="text-[10px] md:text-xs text-stone-400 hover:text-red-400 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
+            <button onClick={handleLogout} className="text-[10px] md:text-xs text-slate-400 hover:text-red-400 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
           </div>
         </nav>
       </div>
@@ -183,17 +183,17 @@ export default function Dashboard() {
         {/* Header section */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-10 animate-slide-up">
           <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-stone-100 tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
               Welcome back, <span className="gradient-text">{user?.name}</span> 👋
             </h1>
-            <p className="text-stone-400 mt-1.5 font-medium text-sm md:text-base">Track your learning sprints, complete milestones, and crush your goals.</p>
+            <p className="text-slate-400 mt-1.5 font-medium text-sm md:text-base">Track your learning sprints, complete milestones, and crush your goals.</p>
           </div>
-          <div onClick={() => navigate('/profile')} className="flex items-center gap-3 bg-[#1a1815]/60 backdrop-blur-xl border border-white/[0.05] px-5 py-3 rounded-2xl shadow-lg cursor-pointer hover:bg-white/[0.06] hover:border-white/[0.16] transition-all duration-300">
-            <div className="w-10 h-10 bg-white/[0.08] border border-white/[0.12] rounded-xl flex items-center justify-center text-stone-100 font-bold text-lg">
+          <div onClick={() => navigate('/profile')} className="flex items-center gap-3 bg-[#131d33]/60 backdrop-blur-xl border border-white/[0.05] px-5 py-3 rounded-2xl shadow-lg cursor-pointer hover:bg-white/[0.06] hover:border-white/[0.16] transition-all duration-300">
+            <div className="w-10 h-10 bg-white/[0.08] border border-white/[0.12] rounded-xl flex items-center justify-center text-slate-100 font-bold text-lg">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="text-sm font-bold text-stone-200">{user?.name}</p>
+              <p className="text-sm font-bold text-slate-200">{user?.name}</p>
               <p className="text-xs font-semibold text-accent-400 uppercase tracking-wider">{user?.title || 'Learner Pro'}</p>
             </div>
           </div>
@@ -204,13 +204,13 @@ export default function Dashboard() {
           {[
             { label: 'Active Roadmaps', rawVal: roadmaps.length, suffix: '', color: 'text-sky-400', bg: 'bg-sky-500/10 text-sky-400', icon: '🗺️', delay: 'animation-delay-100' },
             { label: 'Weeks Completed', rawVal: completedWeeks, suffix: '', color: 'text-accent-400', bg: 'bg-accent-500/10 text-accent-400', icon: '✅', delay: 'animation-delay-200' },
-            { label: 'Avg Progress', rawVal: totalProgress, suffix: '%', color: 'text-stone-200', bg: 'bg-white/[0.06] text-stone-200', icon: '📈', delay: 'animation-delay-300' },
+            { label: 'Avg Progress', rawVal: totalProgress, suffix: '%', color: 'text-slate-200', bg: 'bg-white/[0.06] text-slate-200', icon: '📈', delay: 'animation-delay-300' },
             { label: 'Quiz Avg Score', rawVal: avgQuizScore, suffix: '%', color: 'text-amber-400', bg: 'bg-amber-500/10 text-amber-400', icon: '🧠', delay: 'animation-delay-500' },
           ].map((s, index) => (
             <div key={s.label} className={`glass-panel rounded-2xl p-4 md:p-5 flex items-center gap-3 md:gap-4 transition-all duration-300 hover:scale-[1.02] animate-slide-up ${s.delay}`}>
               <div className={`${s.bg} w-10 h-10 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-xl md:text-3xl shadow-sm`}>{s.icon}</div>
               <div>
-                <p className="text-[10px] md:text-xs text-stone-400 font-bold uppercase tracking-wider">{s.label}</p>
+                <p className="text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-wider">{s.label}</p>
                 <p className={`text-xl md:text-2xl font-black mt-0.5 md:mt-1 ${s.color}`}>
                   <AnimatedCounter value={s.rawVal} suffix={s.suffix} />
                 </p>
@@ -220,10 +220,10 @@ export default function Dashboard() {
         </div>
 
         {/* High-tech toggle switches */}
-        <div className="flex gap-2 mb-8 bg-[#1a1815]/60 backdrop-blur-xl p-1.5 rounded-2xl w-fit shadow-2xl border border-white/[0.05]">
+        <div className="flex gap-2 mb-8 bg-[#131d33]/60 backdrop-blur-xl p-1.5 rounded-2xl w-fit shadow-2xl border border-white/[0.05]">
           {tabs.map(t => (
             <button key={t} onClick={() => setActiveTab(t)}
-              className={`px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === t ? 'bg-white text-stone-950' : 'text-stone-400 hover:text-stone-200'}`}>
+              className={`px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === t ? 'bg-white text-slate-950' : 'text-slate-400 hover:text-slate-200'}`}>
               {t}
             </button>
           ))}
@@ -232,9 +232,9 @@ export default function Dashboard() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="w-12 h-12 border-4 border-accent-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p className="text-stone-400 font-bold animate-pulse text-sm uppercase tracking-widest">Retrieving your stats...</p>
+            <p className="text-slate-400 font-bold animate-pulse text-sm uppercase tracking-widest">Retrieving your stats...</p>
             {slowLoad && (
-              <p className="text-stone-500 text-xs mt-3 max-w-xs leading-relaxed">
+              <p className="text-slate-500 text-xs mt-3 max-w-xs leading-relaxed">
                 ⏳ The server is waking up after a quiet period — this can take up to a minute. It'll be fast once it's awake.
               </p>
             )}
@@ -246,9 +246,9 @@ export default function Dashboard() {
             {user.interest && (
               <div className="glass-panel rounded-3xl p-6 mb-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-extrabold text-stone-100 text-xl tracking-tight">Based on your interest</h2>
+                  <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Based on your interest</h2>
                 </div>
-                <p className="text-stone-400 mb-4">
+                <p className="text-slate-400 mb-4">
                   Based on your interest in <span className="font-semibold">{user.interest}</span>, you might enjoy learning
                   {getSuggestedSkill(user.interest)}
                   .
@@ -256,7 +256,7 @@ export default function Dashboard() {
                 <div className="flex gap-3">
                   <button
                     onClick={() => navigate('/roadmap')}
-                    className="flex-1 bg-white hover:bg-stone-200 text-stone-950 font-semibold text-xs py-3.5 rounded-lg cursor-pointer transition-colors"
+                    className="flex-1 bg-white hover:bg-slate-200 text-slate-950 font-semibold text-xs py-3.5 rounded-lg cursor-pointer transition-colors"
                   >
                     Explore roadmaps
                   </button>
@@ -275,26 +275,26 @@ export default function Dashboard() {
 
                 <div className="glass-panel rounded-3xl p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-extrabold text-stone-100 text-xl tracking-tight">Active Roadmaps</h2>
-                    <button onClick={() => navigate('/roadmap')} className="text-sm text-accent-400 font-bold hover:text-stone-200 transition cursor-pointer">View all →</button>
+                    <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Active Roadmaps</h2>
+                    <button onClick={() => navigate('/roadmap')} className="text-sm text-accent-400 font-bold hover:text-slate-200 transition cursor-pointer">View all →</button>
                   </div>
                   {roadmaps.length === 0 ? (
-                    <div className="text-center py-10 bg-[#1a1815]/40 border border-dashed border-white/[0.12] rounded-2xl p-6">
+                    <div className="text-center py-10 bg-[#131d33]/40 border border-dashed border-white/[0.12] rounded-2xl p-6">
                       <div className="text-5xl mb-4">🗺️</div>
-                      <p className="text-stone-400 font-medium text-sm mb-5">No roadmap tracks created yet</p>
-                      <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-stone-200 text-stone-950 text-xs px-5 py-3 rounded-lg font-semibold cursor-pointer transition-colors">Generate first roadmap →</button>
+                      <p className="text-slate-400 font-medium text-sm mb-5">No roadmap tracks created yet</p>
+                      <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-slate-200 text-slate-950 text-xs px-5 py-3 rounded-lg font-semibold cursor-pointer transition-colors">Generate first roadmap →</button>
                     </div>
                   ) : roadmaps.slice(0, 3).map(r => (
-                    <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="flex items-center gap-4 p-3.5 rounded-2xl bg-[#1c1a17]/40 hover:bg-[#1f1c18]/60 border border-white/[0.04] hover:border-white/[0.16] cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
-                      <div className={`w-12 h-12 rounded-xl ${skillColors[r.skill] || 'bg-white/[0.06] text-stone-200 border border-white/[0.1]'} flex items-center justify-center font-black text-sm`}>
+                    <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="flex items-center gap-4 p-3.5 rounded-2xl bg-[#16223b]/40 hover:bg-[#1a2842]/60 border border-white/[0.04] hover:border-white/[0.16] cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
+                      <div className={`w-12 h-12 rounded-xl ${skillColors[r.skill] || 'bg-white/[0.06] text-slate-200 border border-white/[0.1]'} flex items-center justify-center font-black text-sm`}>
                         {r.skill.charAt(0)}
                       </div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="font-bold text-stone-200 text-sm">{r.skill}</span>
+                          <span className="font-bold text-slate-200 text-sm">{r.skill}</span>
                           <span className="text-xs font-black text-accent-400">{r.progress}%</span>
                         </div>
-                        <div className="bg-stone-950/60 shadow-inner rounded-full h-2 overflow-hidden">
+                        <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden">
                           <div className="bg-accent-500 h-2 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                         </div>
                       </div>
@@ -304,22 +304,22 @@ export default function Dashboard() {
 
                 <div className="glass-panel rounded-3xl p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-extrabold text-stone-100 text-xl tracking-tight">Recent Quizzes</h2>
-                    <button onClick={() => navigate('/quiz')} className="text-sm text-accent-400 font-bold hover:text-stone-200 transition cursor-pointer">Take quiz →</button>
+                    <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Recent Quizzes</h2>
+                    <button onClick={() => navigate('/quiz')} className="text-sm text-accent-400 font-bold hover:text-slate-200 transition cursor-pointer">Take quiz →</button>
                   </div>
                   {quizzes.length === 0 ? (
-                    <div className="text-center py-10 bg-[#1a1815]/40 border border-dashed border-white/[0.12] rounded-2xl p-6">
+                    <div className="text-center py-10 bg-[#131d33]/40 border border-dashed border-white/[0.12] rounded-2xl p-6">
                       <div className="text-5xl mb-4">🧠</div>
-                      <p className="text-stone-400 font-medium text-sm mb-5">No quiz logs recorded</p>
-                      <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-stone-300 text-xs px-5 py-3 rounded-lg font-semibold transition cursor-pointer">Start a quiz →</button>
+                      <p className="text-slate-400 font-medium text-sm mb-5">No quiz logs recorded</p>
+                      <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 text-xs px-5 py-3 rounded-lg font-semibold transition cursor-pointer">Start a quiz →</button>
                     </div>
                   ) : quizzes.slice(0, 4).map(q => (
-                    <div key={q._id} onClick={() => navigate('/quiz', { state: { resumeQuiz: q } })} className="flex items-center justify-between p-3.5 rounded-2xl bg-[#1c1a17]/40 hover:bg-[#1f1c18]/60 border border-white/[0.03] hover:border-white/[0.16] cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
+                    <div key={q._id} onClick={() => navigate('/quiz', { state: { resumeQuiz: q } })} className="flex items-center justify-between p-3.5 rounded-2xl bg-[#16223b]/40 hover:bg-[#1a2842]/60 border border-white/[0.03] hover:border-white/[0.16] cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-white/[0.06] rounded-xl flex items-center justify-center text-xl shadow-inner">🧠</div>
                         <div>
-                          <p className="font-bold text-stone-200 text-sm leading-tight">{q.topic}</p>
-                          <p className="text-xs text-stone-400 font-bold mt-0.5">{q.skill}</p>
+                          <p className="font-bold text-slate-200 text-sm leading-tight">{q.topic}</p>
+                          <p className="text-xs text-slate-400 font-bold mt-0.5">{q.skill}</p>
                         </div>
                       </div>
                       <div className={`text-xs font-black px-3 py-1.5 rounded-full border ${q.score >= 80 ? 'bg-accent-500/10 text-accent-300 border-accent-500/25' : q.score >= 50 ? 'bg-yellow-500/10 text-yellow-300 border-yellow-500/25' : q.completed ? 'bg-red-500/10 text-red-300 border-red-500/25' : 'bg-accent-500/10 text-accent-300 border-accent-500/25'}`}>
@@ -329,16 +329,16 @@ export default function Dashboard() {
                   ))}
                 </div>
 
-                <div className="md:col-span-2 bg-[#161412] grid-bg rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl border border-white/[0.08]">
+                <div className="md:col-span-2 bg-[#0f1729] grid-bg rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl border border-white/[0.08]">
                   <div className="absolute right-0 bottom-0 w-80 h-80 bg-accent-500/[0.05] rounded-full blur-3xl -mr-20 -mb-20"></div>
 
                   <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div>
                       <h2 className="text-2xl font-extrabold mb-2 tracking-tight">Ready to learn something new?</h2>
-                      <p className="text-stone-400 text-sm font-medium">Generate an advanced, structured learning roadmap for any technical skill instantly.</p>
+                      <p className="text-slate-400 text-sm font-medium">Generate an advanced, structured learning roadmap for any technical skill instantly.</p>
                     </div>
                     <div className="flex gap-3 flex-wrap">
-                      <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-stone-200 text-stone-950 font-semibold text-xs px-5 py-3.5 rounded-lg cursor-pointer transition-colors">🗺️ New Roadmap</button>
+                      <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-slate-200 text-slate-950 font-semibold text-xs px-5 py-3.5 rounded-lg cursor-pointer transition-colors">🗺️ New Roadmap</button>
                       <button onClick={() => navigate('/quiz')} className="bg-white/[0.06] border border-white/[0.12] hover:bg-white/[0.12] text-white font-semibold text-xs px-5 py-3.5 rounded-lg transition cursor-pointer">🧠 Take Quiz</button>
                     </div>
                   </div>
@@ -360,8 +360,8 @@ export default function Dashboard() {
                       {finderStep === 1 && (
                         <div className="animate-fade-in">
                           <span className="text-3xl inline-block mb-3 animate-bounce">⚡</span>
-                          <h2 className="text-2xl font-black text-stone-100 tracking-tight mb-2">Find Your Perfect Learning Path</h2>
-                          <p className="text-stone-400 font-medium text-xs md:text-sm mb-8">Choose what you want to create and build:</p>
+                          <h2 className="text-2xl font-black text-slate-100 tracking-tight mb-2">Find Your Perfect Learning Path</h2>
+                          <p className="text-slate-400 font-medium text-xs md:text-sm mb-8">Choose what you want to create and build:</p>
                           
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                             {[
@@ -374,10 +374,10 @@ export default function Dashboard() {
                               <div 
                                 key={opt.id}
                                 onClick={() => handleFinderSelectBuild(opt.id)}
-                                className="p-4 bg-[#1a1815]/50 hover:bg-[#232019]/60 border border-white/[0.05] hover:border-white/[0.16] rounded-2xl cursor-pointer hover:scale-[1.01] transition-all duration-300 shadow-sm"
+                                className="p-4 bg-[#131d33]/50 hover:bg-[#1e2d4a]/60 border border-white/[0.05] hover:border-white/[0.16] rounded-2xl cursor-pointer hover:scale-[1.01] transition-all duration-300 shadow-sm"
                               >
-                                <h4 className="font-extrabold text-stone-100 text-sm">{opt.title}</h4>
-                                <p className="text-[11px] text-stone-400 mt-1 font-medium">{opt.desc}</p>
+                                <h4 className="font-extrabold text-slate-100 text-sm">{opt.title}</h4>
+                                <p className="text-[11px] text-slate-400 mt-1 font-medium">{opt.desc}</p>
                               </div>
                             ))}
                           </div>
@@ -387,8 +387,8 @@ export default function Dashboard() {
                       {finderStep === 2 && (
                         <div className="animate-fade-in">
                           <span className="text-3xl inline-block mb-3">💻</span>
-                          <h2 className="text-2xl font-black text-stone-100 tracking-tight mb-2">Preferred Coding Language</h2>
-                          <p className="text-stone-400 font-medium text-xs md:text-sm mb-8">Select the programming language you want to write code in:</p>
+                          <h2 className="text-2xl font-black text-slate-100 tracking-tight mb-2">Preferred Coding Language</h2>
+                          <p className="text-slate-400 font-medium text-xs md:text-sm mb-8">Select the programming language you want to write code in:</p>
                           
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                             {[
@@ -399,18 +399,18 @@ export default function Dashboard() {
                               <div 
                                 key={lang.id}
                                 onClick={() => handleFinderSelectLang(lang.id)}
-                                className="p-5 bg-[#1a1815]/50 hover:bg-[#232019]/60 border border-white/[0.05] hover:border-white/[0.16] rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300 shadow-sm flex flex-col items-center text-center"
+                                className="p-5 bg-[#131d33]/50 hover:bg-[#1e2d4a]/60 border border-white/[0.05] hover:border-white/[0.16] rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300 shadow-sm flex flex-col items-center text-center"
                               >
                                 <span className="text-3xl mb-2">{lang.icon}</span>
-                                <h4 className="font-extrabold text-stone-100 text-xs">{lang.name}</h4>
-                                <p className="text-[10px] text-stone-400 mt-1 font-semibold">{lang.desc}</p>
+                                <h4 className="font-extrabold text-slate-100 text-xs">{lang.name}</h4>
+                                <p className="text-[10px] text-slate-400 mt-1 font-semibold">{lang.desc}</p>
                               </div>
                             ))}
                           </div>
 
                           <button 
                             onClick={() => setFinderStep(1)}
-                            className="text-xs font-bold text-stone-400 hover:text-white transition cursor-pointer"
+                            className="text-xs font-bold text-slate-400 hover:text-white transition cursor-pointer"
                           >
                             ← Back to choices
                           </button>
@@ -424,25 +424,25 @@ export default function Dashboard() {
                           <h2 className="text-3xl font-black text-accent-400 tracking-tight mb-2">
                             {finderResult.skill} Roadmap
                           </h2>
-                          <p className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-4">
+                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
                             Level: {finderResult.level} · 4-Week Track
                           </p>
                           
-                          <div className="bg-[#1a1815]/80 p-5 rounded-2xl border border-white/[0.08] mb-8 max-w-md mx-auto text-left">
-                            <p className="text-xs text-stone-300 font-semibold leading-relaxed">{finderResult.explanation}</p>
+                          <div className="bg-[#131d33]/80 p-5 rounded-2xl border border-white/[0.08] mb-8 max-w-md mx-auto text-left">
+                            <p className="text-xs text-slate-300 font-semibold leading-relaxed">{finderResult.explanation}</p>
                           </div>
 
                           <div className="flex gap-4 max-w-sm mx-auto flex-col sm:flex-row">
                             <button 
                               disabled={generatingDemo}
                               onClick={() => handleStartCuratedTrack(finderResult.skill, finderResult.level, 4)}
-                              className="flex-1 bg-white hover:bg-stone-200 text-stone-950 font-semibold text-xs py-3 rounded-lg cursor-pointer transition-colors"
+                              className="flex-1 bg-white hover:bg-slate-200 text-slate-950 font-semibold text-xs py-3 rounded-lg cursor-pointer transition-colors"
                             >
                               {generatingDemo ? 'Generating Sprint...' : '🚀 Launch This Sprint'}
                             </button>
                             <button 
                               onClick={handleFinderReset}
-                              className="px-6 py-3 border border-white/[0.08] hover:bg-white/[0.04] text-stone-400 hover:text-white font-bold text-xs rounded-xl cursor-pointer transition"
+                              className="px-6 py-3 border border-white/[0.08] hover:bg-white/[0.04] text-slate-400 hover:text-white font-bold text-xs rounded-xl cursor-pointer transition"
                             >
                               Restart Finder
                             </button>
@@ -453,7 +453,7 @@ export default function Dashboard() {
 
                     {/* Curated Speed Templates */}
                     <div className="animate-slide-up">
-                      <h3 className="font-extrabold text-xs text-stone-400 uppercase tracking-wider mb-4 flex items-center gap-1.5 justify-center">
+                      <h3 className="font-extrabold text-xs text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-1.5 justify-center">
                         <span>⚡</span> Or Quick-Launch a Curated Speed Template
                       </h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -467,14 +467,14 @@ export default function Dashboard() {
                               <div className={`w-10 h-10 rounded-xl ${tmpl.color} flex items-center justify-center font-black text-sm mb-3`}>
                                 {tmpl.skill.charAt(0)}
                               </div>
-                              <h4 className="font-extrabold text-stone-100 text-base">{tmpl.skill} Sprint</h4>
+                              <h4 className="font-extrabold text-slate-100 text-base">{tmpl.skill} Sprint</h4>
                               <p className="text-xs font-semibold text-accent-400 mt-0.5">{tmpl.level} · {tmpl.duration} Weeks</p>
-                              <p className="text-xs text-stone-400 mt-2 leading-relaxed font-medium">{tmpl.desc}</p>
+                              <p className="text-xs text-slate-400 mt-2 leading-relaxed font-medium">{tmpl.desc}</p>
                             </div>
                             <button 
                               onClick={() => handleStartCuratedTrack(tmpl.skill, tmpl.level, tmpl.duration)}
                               disabled={generatingDemo}
-                              className="mt-4 w-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-stone-300 font-semibold text-xs py-2.5 rounded-lg transition cursor-pointer flex items-center justify-center gap-1"
+                              className="mt-4 w-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 font-semibold text-xs py-2.5 rounded-lg transition cursor-pointer flex items-center justify-center gap-1"
                             >
                               {generatingDemo ? 'Spawning...' : 'Launch Track 🚀'}
                             </button>
@@ -488,27 +488,27 @@ export default function Dashboard() {
                     {roadmaps.map(r => (
                       <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="glass-panel card-hover rounded-3xl p-6 cursor-pointer hover:scale-[1.01] transition-all duration-300">
                         <div className="flex items-center gap-4 mb-5">
-                          <div className={`w-14 h-14 rounded-xl ${skillColors[r.skill] || 'bg-white/[0.06] text-stone-200 border border-white/[0.1]'} flex items-center justify-center font-black text-lg`}>
+                          <div className={`w-14 h-14 rounded-xl ${skillColors[r.skill] || 'bg-white/[0.06] text-slate-200 border border-white/[0.1]'} flex items-center justify-center font-black text-lg`}>
                             {r.skill.charAt(0)}
                           </div>
                           <div>
-                            <h3 className="font-extrabold text-stone-100 tracking-tight text-lg">{r.skill}</h3>
-                            <p className="text-xs font-semibold text-stone-400 mt-0.5">{r.level} · {r.duration} weeks</p>
+                            <h3 className="font-extrabold text-slate-100 tracking-tight text-lg">{r.skill}</h3>
+                            <p className="text-xs font-semibold text-slate-400 mt-0.5">{r.level} · {r.duration} weeks</p>
                           </div>
-                          <span className={`ml-auto text-xs font-black px-3 py-1.5 rounded-full border ${r.progress === 100 ? 'bg-accent-500/10 text-accent-300 border-accent-500/25' : 'bg-white/[0.04] text-stone-300 border-white/[0.1]'}`}>
+                          <span className={`ml-auto text-xs font-black px-3 py-1.5 rounded-full border ${r.progress === 100 ? 'bg-accent-500/10 text-accent-300 border-accent-500/25' : 'bg-white/[0.04] text-slate-300 border-white/[0.1]'}`}>
                             {r.progress === 100 ? '✅ Done' : 'In Progress'}
                           </span>
                         </div>
                         <div className="mb-3">
                           <div className="flex justify-between items-center text-xs font-bold mb-1.5">
-                            <span className="text-stone-400 uppercase tracking-wider">Progress</span>
+                            <span className="text-slate-400 uppercase tracking-wider">Progress</span>
                             <span className="font-black text-accent-400">{r.progress}%</span>
                           </div>
-                          <div className="bg-stone-950/60 shadow-inner rounded-full h-2 overflow-hidden">
+                          <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden">
                             <div className="bg-accent-500 h-2 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                           </div>
                         </div>
-                        <p className="text-xs text-stone-400 font-bold mt-4">{r.weeks.filter(w => w.completed).length} of {r.weeks.length} milestones complete</p>
+                        <p className="text-xs text-slate-400 font-bold mt-4">{r.weeks.filter(w => w.completed).length} of {r.weeks.length} milestones complete</p>
                       </div>
                     ))}
                   </div>
@@ -520,15 +520,15 @@ export default function Dashboard() {
             {activeTab === 'quizzes' && (
               <div>
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-extrabold text-stone-100 tracking-tight">Quiz Dashboard</h2>
-                  <button onClick={() => navigate('/quiz')} className="bg-white hover:bg-stone-200 text-stone-950 text-xs px-5 py-3 rounded-lg font-semibold cursor-pointer transition-colors">🧠 New Quiz</button>
+                  <h2 className="text-xl font-extrabold text-slate-100 tracking-tight">Quiz Dashboard</h2>
+                  <button onClick={() => navigate('/quiz')} className="bg-white hover:bg-slate-200 text-slate-950 text-xs px-5 py-3 rounded-lg font-semibold cursor-pointer transition-colors">🧠 New Quiz</button>
                 </div>
                 {quizzes.length === 0 ? (
                   <div className="text-center py-20 glass-panel rounded-3xl border-dashed border-white/[0.12] max-w-xl mx-auto p-8 animate-fade-in">
                     <div className="text-6xl mb-4">🧠</div>
-                    <h2 className="text-xl font-bold text-stone-100 mb-2">No quiz sessions yet</h2>
-                    <p className="text-stone-400 mb-6 font-medium text-sm">Test your technical milestone knowledge with instant feedback.</p>
-                    <button onClick={() => navigate('/quiz')} className="bg-white hover:bg-stone-200 text-stone-950 px-8 py-3.5 rounded-lg font-semibold text-sm cursor-pointer transition-colors">Start First Quiz →</button>
+                    <h2 className="text-xl font-bold text-slate-100 mb-2">No quiz sessions yet</h2>
+                    <p className="text-slate-400 mb-6 font-medium text-sm">Test your technical milestone knowledge with instant feedback.</p>
+                    <button onClick={() => navigate('/quiz')} className="bg-white hover:bg-slate-200 text-slate-950 px-8 py-3.5 rounded-lg font-semibold text-sm cursor-pointer transition-colors">Start First Quiz →</button>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5 animate-fade-in">
@@ -538,8 +538,8 @@ export default function Dashboard() {
                           <div className="flex items-center gap-3">
                             <div className="w-12 h-12 bg-white/[0.06] rounded-2xl flex items-center justify-center text-2xl shadow-inner">🧠</div>
                             <div>
-                              <p className="font-extrabold text-stone-100 tracking-tight leading-tight">{q.topic}</p>
-                              <p className="text-xs text-stone-400 font-bold mt-0.5">{q.skill} · {q.questions.length} Qs</p>
+                              <p className="font-extrabold text-slate-100 tracking-tight leading-tight">{q.topic}</p>
+                              <p className="text-xs text-slate-400 font-bold mt-0.5">{q.skill} · {q.questions.length} Qs</p>
                             </div>
                           </div>
                           <div className={`text-lg font-black ${q.score >= 80 ? 'text-green-400' : q.score >= 50 ? 'text-yellow-400' : q.completed ? 'text-red-400' : 'text-accent-400'}`}>
@@ -547,7 +547,7 @@ export default function Dashboard() {
                           </div>
                         </div>
                         {q.completed ? (
-                          <div className="bg-stone-950/60 shadow-inner rounded-full h-2 overflow-hidden mt-3">
+                          <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden mt-3">
                             <div className={`h-2 rounded-full transition-all duration-500 ${q.score >= 80 ? 'bg-green-500' : q.score >= 50 ? 'bg-yellow-500' : 'bg-red-400'}`} style={{ width: `${q.score}%` }} />
                           </div>
                         ) : (

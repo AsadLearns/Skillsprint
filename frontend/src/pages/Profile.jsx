@@ -111,12 +111,12 @@ export default function Profile() {
   return (
     <div className="min-h-screen hero-bg relative overflow-hidden">
 
-        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#100f0d]/75 backdrop-blur-xl">
+        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#0b1220]/75 backdrop-blur-xl">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
             <Logo />
             <span className="text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
-          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-stone-400 hover:text-stone-200 transition cursor-pointer">← Dashboard</button>
+          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-400 hover:text-slate-200 transition cursor-pointer">← Dashboard</button>
         </nav>
 
       <div className="max-w-4xl mx-auto px-6 py-10 relative z-10">
@@ -127,27 +127,27 @@ export default function Profile() {
           {/* Left card: details & avatar */}
           <div className="md:col-span-1 flex flex-col gap-6">
             <div className="glass-panel rounded-3xl p-6 text-center animate-slide-up">
-              <div className="w-24 h-24 bg-white/[0.08] border border-white/[0.12] rounded-2xl flex items-center justify-center text-stone-100 font-black text-4xl mx-auto mb-4">
+              <div className="w-24 h-24 bg-white/[0.08] border border-white/[0.12] rounded-2xl flex items-center justify-center text-slate-100 font-black text-4xl mx-auto mb-4">
                 {user?.name?.charAt(0).toUpperCase()}
               </div>
-              <h2 className="text-2xl font-black text-stone-100 tracking-tight leading-tight">{user?.name}</h2>
+              <h2 className="text-2xl font-black text-slate-100 tracking-tight leading-tight">{user?.name}</h2>
               <p className="text-xs font-bold text-accent-400 uppercase tracking-widest mt-1">{form.title}</p>
 
-              <div className="flex justify-center gap-3 mt-4 text-xs font-bold text-stone-400">
-                {form.github && <a href={form.github} target="_blank" rel="noopener noreferrer" className="hover:text-stone-200 transition">💻 GitHub</a>}
-                {form.linkedin && <a href={form.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-stone-200 transition">🔗 LinkedIn</a>}
+              <div className="flex justify-center gap-3 mt-4 text-xs font-bold text-slate-400">
+                {form.github && <a href={form.github} target="_blank" rel="noopener noreferrer" className="hover:text-slate-200 transition">💻 GitHub</a>}
+                {form.linkedin && <a href={form.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-slate-200 transition">🔗 LinkedIn</a>}
               </div>
 
               {form.bio && (
-                <p className="text-xs text-stone-400 font-medium leading-relaxed mt-4 pt-4 border-t border-white/[0.05]">{form.bio}</p>
+                <p className="text-xs text-slate-400 font-medium leading-relaxed mt-4 pt-4 border-t border-white/[0.05]">{form.bio}</p>
               )}
               {form.interest && (
-                <p className="text-xs text-stone-400 font-medium leading-relaxed mt-2">{form.interest}</p>
+                <p className="text-xs text-slate-400 font-medium leading-relaxed mt-2">{form.interest}</p>
               )}
 
               <button
                 onClick={() => setEditMode(!editMode)}
-                className="mt-6 w-full py-2.5 bg-[#1c1a17]/80 border border-white/[0.08] text-accent-400 font-extrabold text-xs hover:bg-white/[0.06] transition cursor-pointer rounded-xl"
+                className="mt-6 w-full py-2.5 bg-[#16223b]/80 border border-white/[0.08] text-accent-400 font-extrabold text-xs hover:bg-white/[0.06] transition cursor-pointer rounded-xl"
               >
                 {editMode ? 'Cancel Edit' : 'Edit Profile Details'}
               </button>
@@ -155,18 +155,18 @@ export default function Profile() {
 
             {/* Profile achievements overview */}
             <div className="glass-panel rounded-3xl p-6 animate-slide-up animation-delay-100">
-              <h3 className="font-extrabold text-xs text-stone-400 uppercase tracking-wider mb-4">Mastery Summary</h3>
+              <h3 className="font-extrabold text-xs text-slate-400 uppercase tracking-wider mb-4">Mastery Summary</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center text-sm font-semibold">
-                  <span className="text-stone-400">Completed Tracks</span>
+                  <span className="text-slate-400">Completed Tracks</span>
                   <span className="text-accent-400 font-bold">{roadmaps.filter(r => r.progress === 100).length}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm font-semibold">
-                  <span className="text-stone-400">Average Quiz Accuracy</span>
+                  <span className="text-slate-400">Average Quiz Accuracy</span>
                   <span className="text-amber-400 font-bold">{avgQuizScore}%</span>
                 </div>
                 <div className="flex justify-between items-center text-sm font-semibold">
-                  <span className="text-stone-400">Certificates Earned</span>
+                  <span className="text-slate-400">Certificates Earned</span>
                   <span className="text-accent-400 font-bold">{certificates.length} 🏆</span>
                 </div>
               </div>
@@ -178,70 +178,70 @@ export default function Profile() {
 
             {editMode ? (
               <form onSubmit={handleSave} className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up">
-                <h3 className="text-xl font-black text-stone-100 tracking-tight mb-6">Edit Profile</h3>
+                <h3 className="text-xl font-black text-slate-100 tracking-tight mb-6">Edit Profile</h3>
 
                 {error && <div className="mb-4 text-red-400 font-bold text-xs">⚠️ {error}</div>}
                 {success && <div className="mb-4 text-green-400 font-bold text-xs">✅ {success}</div>}
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Display Name</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Display Name</label>
                     <input
                       type="text"
                       required
                       value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                      className="w-full bg-[#1a1815]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Headline/Title</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Headline/Title</label>
                     <input
                       type="text"
                       value={form.title}
                       onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-                      className="w-full bg-[#1a1815]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Short Bio</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Short Bio</label>
                     <textarea
                       rows="3"
                       value={form.bio}
                       onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
-                      className="w-full bg-[#1a1815]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none leading-relaxed"
+                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none leading-relaxed"
                       placeholder="Tell recruiters/friends about your learning goal..."
                     />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">LinkedIn URL</label>
+                      <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">LinkedIn URL</label>
                       <input
                         type="url"
                         value={form.linkedin}
                         onChange={e => setForm(f => ({ ...f, linkedin: e.target.value }))}
-                        className="w-full bg-[#1a1815]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                        className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                         placeholder="https://linkedin.com/in/username"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">GitHub URL</label>
+                      <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">GitHub URL</label>
                       <input
                         type="url"
                         value={form.github}
                         onChange={e => setForm(f => ({ ...f, github: e.target.value }))}
-                        className="w-full bg-[#1a1815]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                        className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                         placeholder="https://github.com/username"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Interest</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Interest</label>
                     <input
                       type="text"
                       value={form.interest}
                       onChange={e => setForm(f => ({ ...f, interest: e.target.value }))}
-                      className="w-full bg-[#1a1815]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
                       placeholder="e.g. AI, Web Development, Game Dev"
                     />
                   </div>
@@ -251,14 +251,14 @@ export default function Profile() {
                   <button
                     type="submit"
                     disabled={saving}
-                    className="flex-1 bg-white hover:bg-stone-200 text-stone-950 font-semibold text-xs py-3.5 rounded-lg cursor-pointer transition-colors"
+                    className="flex-1 bg-white hover:bg-slate-200 text-slate-950 font-semibold text-xs py-3.5 rounded-lg cursor-pointer transition-colors"
                   >
                     {saving ? 'Saving...' : 'Save Profile Changes'}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
-                    className="bg-[#1c1a17]/85 border border-white/[0.08] text-stone-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl cursor-pointer"
+                    className="bg-[#16223b]/85 border border-white/[0.08] text-slate-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -269,16 +269,16 @@ export default function Profile() {
 
                 {/* Certificates Section */}
                 <div className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up">
-                  <h3 className="text-xl font-black text-stone-100 tracking-tight mb-2">My Certificates</h3>
-                  <p className="text-xs text-stone-400 font-medium mb-6">Complete all roadmap milestones and score &gt;60% in a quiz for that skill to earn achievements!</p>
+                  <h3 className="text-xl font-black text-slate-100 tracking-tight mb-2">My Certificates</h3>
+                  <p className="text-xs text-slate-400 font-medium mb-6">Complete all roadmap milestones and score &gt;60% in a quiz for that skill to earn achievements!</p>
 
                   {loading ? (
-                    <div className="text-center py-6 text-stone-400 text-xs font-bold animate-pulse">Calculating certificates...</div>
+                    <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse">Calculating certificates...</div>
                   ) : certificates.length === 0 ? (
-                    <div className="text-center py-10 bg-[#1a1815]/40 rounded-2xl border border-dashed border-white/[0.12] p-6">
+                    <div className="text-center py-10 bg-[#131d33]/40 rounded-2xl border border-dashed border-white/[0.12] p-6">
                       <div className="text-4xl mb-3">🎓</div>
-                      <p className="text-xs text-stone-400 font-bold leading-relaxed mb-4">No master certificates earned yet.<br />Finish a study guide roadmap and pass the quiz to claim your first reward!</p>
-                      <button onClick={() => navigate('/dashboard')} className="bg-[#1c1a17]/80 border border-white/[0.08] text-accent-400 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-white/[0.06] transition cursor-pointer">Start Learning</button>
+                      <p className="text-xs text-slate-400 font-bold leading-relaxed mb-4">No master certificates earned yet.<br />Finish a study guide roadmap and pass the quiz to claim your first reward!</p>
+                      <button onClick={() => navigate('/dashboard')} className="bg-[#16223b]/80 border border-white/[0.08] text-accent-400 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-white/[0.06] transition cursor-pointer">Start Learning</button>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -290,9 +290,9 @@ export default function Profile() {
                         >
                           <div className="text-3xl mt-0.5">🏆</div>
                           <div>
-                            <h4 className="font-extrabold text-sm text-stone-100 leading-tight">Mastery Certificate</h4>
+                            <h4 className="font-extrabold text-sm text-slate-100 leading-tight">Mastery Certificate</h4>
                             <p className="text-[10px] font-bold text-accent-400 mt-0.5 uppercase tracking-wider">{cert.skill}</p>
-                            <p className="text-[10px] text-stone-400 font-semibold mt-1">Accuracy: {cert.quizScore}%</p>
+                            <p className="text-[10px] text-slate-400 font-semibold mt-1">Accuracy: {cert.quizScore}%</p>
                             <span className="text-[8px] bg-amber-950/40 text-amber-400 border border-amber-900/50 px-2 py-0.5 rounded-full mt-2 inline-block">Click to view</span>
                           </div>
                         </div>
@@ -303,26 +303,26 @@ export default function Profile() {
 
                 {/* Roadmaps in progress */}
                 <div className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up animation-delay-100">
-                  <h3 className="text-xl font-black text-stone-100 tracking-tight mb-5">Learning Progress</h3>
+                  <h3 className="text-xl font-black text-slate-100 tracking-tight mb-5">Learning Progress</h3>
 
                   {loading ? (
-                    <div className="text-center py-6 text-stone-400 text-xs font-bold animate-pulse">Loading progress...</div>
+                    <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse">Loading progress...</div>
                   ) : roadmaps.length === 0 ? (
-                    <p className="text-xs text-stone-400 text-center py-4 font-bold">No active learning sprint roadmaps.</p>
+                    <p className="text-xs text-slate-400 text-center py-4 font-bold">No active learning sprint roadmaps.</p>
                   ) : (
                     <div className="space-y-4">
                       {roadmaps.map(r => (
-                        <div key={r._id} className="p-4 bg-[#1c1a17]/40 rounded-2xl border border-white/[0.04] flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                        <div key={r._id} className="p-4 bg-[#16223b]/40 rounded-2xl border border-white/[0.04] flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                           <div>
-                            <h4 className="font-extrabold text-sm text-stone-100">{r.skill} Roadmap</h4>
-                            <p className="text-[10px] font-bold text-stone-400 uppercase mt-0.5">{r.level} · {r.duration} weeks</p>
+                            <h4 className="font-extrabold text-sm text-slate-100">{r.skill} Roadmap</h4>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{r.level} · {r.duration} weeks</p>
                           </div>
                           <div className="flex-1 sm:max-w-xs">
                             <div className="flex justify-between text-[10px] font-bold text-accent-400 mb-1">
                               <span>Progress</span>
                               <span>{r.progress}%</span>
                             </div>
-                            <div className="bg-stone-950/60 shadow-inner rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-slate-950/60 shadow-inner rounded-full h-1.5 overflow-hidden">
                               <div className="bg-accent-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                             </div>
                           </div>
@@ -342,7 +342,7 @@ export default function Profile() {
 
       {/* Printable Certificate Modal Overlay */}
       {activeCert && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/80 backdrop-blur-md animate-fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
           <div className="absolute inset-0 cursor-default" onClick={() => setActiveCert(null)}></div>
 
           <div className="relative w-full max-w-3xl bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-8 border-double border-amber-400/60 z-10 flex flex-col items-center justify-center text-center select-none overflow-y-auto max-h-[90vh]">
@@ -367,7 +367,7 @@ export default function Profile() {
               has successfully completed all learning roadmap sprints and met the academic evaluation milestones with an accuracy score of <span className="font-extrabold text-accent-700 bg-accent-50 px-2 py-0.5 rounded border border-accent-100">{activeCert.quizScore}%</span>, thereby achieving complete mastery of the core discipline of
             </p>
 
-            <h3 className="text-2xl md:text-3xl font-black text-stone-900 mt-4 uppercase tracking-wide">{activeCert.skill}</h3>
+            <h3 className="text-2xl md:text-3xl font-black text-slate-900 mt-4 uppercase tracking-wide">{activeCert.skill}</h3>
 
             <div className="w-24 h-0.5 bg-amber-400 my-8"></div>
 
@@ -385,13 +385,13 @@ export default function Profile() {
             <div className="flex gap-3 mt-10 w-full max-w-sm justify-center">
               <button
                 onClick={() => window.print()}
-                className="flex-1 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs py-3 rounded-lg cursor-pointer transition"
+                className="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs py-3 rounded-lg cursor-pointer transition"
               >
                 🖨️ Print / Save PDF
               </button>
               <button
                 onClick={() => setActiveCert(null)}
-                className="bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs px-6 py-3 rounded-xl cursor-pointer transition"
+                className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-6 py-3 rounded-xl cursor-pointer transition"
               >
                 Close View
               </button>

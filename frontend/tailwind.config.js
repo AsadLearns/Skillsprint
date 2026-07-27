@@ -7,20 +7,24 @@ export default {
     extend: {
       colors: {
         // Single accent for the whole app — change these values to re-theme.
-        // Warm amber rather than the near-universal SaaS emerald.
+        // Sky blue, matched to the cloud effect in the hero.
         accent: {
-          50: "#fdf7ef",
-          100: "#faebd7",
-          200: "#f4d5ae",
-          300: "#ecba7e",
-          400: "#e5a663",
-          500: "#d98e42",
-          600: "#c07533",
-          700: "#9c5c2b",
-          800: "#6b4020",
-          900: "#422917",
-          950: "#241509",
+          50: "#eff8ff",
+          100: "#dbeefe",
+          200: "#bfe2fe",
+          300: "#93d1fd",
+          400: "#5cb8fa",
+          500: "#36a0f0",
+          600: "#2183d6",
+          700: "#1c69ad",
+          800: "#1d598e",
+          900: "#1d4b76",
+          950: "#142f4d",
         },
+      },
+      fontFamily: {
+        sans: ["Space Grotesk", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
     },
   },

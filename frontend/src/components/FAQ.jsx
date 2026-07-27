@@ -27,16 +27,16 @@ function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="reveal bg-[#100f0d] py-24 px-6">
+    <section id="faq" className="reveal bg-[#0b1220] py-24 px-6">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-end justify-between gap-4 border-b border-white/[0.06] pb-5 mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-stone-100 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
             Questions, <span className="text-accent-400">answered</span>
           </h2>
-          <span className="font-mono text-[11px] text-stone-500 uppercase tracking-[0.25em] shrink-0 hidden sm:block">04 / FAQ</span>
+          <span className="font-mono text-[11px] text-slate-500 uppercase tracking-[0.25em] shrink-0 hidden sm:block">04 / FAQ</span>
         </div>
 
-        <div className="rounded-xl border border-white/[0.07] divide-y divide-white/[0.06] bg-[#161412] overflow-hidden">
+        <div className="rounded-xl border border-white/[0.07] divide-y divide-white/[0.06] bg-[#0f1729] overflow-hidden">
           {faqs.map((item, i) => {
             const isOpen = openIndex === i
             return (
@@ -47,14 +47,14 @@ function FAQ() {
                   className="w-full flex items-center gap-4 text-left px-6 py-5 cursor-pointer hover:bg-white/[0.02] transition-colors"
                 >
                   <span className="font-mono text-[10px] text-accent-400/70 w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="font-semibold text-stone-100 flex-1 text-sm md:text-base">{item.q}</span>
-                  <span aria-hidden="true" className={`text-stone-400 text-xl shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                  <span className="font-semibold text-slate-100 flex-1 text-sm md:text-base">{item.q}</span>
+                  <span aria-hidden="true" className={`text-slate-400 text-xl shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
                     +
                   </span>
                 </button>
                 <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                   <div className="overflow-hidden">
-                    <p className="pl-16 pr-6 pb-5 text-stone-400 text-sm leading-relaxed">{item.a}</p>
+                    <p className="pl-16 pr-6 pb-5 text-slate-400 text-sm leading-relaxed">{item.a}</p>
                   </div>
                 </div>
               </div>

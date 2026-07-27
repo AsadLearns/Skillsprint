@@ -16,35 +16,35 @@ function Navbar() {
 
   return (
     <div className="sticky top-0 z-50 w-full animate-fade-in">
-      <nav className="relative border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#100f0d]/85 backdrop-blur-xl">
+      <nav className="relative border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#0b1220]/85 backdrop-blur-xl">
         <Link to="/" className="flex items-center gap-2">
           <Logo />
-          <span className="text-xl font-bold text-stone-100 tracking-tight">SkillSprint</span>
+          <span className="text-xl font-bold text-slate-100 tracking-tight">SkillSprint</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] text-stone-500">
-          <Link to="/features" className="hover:text-stone-200 transition">Features</Link>
-          <Link to="/how-it-works" className="hover:text-stone-200 transition">Process</Link>
-          <Link to="/faq" className="hover:text-stone-200 transition">FAQ</Link>
+        <div className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500">
+          <Link to="/features" className="hover:text-slate-200 transition">Features</Link>
+          <Link to="/how-it-works" className="hover:text-slate-200 transition">Process</Link>
+          <Link to="/faq" className="hover:text-slate-200 transition">FAQ</Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <>
-              <Link to="/dashboard" className="text-sm text-stone-300 font-semibold hover:text-white transition">Dashboard</Link>
-              <Link to="/profile" className="text-sm text-stone-400 font-semibold hover:text-white transition px-2">Profile</Link>
-              <button onClick={handleLogout} className="text-sm text-stone-400 hover:text-red-400 transition font-medium px-3 py-2 cursor-pointer">Log out</button>
+              <Link to="/dashboard" className="text-sm text-slate-300 font-semibold hover:text-white transition">Dashboard</Link>
+              <Link to="/profile" className="text-sm text-slate-400 font-semibold hover:text-white transition px-2">Profile</Link>
+              <button onClick={handleLogout} className="text-sm text-slate-400 hover:text-red-400 transition font-medium px-3 py-2 cursor-pointer">Log out</button>
             </>
           ) : (
             <>
-              <Link to="/login" className="text-sm text-stone-400 hover:text-stone-200 transition font-medium px-3 py-2">Log in</Link>
-              <Link to="/signup" className="bg-white text-stone-950 hover:bg-stone-200 text-sm px-4 py-2 rounded-lg font-semibold transition-colors">Get started</Link>
+              <Link to="/login" className="text-sm text-slate-400 hover:text-slate-200 transition font-medium px-3 py-2">Log in</Link>
+              <Link to="/signup" className="bg-white text-slate-950 hover:bg-slate-200 text-sm px-4 py-2 rounded-lg font-semibold transition-colors">Get started</Link>
             </>
           )}
         </div>
 
         {/* Hamburger Menu Button */}
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-3 text-stone-400 hover:text-stone-200 focus:outline-none transition-all duration-300">
+        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-3 text-slate-400 hover:text-slate-200 focus:outline-none transition-all duration-300">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -56,20 +56,20 @@ function Navbar() {
 
         {/* Mobile Drawer Menu */}
         {isOpen && (
-          <div className="absolute top-full left-0 w-full bg-[#1a1815]/95 backdrop-blur-lg border-b border-white/[0.06] px-6 py-6 md:hidden flex flex-col gap-4 z-40 animate-slide-down shadow-2xl">
-            <Link to="/features" onClick={() => setIsOpen(false)} className="text-stone-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Features</Link>
-            <Link to="/how-it-works" onClick={() => setIsOpen(false)} className="text-stone-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Process</Link>
-            <Link to="/faq" onClick={() => setIsOpen(false)} className="text-stone-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">FAQ</Link>
+          <div className="absolute top-full left-0 w-full bg-[#131d33]/95 backdrop-blur-lg border-b border-white/[0.06] px-6 py-6 md:hidden flex flex-col gap-4 z-40 animate-slide-down shadow-2xl">
+            <Link to="/features" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Features</Link>
+            <Link to="/how-it-works" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Process</Link>
+            <Link to="/faq" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">FAQ</Link>
             {user ? (
               <>
-                <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-stone-100 font-bold py-3 border-b border-white/[0.03]">Dashboard</Link>
-                <Link to="/profile" onClick={() => setIsOpen(false)} className="text-stone-300 font-bold py-3 border-b border-white/[0.03]">Profile</Link>
-                <button onClick={() => { handleLogout(); setIsOpen(false); }} className="text-left text-stone-300 hover:text-red-400 font-bold transition py-3 cursor-pointer">Log out</button>
+                <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-slate-100 font-bold py-3 border-b border-white/[0.03]">Dashboard</Link>
+                <Link to="/profile" onClick={() => setIsOpen(false)} className="text-slate-300 font-bold py-3 border-b border-white/[0.03]">Profile</Link>
+                <button onClick={() => { handleLogout(); setIsOpen(false); }} className="text-left text-slate-300 hover:text-red-400 font-bold transition py-3 cursor-pointer">Log out</button>
               </>
             ) : (
               <>
-                <Link to="/login" onClick={() => setIsOpen(false)} className="text-stone-300 hover:text-white font-bold py-3 border-b border-white/[0.03]">Log in</Link>
-                <Link to="/signup" onClick={() => setIsOpen(false)} className="bg-white text-stone-950 text-center py-3 rounded-lg font-semibold mt-2">Get started</Link>
+                <Link to="/login" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold py-3 border-b border-white/[0.03]">Log in</Link>
+                <Link to="/signup" onClick={() => setIsOpen(false)} className="bg-white text-slate-950 text-center py-3 rounded-lg font-semibold mt-2">Get started</Link>
               </>
             )}
           </div>

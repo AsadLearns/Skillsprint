@@ -96,19 +96,19 @@ export default function Quiz() {
     <div className="min-h-screen hero-bg relative overflow-hidden">
       <div className="sticky top-0 z-50 w-full">
         {/* Announcement Marquee Ticker */}
-        <div className="w-full bg-[#1a1815] font-mono text-[10px] uppercase tracking-widest text-stone-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
+        <div className="w-full bg-[#131d33] font-mono text-[10px] uppercase tracking-widest text-slate-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
           <div className="inline-block animate-marquee">
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </div>
 
-        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#100f0d]/75 backdrop-blur-xl">
+        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#0b1220]/75 backdrop-blur-xl">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
             <Logo />
             <span className="text-lg md:text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
-          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-stone-400 hover:text-stone-200 transition cursor-pointer">← Dashboard</button>
+          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-400 hover:text-slate-200 transition cursor-pointer">← Dashboard</button>
         </nav>
       </div>
 
@@ -118,8 +118,8 @@ export default function Quiz() {
           <div>
             <div className="text-center mb-10">
               <div className="text-6xl mb-4 animate-float inline-block">🧠</div>
-              <h1 className="text-4xl font-extrabold text-stone-100 tracking-tight mb-2">AI Quiz Generator</h1>
-              <p className="text-stone-400 font-medium text-lg">Test your milestone concepts. Generates custom MCQs instantly.</p>
+              <h1 className="text-4xl font-extrabold text-slate-100 tracking-tight mb-2">AI Quiz Generator</h1>
+              <p className="text-slate-400 font-medium text-lg">Test your milestone concepts. Generates custom MCQs instantly.</p>
             </div>
 
             {error && (
@@ -129,40 +129,40 @@ export default function Quiz() {
             )}
 
             <div className="glass-panel rounded-3xl p-6 mb-5">
-              <h2 className="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-4 ml-1">1. Choose a skill</h2>
+              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">1. Choose a skill</h2>
               <div className="grid grid-cols-2 gap-3 mb-4">
                 {skills.map(s => (
                   <button key={s} onClick={() => { setSkill(s); setTopic('') }}
-                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${skill === s ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-stone-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${skill === s ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
                     {s}
                   </button>
                 ))}
               </div>
               <div>
-                <label className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block mb-2 ml-1">Or enter custom skill / language:</label>
+                <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Or enter custom skill / language:</label>
                 <input type="text" value={skills.includes(skill) ? '' : skill} onChange={(e) => { setSkill(e.target.value); setTopic('') }} placeholder="e.g. Rust, Go, C++, SQL, Ruby..."
-                  className="w-full bg-[#1a1815] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
+                  className="w-full bg-[#131d33] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
                 />
               </div>
             </div>
 
             {skill && (
               <div className="glass-panel rounded-3xl p-6 mb-6 fade-up">
-                <h2 className="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-4 ml-1">2. Choose a topic</h2>
+                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">2. Choose a topic</h2>
                 {topicsBySkill[skill] ? (
                   <div className="grid grid-cols-1 gap-2.5">
                     {topicsBySkill[skill]?.map(t => (
                       <button key={t} onClick={() => setTopic(t)}
-                        className={`py-3.5 px-5 rounded-xl font-bold text-sm transition-all duration-300 border-2 text-left cursor-pointer ${topic === t ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-stone-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                        className={`py-3.5 px-5 rounded-xl font-bold text-sm transition-all duration-300 border-2 text-left cursor-pointer ${topic === t ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
                         {t}
                       </button>
                     ))}
                   </div>
                 ) : (
                   <div>
-                    <label className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block mb-2 ml-1">Type custom topic to generate quiz on:</label>
+                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Type custom topic to generate quiz on:</label>
                     <input type="text" value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="e.g. Memory management, Pointers, Concurrency, Joins..."
-                      className="w-full bg-[#1a1815] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-[#131d33] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
                     />
                   </div>
                 )}
@@ -171,11 +171,11 @@ export default function Quiz() {
 
             {skill && topic && (
               <div className="glass-panel rounded-3xl p-6 mb-6 fade-up">
-                <h2 className="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-4 ml-1">3. Number of Questions</h2>
+                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">3. Number of Questions</h2>
                 <div className="flex gap-3">
                   {[5, 10, 15, 20].map(n => (
                     <button key={n} onClick={() => setCount(n)}
-                      className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${count === n ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-stone-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                      className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${count === n ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
                       {n} Qs
                     </button>
                   ))}
@@ -185,7 +185,7 @@ export default function Quiz() {
 
             {skill && topic && (
               <button onClick={handleGenerate} disabled={loading}
-                className="w-full bg-white hover:bg-stone-200 text-stone-950 py-4 rounded-lg font-semibold text-base disabled:opacity-50 cursor-pointer transition-colors"
+                className="w-full bg-white hover:bg-slate-200 text-slate-950 py-4 rounded-lg font-semibold text-base disabled:opacity-50 cursor-pointer transition-colors"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -205,8 +205,8 @@ export default function Quiz() {
           <div className="fade-up">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-2xl font-black text-stone-100 tracking-tight">{quiz.topic}</h1>
-                <p className="text-stone-400 font-bold text-xs mt-0.5 uppercase tracking-wider">{quiz.skill} · {quiz.questions.length} questions</p>
+                <h1 className="text-2xl font-black text-slate-100 tracking-tight">{quiz.topic}</h1>
+                <p className="text-slate-400 font-bold text-xs mt-0.5 uppercase tracking-wider">{quiz.skill} · {quiz.questions.length} questions</p>
               </div>
               <div className="text-xs font-bold text-accent-300 bg-accent-500/10 border border-accent-500/25 px-4 py-2 rounded-lg">
                 {Object.keys(answers).length} / {quiz.questions.length} Answered
@@ -225,11 +225,11 @@ export default function Quiz() {
             <div className="flex flex-wrap gap-2 mb-6">
               {quiz.questions.map((_, i) => (
                 <button key={i} onClick={() => setCurrent(i)}
-                  className={`w-9 h-9 rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-white text-stone-950' : answers[i] !== undefined ? 'bg-accent-500/10 text-accent-300 border border-accent-500/30' : 'bg-white/[0.03] border border-white/[0.08] text-stone-500 hover:border-white/[0.2]'}`}>
+                  className={`w-9 h-9 rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-white text-slate-950' : answers[i] !== undefined ? 'bg-accent-500/10 text-accent-300 border border-accent-500/30' : 'bg-white/[0.03] border border-white/[0.08] text-slate-500 hover:border-white/[0.2]'}`}>
                   {current === i ? (
                     <span className="relative flex h-2 w-2 mx-auto mb-0.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-stone-900 opacity-40"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-stone-900"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-900 opacity-40"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-900"></span>
                     </span>
                   ) : null}
                   {current === i ? '' : i + 1}
@@ -240,12 +240,12 @@ export default function Quiz() {
             {/* Question Panel */}
             <div key={current} className="glass-panel rounded-3xl p-8 mb-6 shadow-md animate-slide-up">
               <p className="text-[10px] text-accent-400 font-black uppercase tracking-wider mb-2">Question {current + 1} of {quiz.questions.length}</p>
-              <h2 className="text-xl font-bold text-stone-100 leading-snug mb-8">{quiz.questions[current].question}</h2>
+              <h2 className="text-xl font-bold text-slate-100 leading-snug mb-8">{quiz.questions[current].question}</h2>
               <div className="space-y-3.5">
                 {quiz.questions[current].options.map((opt, i) => (
                   <button key={i} onClick={() => handleAnswer(current, i)}
-                    className={`w-full text-left py-3.5 px-5 rounded-xl border-2 font-medium text-sm transition-all duration-300 cursor-pointer hover:scale-[1.01] ${answers[current] === i ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-200 font-bold' : 'border-white/[0.06] bg-white/[0.03] text-stone-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
-                    <span className="font-extrabold mr-3 text-stone-500">{['A', 'B', 'C', 'D'][i]}.</span>{opt}
+                    className={`w-full text-left py-3.5 px-5 rounded-xl border-2 font-medium text-sm transition-all duration-300 cursor-pointer hover:scale-[1.01] ${answers[current] === i ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-200 font-bold' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    <span className="font-extrabold mr-3 text-slate-500">{['A', 'B', 'C', 'D'][i]}.</span>{opt}
                   </button>
                 ))}
               </div>
@@ -255,13 +255,13 @@ export default function Quiz() {
 
             <div className="flex gap-3">
               {current > 0 && (
-                <button onClick={() => setCurrent(c => c - 1)} className="flex-1 border border-white/[0.1] bg-white/[0.03] text-stone-300 py-3.5 rounded-lg font-bold text-sm hover:bg-white/[0.06] transition cursor-pointer">← Previous</button>
+                <button onClick={() => setCurrent(c => c - 1)} className="flex-1 border border-white/[0.1] bg-white/[0.03] text-slate-300 py-3.5 rounded-lg font-bold text-sm hover:bg-white/[0.06] transition cursor-pointer">← Previous</button>
               )}
               {current < quiz.questions.length - 1 ? (
-                <button onClick={() => setCurrent(c => c + 1)} className="flex-1 bg-white/[0.06] hover:bg-white/[0.1] text-stone-200 py-3.5 rounded-lg font-bold text-sm transition cursor-pointer">Next →</button>
+                <button onClick={() => setCurrent(c => c + 1)} className="flex-1 bg-white/[0.06] hover:bg-white/[0.1] text-slate-200 py-3.5 rounded-lg font-bold text-sm transition cursor-pointer">Next →</button>
               ) : (
                 <button onClick={handleSubmit} disabled={loading || Object.keys(answers).length < quiz.questions.length}
-                  className="flex-1 bg-white hover:bg-stone-200 text-stone-950 py-3.5 rounded-lg font-semibold text-sm disabled:opacity-50 cursor-pointer transition-colors"
+                  className="flex-1 bg-white hover:bg-slate-200 text-slate-950 py-3.5 rounded-lg font-semibold text-sm disabled:opacity-50 cursor-pointer transition-colors"
                 >
                   {loading ? 'Submitting...' : '✅ Submit Quiz'}
                 </button>
@@ -279,11 +279,11 @@ export default function Quiz() {
             {/* Beautiful radial visual score badge */}
             <div className="my-6 inline-flex flex-col items-center justify-center p-8 bg-white/[0.04] border border-white/[0.1] rounded-full w-48 h-48">
               <span className={`text-5xl font-black ${result.quiz.score >= 80 ? 'text-green-500' : result.quiz.score >= 50 ? 'text-yellow-500' : 'text-rose-500'}`}>{result.quiz.score}%</span>
-              <span className="text-[10px] text-stone-400 font-black uppercase tracking-widest mt-1">Accuracy</span>
+              <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-1">Accuracy</span>
             </div>
 
-            <h1 className="text-3xl font-extrabold text-stone-100 mb-1.5 tracking-tight">Quiz Session Complete</h1>
-            <p className="text-stone-400 font-medium mb-10">{result.correct} out of {result.total} answers correct · {quiz.topic}</p>
+            <h1 className="text-3xl font-extrabold text-slate-100 mb-1.5 tracking-tight">Quiz Session Complete</h1>
+            <p className="text-slate-400 font-medium mb-10">{result.correct} out of {result.total} answers correct · {quiz.topic}</p>
 
             {/* Answer review list */}
             <div className="space-y-5 text-left mb-10">
@@ -291,10 +291,10 @@ export default function Quiz() {
                 const isCorrect = q.userAnswer === q.correct
                 return (
                   <div key={i} className={`glass-panel rounded-2xl p-6 border ${isCorrect ? 'border-accent-500/25 bg-accent-500/[0.04]' : 'border-red-500/25 bg-red-500/[0.04]'}`}>
-                    <p className="font-extrabold text-stone-100 mb-4 text-sm leading-tight">{i + 1}. {q.question}</p>
+                    <p className="font-extrabold text-slate-100 mb-4 text-sm leading-tight">{i + 1}. {q.question}</p>
                     <div className="space-y-2">
                       {q.options.map((opt, j) => (
-                        <div key={j} className={`py-3 px-4 rounded-lg text-xs font-semibold ${j === q.correct ? 'bg-accent-500/10 text-accent-300 border border-accent-500/30' : j === q.userAnswer && !isCorrect ? 'bg-red-500/10 text-red-300 border border-red-500/30' : 'text-stone-400 bg-white/[0.03]'}`}>
+                        <div key={j} className={`py-3 px-4 rounded-lg text-xs font-semibold ${j === q.correct ? 'bg-accent-500/10 text-accent-300 border border-accent-500/30' : j === q.userAnswer && !isCorrect ? 'bg-red-500/10 text-red-300 border border-red-500/30' : 'text-slate-400 bg-white/[0.03]'}`}>
                           <span className="font-bold mr-2">{['A', 'B', 'C', 'D'][j]}.</span>{opt}
                           {j === q.correct && <span className="ml-2 text-[10px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-wider">Correct Answer</span>}
                           {j === q.userAnswer && !isCorrect && <span className="ml-2 text-[10px] bg-red-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-wider">Your Answer</span>}
@@ -308,12 +308,12 @@ export default function Quiz() {
 
             <div className="flex gap-3">
               <button onClick={() => { setStep('select'); setQuiz(null); setResult(null); setAnswers({}) }}
-                className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-stone-300 py-3.5 rounded-lg font-bold text-sm transition cursor-pointer"
+                className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 py-3.5 rounded-lg font-bold text-sm transition cursor-pointer"
               >
                 Take another quiz
               </button>
               <button onClick={() => navigate('/dashboard')}
-                className="flex-1 bg-white hover:bg-stone-200 text-stone-950 py-3.5 rounded-lg font-semibold text-sm cursor-pointer transition-colors"
+                className="flex-1 bg-white hover:bg-slate-200 text-slate-950 py-3.5 rounded-lg font-semibold text-sm cursor-pointer transition-colors"
               >
                 Back to Dashboard
               </button>

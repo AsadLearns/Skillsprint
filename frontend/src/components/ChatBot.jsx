@@ -97,15 +97,15 @@ export default function ChatBot() {
           return (
             <div className="mt-3 bg-accent-500/[0.07] border border-accent-500/25 rounded-xl p-4 text-left">
               <span className="text-[10px] font-bold text-accent-400 uppercase tracking-widest block mb-1">Recommended Sprint</span>
-              <h5 className="font-extrabold text-sm text-stone-100 mb-2">{skill} Mastery ({level})</h5>
+              <h5 className="font-extrabold text-sm text-slate-100 mb-2">{skill} Mastery ({level})</h5>
               <button
                 disabled={isThisLaunching || loading}
                 onClick={() => handleLaunchSprint(skill, level)}
-                className="w-full bg-white hover:bg-stone-200 text-stone-950 font-semibold text-xs py-2.5 px-4 rounded-lg cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+                className="w-full bg-white hover:bg-slate-200 text-slate-950 font-semibold text-xs py-2.5 px-4 rounded-lg cursor-pointer transition-colors flex items-center justify-center gap-1.5"
               >
                 {isThisLaunching ? (
                   <>
-                    <svg className="animate-spin h-3.5 w-3.5 text-stone-900" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin h-3.5 w-3.5 text-slate-900" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
@@ -129,15 +129,15 @@ export default function ChatBot() {
 
       {/* Expanded Chat Widget */}
       {isOpen && (
-        <div className="w-[min(380px,calc(100vw-3rem))] h-[min(480px,calc(100vh-8rem))] mb-4 bg-[#1a1815]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 rounded-2xl overflow-hidden flex flex-col">
+        <div className="w-[min(380px,calc(100vw-3rem))] h-[min(480px,calc(100vh-8rem))] mb-4 bg-[#131d33]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 rounded-2xl overflow-hidden flex flex-col">
 
           {/* Header */}
-          <div className="bg-[#1f1c18] p-4 flex items-center justify-between text-white border-b border-white/[0.06]">
+          <div className="bg-[#1a2842] p-4 flex items-center justify-between text-white border-b border-white/[0.06]">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 bg-white/[0.06] border border-white/[0.08] rounded-lg flex items-center justify-center font-black text-lg">🤖</div>
               <div>
                 <h4 className="font-extrabold text-sm tracking-tight leading-tight">Sprinty</h4>
-                <p className="text-[10px] font-semibold text-stone-400 flex items-center gap-1">
+                <p className="text-[10px] font-semibold text-slate-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse inline-block" />
                   SkillSprint AI Guide
                 </p>
@@ -152,7 +152,7 @@ export default function ChatBot() {
           </div>
 
           {/* Messages Window */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#100f0d]/60">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#0b1220]/60">
             {messages.map((msg, idx) => (
               <div
                 key={idx}
@@ -161,8 +161,8 @@ export default function ChatBot() {
                 <div
                   className={`max-w-[85%] rounded-xl px-4 py-3 shadow-sm text-xs md:text-sm font-medium leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-white text-stone-900 rounded-tr-sm'
-                      : 'bg-[#1f1c18] border border-white/[0.06] text-stone-200 rounded-tl-sm'
+                      ? 'bg-white text-slate-900 rounded-tr-sm'
+                      : 'bg-[#1a2842] border border-white/[0.06] text-slate-200 rounded-tl-sm'
                   }`}
                 >
                   {renderMessageContent(msg)}
@@ -172,7 +172,7 @@ export default function ChatBot() {
 
             {loading && (
               <div className="flex justify-start animate-pulse">
-                <div className="bg-[#1f1c18] border border-white/[0.06] rounded-xl rounded-tl-sm px-4 py-3 shadow-sm text-xs font-bold text-stone-400 flex items-center gap-1">
+                <div className="bg-[#1a2842] border border-white/[0.06] rounded-xl rounded-tl-sm px-4 py-3 shadow-sm text-xs font-bold text-slate-400 flex items-center gap-1">
                   <span>Sprinty is thinking</span>
                   <span className="animate-bounce font-black">.</span>
                   <span className="animate-bounce animation-delay-100 font-black">.</span>
@@ -185,22 +185,22 @@ export default function ChatBot() {
 
           {/* Quick-Start suggestions Chips */}
           {messages.length === 1 && (
-            <div className="p-3 border-t border-white/[0.06] bg-[#1a1815] flex flex-wrap gap-2 justify-center">
+            <div className="p-3 border-t border-white/[0.06] bg-[#131d33] flex flex-wrap gap-2 justify-center">
               <button
                 onClick={() => handleSend("Recommend a Python track for beginners")}
-                className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-stone-300 text-[10px] font-bold px-3 py-1.5 rounded-full transition cursor-pointer"
+                className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 text-[10px] font-bold px-3 py-1.5 rounded-full transition cursor-pointer"
               >
                 🐍 Python Track
               </button>
               <button
                 onClick={() => handleSend("Suggest a Web Development roadmap")}
-                className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-stone-300 text-[10px] font-bold px-3 py-1.5 rounded-full transition cursor-pointer"
+                className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 text-[10px] font-bold px-3 py-1.5 rounded-full transition cursor-pointer"
               >
                 🎨 Web Dev
               </button>
               <button
                 onClick={() => handleSend("DevOps or AI/ML: help me choose which skill to learn")}
-                className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-stone-300 text-[10px] font-bold px-3 py-1.5 rounded-full transition cursor-pointer"
+                className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 text-[10px] font-bold px-3 py-1.5 rounded-full transition cursor-pointer"
               >
                 🚀 DevOps vs AI/ML
               </button>
@@ -210,7 +210,7 @@ export default function ChatBot() {
           {/* Input field footer */}
           <form
             onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-            className="p-3 bg-[#1a1815] border-t border-white/[0.06] flex gap-2"
+            className="p-3 bg-[#131d33] border-t border-white/[0.06] flex gap-2"
           >
             <input
               type="text"
@@ -218,12 +218,12 @@ export default function ChatBot() {
               onChange={(e) => setInput(e.target.value)}
               disabled={loading}
               placeholder="Ask Sprinty anything..."
-              className="flex-1 px-4 py-2.5 rounded-lg bg-[#1f1c18] border border-white/[0.08] focus:border-accent-500/60 focus:outline-none text-xs font-semibold text-white placeholder-stone-500 outline-none"
+              className="flex-1 px-4 py-2.5 rounded-lg bg-[#1a2842] border border-white/[0.08] focus:border-accent-500/60 focus:outline-none text-xs font-semibold text-white placeholder-slate-500 outline-none"
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="bg-white hover:bg-stone-200 disabled:bg-white/[0.06] disabled:text-stone-500 text-stone-950 font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+              className="bg-white hover:bg-slate-200 disabled:bg-white/[0.06] disabled:text-slate-500 text-slate-950 font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer flex items-center justify-center"
             >
               Send
             </button>
@@ -235,7 +235,7 @@ export default function ChatBot() {
       {/* Floating Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-white hover:bg-stone-200 text-stone-950 rounded-2xl flex items-center justify-center text-2xl shadow-xl shadow-black/50 hover:scale-105 cursor-pointer transition-all duration-300"
+        className="w-14 h-14 bg-white hover:bg-slate-200 text-slate-950 rounded-2xl flex items-center justify-center text-2xl shadow-xl shadow-black/50 hover:scale-105 cursor-pointer transition-all duration-300"
       >
         {isOpen ? '✕' : '💬'}
       </button>
