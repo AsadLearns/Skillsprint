@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import api from '../services/api'
 import Logo from '../components/Logo'
 import ChatBot from '../components/ChatBot'
+import RoadmapGenerating from '../components/RoadmapGenerating'
 
 const skills = ['Java', 'Python', 'React', 'Web Development', 'Node.js', 'AI/ML', 'MongoDB', 'DevOps']
 const levels = ['Beginner', 'Intermediate', 'Advanced']
@@ -258,6 +259,8 @@ function Roadmap() {
                   </span>
                 ) : '🤖 Generate My Roadmap →'}
               </button>
+
+              {loading && <RoadmapGenerating duration={duration} skill={skill} />}
             </div>
 
             {myRoadmaps.length > 0 && (

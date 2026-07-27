@@ -255,6 +255,16 @@ body::after {
   animation: blink 1.1s step-end infinite;
 }
 
+/* Sweeping highlight for the roadmap-generation skeleton bars. */
+@keyframes shimmerBar {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-shimmer-bar {
+  animation: shimmerBar 1.6s linear infinite;
+}
+
 .animate-marquee {
   display: inline-block;
   animation: marquee 30s linear infinite;
