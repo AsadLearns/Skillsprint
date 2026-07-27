@@ -6,21 +6,21 @@ function CTABanner() {
   const navigate = useNavigate()
 
   return (
-    <section className="bg-[#0a0a0a] pb-24 px-6">
-      <div className="max-w-4xl mx-auto rounded-2xl border border-white/[0.08] bg-[#0d0d0e] grid-bg px-8 py-16 text-center relative overflow-hidden">
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[300px] h-40 bg-emerald-500/[0.04] rounded-full blur-[80px] pointer-events-none sm:w-[400px] sm:h-52 sm:blur-[90px] lg:w-[500px] lg:h-56 lg:blur-[110px]"></div>
+    <section className="reveal bg-[#100f0d] pb-24 px-6">
+      <div className="max-w-4xl mx-auto rounded-2xl border border-white/[0.08] bg-[#161412] grid-bg px-8 py-16 text-center relative overflow-hidden">
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[300px] h-40 bg-accent-500/[0.04] rounded-full blur-[80px] pointer-events-none sm:w-[400px] sm:h-52 sm:blur-[90px] lg:w-[500px] lg:h-56 lg:blur-[110px]"></div>
 
         <div className="relative z-10">
-          <p className="font-mono text-[11px] text-emerald-400 uppercase tracking-[0.25em] mb-5">Ready when you are</p>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-100 tracking-tight mb-4">
+          <p className="font-mono text-[11px] text-accent-400 uppercase tracking-[0.25em] mb-5">Ready when you are</p>
+          <h2 className="text-3xl md:text-5xl font-black text-stone-100 tracking-tight mb-4">
             Your first sprint starts today.
           </h2>
-          <p className="text-slate-400 text-lg max-w-md mx-auto mb-9">
+          <p className="text-stone-400 text-lg max-w-md mx-auto mb-9">
             Free forever. No credit card. A full roadmap in under a minute.
           </p>
           <button
             onClick={() => navigate(user ? "/dashboard" : "/signup")}
-            className="bg-white text-zinc-950 hover:bg-zinc-200 px-7 py-3.5 rounded-lg font-semibold text-base transition-colors cursor-pointer"
+            className="bg-white text-stone-950 hover:bg-stone-200 px-7 py-3.5 rounded-lg font-semibold text-base transition-colors cursor-pointer"
           >
             Start learning free
           </button>

@@ -4,15 +4,15 @@
 
 @layer utilities {
   .gradient-text {
-    @apply text-slate-100;
+    @apply text-stone-100;
   }
 
   .glass-panel {
-    @apply bg-[#111112]/70 backdrop-blur-xl border border-white/[0.07] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+    @apply bg-[#1c1a17]/70 backdrop-blur-xl border border-white/[0.07] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
   }
 
   .glass-panel-dark {
-    @apply bg-[#0d0d0e]/90 backdrop-blur-xl border border-white/[0.05] shadow-2xl;
+    @apply bg-[#161412]/90 backdrop-blur-xl border border-white/[0.05] shadow-2xl;
   }
 
   /* Unused as of the landing redesign — kept, not deleted, in case a page
@@ -36,16 +36,16 @@
   }
 
   .hero-bg {
-    background-color: #0a0a0a;
+    background-color: #100f0d;
     background-image:
-      radial-gradient(at 80% 0%, rgba(16, 185, 129, 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(229, 166, 99, 0.04) 0px, transparent 50%),
       linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     background-size: 100% 100%, 40px 40px, 40px 40px;
   }
 
   .shimmer {
-    @apply text-slate-100;
+    @apply text-stone-100;
   }
 }
 
@@ -57,8 +57,8 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #0a0a0a;
-  color: #f8fafc;
+  background: #100f0d;
+  color: #f5f1ea;
   overflow-x: hidden;
 }
 
@@ -69,16 +69,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #100f0d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
+  background: #443f38;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: #5a5249;
 }
 
 /* Custom Animations */
@@ -194,6 +194,55 @@ body {
   background-size: 44px 44px;
 }
 
+/* Page-wide grid so no section is ever flat dead black, plus a single warm
+   ambient wash near the top. Attached to body, behind everything. */
+body {
+  background-color: #100f0d;
+  background-image:
+    radial-gradient(900px 500px at 75% -10%, rgba(229, 166, 99, 0.055), transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+  background-attachment: fixed, fixed, fixed;
+}
+
+/* Fine film grain over the page. Stops large dark areas reading as a flat
+   fill — the thing that makes a dark site look cheap. Fixed so it does not
+   swim around while scrolling; pointer-events off so it never eats clicks. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scroll-driven 3D reveal: sections tilt up out of the page as they enter.
+   Uses the native view() timeline, so there is no scroll listener and no JS.
+   Guarded by @supports — where it is unsupported (Safari/Firefox today) the
+   rule never applies and content is simply visible, which is the right
+   fallback. Never start these at opacity 0 outside the guard. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: revealIn linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 30%;
+  }
+}
+
+@keyframes revealIn {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(7deg) translateY(44px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+  }
+}
+
 @keyframes blink {
   50% { opacity: 0; }
 }
@@ -234,4 +283,14 @@ body {
     animation: none !important;
     opacity: 1;
   }
+
+  /* Scroll-driven reveals are not duration-based, so zeroing the duration
+     above does not stop them — cancel the animation outright. */
+  .reveal {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  body::after { display: none; }
 }

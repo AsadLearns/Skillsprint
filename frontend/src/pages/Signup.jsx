@@ -37,8 +37,8 @@ function Signup() {
       <div className="glass-panel rounded-2xl p-8 w-full max-w-md relative z-10">
         <div className="text-center mb-8">
           <Logo size="w-14 h-14 mx-auto mb-4" />
-          <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Create account</h1>
-          <p className="text-slate-400 text-sm mt-2">Start learning smarter in just 30 seconds</p>
+          <h1 className="text-3xl font-extrabold text-stone-100 tracking-tight">Create account</h1>
+          <p className="text-stone-400 text-sm mt-2">Start learning smarter in just 30 seconds</p>
         </div>
 
         {error && (
@@ -49,46 +49,46 @@ function Signup() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5 ml-1">Full name</label>
+            <label className="text-xs font-bold text-stone-400 uppercase tracking-wider block mb-1.5 ml-1">Full name</label>
             <input
               type="text" name="name" placeholder="Enter your name"
               value={form.name} onChange={handleChange} required
-              className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition-all duration-300 outline-none"
+              className="w-full bg-[#1a1815] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/15 focus:border-accent-500/60 focus:bg-[#1f1c18] transition-all duration-300 outline-none"
             />
           </div>
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5 ml-1">Email address</label>
+            <label className="text-xs font-bold text-stone-400 uppercase tracking-wider block mb-1.5 ml-1">Email address</label>
             <input
               type="email" name="email" placeholder="you@example.com"
               value={form.email} onChange={handleChange} required
-              className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition-all duration-300 outline-none"
+              className="w-full bg-[#1a1815] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/15 focus:border-accent-500/60 focus:bg-[#1f1c18] transition-all duration-300 outline-none"
             />
           </div>
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5 ml-1">Password</label>
+            <label className="text-xs font-bold text-stone-400 uppercase tracking-wider block mb-1.5 ml-1">Password</label>
             <input
               type="password" name="password" placeholder="Minimum 6 characters"
               value={form.password} onChange={handleChange} required
-              className="w-full bg-[#101011] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/15 focus:border-emerald-500/60 focus:bg-[#131314] transition-all duration-300 outline-none"
+              className="w-full bg-[#1a1815] border border-white/[0.08] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/15 focus:border-accent-500/60 focus:bg-[#1f1c18] transition-all duration-300 outline-none"
             />
           </div>
           <button
             type="submit" disabled={loading}
-            className="w-full bg-white hover:bg-zinc-200 text-zinc-950 py-3.5 rounded-lg font-semibold text-sm mt-4 disabled:opacity-50 cursor-pointer transition-colors"
+            className="w-full bg-white hover:bg-stone-200 text-stone-950 py-3.5 rounded-lg font-semibold text-sm mt-4 disabled:opacity-50 cursor-pointer transition-colors"
           >
             {loading ? 'Creating account...' : 'Create Account →'}
           </button>
 
           {loading && waking && (
-            <p className="text-center text-xs text-slate-500 animate-pulse">
+            <p className="text-center text-xs text-stone-500 animate-pulse">
               ⏳ Waking up the server — the first request after a quiet period can take up to a minute. Hang tight!
             </p>
           )}
         </form>
 
-        <p className="text-center text-sm text-slate-400 mt-8">
+        <p className="text-center text-sm text-stone-400 mt-8">
           Already have an account?{' '}
-          <Link to="/login" className="text-emerald-400 font-bold hover:text-emerald-300 hover:underline transition">Log in</Link>
+          <Link to="/login" className="text-accent-400 font-bold hover:text-accent-300 hover:underline transition">Log in</Link>
         </p>
       </div>
     </div>

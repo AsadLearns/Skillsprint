@@ -13,7 +13,7 @@ const skillColors = {
   'Python': 'bg-sky-500/15 text-sky-300 border border-sky-500/25',
   'React': 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/25',
   'Web Development': 'bg-violet-500/15 text-violet-300 border border-violet-500/25',
-  'Node.js': 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/25',
+  'Node.js': 'bg-accent-500/15 text-accent-300 border border-accent-500/25',
   'AI/ML': 'bg-rose-500/15 text-rose-300 border border-rose-500/25',
   'MongoDB': 'bg-teal-500/15 text-teal-300 border border-teal-500/25',
   'DevOps': 'bg-amber-500/15 text-amber-300 border border-amber-500/25',
@@ -60,15 +60,15 @@ function Roadmap() {
       .replace(/>/g, "&gt;");
     
     // Headers
-    html = html.replace(/^### (.*$)/gim, '<h4 class="text-md font-extrabold text-slate-200 mt-4 mb-2">$1</h4>');
-    html = html.replace(/^## (.*$)/gim, '<h3 class="text-lg font-black text-slate-100 mt-5 mb-3 border-b border-white/[0.08] pb-1">$1</h3>');
-    html = html.replace(/^# (.*$)/gim, '<h2 class="text-xl font-black text-emerald-400 mt-6 mb-4">$1</h2>');
+    html = html.replace(/^### (.*$)/gim, '<h4 class="text-md font-extrabold text-stone-200 mt-4 mb-2">$1</h4>');
+    html = html.replace(/^## (.*$)/gim, '<h3 class="text-lg font-black text-stone-100 mt-5 mb-3 border-b border-white/[0.08] pb-1">$1</h3>');
+    html = html.replace(/^# (.*$)/gim, '<h2 class="text-xl font-black text-accent-400 mt-6 mb-4">$1</h2>');
     
     // Bold
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-100">$1</strong>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-stone-100">$1</strong>');
     
     // Inline Code
-    html = html.replace(/`(.*?)`/g, '<code class="bg-white/[0.06] text-emerald-300 font-mono text-xs px-1.5 py-0.5 rounded border border-white/[0.08]">$1</code>');
+    html = html.replace(/`(.*?)`/g, '<code class="bg-white/[0.06] text-accent-300 font-mono text-xs px-1.5 py-0.5 rounded border border-white/[0.08]">$1</code>');
     
     // Links (with YouTube styling support)
     html = html.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
@@ -79,19 +79,19 @@ function Roadmap() {
           ${text}
         </a>`;
       }
-      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-bold underline inline-flex items-center gap-1">🔗 ${text}</a>`;
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-accent-400 hover:text-accent-300 font-bold underline inline-flex items-center gap-1">🔗 ${text}</a>`;
     });
 
     // Code Blocks
-    html = html.replace(/```[a-z]*\n([\s\S]*?)\n```/g, '<pre class="bg-slate-950 text-slate-200 font-mono text-xs p-4 rounded-2xl border border-slate-800 my-4 overflow-x-auto select-text"><code class="select-text">$1</code></pre>');
+    html = html.replace(/```[a-z]*\n([\s\S]*?)\n```/g, '<pre class="bg-stone-950 text-stone-200 font-mono text-xs p-4 rounded-2xl border border-stone-800 my-4 overflow-x-auto select-text"><code class="select-text">$1</code></pre>');
     
     // Bullet points
-    html = html.replace(/^\s*-\s+(.*$)/gim, '<li class="ml-4 list-disc text-sm text-slate-300 mb-1.5">$1</li>');
+    html = html.replace(/^\s*-\s+(.*$)/gim, '<li class="ml-4 list-disc text-sm text-stone-300 mb-1.5">$1</li>');
     
     // Paragraphs (double newlines)
-    html = html.replace(/\n\n/g, '</p><p class="text-sm text-slate-300 leading-relaxed mb-4">');
+    html = html.replace(/\n\n/g, '</p><p class="text-sm text-stone-300 leading-relaxed mb-4">');
     
-    return `<p class="text-sm text-slate-300 leading-relaxed mb-4">${html}</p>`;
+    return `<p class="text-sm text-stone-300 leading-relaxed mb-4">${html}</p>`;
   }
 
   useEffect(() => {
@@ -170,21 +170,21 @@ function Roadmap() {
     <div className="min-h-screen hero-bg relative overflow-hidden">
       <div className="sticky top-0 z-50 w-full">
         {/* Announcement Marquee Ticker */}
-        <div className="w-full bg-[#0f0f10] font-mono text-[10px] uppercase tracking-widest text-slate-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
+        <div className="w-full bg-[#1a1815] font-mono text-[10px] uppercase tracking-widest text-stone-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
           <div className="inline-block animate-marquee">
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </div>
 
-        <nav className="nav-blur border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#0a0a0a]/75 backdrop-blur-xl">
+        <nav className="nav-blur border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#100f0d]/75 backdrop-blur-xl">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
             <Logo />
             <span className="text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/[0.1] text-xs px-4 py-2 rounded-lg font-semibold transition cursor-pointer">🧠 Take Quiz</button>
-            <button onClick={() => navigate('/dashboard')} className="text-xs text-slate-400 hover:text-slate-200 font-bold transition cursor-pointer">← Dashboard</button>
+            <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] text-stone-300 border border-white/[0.1] text-xs px-4 py-2 rounded-lg font-semibold transition cursor-pointer">🧠 Take Quiz</button>
+            <button onClick={() => navigate('/dashboard')} className="text-xs text-stone-400 hover:text-stone-200 font-bold transition cursor-pointer">← Dashboard</button>
           </div>
         </nav>
       </div>
@@ -195,10 +195,10 @@ function Roadmap() {
           <div>
             <div className="text-center mb-10">
               <div className="text-6xl mb-4 animate-float inline-block">🗺️</div>
-              <h1 className="text-4xl font-extrabold text-slate-100 tracking-tight mb-3">
+              <h1 className="text-4xl font-extrabold text-stone-100 tracking-tight mb-3">
                 Generate your <span className="shimmer">AI Learning Roadmap</span>
               </h1>
-              <p className="text-slate-400 font-medium text-lg">Pick a tech skill and level. AI will structure a personalized timeline.</p>
+              <p className="text-stone-400 font-medium text-lg">Pick a tech skill and level. AI will structure a personalized timeline.</p>
             </div>
 
             {error && (
@@ -208,45 +208,45 @@ function Roadmap() {
             )}
 
             <div className="glass-panel rounded-3xl p-8 mb-10">
-              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">1. Choose your skill</h2>
+              <h2 className="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-4 ml-1">1. Choose your skill</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                 {skills.map(s => (
                   <button key={s} onClick={() => setSkill(s)}
-                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${skill === s ? 'border-emerald-500/50 bg-emerald-500/[0.08] text-emerald-300' : 'border-white/[0.05] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${skill === s ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.05] bg-white/[0.03] text-stone-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
                     {s}
                   </button>
                 ))}
               </div>
 
               <div className="mb-8">
-                <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Or enter any custom skill / language:</label>
+                <label className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block mb-2 ml-1">Or enter any custom skill / language:</label>
                 <input type="text" value={skills.includes(skill) ? '' : skill} onChange={(e) => setSkill(e.target.value)} placeholder="e.g. Rust, Go, C++, SQL, Swift..."
-                  className="w-full bg-[#101011] border border-white/[0.08] text-white focus:border-emerald-500/60 focus:bg-[#131314] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
+                  className="w-full bg-[#1a1815] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1f1c18] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
                 />
               </div>
 
-              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">2. Choose your level</h2>
+              <h2 className="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-4 ml-1">2. Choose your level</h2>
               <div className="flex gap-3 mb-8">
                 {levels.map(l => (
                   <button key={l} onClick={() => setLevel(l)}
-                    className={`flex-1 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${level === l ? 'border-emerald-500/50 bg-emerald-500/[0.08] text-emerald-300' : 'border-white/[0.05] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    className={`flex-1 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${level === l ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.05] bg-white/[0.03] text-stone-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
                     {l}
                   </button>
                 ))}
               </div>
 
-              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">3. Choose duration</h2>
+              <h2 className="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-4 ml-1">3. Choose duration</h2>
               <div className="flex gap-3 mb-8">
                 {durations.map(d => (
                   <button key={d} onClick={() => setDuration(d)}
-                    className={`flex-1 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${duration === d ? 'border-emerald-500/50 bg-emerald-500/[0.08] text-emerald-300' : 'border-white/[0.05] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    className={`flex-1 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${duration === d ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.05] bg-white/[0.03] text-stone-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
                     {d} weeks
                   </button>
                 ))}
               </div>
 
               <button onClick={handleGenerate} disabled={loading || !skill}
-                className="w-full bg-white hover:bg-zinc-200 text-zinc-950 py-4 rounded-lg font-semibold text-base disabled:opacity-50 cursor-pointer transition-colors"
+                className="w-full bg-white hover:bg-stone-200 text-stone-950 py-4 rounded-lg font-semibold text-base disabled:opacity-50 cursor-pointer transition-colors"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -262,27 +262,27 @@ function Roadmap() {
 
             {myRoadmaps.length > 0 && (
               <div className="fade-up">
-                <h2 className="text-xl font-black text-slate-100 mb-5 tracking-tight">Active Learning Tracks</h2>
+                <h2 className="text-xl font-black text-stone-100 mb-5 tracking-tight">Active Learning Tracks</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {myRoadmaps.map(r => (
                     <div key={r._id} className="glass-panel rounded-3xl p-5 transition-all duration-300 hover:scale-[1.01]">
                       <div className="flex items-center justify-between mb-4">
-                        <div className={`${skillColors[r.skill] || 'bg-white/[0.06] text-slate-200 border border-white/[0.1]'} text-xs font-black px-3 py-1 rounded-full`}>
+                        <div className={`${skillColors[r.skill] || 'bg-white/[0.06] text-stone-200 border border-white/[0.1]'} text-xs font-black px-3 py-1 rounded-full`}>
                           {r.skill}
                         </div>
-                        <span className="text-xs font-bold text-slate-400">{r.level} · {r.duration} weeks</span>
+                        <span className="text-xs font-bold text-stone-400">{r.level} · {r.duration} weeks</span>
                       </div>
                       <div className="mb-4">
                         <div className="flex justify-between items-center text-xs font-bold mb-1.5">
-                          <span className="text-slate-400 uppercase tracking-wider">Progress</span>
-                          <span className="font-black text-emerald-400">{r.progress}%</span>
+                          <span className="text-stone-400 uppercase tracking-wider">Progress</span>
+                          <span className="font-black text-accent-400">{r.progress}%</span>
                         </div>
-                        <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden">
-                          <div className="bg-emerald-500 h-2 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
+                        <div className="bg-stone-950/60 shadow-inner rounded-full h-2 overflow-hidden">
+                          <div className="bg-accent-500 h-2 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button onClick={() => viewRoadmap(r._id)} className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 text-xs font-semibold py-2.5 rounded-lg cursor-pointer transition">View Roadmap</button>
+                        <button onClick={() => viewRoadmap(r._id)} className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-stone-300 text-xs font-semibold py-2.5 rounded-lg cursor-pointer transition">View Roadmap</button>
                         <button onClick={() => handleDeleteRoadmap(r._id)} className="bg-red-950/40 hover:bg-red-900/30 text-red-400 text-xs font-bold px-4 py-2.5 rounded-xl cursor-pointer transition">Delete</button>
                       </div>
                     </div>
@@ -298,26 +298,26 @@ function Roadmap() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div>
                 <div className="flex items-center gap-3 mb-2.5">
-                  <div className={`${skillColors[roadmap.skill] || 'bg-white/[0.06] text-slate-200 border border-white/[0.1]'} font-black px-4 py-1 rounded-full text-xs`}>
+                  <div className={`${skillColors[roadmap.skill] || 'bg-white/[0.06] text-stone-200 border border-white/[0.1]'} font-black px-4 py-1 rounded-full text-xs`}>
                     {roadmap.skill}
                   </div>
-                  <span className="text-slate-400 font-semibold text-sm">{roadmap.level} · {roadmap.duration} weeks</span>
+                  <span className="text-stone-400 font-semibold text-sm">{roadmap.level} · {roadmap.duration} weeks</span>
                 </div>
-                <h1 className="text-3xl font-extrabold text-slate-100 tracking-tight">Your Custom Learning Roadmap</h1>
+                <h1 className="text-3xl font-extrabold text-stone-100 tracking-tight">Your Custom Learning Roadmap</h1>
               </div>
-              <button onClick={() => setStep('select')} className="text-xs font-bold text-emerald-400 bg-[#111112]/80 px-4 py-2.5 rounded-xl hover:bg-white/[0.06] transition cursor-pointer self-start md:self-auto border border-white/[0.08]">← All roadmaps</button>
+              <button onClick={() => setStep('select')} className="text-xs font-bold text-accent-400 bg-[#1c1a17]/80 px-4 py-2.5 rounded-xl hover:bg-white/[0.06] transition cursor-pointer self-start md:self-auto border border-white/[0.08]">← All roadmaps</button>
             </div>
 
             {/* Overall progress block */}
             <div className="glass-panel rounded-3xl p-6 mb-10">
               <div className="flex justify-between items-center mb-2">
-                <span className="font-bold text-slate-300 text-sm">Overall progress</span>
-                <span className="font-black text-emerald-400 text-lg">{roadmap.progress}%</span>
+                <span className="font-bold text-stone-300 text-sm">Overall progress</span>
+                <span className="font-black text-accent-400 text-lg">{roadmap.progress}%</span>
               </div>
-              <div className="bg-slate-950/60 shadow-inner rounded-full h-3 overflow-hidden">
-                <div className="bg-emerald-500 h-3 rounded-full transition-all duration-500" style={{ width: `${roadmap.progress}%` }} />
+              <div className="bg-stone-950/60 shadow-inner rounded-full h-3 overflow-hidden">
+                <div className="bg-accent-500 h-3 rounded-full transition-all duration-500" style={{ width: `${roadmap.progress}%` }} />
               </div>
-              <p className="text-xs font-bold text-slate-400 mt-2.5 uppercase tracking-wider">{roadmap.weeks.filter(w => w.completed).length} of {roadmap.weeks.length} milestones complete</p>
+              <p className="text-xs font-bold text-stone-400 mt-2.5 uppercase tracking-wider">{roadmap.weeks.filter(w => w.completed).length} of {roadmap.weeks.length} milestones complete</p>
             </div>
 
             {/* Interactive Timeline */}
@@ -332,43 +332,43 @@ function Roadmap() {
                     {/* Timeline Node Icon */}
                     <div className="absolute -left-[49px] md:-left-[61px] top-1 z-20">
                       {isCompleted ? (
-                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm md:text-base border-4 border-[#0a0a0a] shadow-md">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold text-sm md:text-base border-4 border-[#100f0d] shadow-md">
                           ✓
                         </div>
                       ) : isActive ? (
                         <div className="relative">
-                          <div className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-40"></div>
-                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs md:text-sm border-4 border-[#0a0a0a] shadow-md relative z-10">
+                          <div className="absolute inset-0 rounded-full bg-accent-500 animate-ping opacity-40"></div>
+                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-600 text-white flex items-center justify-center font-black text-xs md:text-sm border-4 border-[#100f0d] shadow-md relative z-10">
                             W{week.week}
                           </div>
                         </div>
                       ) : (
-                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#0f0f10] text-slate-500 flex items-center justify-center font-bold text-xs md:text-sm border-4 border-[#0a0a0a]">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#1a1815] text-stone-500 flex items-center justify-center font-bold text-xs md:text-sm border-4 border-[#100f0d]">
                           W{week.week}
                         </div>
                       )}
                     </div>
 
                     {/* Timeline Content Card */}
-                    <div className={`glass-panel rounded-2xl p-6 border transition-all duration-300 hover:scale-[1.01] ${isCompleted ? 'border-emerald-500/20 bg-emerald-950/15' : isActive ? 'border-emerald-500/30 bg-[#111112] ring-1 ring-emerald-500/20' : 'border-white/[0.04] hover:border-white/[0.16]'}`}>
+                    <div className={`glass-panel rounded-2xl p-6 border transition-all duration-300 hover:scale-[1.01] ${isCompleted ? 'border-accent-500/20 bg-accent-950/15' : isActive ? 'border-accent-500/30 bg-[#1c1a17] ring-1 ring-accent-500/20' : 'border-white/[0.04] hover:border-white/[0.16]'}`}>
                       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            <h3 className="font-extrabold text-slate-100 text-lg leading-snug">{week.topic}</h3>
+                            <h3 className="font-extrabold text-stone-100 text-lg leading-snug">{week.topic}</h3>
                             {isCompleted && (
-                              <span className="text-[10px] bg-emerald-950/40 text-emerald-400 border border-emerald-900/50 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Completed</span>
+                              <span className="text-[10px] bg-accent-950/40 text-accent-400 border border-accent-900/50 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Completed</span>
                             )}
                             {isActive && (
-                              <span className="text-[10px] bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Active Week</span>
+                              <span className="text-[10px] bg-accent-500/10 text-accent-300 border border-accent-500/25 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Active Week</span>
                             )}
                           </div>
                           
-                          <p className="text-sm text-slate-300 leading-relaxed font-medium mb-4">{week.description}</p>
+                          <p className="text-sm text-stone-300 leading-relaxed font-medium mb-4">{week.description}</p>
                           
                           {week.resources?.length > 0 && (
                             <div className="flex flex-wrap gap-2">
                               {week.resources.map((r, j) => (
-                                <span key={j} className="text-[11px] bg-[#111112]/85 border border-white/[0.05] text-slate-300 px-3 py-1.5 rounded-full font-semibold transition cursor-default shadow-sm flex items-center gap-1">
+                                <span key={j} className="text-[11px] bg-[#1c1a17]/85 border border-white/[0.05] text-stone-300 px-3 py-1.5 rounded-full font-semibold transition cursor-default shadow-sm flex items-center gap-1">
                                   <span>📚</span> {r}
                                 </span>
                               ))}
@@ -378,13 +378,13 @@ function Roadmap() {
 
                         <div className="flex gap-2 self-start md:self-auto flex-wrap">
                           <button onClick={() => openStudyGuide(week.week, week.topic)}
-                            className="bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/[0.1] text-xs font-semibold px-4 py-3 rounded-lg transition cursor-pointer flex items-center gap-1.5"
+                            className="bg-white/[0.04] hover:bg-white/[0.08] text-stone-300 border border-white/[0.1] text-xs font-semibold px-4 py-3 rounded-lg transition cursor-pointer flex items-center gap-1.5"
                           >
                             📖 Study Guide
                           </button>
                           {!isCompleted && (
                             <button onClick={() => handleCompleteWeek(roadmap._id, week.week)}
-                              className="bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold px-5 py-3 rounded-lg transition-colors cursor-pointer"
+                              className="bg-white hover:bg-stone-200 text-stone-950 text-xs font-semibold px-5 py-3 rounded-lg transition-colors cursor-pointer"
                             >
                               Mark Done ✓
                             </button>
@@ -404,25 +404,25 @@ function Roadmap() {
       {studyWeek !== null && (
         <div className="fixed inset-0 z-50 overflow-hidden flex justify-end">
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity" onClick={() => setStudyWeek(null)}></div>
+          <div className="absolute inset-0 bg-stone-950/60 backdrop-blur-sm transition-opacity" onClick={() => setStudyWeek(null)}></div>
           
           {/* Panel */}
-          <div className="relative w-full max-w-2xl bg-[#0f0f10] h-full shadow-2xl flex flex-col z-10 border-l border-white/[0.08] animate-slide-in-right">
+          <div className="relative w-full max-w-2xl bg-[#1a1815] h-full shadow-2xl flex flex-col z-10 border-l border-white/[0.08] animate-slide-in-right">
             {/* Header */}
-            <div className="p-6 border-b border-white/[0.06] flex items-center justify-between bg-[#111112]">
+            <div className="p-6 border-b border-white/[0.06] flex items-center justify-between bg-[#1c1a17]">
               <div>
-                <span className="text-[10px] text-emerald-400 font-black uppercase tracking-wider">Week {studyWeek} Study Material</span>
-                <h2 className="text-xl font-extrabold text-slate-100 tracking-tight leading-tight mt-1">{studyTopic}</h2>
+                <span className="text-[10px] text-accent-400 font-black uppercase tracking-wider">Week {studyWeek} Study Material</span>
+                <h2 className="text-xl font-extrabold text-stone-100 tracking-tight leading-tight mt-1">{studyTopic}</h2>
               </div>
-              <button onClick={() => setStudyWeek(null)} className="w-9 h-9 rounded-xl bg-[#111112]/80 border border-white/[0.08] text-slate-400 hover:text-slate-200 flex items-center justify-center font-bold text-sm shadow-sm cursor-pointer hover:scale-105 transition-all">✕</button>
+              <button onClick={() => setStudyWeek(null)} className="w-9 h-9 rounded-xl bg-[#1c1a17]/80 border border-white/[0.08] text-stone-400 hover:text-stone-200 flex items-center justify-center font-bold text-sm shadow-sm cursor-pointer hover:scale-105 transition-all">✕</button>
             </div>
             
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-8 select-text">
               {studyLoading ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
-                  <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-                  <p className="text-slate-400 font-bold animate-pulse text-sm uppercase tracking-widest">AI is writing study guide...</p>
+                  <div className="w-12 h-12 border-4 border-accent-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                  <p className="text-stone-400 font-bold animate-pulse text-sm uppercase tracking-widest">AI is writing study guide...</p>
                 </div>
               ) : (
                 <div className="prose max-w-none select-text" dangerouslySetInnerHTML={{ __html: renderMarkdown(studyContent) }} />
@@ -430,13 +430,13 @@ function Roadmap() {
             </div>
             
             {/* Footer / CTA */}
-            <div className="p-6 border-t border-white/[0.05] bg-[#0d0d0e]/90 flex items-center justify-between gap-4">
+            <div className="p-6 border-t border-white/[0.05] bg-[#161412]/90 flex items-center justify-between gap-4">
               <button onClick={() => navigate('/quiz', { state: { skill: roadmap.skill, topic: studyTopic } })}
-                className="bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold px-5 py-3.5 rounded-lg cursor-pointer transition-colors flex items-center gap-1.5"
+                className="bg-white hover:bg-stone-200 text-stone-950 text-xs font-semibold px-5 py-3.5 rounded-lg cursor-pointer transition-colors flex items-center gap-1.5"
               >
                 🧠 Test Knowledge (Take Quiz)
               </button>
-              <button onClick={() => setStudyWeek(null)} className="bg-[#111112]/80 border border-white/[0.08] text-slate-400 hover:text-white text-xs font-bold px-5 py-3.5 rounded-xl cursor-pointer">
+              <button onClick={() => setStudyWeek(null)} className="bg-[#1c1a17]/80 border border-white/[0.08] text-stone-400 hover:text-white text-xs font-bold px-5 py-3.5 rounded-xl cursor-pointer">
                 Close Guide
               </button>
             </div>
