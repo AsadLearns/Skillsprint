@@ -16,7 +16,10 @@ function Navbar() {
 
   return (
     <div className="sticky top-0 z-50 w-full animate-fade-in">
-      <nav className="relative border-b border-white/[0.06] px-6 py-4 flex items-center justify-between bg-[#0b1220]/85 backdrop-blur-xl">
+      {/* Kept mostly transparent so the cloud layer reads as continuous behind
+          it — at 85% it looked like an opaque banner bolted across the top.
+          The blur is what keeps the links legible over moving sky. */}
+      <nav className="relative border-b border-white/[0.04] px-6 py-4 flex items-center justify-between bg-[#0b1220]/25 backdrop-blur-md">
         <Link to="/" className="flex items-center gap-2">
           <Logo />
           <span className="text-xl font-bold text-slate-100 tracking-tight">SkillSprint</span>

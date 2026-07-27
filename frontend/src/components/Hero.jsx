@@ -25,7 +25,7 @@ function Hero() {
           left. On mobile the copy spans the full width, so a horizontal fade
           leaves the right-hand side of every line sitting on bright cloud —
           measurably unreadable. Small screens get a vertical fade instead. */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#0b1220]/92 via-[#0b1220]/80 to-[#0b1220]/65 md:bg-gradient-to-r md:from-[#0b1220] md:via-[#0b1220]/55 md:to-transparent"></div>
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#0b1220]/40 via-[#0b1220]/85 to-[#0b1220]/70 md:bg-gradient-to-r md:from-[#0b1220] md:via-[#0b1220]/55 md:to-transparent"></div>
 
       {/* single static glow — no drifting blobs */}
       <div className="absolute top-0 right-0 w-[300px] h-[200px] bg-accent-500/[0.03] rounded-full blur-[80px] pointer-events-none sm:w-[400px] sm:h-[250px] sm:blur-[100px] lg:w-[600px] lg:h-[400px] lg:blur-[140px]"></div>
