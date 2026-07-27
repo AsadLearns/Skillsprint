@@ -1,65 +1,123 @@
 import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 
-const MAX_DEG = 7 // beyond this the text starts to visibly skew
+const MAX_POINTER_DEG = 7 // beyond this the text visibly skews
+const MAX_SCROLL_DEG = 5
 
-// Tilts .surface-card elements toward the pointer, so the boxes read as solid
-// panels catching light rather than flat rectangles.
+// Makes .surface-card elements read as solid panels catching light rather
+// than flat rectangles, on every device:
 //
-// One delegated listener on the document rather than per-card handlers: cards
-// mount and unmount with every route, and this way nothing has to be rebound.
-// The transform itself is applied by CSS from the --rx/--ry variables set
-// here, so cards with no pointer over them simply stay flat.
+//   pointer devices — the card tilts toward the cursor
+//   touch devices   — there is no cursor, so the tilt is driven by where the
+//                     card sits in the viewport as you scroll
+//
+// Both paths set the same --rx/--ry variables; the transform itself lives in
+// CSS, so a card nothing is driving simply stays flat.
 function CardTilt() {
+  const { pathname } = useLocation()
+
   useEffect(() => {
-    // No hover means a touch screen — there is no pointer to follow, and
-    // tracking touch here would fight scrolling.
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
 
-    let active = null
+    const cards = () => document.querySelectorAll(".surface-card")
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches
 
-    const reset = (card) => {
-      card.classList.remove("tilting")
-      card.style.removeProperty("--rx")
-      card.style.removeProperty("--ry")
-    }
+    // ---- pointer devices -------------------------------------------------
+    if (fine) {
+      let active = null
 
-    const onMove = (e) => {
-      const card = e.target.closest && e.target.closest(".surface-card")
-
-      if (card !== active) {
-        if (active) reset(active)
-        active = card
-        if (card) card.classList.add("tilting")
+      const reset = (card) => {
+        card.classList.remove("tilting")
+        card.style.removeProperty("--rx")
+        card.style.removeProperty("--ry")
       }
-      if (!card) return
 
-      const r = card.getBoundingClientRect()
-      // -0.5 .. 0.5 from the card's centre
-      const px = (e.clientX - r.left) / r.width - 0.5
-      const py = (e.clientY - r.top) / r.height - 0.5
-      // Pointer above centre tilts the top away from the viewer, so rotateX
-      // takes the negated Y.
-      card.style.setProperty("--rx", `${(-py * MAX_DEG).toFixed(2)}deg`)
-      card.style.setProperty("--ry", `${(px * MAX_DEG).toFixed(2)}deg`)
+      const onMove = (e) => {
+        const card = e.target.closest && e.target.closest(".surface-card")
+        if (card !== active) {
+          if (active) reset(active)
+          active = card
+          if (card) card.classList.add("tilting")
+        }
+        if (!card) return
+
+        const r = card.getBoundingClientRect()
+        const px = (e.clientX - r.left) / r.width - 0.5 // -0.5 .. 0.5
+        const py = (e.clientY - r.top) / r.height - 0.5
+        // pointer above centre tilts the top away, so rotateX takes -Y
+        card.style.setProperty("--rx", `${(-py * MAX_POINTER_DEG).toFixed(2)}deg`)
+        card.style.setProperty("--ry", `${(px * MAX_POINTER_DEG).toFixed(2)}deg`)
+      }
+
+      const onLeave = () => {
+        if (active) reset(active)
+        active = null
+      }
+
+      document.addEventListener("pointermove", onMove, { passive: true })
+      document.addEventListener("pointerleave", onLeave)
+      window.addEventListener("blur", onLeave)
+      return () => {
+        document.removeEventListener("pointermove", onMove)
+        document.removeEventListener("pointerleave", onLeave)
+        window.removeEventListener("blur", onLeave)
+        if (active) reset(active)
+      }
     }
 
-    const onLeave = () => {
-      if (active) reset(active)
-      active = null
+    // ---- touch devices ---------------------------------------------------
+    // Only cards actually on screen are updated, so the scroll handler stays
+    // O(visible) rather than walking every card on the page.
+    const visible = new Set()
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            visible.add(e.target)
+            e.target.classList.add("tilting")
+          } else {
+            visible.delete(e.target)
+            e.target.classList.remove("tilting")
+            e.target.style.removeProperty("--rx")
+          }
+        })
+      },
+      { threshold: 0 }
+    )
+    cards().forEach((c) => io.observe(c))
+
+    let ticking = false
+    const update = () => {
+      ticking = false
+      const mid = window.innerHeight / 2
+      visible.forEach((card) => {
+        const r = card.getBoundingClientRect()
+        // -1 above the fold centre .. +1 below it
+        const t = Math.max(-1, Math.min(1, (r.top + r.height / 2 - mid) / mid))
+        card.style.setProperty("--rx", `${(-t * MAX_SCROLL_DEG).toFixed(2)}deg`)
+      })
+    }
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(update)
     }
 
-    document.addEventListener("pointermove", onMove, { passive: true })
-    document.addEventListener("pointerleave", onLeave)
-    window.addEventListener("blur", onLeave)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll, { passive: true })
+    update()
 
     return () => {
-      document.removeEventListener("pointermove", onMove)
-      document.removeEventListener("pointerleave", onLeave)
-      window.removeEventListener("blur", onLeave)
-      if (active) reset(active)
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+      io.disconnect()
+      cards().forEach((c) => {
+        c.classList.remove("tilting")
+        c.style.removeProperty("--rx")
+      })
     }
-  }, [])
+    // re-bind per route: cards mount and unmount with the page
+  }, [pathname])
 
   return null
 }
