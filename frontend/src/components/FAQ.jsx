@@ -36,7 +36,7 @@ function FAQ() {
           <span className="font-mono text-[11px] text-slate-500 uppercase tracking-[0.25em] shrink-0 hidden sm:block">04 / FAQ</span>
         </div>
 
-        <div className="rounded-xl border border-white/[0.07] divide-y divide-white/[0.06] bg-[#0f1729] overflow-hidden">
+        <div className="surface-card rounded-xl border border-white/[0.07] divide-y divide-white/[0.06] bg-[#0f1729] overflow-hidden">
           {faqs.map((item, i) => {
             const isOpen = openIndex === i
             return (

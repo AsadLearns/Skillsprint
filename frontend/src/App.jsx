@@ -12,6 +12,7 @@ import ProcessPage from "./pages/ProcessPage";
 import FaqPage from "./pages/FaqPage";
 import VantaBackground from "./components/VantaBackground";
 import ScrollReveal from "./components/ScrollReveal";
+import CardTilt from "./components/CardTilt";
 
 // BrowserRouter keeps the old scroll position across navigations, so a new
 // page can open halfway down. ScrollRestoration is data-router only.
@@ -36,6 +37,7 @@ function App() {
       <div aria-hidden="true" className="fixed inset-0 z-0 pointer-events-none bg-[#0b1220]/72"></div>
       <ScrollToTop />
       <ScrollReveal />
+      <CardTilt />
       {/* Content is lifted above the cloud layer explicitly rather than the
           layer being pushed behind with a negative z-index. Negative z-index
           is fragile in Safari — any ancestor that forms a stacking context

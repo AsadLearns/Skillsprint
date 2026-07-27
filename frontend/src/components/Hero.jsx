@@ -65,7 +65,12 @@ function Hero() {
 
         {/* Right: terminal-style product mockup */}
         <div className="relative">
-          <div className="rounded-xl border border-white/[0.08] bg-[#131d33] shadow-2xl shadow-black/60 overflow-hidden animate-slide-up animation-delay-200">
+          {/* Entrance animation lives on the wrapper, not on the card. A
+              `both`-fill animation retains its end transform, and that
+              overrides the card's own transform — putting them on the same
+              element silently kills the pointer tilt. */}
+          <div className="animate-slide-up animation-delay-200">
+          <div className="surface-card rounded-xl border border-white/[0.08] bg-[#131d33] overflow-hidden">
             <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
               <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
               <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
@@ -114,6 +119,7 @@ function Hero() {
                 <span aria-hidden="true" className="inline-block w-2 h-4 bg-slate-300 align-middle animate-blink"></span>
               </p>
             </div>
+          </div>
           </div>
 
           {/* floating quiz chip */}

@@ -23,7 +23,7 @@ function ProjectStatus() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4">
-          <div className="rounded-xl border border-white/[0.07] bg-[#0b1220] p-6 md:p-8">
+          <div className="surface-card rounded-xl border border-white/[0.07] bg-[#0b1220] p-6 md:p-8">
             <p className="text-[15px] text-slate-300 leading-relaxed">
               A side project by one person, launched recently. No real user quotes
               yet — so here is what actually works, and what does not.
@@ -34,7 +34,7 @@ function ProjectStatus() {
           </div>
 
           <div className="grid gap-4">
-            <div className="rounded-xl border border-white/[0.07] bg-[#0b1220] p-6">
+            <div className="surface-card rounded-xl border border-white/[0.07] bg-[#0b1220] p-6">
               <p className="font-mono text-[10px] text-accent-400/80 tracking-[0.25em] mb-4">SHIPPED</p>
               <ul className="space-y-2.5">
                 {shipped.map((item) => (
@@ -46,7 +46,7 @@ function ProjectStatus() {
               </ul>
             </div>
 
-            <div className="rounded-xl border border-white/[0.07] bg-[#0b1220] p-6">
+            <div className="surface-card rounded-xl border border-white/[0.07] bg-[#0b1220] p-6">
               <p className="font-mono text-[10px] text-slate-500 tracking-[0.25em] mb-4">NEXT UP</p>
               <ul className="space-y-2.5">
                 {next.map((item) => (

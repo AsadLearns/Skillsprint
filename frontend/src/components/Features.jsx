@@ -1,4 +1,4 @@
-const card = "rounded-xl border border-white/[0.07] bg-[#0b1220] p-6 hover:border-white/[0.16] transition-colors duration-300"
+const card = "surface-card rounded-xl border border-white/[0.07] bg-[#0b1220] p-6"
 const num = "font-mono text-[10px] text-accent-400/80 tracking-[0.25em] mb-3"
 const title = "text-lg font-bold text-slate-100 mb-1.5"
 const desc = "text-sm text-slate-400 leading-relaxed"
