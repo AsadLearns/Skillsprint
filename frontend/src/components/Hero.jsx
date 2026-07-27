@@ -40,9 +40,9 @@ function Hero() {
             <span className="text-slate-500">Stop collecting tutorials.</span>{" "}
             <span className="text-slate-100">Start finishing skills.</span>
           </h1>
-          <p className="text-slate-400 text-lg leading-relaxed max-w-md mb-9">
-            Pick a skill. Get an AI-built weekly roadmap with study guides,
-            milestone quizzes, and a certificate when you finish.
+          <p className="text-slate-300 text-lg leading-relaxed max-w-sm mb-9">
+            Pick a skill. Get a week-by-week plan, quizzes at every milestone,
+            and a certificate when you finish.
           </p>
           <div className="flex items-center gap-3 flex-wrap mb-9">
             <button

@@ -25,13 +25,8 @@ function ProjectStatus() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4">
           <div className="rounded-xl border border-white/[0.07] bg-[#0b1220] p-6 md:p-8">
             <p className="text-[15px] text-slate-300 leading-relaxed">
-              This is a side project built by one person, and it launched recently — so
-              there are no real user quotes to put here. Rather than invent some, here is
-              what actually works today and what is still missing.
-            </p>
-            <p className="text-[15px] text-slate-400 leading-relaxed mt-4">
-              If you use it and something breaks or feels wrong, that feedback is genuinely
-              useful. The list below moves based on it.
+              A side project by one person, launched recently. No real user quotes
+              yet — so here is what actually works, and what does not.
             </p>
             <p className="font-mono text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-8 pt-5 border-t border-white/[0.06]">
               Asad · solo maintainer

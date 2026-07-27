@@ -276,6 +276,34 @@ body::after {
   animation: blink 1.1s step-end infinite;
 }
 
+/* Logo: a slow 3D tilt so the mark reads as a solid object catching light
+   rather than a flat glyph. Small amplitude on purpose — it sits in the
+   sticky navbar on every page, and anything larger becomes a distraction.
+   Tilts further on hover. */
+@keyframes logoTilt {
+  0%, 100% { transform: perspective(340px) rotateY(-16deg) rotateX(6deg); }
+  50%      { transform: perspective(340px) rotateY(16deg) rotateX(-4deg); }
+}
+
+.logo-3d {
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: logoTilt 7s ease-in-out infinite;
+  transition: transform 0.35s ease;
+}
+
+.logo-3d:hover {
+  animation-play-state: paused;
+  transform: perspective(340px) rotateY(0deg) rotateX(0deg) scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-3d {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 /* Sweeping highlight for the roadmap-generation skeleton bars. */
 @keyframes shimmerBar {
   0% { background-position: 200% 0; }
