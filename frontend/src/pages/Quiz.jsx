@@ -117,52 +117,55 @@ export default function Quiz() {
         {step === 'select' && (
           <div>
             <div className="text-center mb-10">
-              <div className="text-6xl mb-4 animate-float inline-block">🧠</div>
-              <h1 className="text-4xl font-extrabold text-slate-100 tracking-tight mb-2">AI Quiz Generator</h1>
-              <p className="text-slate-400 font-medium text-lg">Test your milestone concepts. Generates custom MCQs instantly.</p>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent-500/10 border border-accent-500/25 mb-4 text-accent-300 font-mono text-[10px] font-bold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyber-400 animate-pulse"></span>
+                AI Milestone Verification
+              </div>
+              <h1 className="text-4xl md:text-5xl font-black text-slate-100 tracking-tight mb-2">Quiz Generator</h1>
+              <p className="text-slate-400 font-medium text-base md:text-lg max-w-lg mx-auto">Validate your concept mastery. AI generates customized assessment scenarios instantly.</p>
             </div>
 
             {error && (
-              <div className="bg-red-950/40 border border-red-900/50 text-red-400 text-sm px-4 py-3.5 rounded-xl mb-6 text-center">
+              <div className="bg-rose-950/40 border border-rose-900/50 text-rose-300 text-sm px-4 py-3.5 rounded-xl mb-6 text-center">
                 ⚠️ {error}
               </div>
             )}
 
-            <div className="glass-panel rounded-3xl p-6 mb-5">
-              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">1. Choose a skill</h2>
+            <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6 mb-5">
+              <h2 className="text-xs font-mono font-bold text-cyber-400 uppercase tracking-widest block mb-4 ml-1">// 01. SELECT DOMAIN</h2>
               <div className="grid grid-cols-2 gap-3 mb-4">
                 {skills.map(s => (
                   <button key={s} onClick={() => { setSkill(s); setTopic('') }}
-                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${skill === s ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border cursor-pointer ${skill === s ? 'border-accent-500 bg-accent-500/20 text-white shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-accent-500/40 hover:bg-white/[0.06]'}`}>
                     {s}
                   </button>
                 ))}
               </div>
               <div>
-                <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Or enter custom skill / language:</label>
-                <input type="text" value={skills.includes(skill) ? '' : skill} onChange={(e) => { setSkill(e.target.value); setTopic('') }} placeholder="e.g. Rust, Go, C++, SQL, Ruby..."
-                  className="w-full bg-[#131d33] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
+                <label className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Or enter custom skill / language:</label>
+                <input type="text" value={skills.includes(skill) ? '' : skill} onChange={(e) => { setSkill(e.target.value); setTopic('') }} placeholder="e.g. Rust, Go, C++, SQL, Ruby, GraphQL..."
+                  className="w-full bg-[#080d19] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#0c1324] rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                 />
               </div>
             </div>
 
             {skill && (
-              <div className="glass-panel rounded-3xl p-6 mb-6 fade-up">
-                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">2. Choose a topic</h2>
+              <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6 mb-5 fade-up">
+                <h2 className="text-xs font-mono font-bold text-accent-400 uppercase tracking-widest block mb-4 ml-1">// 02. SELECT TOPIC</h2>
                 {topicsBySkill[skill] ? (
                   <div className="grid grid-cols-1 gap-2.5">
                     {topicsBySkill[skill]?.map(t => (
                       <button key={t} onClick={() => setTopic(t)}
-                        className={`py-3.5 px-5 rounded-xl font-bold text-sm transition-all duration-300 border-2 text-left cursor-pointer ${topic === t ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                        className={`py-3.5 px-5 rounded-xl font-bold text-sm transition-all duration-300 border text-left cursor-pointer ${topic === t ? 'border-accent-500 bg-accent-500/20 text-white shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-accent-500/40 hover:bg-white/[0.06]'}`}>
                         {t}
                       </button>
                     ))}
                   </div>
                 ) : (
                   <div>
-                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Type custom topic to generate quiz on:</label>
+                    <label className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Type custom topic to generate quiz on:</label>
                     <input type="text" value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="e.g. Memory management, Pointers, Concurrency, Joins..."
-                      className="w-full bg-[#131d33] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-lg px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-[#080d19] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#0c1324] rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                     />
                   </div>
                 )}
@@ -170,12 +173,12 @@ export default function Quiz() {
             )}
 
             {skill && topic && (
-              <div className="glass-panel rounded-3xl p-6 mb-6 fade-up">
-                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4 ml-1">3. Number of Questions</h2>
+              <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6 mb-6 fade-up">
+                <h2 className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest block mb-4 ml-1">// 03. QUESTION COUNT</h2>
                 <div className="flex gap-3">
                   {[5, 10, 15, 20].map(n => (
                     <button key={n} onClick={() => setCount(n)}
-                      className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all duration-300 border-2 cursor-pointer ${count === n ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-300' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                      className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all duration-300 border cursor-pointer ${count === n ? 'border-accent-500 bg-accent-500/20 text-white shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-accent-500/40 hover:bg-white/[0.06]'}`}>
                       {n} Qs
                     </button>
                   ))}
@@ -185,7 +188,7 @@ export default function Quiz() {
 
             {skill && topic && (
               <button onClick={handleGenerate} disabled={loading}
-                className="w-full bg-white hover:bg-slate-200 text-slate-950 py-4 rounded-lg font-semibold text-base disabled:opacity-50 cursor-pointer transition-colors"
+                className="w-full bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white py-4 rounded-xl font-bold text-base shadow-glow-sm hover:shadow-glow disabled:opacity-50 cursor-pointer transition-all duration-300 flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -193,9 +196,9 @@ export default function Quiz() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
                     </svg>
-                    Generating quiz questions...
+                    Synthesizing questions...
                   </span>
-                ) : '🧠 Generate Quiz →'}
+                ) : '⚡ Generate Quiz →'}
               </button>
             )}
           </div>
@@ -206,17 +209,17 @@ export default function Quiz() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h1 className="text-2xl font-black text-slate-100 tracking-tight">{quiz.topic}</h1>
-                <p className="text-slate-400 font-bold text-xs mt-0.5 uppercase tracking-wider">{quiz.skill} · {quiz.questions.length} questions</p>
+                <p className="text-slate-400 font-mono text-xs mt-0.5 uppercase tracking-wider">{quiz.skill} · {quiz.questions.length} questions</p>
               </div>
-              <div className="text-xs font-bold text-accent-300 bg-accent-500/10 border border-accent-500/25 px-4 py-2 rounded-lg">
+              <div className="text-xs font-mono font-bold text-cyber-400 bg-cyber-500/10 border border-cyber-500/20 px-3.5 py-1.5 rounded-full">
                 {Object.keys(answers).length} / {quiz.questions.length} Answered
               </div>
             </div>
 
             {/* Sleek Progress Bar */}
-            <div className="w-full bg-white/[0.06] h-1.5 rounded-full overflow-hidden mb-6">
+            <div className="w-full bg-slate-950/80 h-2 rounded-full overflow-hidden mb-6 border border-white/[0.04]">
               <div
-                className="bg-accent-500 h-full transition-all duration-500 ease-out"
+                className="bg-gradient-to-r from-accent-500 to-cyber-400 h-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(139,92,246,0.6)]"
                 style={{ width: `${((current + 1) / quiz.questions.length) * 100}%` }}
               />
             </div>
@@ -225,45 +228,39 @@ export default function Quiz() {
             <div className="flex flex-wrap gap-2 mb-6">
               {quiz.questions.map((_, i) => (
                 <button key={i} onClick={() => setCurrent(i)}
-                  className={`w-9 h-9 rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-white text-slate-950' : answers[i] !== undefined ? 'bg-accent-500/10 text-accent-300 border border-accent-500/30' : 'bg-white/[0.03] border border-white/[0.08] text-slate-500 hover:border-white/[0.2]'}`}>
-                  {current === i ? (
-                    <span className="relative flex h-2 w-2 mx-auto mb-0.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-900 opacity-40"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-900"></span>
-                    </span>
-                  ) : null}
-                  {current === i ? '' : i + 1}
+                  className={`w-9 h-9 rounded-xl text-xs font-mono font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm' : answers[i] !== undefined ? 'bg-accent-500/15 text-accent-300 border border-accent-500/30' : 'bg-white/[0.03] border border-white/[0.08] text-slate-400 hover:border-white/[0.2]'}`}>
+                  {i + 1}
                 </button>
               ))}
             </div>
 
             {/* Question Panel */}
-            <div key={current} className="glass-panel rounded-3xl p-8 mb-6 shadow-md animate-slide-up">
-              <p className="text-[10px] text-accent-400 font-black uppercase tracking-wider mb-2">Question {current + 1} of {quiz.questions.length}</p>
+            <div key={current} className="surface-card rounded-3xl p-6 md:p-8 mb-6 border border-white/[0.08] bg-[#0c1324]/85 backdrop-blur-xl shadow-2xl animate-slide-up">
+              <p className="text-[10px] text-cyber-400 font-mono font-bold uppercase tracking-wider mb-2">Question {current + 1} of {quiz.questions.length}</p>
               <h2 className="text-xl font-bold text-slate-100 leading-snug mb-8">{quiz.questions[current].question}</h2>
-              <div className="space-y-3.5">
+              <div className="space-y-3">
                 {quiz.questions[current].options.map((opt, i) => (
                   <button key={i} onClick={() => handleAnswer(current, i)}
-                    className={`w-full text-left py-3.5 px-5 rounded-xl border-2 font-medium text-sm transition-all duration-300 cursor-pointer hover:scale-[1.01] ${answers[current] === i ? 'border-accent-500/50 bg-accent-500/[0.08] text-accent-200 font-bold' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
-                    <span className="font-extrabold mr-3 text-slate-500">{['A', 'B', 'C', 'D'][i]}.</span>{opt}
+                    className={`w-full text-left py-3.5 px-5 rounded-xl border font-medium text-sm transition-all duration-300 cursor-pointer hover:scale-[1.01] ${answers[current] === i ? 'border-accent-500 bg-accent-500/20 text-white font-bold shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    <span className="font-mono font-bold mr-3 text-slate-500">{['A', 'B', 'C', 'D'][i]}.</span>{opt}
                   </button>
                 ))}
               </div>
             </div>
 
-            {error && <p className="text-red-500 font-semibold text-sm text-center mb-4">⚠️ {error}</p>}
+            {error && <p className="text-rose-400 font-semibold text-sm text-center mb-4">⚠️ {error}</p>}
 
             <div className="flex gap-3">
               {current > 0 && (
-                <button onClick={() => setCurrent(c => c - 1)} className="flex-1 border border-white/[0.1] bg-white/[0.03] text-slate-300 py-3.5 rounded-lg font-bold text-sm hover:bg-white/[0.06] transition cursor-pointer">← Previous</button>
+                <button onClick={() => setCurrent(c => c - 1)} className="flex-1 border border-white/[0.1] bg-white/[0.03] text-slate-300 py-3.5 rounded-xl font-bold text-sm hover:bg-white/[0.06] transition cursor-pointer">← Previous</button>
               )}
               {current < quiz.questions.length - 1 ? (
-                <button onClick={() => setCurrent(c => c + 1)} className="flex-1 bg-white/[0.06] hover:bg-white/[0.1] text-slate-200 py-3.5 rounded-lg font-bold text-sm transition cursor-pointer">Next →</button>
+                <button onClick={() => setCurrent(c => c + 1)} className="flex-1 bg-white/[0.06] hover:bg-white/[0.1] text-slate-200 py-3.5 rounded-xl font-bold text-sm transition cursor-pointer">Next →</button>
               ) : (
                 <button onClick={handleSubmit} disabled={loading || Object.keys(answers).length < quiz.questions.length}
-                  className="flex-1 bg-white hover:bg-slate-200 text-slate-950 py-3.5 rounded-lg font-semibold text-sm disabled:opacity-50 cursor-pointer transition-colors"
+                  className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 py-3.5 rounded-xl font-bold text-sm disabled:opacity-50 cursor-pointer transition shadow-sm"
                 >
-                  {loading ? 'Submitting...' : '✅ Submit Quiz'}
+                  {loading ? 'Evaluating...' : '✅ Submit Assessment'}
                 </button>
               )}
             </div>
@@ -276,28 +273,30 @@ export default function Quiz() {
               {result.quiz.score >= 80 ? '🎉' : result.quiz.score >= 50 ? '👍' : '💪'}
             </div>
             
-            {/* Beautiful radial visual score badge */}
-            <div className="my-6 inline-flex flex-col items-center justify-center p-8 bg-white/[0.04] border border-white/[0.1] rounded-full w-48 h-48">
-              <span className={`text-5xl font-black ${result.quiz.score >= 80 ? 'text-green-500' : result.quiz.score >= 50 ? 'text-yellow-500' : 'text-rose-500'}`}>{result.quiz.score}%</span>
-              <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-1">Accuracy</span>
+            {/* Luminous visual score badge */}
+            <div className="my-6 inline-flex flex-col items-center justify-center p-8 bg-[#0c1324]/90 border border-white/[0.1] rounded-full w-48 h-48 shadow-2xl relative">
+              <span className={`text-5xl font-mono font-black ${result.quiz.score >= 80 ? 'text-emerald-400' : result.quiz.score >= 50 ? 'text-amber-400' : 'text-rose-400'}`}>{result.quiz.score}%</span>
+              <span className="text-[10px] text-slate-400 font-mono font-bold uppercase tracking-widest mt-1">Accuracy</span>
             </div>
 
-            <h1 className="text-3xl font-extrabold text-slate-100 mb-1.5 tracking-tight">Quiz Session Complete</h1>
+            <h1 className="text-3xl font-extrabold text-slate-100 mb-1.5 tracking-tight">Assessment Complete</h1>
             <p className="text-slate-400 font-medium mb-10">{result.correct} out of {result.total} answers correct · {quiz.topic}</p>
 
             {/* Answer review list */}
-            <div className="space-y-5 text-left mb-10">
+            <div className="space-y-4 text-left mb-10">
               {quiz.questions.map((q, i) => {
                 const isCorrect = q.userAnswer === q.correct
                 return (
-                  <div key={i} className={`glass-panel rounded-2xl p-6 border ${isCorrect ? 'border-accent-500/25 bg-accent-500/[0.04]' : 'border-red-500/25 bg-red-500/[0.04]'}`}>
+                  <div key={i} className={`surface-card rounded-2xl p-6 border ${isCorrect ? 'border-emerald-500/20 bg-emerald-950/10' : 'border-rose-500/20 bg-rose-950/10'}`}>
                     <p className="font-extrabold text-slate-100 mb-4 text-sm leading-tight">{i + 1}. {q.question}</p>
                     <div className="space-y-2">
                       {q.options.map((opt, j) => (
-                        <div key={j} className={`py-3 px-4 rounded-lg text-xs font-semibold ${j === q.correct ? 'bg-accent-500/10 text-accent-300 border border-accent-500/30' : j === q.userAnswer && !isCorrect ? 'bg-red-500/10 text-red-300 border border-red-500/30' : 'text-slate-400 bg-white/[0.03]'}`}>
-                          <span className="font-bold mr-2">{['A', 'B', 'C', 'D'][j]}.</span>{opt}
-                          {j === q.correct && <span className="ml-2 text-[10px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-wider">Correct Answer</span>}
-                          {j === q.userAnswer && !isCorrect && <span className="ml-2 text-[10px] bg-red-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-wider">Your Answer</span>}
+                        <div key={j} className={`py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-between ${j === q.correct ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/25' : j === q.userAnswer && !isCorrect ? 'bg-rose-500/10 text-rose-300 border border-rose-500/25' : 'text-slate-400 bg-white/[0.02]'}`}>
+                          <div>
+                            <span className="font-mono font-bold mr-2 text-slate-500">{['A', 'B', 'C', 'D'][j]}.</span>{opt}
+                          </div>
+                          {j === q.correct && <span className="ml-2 text-[9px] bg-emerald-500 text-slate-950 px-2 py-0.5 rounded-full font-mono font-black uppercase tracking-wider">Correct Answer</span>}
+                          {j === q.userAnswer && !isCorrect && <span className="ml-2 text-[9px] bg-rose-500 text-white px-2 py-0.5 rounded-full font-mono font-black uppercase tracking-wider">Your Pick</span>}
                         </div>
                       ))}
                     </div>
@@ -308,14 +307,14 @@ export default function Quiz() {
 
             <div className="flex gap-3">
               <button onClick={() => { setStep('select'); setQuiz(null); setResult(null); setAnswers({}) }}
-                className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 py-3.5 rounded-lg font-bold text-sm transition cursor-pointer"
+                className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 py-3.5 rounded-xl font-bold text-sm transition cursor-pointer"
               >
                 Take another quiz
               </button>
               <button onClick={() => navigate('/dashboard')}
-                className="flex-1 bg-white hover:bg-slate-200 text-slate-950 py-3.5 rounded-lg font-semibold text-sm cursor-pointer transition-colors"
+                className="flex-1 bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white py-3.5 rounded-xl font-bold text-sm cursor-pointer transition shadow-glow-sm"
               >
-                Back to Dashboard
+                Back to Terminal
               </button>
             </div>
           </div>

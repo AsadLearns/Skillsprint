@@ -1,16 +1,19 @@
-const card = "surface-card rounded-xl border border-white/[0.07] bg-[#0b1220] p-6"
-const num = "font-mono text-[10px] text-accent-400/80 tracking-[0.25em] mb-3"
-const title = "text-lg font-bold text-slate-100 mb-1.5"
+const card = "surface-card rounded-2xl border border-white/[0.08] bg-[#0c1324]/80 p-7 hover:border-accent-500/40 transition-all duration-300 shadow-lg relative overflow-hidden group backdrop-blur-xl"
+const num = "inline-block font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-accent-500/15 text-accent-300 border border-accent-500/30 tracking-[0.2em] mb-4"
+const title = "text-xl font-extrabold text-slate-100 mb-2 group-hover:text-white transition-colors"
 const desc = "text-sm text-slate-400 leading-relaxed"
 
 function Features() {
   return (
-    <section id="features" className="reveal bg-[#0f1729]/55 border-y border-white/[0.04] py-24 px-6">
+    <section id="features" className="reveal bg-[#080d19]/60 border-y border-white/[0.05] py-24 px-6 relative">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-end justify-between gap-4 border-b border-white/[0.06] pb-5 mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
-            Built to get you to <span className="text-accent-400">done</span>
-          </h2>
+        <div className="flex items-end justify-between gap-4 border-b border-white/[0.06] pb-6 mb-12">
+          <div>
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-accent-400 font-bold block mb-2">// CAPABILITIES</span>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-100 tracking-tight">
+              Engineered for <span className="gradient-text">high-velocity mastery</span>
+            </h2>
+          </div>
           <span className="font-mono text-[11px] text-slate-500 uppercase tracking-[0.25em] shrink-0 hidden sm:block">01 / Features</span>
         </div>
 

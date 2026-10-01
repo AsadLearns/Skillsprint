@@ -7,14 +7,14 @@ import ChatBot from '../components/ChatBot'
 import AnimatedCounter from '../components/AnimatedCounter'
 
 const skillColors = {
-  'Java': 'bg-orange-500/15 text-orange-300 border border-orange-500/25',
-  'Python': 'bg-sky-500/15 text-sky-300 border border-sky-500/25',
-  'React': 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/25',
-  'Web Development': 'bg-violet-500/15 text-violet-300 border border-violet-500/25',
-  'Node.js': 'bg-accent-500/15 text-accent-300 border border-accent-500/25',
-  'AI/ML': 'bg-rose-500/15 text-rose-300 border border-rose-500/25',
-  'MongoDB': 'bg-teal-500/15 text-teal-300 border border-teal-500/25',
-  'DevOps': 'bg-amber-500/15 text-amber-300 border border-amber-500/25',
+  'Java': 'bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.15)]',
+  'Python': 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.15)]',
+  'React': 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-[0_0_12px_rgba(6,182,212,0.15)]',
+  'Web Development': 'bg-violet-500/15 text-violet-300 border border-violet-500/30 shadow-[0_0_12px_rgba(139,92,246,0.15)]',
+  'Node.js': 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.15)]',
+  'AI/ML': 'bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30 shadow-[0_0_12px_rgba(217,70,239,0.15)]',
+  'MongoDB': 'bg-teal-500/15 text-teal-300 border border-teal-500/30 shadow-[0_0_12px_rgba(20,184,166,0.15)]',
+  'DevOps': 'bg-rose-500/15 text-rose-300 border border-rose-500/30 shadow-[0_0_12px_rgba(244,63,94,0.15)]',
 }
 
 export default function Dashboard() {
@@ -107,7 +107,12 @@ export default function Dashboard() {
   useEffect(() => {
     fetchData()
     const t = setTimeout(() => setSlowLoad(true), 4000)
-    return () => clearTimeout(t)
+    // Safety fallback: never block tab switching for more than 5 seconds if backend is sleeping
+    const safetyTimer = setTimeout(() => setLoading(false), 5000)
+    return () => {
+      clearTimeout(t)
+      clearTimeout(safetyTimer)
+    }
   }, [])
 
   const handleStartCuratedTrack = async (skill, level, duration) => {
@@ -129,10 +134,12 @@ export default function Dashboard() {
         api.get('/roadmap'),
         api.get('/quiz'),
       ])
-      setRoadmaps(rm.data.roadmaps)
-      setQuizzes(qz.data.quizzes)
+      setRoadmaps(rm.data.roadmaps || [])
+      setQuizzes(qz.data.quizzes || [])
     } catch (err) {
       console.error(err)
+      setRoadmaps([])
+      setQuizzes([])
     } finally {
       setLoading(false)
     }
@@ -165,15 +172,15 @@ export default function Dashboard() {
             <span className="text-lg md:text-2xl font-black gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
           <div className="flex items-center gap-2 md:gap-3">
-            <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-slate-200 text-slate-950 text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-lg font-semibold transition-colors cursor-pointer">
+            <button onClick={() => navigate('/roadmap')} className="bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white text-[10px] md:text-xs px-3 md:px-4 py-2 md:py-2.5 rounded-xl font-bold transition-all shadow-glow-sm hover:shadow-glow cursor-pointer">
               <span className="md:inline hidden">+ New Roadmap</span>
               <span className="md:hidden">🗺️ New</span>
             </button>
-            <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/[0.1] text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-lg font-semibold transition cursor-pointer">
+            <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/[0.1] text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-semibold transition cursor-pointer">
               <span className="md:inline hidden">🧠 Take Quiz</span>
               <span className="md:hidden">🧠 Quiz</span>
             </button>
-            <button onClick={handleLogout} className="text-[10px] md:text-xs text-slate-400 hover:text-red-400 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
+            <button onClick={handleLogout} className="text-[10px] md:text-xs text-slate-400 hover:text-rose-400 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
           </div>
         </nav>
       </div>
@@ -183,18 +190,22 @@ export default function Dashboard() {
         {/* Header section */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-10 animate-slide-up">
           <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-500/10 border border-accent-500/20 text-accent-300 font-mono text-[10px] font-bold uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyber-400 animate-pulse"></span>
+              Sprint Intelligence Terminal
+            </div>
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
               Welcome back, <span className="gradient-text">{user?.name}</span> 👋
             </h1>
-            <p className="text-slate-400 mt-1.5 font-medium text-sm md:text-base">Track your learning sprints, complete milestones, and crush your goals.</p>
+            <p className="text-slate-400 mt-1.5 font-medium text-sm md:text-base">Track active sprints, review milestone quizzes, and engineer your engineering stack.</p>
           </div>
-          <div onClick={() => navigate('/profile')} className="flex items-center gap-3 bg-[#131d33]/60 backdrop-blur-xl border border-white/[0.05] px-5 py-3 rounded-2xl shadow-lg cursor-pointer hover:bg-white/[0.06] hover:border-white/[0.16] transition-all duration-300">
-            <div className="w-10 h-10 bg-white/[0.08] border border-white/[0.12] rounded-xl flex items-center justify-center text-slate-100 font-bold text-lg">
+          <div onClick={() => navigate('/profile')} className="flex items-center gap-3 bg-[#0c1324]/80 backdrop-blur-xl border border-white/[0.08] px-5 py-3 rounded-2xl shadow-lg cursor-pointer hover:border-accent-500/30 transition-all duration-300 group">
+            <div className="w-10 h-10 bg-gradient-to-tr from-accent-600 to-cyber-500 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-sm">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="text-sm font-bold text-slate-200">{user?.name}</p>
-              <p className="text-xs font-semibold text-accent-400 uppercase tracking-wider">{user?.title || 'Learner Pro'}</p>
+              <p className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">{user?.name}</p>
+              <p className="text-xs font-mono font-bold text-cyber-400 uppercase tracking-wider">{user?.title || 'Engineer Pro'}</p>
             </div>
           </div>
         </div>
@@ -202,15 +213,15 @@ export default function Dashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 mb-10">
           {[
-            { label: 'Active Roadmaps', rawVal: roadmaps.length, suffix: '', color: 'text-sky-400', bg: 'bg-sky-500/10 text-sky-400', icon: '🗺️', delay: 'animation-delay-100' },
-            { label: 'Weeks Completed', rawVal: completedWeeks, suffix: '', color: 'text-accent-400', bg: 'bg-accent-500/10 text-accent-400', icon: '✅', delay: 'animation-delay-200' },
-            { label: 'Avg Progress', rawVal: totalProgress, suffix: '%', color: 'text-slate-200', bg: 'bg-white/[0.06] text-slate-200', icon: '📈', delay: 'animation-delay-300' },
-            { label: 'Quiz Avg Score', rawVal: avgQuizScore, suffix: '%', color: 'text-amber-400', bg: 'bg-amber-500/10 text-amber-400', icon: '🧠', delay: 'animation-delay-500' },
+            { label: 'Active Tracks', rawVal: roadmaps.length, suffix: '', color: 'text-cyber-400', bg: 'bg-cyber-500/10 text-cyber-400 border border-cyber-500/20', icon: '🗺️', delay: 'animation-delay-100' },
+            { label: 'Weeks Done', rawVal: completedWeeks, suffix: '', color: 'text-accent-400', bg: 'bg-accent-500/10 text-accent-400 border border-accent-500/20', icon: '⚡', delay: 'animation-delay-200' },
+            { label: 'Avg Progress', rawVal: totalProgress, suffix: '%', color: 'text-slate-100', bg: 'bg-white/[0.06] text-slate-200 border border-white/[0.1]', icon: '📈', delay: 'animation-delay-300' },
+            { label: 'Quiz Accuracy', rawVal: avgQuizScore, suffix: '%', color: 'text-emerald-400', bg: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20', icon: '🎯', delay: 'animation-delay-500' },
           ].map((s, index) => (
-            <div key={s.label} className={`glass-panel rounded-2xl p-4 md:p-5 flex items-center gap-3 md:gap-4 transition-all duration-300 hover:scale-[1.02] animate-slide-up ${s.delay}`}>
-              <div className={`${s.bg} w-10 h-10 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-xl md:text-3xl shadow-sm`}>{s.icon}</div>
-              <div>
-                <p className="text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-wider">{s.label}</p>
+            <div key={s.label} className={`surface-card rounded-2xl p-4 md:p-5 flex items-center gap-3 md:gap-4 transition-all duration-300 hover:scale-[1.02] hover:border-accent-500/30 border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl animate-slide-up ${s.delay}`}>
+              <div className={`${s.bg} w-11 h-11 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-sm shrink-0`}>{s.icon}</div>
+              <div className="min-w-0">
+                <p className="text-[10px] md:text-xs text-slate-400 font-mono font-bold uppercase tracking-wider truncate">{s.label}</p>
                 <p className={`text-xl md:text-2xl font-black mt-0.5 md:mt-1 ${s.color}`}>
                   <AnimatedCounter value={s.rawVal} suffix={s.suffix} />
                 </p>
@@ -220,11 +231,14 @@ export default function Dashboard() {
         </div>
 
         {/* High-tech toggle switches */}
-        <div className="flex gap-2 mb-8 bg-[#131d33]/60 backdrop-blur-xl p-1.5 rounded-2xl w-fit shadow-2xl border border-white/[0.05]">
+        <div className="inline-flex items-center gap-1.5 mb-8 bg-[#0c1324]/80 backdrop-blur-2xl p-1.5 rounded-2xl border border-white/[0.08] shadow-2xl">
           {tabs.map(t => (
             <button key={t} onClick={() => setActiveTab(t)}
-              className={`px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${activeTab === t ? 'bg-white text-slate-950' : 'text-slate-400 hover:text-slate-200'}`}>
-              {t}
+              className={`px-5 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 ${activeTab === t ? 'bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm' : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'}`}>
+              {t === 'overview' && <span>📊</span>}
+              {t === 'roadmaps' && <span>🗺️</span>}
+              {t === 'quizzes' && <span>🧠</span>}
+              <span>{t}</span>
             </button>
           ))}
         </div>
@@ -273,73 +287,77 @@ export default function Dashboard() {
             {activeTab === 'overview' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                <div className="glass-panel rounded-3xl p-6">
+                <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Active Roadmaps</h2>
-                    <button onClick={() => navigate('/roadmap')} className="text-sm text-accent-400 font-bold hover:text-slate-200 transition cursor-pointer">View all →</button>
+                    <button onClick={() => navigate('/roadmap')} className="text-xs font-mono font-bold text-cyber-400 hover:text-cyber-300 transition cursor-pointer">View all →</button>
                   </div>
                   {roadmaps.length === 0 ? (
-                    <div className="text-center py-10 bg-[#131d33]/40 border border-dashed border-white/[0.12] rounded-2xl p-6">
+                    <div className="text-center py-10 bg-[#080d19]/60 border border-dashed border-white/[0.1] rounded-2xl p-6">
                       <div className="text-5xl mb-4">🗺️</div>
                       <p className="text-slate-400 font-medium text-sm mb-5">No roadmap tracks created yet</p>
-                      <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-slate-200 text-slate-950 text-xs px-5 py-3 rounded-lg font-semibold cursor-pointer transition-colors">Generate first roadmap →</button>
+                      <button onClick={() => navigate('/roadmap')} className="bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white text-xs px-5 py-3 rounded-xl font-bold cursor-pointer transition shadow-glow-sm">Generate first roadmap →</button>
                     </div>
                   ) : roadmaps.slice(0, 3).map(r => (
-                    <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="flex items-center gap-4 p-3.5 rounded-2xl bg-[#16223b]/40 hover:bg-[#1a2842]/60 border border-white/[0.04] hover:border-white/[0.16] cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
-                      <div className={`w-12 h-12 rounded-xl ${skillColors[r.skill] || 'bg-white/[0.06] text-slate-200 border border-white/[0.1]'} flex items-center justify-center font-black text-sm`}>
+                    <div key={r._id} onClick={() => navigate('/roadmap', { state: { autoLoadRoadmapId: r._id } })} className="flex items-center gap-4 p-3.5 rounded-2xl bg-[#11192e]/60 hover:bg-[#16223b]/80 border border-white/[0.06] hover:border-accent-500/30 cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
+                      <div className={`w-12 h-12 rounded-xl ${skillColors[r.skill] || 'bg-white/[0.06] text-slate-200 border border-white/[0.1]'} flex items-center justify-center font-black text-sm shrink-0`}>
                         {r.skill.charAt(0)}
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="font-bold text-slate-200 text-sm">{r.skill}</span>
-                          <span className="text-xs font-black text-accent-400">{r.progress}%</span>
+                          <span className="font-bold text-slate-200 text-sm truncate">{r.skill}</span>
+                          <span className="text-xs font-mono font-black text-cyber-400">{r.progress}%</span>
                         </div>
-                        <div className="bg-slate-950/60 shadow-inner rounded-full h-2 overflow-hidden">
-                          <div className="bg-accent-500 h-2 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
+                        <div className="bg-slate-950/80 rounded-full h-2 overflow-hidden border border-white/[0.04]">
+                          <div className="bg-gradient-to-r from-accent-500 to-cyber-400 h-2 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(139,92,246,0.6)]" style={{ width: `${r.progress}%` }} />
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="glass-panel rounded-3xl p-6">
+                <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="font-extrabold text-slate-100 text-xl tracking-tight">Recent Quizzes</h2>
-                    <button onClick={() => navigate('/quiz')} className="text-sm text-accent-400 font-bold hover:text-slate-200 transition cursor-pointer">Take quiz →</button>
+                    <button onClick={() => navigate('/quiz')} className="text-xs font-mono font-bold text-accent-400 hover:text-accent-300 transition cursor-pointer">Take quiz →</button>
                   </div>
                   {quizzes.length === 0 ? (
-                    <div className="text-center py-10 bg-[#131d33]/40 border border-dashed border-white/[0.12] rounded-2xl p-6">
+                    <div className="text-center py-10 bg-[#080d19]/60 border border-dashed border-white/[0.1] rounded-2xl p-6">
                       <div className="text-5xl mb-4">🧠</div>
                       <p className="text-slate-400 font-medium text-sm mb-5">No quiz logs recorded</p>
-                      <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 text-xs px-5 py-3 rounded-lg font-semibold transition cursor-pointer">Start a quiz →</button>
+                      <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 text-xs px-5 py-3 rounded-xl font-semibold transition cursor-pointer">Start a quiz →</button>
                     </div>
                   ) : quizzes.slice(0, 4).map(q => (
-                    <div key={q._id} onClick={() => navigate('/quiz', { state: { resumeQuiz: q } })} className="flex items-center justify-between p-3.5 rounded-2xl bg-[#16223b]/40 hover:bg-[#1a2842]/60 border border-white/[0.03] hover:border-white/[0.16] cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-white/[0.06] rounded-xl flex items-center justify-center text-xl shadow-inner">🧠</div>
-                        <div>
-                          <p className="font-bold text-slate-200 text-sm leading-tight">{q.topic}</p>
-                          <p className="text-xs text-slate-400 font-bold mt-0.5">{q.skill}</p>
+                    <div key={q._id} onClick={() => navigate('/quiz', { state: { resumeQuiz: q } })} className="flex items-center justify-between p-3.5 rounded-2xl bg-[#11192e]/60 hover:bg-[#16223b]/80 border border-white/[0.06] hover:border-accent-500/30 cursor-pointer transition-all duration-300 mb-3 hover:scale-[1.01]">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 bg-accent-500/10 border border-accent-500/20 text-accent-300 rounded-xl flex items-center justify-center text-lg shrink-0">🧠</div>
+                        <div className="min-w-0">
+                          <p className="font-bold text-slate-200 text-sm leading-tight truncate">{q.topic}</p>
+                          <p className="text-xs font-mono text-slate-400 mt-0.5">{q.skill}</p>
                         </div>
                       </div>
-                      <div className={`text-xs font-black px-3 py-1.5 rounded-full border ${q.score >= 80 ? 'bg-accent-500/10 text-accent-300 border-accent-500/25' : q.score >= 50 ? 'bg-yellow-500/10 text-yellow-300 border-yellow-500/25' : q.completed ? 'bg-red-500/10 text-red-300 border-red-500/25' : 'bg-accent-500/10 text-accent-300 border-accent-500/25'}`}>
+                      <div className={`text-xs font-mono font-bold px-3 py-1.5 rounded-full border shrink-0 ${q.score >= 80 ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/25' : q.score >= 50 ? 'bg-yellow-500/10 text-yellow-300 border-yellow-500/25' : q.completed ? 'bg-rose-500/10 text-rose-300 border-rose-500/25' : 'bg-accent-500/10 text-accent-300 border-accent-500/25'}`}>
                         {q.completed ? q.score + '%' : 'Continue →'}
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="md:col-span-2 bg-[#0f1729] grid-bg rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl border border-white/[0.08]">
-                  <div className="absolute right-0 bottom-0 w-80 h-80 bg-accent-500/[0.05] rounded-full blur-3xl -mr-20 -mb-20"></div>
+                <div className="md:col-span-2 bg-[#0c1324]/90 grid-bg rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl border border-white/[0.08] hover:border-accent-500/30 transition-all duration-500">
+                  <div className="absolute right-0 bottom-0 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl -mr-20 -mb-20 pointer-events-none"></div>
 
                   <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div>
-                      <h2 className="text-2xl font-extrabold mb-2 tracking-tight">Ready to learn something new?</h2>
-                      <p className="text-slate-400 text-sm font-medium">Generate an advanced, structured learning roadmap for any technical skill instantly.</p>
+                      <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-accent-500/10 border border-accent-500/25 text-accent-300 font-mono text-[10px] font-bold uppercase tracking-wider mb-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyber-400 animate-pulse"></span>
+                        ACCELERATED SPRINTING
+                      </div>
+                      <h2 className="text-2xl md:text-3xl font-black mb-2 tracking-tight">Ready to learn something new?</h2>
+                      <p className="text-slate-400 text-sm font-medium max-w-xl">Generate an advanced, structured learning roadmap for any technical skill with week-by-week milestones and AI study guides.</p>
                     </div>
                     <div className="flex gap-3 flex-wrap">
-                      <button onClick={() => navigate('/roadmap')} className="bg-white hover:bg-slate-200 text-slate-950 font-semibold text-xs px-5 py-3.5 rounded-lg cursor-pointer transition-colors">🗺️ New Roadmap</button>
-                      <button onClick={() => navigate('/quiz')} className="bg-white/[0.06] border border-white/[0.12] hover:bg-white/[0.12] text-white font-semibold text-xs px-5 py-3.5 rounded-lg transition cursor-pointer">🧠 Take Quiz</button>
+                      <button onClick={() => navigate('/roadmap')} className="bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white font-bold text-xs px-5 py-3.5 rounded-xl cursor-pointer transition shadow-glow-sm">🗺️ New Roadmap</button>
+                      <button onClick={() => navigate('/quiz')} className="bg-white/[0.04] border border-white/[0.1] hover:bg-white/[0.08] text-white font-semibold text-xs px-5 py-3.5 rounded-xl transition cursor-pointer">🧠 Take Quiz</button>
                     </div>
                   </div>
                 </div>

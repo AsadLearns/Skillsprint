@@ -5,13 +5,15 @@ import Footer from "../components/Footer"
 
 function FeaturesPage() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <title>Features — SkillSprint</title>
       <Navbar />
-      <Features />
-      <CTABanner />
+      <main className="page-content flex-grow animate-fade-in">
+        <Features />
+        <CTABanner />
+      </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

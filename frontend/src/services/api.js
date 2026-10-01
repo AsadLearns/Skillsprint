@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
-  timeout: 60000,
+  timeout: 15000,
 })
 
 // ponytail: free-tier Render sleeps after ~15 min idle and takes 30-60s to wake.

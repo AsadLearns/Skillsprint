@@ -5,13 +5,15 @@ import Footer from "../components/Footer"
 
 function FaqPage() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <title>FAQ — SkillSprint</title>
       <Navbar />
-      <FAQ />
-      <CTABanner />
+      <main className="page-content flex-grow animate-fade-in">
+        <FAQ />
+        <CTABanner />
+      </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

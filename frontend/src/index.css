@@ -4,7 +4,27 @@
 
 @layer utilities {
   .gradient-text {
-    @apply text-slate-100;
+    background: linear-gradient(135deg, #ffffff 15%, #c4b5fd 55%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-brand {
+    background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+  }
+
+  .badge-niche {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-[0.2em] bg-white/[0.04] border border-white/[0.08] text-slate-300 shadow-sm backdrop-blur-md;
+  }
+
+  .badge-glow {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-[0.18em] bg-accent-500/10 border border-accent-500/30 text-accent-300 shadow-[0_0_16px_rgba(139,92,246,0.22)] backdrop-blur-md;
   }
 
   /* One realistic card surface, shared by the landing cards and by
@@ -16,29 +36,23 @@
   .surface-card {
     background-image: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.06),
-      rgba(255, 255, 255, 0.015) 42%,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.02) 42%,
       rgba(255, 255, 255, 0) 72%
     );
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
       0 2px 6px -2px rgba(0, 0, 0, 0.5),
       0 12px 28px -14px rgba(0, 0, 0, 0.7);
-    /* --rx/--ry are driven by CardTilt on pointer devices; they default to 0
-       so the card is simply flat when nothing is driving them. */
     transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
       translateY(var(--ty, 0px)) scale(var(--cs, 1));
     transform-style: preserve-3d;
-    /* will-change is promoted only while a card is actually being tilted —
-       leaving it on every card permanently costs a compositor layer each. */
     transition:
       transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
       border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Track the pointer near-instantly while over; the rule above handles the
-     slower settle once .tilting is removed. */
   .surface-card.tilting {
     will-change: transform;
     transition:
@@ -47,60 +61,52 @@
       border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Hover motion is gated: on a touch screen :hover sticks after a tap, so
-     the card would stay lifted with no way to dismiss it. */
   @media (hover: hover) and (pointer: fine) {
     .surface-card:hover {
       --ty: -4px;
       --cs: 1.015;
-      border-color: rgba(92, 184, 250, 0.32);
+      border-color: rgba(139, 92, 246, 0.38);
       box-shadow:
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
-        0 2px 8px -2px rgba(0, 0, 0, 0.55),
-        0 28px 52px -22px rgba(0, 0, 0, 0.85),
-        0 14px 40px -20px rgba(92, 184, 250, 0.4);
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+        0 4px 12px -2px rgba(0, 0, 0, 0.6),
+        0 24px 48px -20px rgba(0, 0, 0, 0.8),
+        0 14px 40px -20px rgba(139, 92, 246, 0.35);
     }
   }
 
   .glass-panel {
-    @apply surface-card bg-[#16223b]/70 backdrop-blur-xl border border-white/[0.07];
+    @apply surface-card bg-[#0e1629]/75 backdrop-blur-2xl border border-white/[0.08];
   }
 
   .glass-panel-dark {
-    @apply bg-[#0f1729]/90 backdrop-blur-xl border border-white/[0.05] shadow-2xl;
+    @apply bg-[#080d18]/90 backdrop-blur-2xl border border-white/[0.06] shadow-2xl;
   }
 
-  /* Unused as of the landing redesign — kept, not deleted, in case a page
-     still needs them: .glow-border, .glow-btn, .glass-panel-dark,
-     .animate-pulse-slow, .animate-float-orb-1, .animate-float-orb-2 */
   .glow-border {
     @apply border border-transparent bg-clip-padding relative;
   }
 
   .glow-border::before {
     content: '';
-    @apply absolute -inset-[1px] rounded-[inherit] -z-10 bg-white/10 opacity-30 transition duration-300;
+    @apply absolute -inset-[1px] rounded-[inherit] -z-10 bg-gradient-to-r from-accent-500/40 via-cyber-500/40 to-emerald-500/40 opacity-40 transition duration-300;
   }
 
   .glow-border:hover::before {
-    @apply opacity-60;
+    @apply opacity-80;
   }
 
   .glow-btn {
     @apply hover:-translate-y-[1px] active:translate-y-0 transition-all duration-300;
   }
 
-  /* Used by the auth and logged-in pages. Semi-transparent so the fixed
-     cloud layer shows through there too — opaque here would cover it and
-     those pages would silently lose the effect. Kept strong because these
-     screens are dense UI, not marketing copy. */
   .hero-bg {
-    background-color: rgba(11, 18, 32, 0.78);
+    background-color: #070b16;
     background-image:
-      radial-gradient(at 80% 0%, rgba(92, 184, 250, 0.04) 0px, transparent 50%),
-      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 100% 100%, 40px 40px, 40px 40px;
+      radial-gradient(at 15% 15%, rgba(139, 92, 246, 0.09) 0px, transparent 45%),
+      radial-gradient(at 85% 20%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
   }
 
   .shimmer {
@@ -311,6 +317,17 @@ body::after {
     animation-timeline: view();
     animation-range: entry 5% cover 30%;
   }
+}
+
+/* Ensure that content on dedicated pages or when revealed is never stuck at opacity 0 */
+.page-content .reveal,
+.reveal.revealed,
+.reveal-visible,
+main .reveal,
+.page-section {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Fallback for Safari and Firefox, which do not support view() timelines —

@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
 import Logo from './Logo'
 
 function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleLogout = () => {
@@ -14,21 +14,26 @@ function Navbar() {
     navigate('/')
   }
 
+  const isActive = (path) => location.pathname === path
+
   return (
     <div className="sticky top-0 z-50 w-full animate-fade-in">
       {/* Kept mostly transparent so the cloud layer reads as continuous behind
           it — at 85% it looked like an opaque banner bolted across the top.
           The blur is what keeps the links legible over moving sky. */}
       <nav className="nav-surface relative border-b border-white/[0.04] px-6 py-4 flex items-center justify-between bg-[#0b1220]/25 backdrop-blur-md">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2.5 group">
           <Logo />
-          <span className="text-xl font-bold text-slate-100 tracking-tight">SkillSprint</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-black tracking-tight text-white group-hover:text-accent-300 transition-colors">SkillSprint</span>
+            <span className="text-[9px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full bg-accent-500/15 border border-accent-500/30 text-accent-300 font-bold">PRO</span>
+          </div>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500">
-          <Link to="/features" className="hover:text-slate-200 transition">Features</Link>
-          <Link to="/how-it-works" className="hover:text-slate-200 transition">Process</Link>
-          <Link to="/faq" className="hover:text-slate-200 transition">FAQ</Link>
+        <div className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
+          <Link to="/features" className={`transition ${isActive('/features') ? 'text-accent-300 font-bold border-b border-accent-400 pb-0.5' : 'hover:text-slate-200'}`}>Features</Link>
+          <Link to="/how-it-works" className={`transition ${isActive('/how-it-works') ? 'text-accent-300 font-bold border-b border-accent-400 pb-0.5' : 'hover:text-slate-200'}`}>Process</Link>
+          <Link to="/faq" className={`transition ${isActive('/faq') ? 'text-accent-300 font-bold border-b border-accent-400 pb-0.5' : 'hover:text-slate-200'}`}>FAQ</Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -41,7 +46,7 @@ function Navbar() {
           ) : (
             <>
               <Link to="/login" className="text-sm text-slate-400 hover:text-slate-200 transition font-medium px-3 py-2">Log in</Link>
-              <Link to="/signup" className="bg-white text-slate-950 hover:bg-slate-200 text-sm px-4 py-2 rounded-lg font-semibold transition-colors">Get started</Link>
+              <Link to="/signup" className="bg-gradient-to-r from-accent-500 via-indigo-500 to-cyber-500 hover:from-accent-400 hover:to-cyber-400 text-white text-xs px-4 py-2 rounded-lg font-bold transition-all shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:scale-[1.02]">Get started</Link>
             </>
           )}
         </div>
@@ -60,9 +65,9 @@ function Navbar() {
         {/* Mobile Drawer Menu */}
         {isOpen && (
           <div className="absolute top-full left-0 w-full bg-[#131d33]/95 backdrop-blur-lg border-b border-white/[0.06] px-6 py-6 md:hidden flex flex-col gap-4 z-40 animate-slide-down shadow-2xl">
-            <Link to="/features" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Features</Link>
-            <Link to="/how-it-works" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">Process</Link>
-            <Link to="/faq" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-white font-bold transition py-3 border-b border-white/[0.03]">FAQ</Link>
+            <Link to="/features" onClick={() => setIsOpen(false)} className={`${isActive('/features') ? 'text-accent-300 font-extrabold' : 'text-slate-300 hover:text-white'} font-bold transition py-3 border-b border-white/[0.03]`}>Features</Link>
+            <Link to="/how-it-works" onClick={() => setIsOpen(false)} className={`${isActive('/how-it-works') ? 'text-accent-300 font-extrabold' : 'text-slate-300 hover:text-white'} font-bold transition py-3 border-b border-white/[0.03]`}>Process</Link>
+            <Link to="/faq" onClick={() => setIsOpen(false)} className={`${isActive('/faq') ? 'text-accent-300 font-extrabold' : 'text-slate-300 hover:text-white'} font-bold transition py-3 border-b border-white/[0.03]`}>FAQ</Link>
             {user ? (
               <>
                 <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-slate-100 font-bold py-3 border-b border-white/[0.03]">Dashboard</Link>

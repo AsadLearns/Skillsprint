@@ -6,25 +6,50 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Single accent for the whole app — change these values to re-theme.
-        // Sky blue, matched to the cloud effect in the hero.
+        // Niche developer platform palette: Electric Indigo/Violet + Cyber Cyan + Emerald
         accent: {
-          50: "#eff8ff",
-          100: "#dbeefe",
-          200: "#bfe2fe",
-          300: "#93d1fd",
-          400: "#5cb8fa",
-          500: "#36a0f0",
-          600: "#2183d6",
-          700: "#1c69ad",
-          800: "#1d598e",
-          900: "#1d4b76",
-          950: "#142f4d",
+          50: "#f5f3ff",
+          100: "#ede9fe",
+          200: "#ddd6fe",
+          300: "#c4b5fd",
+          400: "#a78bfa",
+          500: "#8b5cf6",
+          600: "#7c3aed",
+          700: "#6d28d9",
+          800: "#5b21b6",
+          900: "#4c1d95",
+          950: "#2e1065",
+        },
+        cyber: {
+          50: "#ecfeff",
+          100: "#cffafe",
+          200: "#a5f3fc",
+          300: "#67e8f9",
+          400: "#22d3ee",
+          500: "#06b6d4",
+          600: "#0891b2",
+          700: "#0e7490",
+          800: "#155e75",
+          900: "#164e63",
+          950: "#083344",
+        },
+        dark: {
+          950: "#050811",
+          900: "#090d1a",
+          850: "#0f1527",
+          800: "#141d33",
+          750: "#1a2540",
+          700: "#212e4f",
         },
       },
       fontFamily: {
         sans: ["Space Grotesk", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+      },
+      boxShadow: {
+        glow: "0 0 25px -5px rgba(139, 92, 246, 0.35)",
+        "glow-cyan": "0 0 25px -5px rgba(6, 182, 212, 0.35)",
+        "glass": "inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 8px 32px 0 rgba(0, 0, 0, 0.37)",
       },
     },
   },
