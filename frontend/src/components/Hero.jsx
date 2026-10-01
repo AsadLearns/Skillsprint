@@ -1,5 +1,7 @@
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import ThreeWelcomeCanvas from "./ThreeWelcomeCanvas"
 
 const weeks = [
   { n: 1, topic: "Components & JSX", state: "done" },
@@ -13,52 +15,54 @@ const skills = ["React", "Python", "Java", "Web Dev", "Node.js", "AI/ML", "Mongo
 function Hero() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const [heroMode, setHeroMode] = useState("3d") // "3d" or "terminal"
   const handleStart = () => navigate(user ? "/dashboard" : "/signup")
 
   return (
     <section className="grid-bg relative overflow-hidden">
-      {/* The cloud layer is mounted once in App and fixed behind the whole
-          site, so this section stays transparent to let it through. Copy sits
-          over the left, which is the busiest part of the effect — keep a
-          gradient here so the headline never fights a bright cloud. */}
-      {/* The desktop scrim fades left-to-right because the copy sits on the
-          left. On mobile the copy spans the full width, so a horizontal fade
-          leaves the right-hand side of every line sitting on bright cloud —
-          measurably unreadable. Small screens get a vertical fade instead. */}
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#0b1220]/40 via-[#0b1220]/85 to-[#0b1220]/70 md:bg-gradient-to-r md:from-[#0b1220] md:via-[#0b1220]/55 md:to-transparent"></div>
 
-      {/* single static glow — no drifting blobs */}
-      <div className="absolute top-0 right-0 w-[300px] h-[200px] bg-accent-500/[0.03] rounded-full blur-[80px] pointer-events-none sm:w-[400px] sm:h-[250px] sm:blur-[100px] lg:w-[600px] lg:h-[400px] lg:blur-[140px]"></div>
+      {/* Ambient background glow */}
+      <div className="absolute top-0 right-0 w-[400px] h-[300px] bg-accent-500/[0.06] rounded-full blur-[100px] pointer-events-none lg:w-[700px] lg:h-[450px] lg:blur-[150px]"></div>
 
-      <div className="max-w-6xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-2 gap-14 lg:gap-16 items-center relative z-10">
+      <div className="max-w-6xl mx-auto px-6 pt-16 pb-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
         {/* Left: copy */}
         <div className="animate-slide-up">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-[0.2em] bg-accent-500/10 border border-accent-500/30 text-accent-300 mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(139,92,246,0.2)]">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-cyber-400 animate-pulse"></span>
             <span>AI-Accelerated Learning Engine</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.08] mb-6">
-            <span className="text-slate-400">Stop collecting tutorials.</span>{" "}
-            <br className="hidden sm:inline" />
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.08] mb-6 text-slate-100">
+            Stop collecting tutorials. <br className="hidden sm:inline" />
             <span className="gradient-text">Start conquering skills.</span>
           </h1>
-          <p className="text-slate-300 text-lg leading-relaxed max-w-sm mb-9">
-            Pick a high-demand tech stack. Receive an intelligent milestone-driven roadmap, prove proficiency through interactive quizzes, and earn verifiable mastery certificates.
+
+          <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg mb-8 font-medium">
+            Pick a high-demand tech stack. Receive an autonomous milestone roadmap, prove proficiency through AI concept quizzes, and unlock verifiable certificates.
           </p>
-          <div className="flex items-center gap-3.5 flex-wrap mb-9">
+
+          <div className="flex items-center gap-3.5 flex-wrap mb-8">
             <button
               onClick={handleStart}
-              className="bg-gradient-to-r from-accent-500 via-indigo-500 to-cyber-500 hover:from-accent-400 hover:to-cyber-400 text-white shadow-[0_0_25px_rgba(139,92,246,0.35)] px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+              className="bg-gradient-to-r from-accent-500 via-indigo-500 to-cyber-500 hover:from-accent-400 hover:to-cyber-400 text-white shadow-glow-sm hover:shadow-glow px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
             >
               Start your first sprint →
             </button>
+            <a
+              href="#ai-video-demo"
+              className="border border-cyber-500/30 bg-cyber-500/10 hover:bg-cyber-500/20 hover:border-cyber-500/50 text-cyber-300 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 inline-flex items-center gap-2 backdrop-blur-md shadow-sm"
+            >
+              <span>▶ 30s AI Demo Video</span>
+            </a>
             <Link
               to="/how-it-works"
-              className="border border-white/[0.12] bg-white/[0.03] text-slate-300 hover:bg-white/[0.08] hover:border-white/[0.25] px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 inline-block backdrop-blur-md"
+              className="border border-white/[0.12] bg-white/[0.03] text-slate-300 hover:bg-white/[0.08] px-5 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 inline-block backdrop-blur-md"
             >
-              See how it works
+              Process
             </Link>
           </div>
+
           <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
             <span className="flex items-center gap-1.5"><span className="text-emerald-400">✓</span> Free Forever</span>
             <span className="text-slate-600">•</span>
@@ -68,69 +72,94 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right: terminal-style product mockup */}
+        {/* Right: Interactive 3D Hologram or Terminal Mockup */}
         <div className="relative">
-          {/* Entrance animation lives on the wrapper, not on the card. A
-              `both`-fill animation retains its end transform, and that
-              overrides the card's own transform — putting them on the same
-              element silently kills the pointer tilt. */}
           <div className="animate-slide-up animation-delay-200">
-          <div className="surface-card rounded-xl border border-white/[0.08] bg-[#131d33] overflow-hidden">
-            <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
-              <span className="ml-3 font-mono text-[10px] text-slate-500">sprinty — react-sprint</span>
-            </div>
-            <div className="p-5 font-mono text-[12px] md:text-[13px]">
-              <p className="text-slate-500 mb-1.5">
-                $ <span className="text-sky-400">sprint new</span>{" "}
-                <span className="text-sky-400">--skill</span> react{" "}
-                <span className="text-sky-400">--level</span> intermediate
-              </p>
-              <p className="text-accent-400 mb-4">✓ 4-week roadmap generated</p>
-
-              <div className="divide-y divide-white/[0.04] border-t border-white/[0.04]">
-                {weeks.map((w, i) => (
-                  <div
-                    key={w.n}
-                    className="flex items-center gap-3 py-2.5 animate-slide-up"
-                    style={{ animationDelay: `${300 + i * 120}ms` }}
-                  >
-                    <span className="text-slate-600 w-7 shrink-0">W{w.n}</span>
-                    <span className={w.state === "active" ? "text-slate-100" : "text-slate-400"}>
-                      {w.topic}
-                    </span>
-                    {w.state === "done" && (
-                      <span className="ml-auto text-accent-400 shrink-0">done ✓</span>
-                    )}
-                    {w.state === "active" && (
-                      <span className="ml-auto flex items-center gap-2 shrink-0">
-                        <span className="w-16 h-1 bg-white/[0.07] rounded-full overflow-hidden">
-                          <span className="block w-[45%] h-full bg-accent-500 rounded-full"></span>
-                        </span>
-                        <span className="text-accent-400">{w.pct}%</span>
-                      </span>
-                    )}
-                    {w.state === "locked" && (
-                      <span className="ml-auto text-slate-600 shrink-0">locked</span>
-                    )}
-                  </div>
-                ))}
+            {/* View Mode Switcher */}
+            <div className="flex items-center justify-between mb-3 px-1">
+              <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest font-bold">Interactive Stage</span>
+              <div className="flex items-center gap-1 p-1 rounded-xl bg-[#0c1324]/80 border border-white/[0.08] backdrop-blur-md">
+                <button
+                  onClick={() => setHeroMode("3d")}
+                  className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                    heroMode === "3d" ? "bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm" : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  ⚡ 3D Hologram
+                </button>
+                <button
+                  onClick={() => setHeroMode("terminal")}
+                  className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                    heroMode === "terminal" ? "bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm" : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  💻 Sprint Terminal
+                </button>
               </div>
-
-              <p className="text-slate-500 mt-4">
-                ${" "}
-                <span aria-hidden="true" className="inline-block w-2 h-4 bg-slate-300 align-middle animate-blink"></span>
-              </p>
             </div>
-          </div>
+
+            {heroMode === "3d" ? (
+              <div className="surface-card rounded-3xl border border-white/[0.1] bg-[#0c1324]/85 backdrop-blur-2xl p-4 overflow-hidden shadow-2xl relative group">
+                <ThreeWelcomeCanvas />
+              </div>
+            ) : (
+              <div className="surface-card rounded-2xl border border-white/[0.08] bg-[#0c1324]/90 overflow-hidden shadow-2xl backdrop-blur-xl">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+                  <span className="ml-3 font-mono text-[10px] text-slate-400 font-semibold">sprinty — react-sprint</span>
+                </div>
+                <div className="p-5 font-mono text-[12px] md:text-[13px]">
+                  <p className="text-slate-400 mb-1.5">
+                    $ <span className="text-cyber-400 font-bold">sprint new</span>{" "}
+                    <span className="text-cyber-400">--skill</span> react{" "}
+                    <span className="text-cyber-400">--level</span> intermediate
+                  </p>
+                  <p className="text-accent-400 mb-4 font-bold">✓ 4-week roadmap generated</p>
+
+                  <div className="divide-y divide-white/[0.04] border-t border-white/[0.04]">
+                    {weeks.map((w, i) => (
+                      <div
+                        key={w.n}
+                        className="flex items-center gap-3 py-2.5 animate-slide-up"
+                        style={{ animationDelay: `${300 + i * 120}ms` }}
+                      >
+                        <span className="text-slate-500 font-mono w-7 shrink-0">W{w.n}</span>
+                        <span className={w.state === "active" ? "text-slate-100 font-bold" : "text-slate-400"}>
+                          {w.topic}
+                        </span>
+                        {w.state === "done" && (
+                          <span className="ml-auto text-emerald-400 shrink-0 font-bold">done ✓</span>
+                        )}
+                        {w.state === "active" && (
+                          <span className="ml-auto flex items-center gap-2 shrink-0">
+                            <span className="w-16 h-1.5 bg-white/[0.07] rounded-full overflow-hidden">
+                              <span className="block w-[45%] h-full bg-accent-500 rounded-full shadow-glow-sm"></span>
+                            </span>
+                            <span className="text-accent-400 font-bold">{w.pct}%</span>
+                          </span>
+                        )}
+                        {w.state === "locked" && (
+                          <span className="ml-auto text-slate-600 shrink-0 font-mono">locked</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="text-slate-500 mt-4 font-mono">
+                    ${" "}
+                    <span aria-hidden="true" className="inline-block w-2 h-4 bg-cyber-400 align-middle animate-blink"></span>
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* floating quiz chip */}
-          <div className="absolute -bottom-5 -left-3 md:-left-7 rounded-lg border border-white/[0.08] bg-[#131d33] px-4 py-3 shadow-xl shadow-black/50 animate-slide-up animation-delay-500">
-            <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-0.5">Milestone quiz</p>
-            <p className="text-sm font-bold text-accent-400">Passed · 80%</p>
+          <div className="absolute -bottom-5 -left-3 md:-left-7 rounded-2xl border border-white/[0.08] bg-[#0c1324]/90 px-4 py-3 shadow-2xl backdrop-blur-xl animate-slide-up animation-delay-500">
+            <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mb-0.5">Milestone quiz</p>
+            <p className="text-sm font-black text-emerald-400">Passed · 80% ✓</p>
           </div>
         </div>
       </div>
