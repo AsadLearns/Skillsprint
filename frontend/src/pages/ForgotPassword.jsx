@@ -55,24 +55,24 @@ function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen hero-bg flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 relative overflow-hidden">
       <div className="glass-panel w-full max-w-md rounded-2xl p-8 md:p-10 relative z-10">
         <div className="text-center mb-8">
           <Logo size="w-12 h-12 mb-4 mx-auto" />
-          <h1 className="text-2xl font-black text-slate-100 tracking-tight">Reset Password</h1>
-          <p className="text-slate-400 text-sm mt-2">
+          <h1 className="text-2xl font-black text-slate-950 tracking-tight font-heading">Reset Password</h1>
+          <p className="text-slate-600 text-sm mt-2">
             {step === 1 ? 'Enter your email to request a reset code.' : 'Enter the code and set your new password.'}
           </p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-900/50 text-red-400 text-sm flex items-center gap-2">
+          <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-center gap-2">
             <span>⚠️</span> {error}
           </div>
         )}
 
         {success && (
-          <div className="mb-6 p-4 rounded-xl bg-accent-950/40 border border-accent-900/50 text-accent-400 text-sm flex items-center gap-2">
+          <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm flex items-center gap-2">
             <span>✅</span> {success}
           </div>
         )}
@@ -88,7 +88,7 @@ function ForgotPassword() {
         {step === 1 ? (
           <form onSubmit={handleRequestCode} className="space-y-6">
             <div>
-              <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
                 Email Address
               </label>
               <input
@@ -97,7 +97,7 @@ function ForgotPassword() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-[#131d33] border border-white/[0.08] text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-500/15 focus:border-accent-500/60 focus:bg-[#1a2842] transition"
+                className="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white transition"
               />
             </div>
 
@@ -116,7 +116,7 @@ function ForgotPassword() {
         ) : (
           <form onSubmit={handleResetPassword} className="space-y-6">
             <div>
-              <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
                 Reset Code
               </label>
               <input
@@ -125,12 +125,12 @@ function ForgotPassword() {
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
                 placeholder="6-digit reset code"
-                className="w-full bg-[#131d33] border border-white/[0.08] text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-500/15 focus:border-accent-500/60 focus:bg-[#1a2842] transition text-center font-mono tracking-widest"
+                className="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white transition text-center font-mono tracking-widest"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
                 New Password
               </label>
               <input
@@ -139,7 +139,7 @@ function ForgotPassword() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-[#131d33] border border-white/[0.08] text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-500/15 focus:border-accent-500/60 focus:bg-[#1a2842] transition"
+                className="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white transition"
               />
             </div>
 
@@ -158,7 +158,7 @@ function ForgotPassword() {
         )}
 
         <div className="mt-8 pt-6 border-t border-white/[0.05] text-center">
-          <Link to="/login" className="text-sm text-accent-400 hover:text-accent-300 font-medium transition">
+          <Link to="/login" className="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition">
             ← Back to Login
           </Link>
         </div>

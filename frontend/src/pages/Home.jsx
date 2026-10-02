@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import PromptStudio from "../components/PromptStudio";
 import ScrollSkillsShowcase from "../components/ScrollSkillsShowcase";
 import AiVideoDemo from "../components/AiVideoDemo";
 import Features from "../components/Features";
@@ -12,6 +13,7 @@ function Home() {
     <>
       <Navbar />
       <Hero />
+      <PromptStudio />
       <ScrollSkillsShowcase />
       <AiVideoDemo />
       <Features />

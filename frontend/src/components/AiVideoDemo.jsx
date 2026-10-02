@@ -64,26 +64,26 @@ function AiVideoDemo() {
   }
 
   return (
-    <section id="ai-video-demo" className="reveal py-24 px-6 bg-[#070b14]/90 border-t border-white/[0.05] relative overflow-hidden">
+    <section id="ai-video-demo" className="reveal py-24 px-6 bg-slate-50 border-t border-slate-200 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Realistic Developer Heading */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/[0.06] mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-slate-200 mb-12">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-cyber-400 font-bold block mb-2">
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-indigo-600 font-bold block mb-2">
               // ENGINE DEMONSTRATION
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-100 tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-950 tracking-tight font-heading">
               Interactive <span className="gradient-text">Engine Walkthrough</span>
             </h2>
           </div>
-          <p className="text-slate-400 text-sm md:text-base max-w-md font-medium">
+          <p className="text-slate-600 text-sm md:text-base max-w-md font-medium">
             Inspect how the SkillSprint compiler ingests a technology stack, outputs weekly milestones, and validates active recall.
           </p>
         </div>
 
         {/* Realistic IDE / Video Studio Container */}
-        <div className="rounded-2xl border border-white/[0.1] bg-[#0c1324] shadow-2xl overflow-hidden">
+        <div className="rounded-2xl border border-slate-300 bg-slate-950 shadow-2xl overflow-hidden">
           
           {/* macOS / IDE Top Title Bar */}
           <div className="flex items-center justify-between px-4 py-3 bg-[#080d19] border-b border-white/[0.06] font-mono text-xs">

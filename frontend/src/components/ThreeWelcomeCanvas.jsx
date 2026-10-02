@@ -197,28 +197,28 @@ function ThreeWelcomeCanvas() {
   }, [])
 
   return (
-    <div className="relative w-full h-[360px] md:h-[400px] flex items-center justify-center select-none overflow-hidden rounded-2xl bg-[#090d16]/80 border border-white/[0.06]">
+    <div className="relative w-full h-[360px] md:h-[400px] flex items-center justify-center select-none overflow-hidden rounded-2xl bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 border border-slate-300 shadow-inner">
       {/* Three.js Canvas */}
       <div ref={containerRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
       {/* Realistic Technical Telemetry Overlay */}
       <div className="absolute top-3.5 left-4 flex items-center gap-2 pointer-events-none font-mono text-[10px]">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span className="text-slate-400 font-semibold tracking-wider uppercase">GRAPH: TOPOLOGICAL KNOWLEDGE MESH</span>
+        <span className="text-slate-300 font-bold tracking-wider uppercase">GRAPH: TOPOLOGICAL KNOWLEDGE MESH</span>
       </div>
 
-      <div className="absolute top-3.5 right-4 pointer-events-none font-mono text-[10px] text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/[0.08]">
+      <div className="absolute top-3.5 right-4 pointer-events-none font-mono text-[10px] text-slate-300 bg-white/10 px-2.5 py-1 rounded-md border border-white/20 font-semibold backdrop-blur-md">
         10 NODES · 15 EDGES
       </div>
 
       {/* Floating Milestone Pointers */}
       <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] font-mono pointer-events-none">
-        <div className="flex items-center gap-2 text-slate-400 bg-[#070b14]/80 px-3 py-1 rounded-lg border border-white/[0.06] backdrop-blur-md">
-          <span className="text-sky-400">●</span>
+        <div className="flex items-center gap-2 text-slate-300 bg-slate-900/90 px-3 py-1 rounded-lg border border-white/15 backdrop-blur-md font-medium">
+          <span className="text-cyan-400">●</span>
           <span>Interactive 3D dependency model</span>
         </div>
-        <div className="hidden sm:flex items-center gap-1.5 text-slate-400">
-          <span>Click &amp; drag to inspect topology</span>
+        <div className="hidden sm:flex items-center gap-1.5 text-slate-400 font-medium">
+          <span>Click &amp; drag to rotate</span>
         </div>
       </div>
     </div>

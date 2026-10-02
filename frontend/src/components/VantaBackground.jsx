@@ -88,11 +88,10 @@ function VantaBackground() {
           minWidth: 200,
           scale: dpr / targetRatio,
           scaleMobile: dpr / targetRatio,
-          // Blue sky, white light — the stock palette, matched by the site's
-          // accent scale so the clouds and the UI agree.
-          backgroundColor: 0x0b1220,
-          skyColor: 0x5ca6ca,
-          cloudColor: 0x334d80,
+          // Bright daylight sky and luminous white clouds for high-contrast light theme
+          backgroundColor: 0xf8fafc,
+          skyColor: 0x93c5fd,
+          cloudColor: 0xe2e8f0,
           lightColor: 0xffffff,
           speed: 1,
           texturePath: "/noise.png",

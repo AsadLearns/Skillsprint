@@ -14,8 +14,6 @@ import VantaBackground from "./components/VantaBackground";
 import ScrollReveal from "./components/ScrollReveal";
 import CardTilt from "./components/CardTilt";
 
-// BrowserRouter keeps the old scroll position across navigations, so a new
-// page can open halfway down. ScrollRestoration is data-router only.
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => window.scrollTo(0, 0), [pathname]);
@@ -26,39 +24,34 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const Profile = lazy(() => import("./pages/Profile"));
+const PromptBuilderPage = lazy(() => import("./pages/PromptBuilderPage"));
 
 function App() {
   return (
     <AuthProvider>
-      {/* Mounted once at the root so the clouds span every route and survive
-          navigation without paying to re-initialise WebGL. The scrim above
-          them holds text contrast site-wide. */}
       <VantaBackground />
-      <div aria-hidden="true" className="fixed inset-0 z-0 pointer-events-none bg-[#0b1220]/72"></div>
+      <div aria-hidden="true" className="fixed inset-0 z-0 pointer-events-none bg-white/80 backdrop-blur-[1px]"></div>
       <ScrollToTop />
       <ScrollReveal />
       <CardTilt />
-      {/* Content is lifted above the cloud layer explicitly rather than the
-          layer being pushed behind with a negative z-index. Negative z-index
-          is fragile in Safari — any ancestor that forms a stacking context
-          traps the element behind an opaque background and the effect just
-          never appears. */}
+      
       <div className="relative z-10">
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/how-it-works" element={<ProcessPage />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/roadmap" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
-          <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        </Routes>
-      </Suspense>
+        <Suspense fallback={<div className="min-h-screen bg-[#070b14] flex items-center justify-center font-mono text-xs text-accent-400">Loading SkillSprint Core...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/builder" element={<PromptBuilderPage />} />
+            <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/how-it-works" element={<ProcessPage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/roadmap" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
+            <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          </Routes>
+        </Suspense>
       </div>
     </AuthProvider>
   );

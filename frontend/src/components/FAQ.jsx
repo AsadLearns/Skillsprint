@@ -29,14 +29,14 @@ function FAQ() {
   return (
     <section id="faq" className="reveal bg-transparent py-24 px-6">
       <div className="max-w-3xl mx-auto">
-        <div className="flex items-end justify-between gap-4 border-b border-white/[0.06] pb-5 mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
-            Questions, <span className="text-accent-400">answered</span>
+        <div className="flex items-end justify-between gap-4 border-b border-slate-200 pb-5 mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-heading">
+            Questions, <span className="gradient-text">answered</span>
           </h2>
-          <span className="font-mono text-[11px] text-slate-500 uppercase tracking-[0.25em] shrink-0 hidden sm:block">04 / FAQ</span>
+          <span className="font-mono text-[11px] text-slate-400 uppercase tracking-[0.25em] shrink-0 hidden sm:block">04 / FAQ</span>
         </div>
 
-        <div className="surface-card rounded-xl border border-white/[0.07] divide-y divide-white/[0.06] bg-[#0f1729] overflow-hidden">
+        <div className="surface-card rounded-2xl border border-slate-200 divide-y divide-slate-200 bg-white shadow-card overflow-hidden">
           {faqs.map((item, i) => {
             const isOpen = openIndex === i
             return (
@@ -44,17 +44,17 @@ function FAQ() {
                 <button
                   onClick={() => setOpenIndex(isOpen ? -1 : i)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center gap-4 text-left px-6 py-5 cursor-pointer hover:bg-white/[0.02] transition-colors"
+                  className="w-full flex items-center gap-4 text-left px-6 py-5 cursor-pointer hover:bg-slate-50 transition-colors"
                 >
-                  <span className="font-mono text-[10px] text-accent-400/70 w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="font-semibold text-slate-100 flex-1 text-sm md:text-base">{item.q}</span>
-                  <span aria-hidden="true" className={`text-slate-400 text-xl shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                  <span className="font-mono text-[10px] text-indigo-600 font-bold w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-semibold text-slate-900 flex-1 text-sm md:text-base">{item.q}</span>
+                  <span aria-hidden="true" className={`text-slate-500 text-xl shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
                     +
                   </span>
                 </button>
                 <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                   <div className="overflow-hidden">
-                    <p className="pl-16 pr-6 pb-5 text-slate-400 text-sm leading-relaxed">{item.a}</p>
+                    <p className="pl-16 pr-6 pb-5 text-slate-600 text-sm leading-relaxed">{item.a}</p>
                   </div>
                 </div>
               </div>

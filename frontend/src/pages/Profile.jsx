@@ -109,14 +109,14 @@ export default function Profile() {
     ? Math.round(quizzes.filter(q => q.completed).reduce((s, q) => s + q.score, 0) / quizzes.filter(q => q.completed).length) : 0
 
   return (
-    <div className="min-h-screen hero-bg relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 relative overflow-hidden">
 
-        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#0b1220]/75 backdrop-blur-xl">
+        <nav className="border-b border-slate-200 px-4 md:px-6 py-4 flex items-center justify-between bg-white/90 backdrop-blur-xl shadow-xs">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
             <Logo />
             <span className="text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
-          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-400 hover:text-slate-200 transition cursor-pointer">← Dashboard</button>
+          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-600 hover:text-slate-950 font-bold transition cursor-pointer">← Dashboard</button>
         </nav>
 
       <div className="max-w-4xl mx-auto px-6 py-10 relative z-10">
@@ -127,11 +127,11 @@ export default function Profile() {
           {/* Left card: details & avatar */}
           <div className="md:col-span-1 flex flex-col gap-6">
             <div className="glass-panel rounded-3xl p-6 text-center animate-slide-up">
-              <div className="w-24 h-24 bg-white/[0.08] border border-white/[0.12] rounded-2xl flex items-center justify-center text-slate-100 font-black text-4xl mx-auto mb-4">
+              <div className="w-24 h-24 bg-indigo-50 border border-indigo-200 rounded-2xl flex items-center justify-center text-indigo-700 font-black text-4xl mx-auto mb-4 shadow-xs">
                 {user?.name?.charAt(0).toUpperCase()}
               </div>
-              <h2 className="text-2xl font-black text-slate-100 tracking-tight leading-tight">{user?.name}</h2>
-              <p className="text-xs font-bold text-accent-400 uppercase tracking-widest mt-1">{form.title}</p>
+              <h2 className="text-2xl font-black text-slate-950 tracking-tight leading-tight font-heading">{user?.name}</h2>
+              <p className="text-xs font-bold text-indigo-600 uppercase tracking-widest mt-1">{form.title}</p>
 
               <div className="flex justify-center gap-3 mt-4 text-xs font-bold text-slate-400">
                 {form.github && <a href={form.github} target="_blank" rel="noopener noreferrer" className="hover:text-slate-200 transition">💻 GitHub</a>}
@@ -147,7 +147,7 @@ export default function Profile() {
 
               <button
                 onClick={() => setEditMode(!editMode)}
-                className="mt-6 w-full py-2.5 bg-[#16223b]/80 border border-white/[0.08] text-accent-400 font-extrabold text-xs hover:bg-white/[0.06] transition cursor-pointer rounded-xl"
+                className="mt-6 w-full py-2.5 bg-slate-100 border border-slate-200 text-slate-800 font-extrabold text-xs hover:bg-slate-200 transition cursor-pointer rounded-xl shadow-xs"
               >
                 {editMode ? 'Cancel Edit' : 'Edit Profile Details'}
               </button>
@@ -178,7 +178,7 @@ export default function Profile() {
 
             {editMode ? (
               <form onSubmit={handleSave} className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up">
-                <h3 className="text-xl font-black text-slate-100 tracking-tight mb-6">Edit Profile</h3>
+                <h3 className="text-xl font-black text-slate-950 tracking-tight mb-6 font-heading">Edit Profile</h3>
 
                 {error && <div className="mb-4 text-red-400 font-bold text-xs">⚠️ {error}</div>}
                 {success && <div className="mb-4 text-green-400 font-bold text-xs">✅ {success}</div>}
@@ -191,7 +191,7 @@ export default function Profile() {
                       required
                       value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                     />
                   </div>
                   <div>
@@ -200,7 +200,7 @@ export default function Profile() {
                       type="text"
                       value={form.title}
                       onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                     />
                   </div>
                   <div>
@@ -209,7 +209,7 @@ export default function Profile() {
                       rows="3"
                       value={form.bio}
                       onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
-                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none leading-relaxed"
+                      className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none leading-relaxed"
                       placeholder="Tell recruiters/friends about your learning goal..."
                     />
                   </div>
@@ -220,7 +220,7 @@ export default function Profile() {
                         type="url"
                         value={form.linkedin}
                         onChange={e => setForm(f => ({ ...f, linkedin: e.target.value }))}
-                        className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                        className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                         placeholder="https://linkedin.com/in/username"
                       />
                     </div>
@@ -230,7 +230,7 @@ export default function Profile() {
                         type="url"
                         value={form.github}
                         onChange={e => setForm(f => ({ ...f, github: e.target.value }))}
-                        className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                        className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                         placeholder="https://github.com/username"
                       />
                     </div>
@@ -241,7 +241,7 @@ export default function Profile() {
                       type="text"
                       value={form.interest}
                       onChange={e => setForm(f => ({ ...f, interest: e.target.value }))}
-                      className="w-full bg-[#131d33]/65 border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#1a2842] rounded-xl px-4 py-3 text-sm font-bold transition-all outline-none"
+                      className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                       placeholder="e.g. AI, Web Development, Game Dev"
                     />
                   </div>
@@ -251,14 +251,14 @@ export default function Profile() {
                   <button
                     type="submit"
                     disabled={saving}
-                    className="flex-1 bg-white hover:bg-slate-200 text-slate-950 font-semibold text-xs py-3.5 rounded-lg cursor-pointer transition-colors"
+                    className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-xl cursor-pointer transition shadow-xs"
                   >
                     {saving ? 'Saving...' : 'Save Profile Changes'}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
-                    className="bg-[#16223b]/85 border border-white/[0.08] text-slate-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl cursor-pointer"
+                    className="bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-bold text-xs px-6 py-3.5 rounded-xl cursor-pointer shadow-xs"
                   >
                     Cancel
                   </button>
@@ -269,16 +269,16 @@ export default function Profile() {
 
                 {/* Certificates Section */}
                 <div className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up">
-                  <h3 className="text-xl font-black text-slate-100 tracking-tight mb-2">My Certificates</h3>
+                  <h3 className="text-xl font-black text-slate-950 tracking-tight mb-2 font-heading">My Certificates</h3>
                   <p className="text-xs text-slate-400 font-medium mb-6">Complete all roadmap milestones and score &gt;60% in a quiz for that skill to earn achievements!</p>
 
                   {loading ? (
                     <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse">Calculating certificates...</div>
                   ) : certificates.length === 0 ? (
-                    <div className="text-center py-10 bg-[#131d33]/40 rounded-2xl border border-dashed border-white/[0.12] p-6">
+                    <div className="text-center py-10 bg-slate-50 rounded-2xl border border-dashed border-slate-300 p-6">
                       <div className="text-4xl mb-3">🎓</div>
                       <p className="text-xs text-slate-400 font-bold leading-relaxed mb-4">No master certificates earned yet.<br />Finish a study guide roadmap and pass the quiz to claim your first reward!</p>
-                      <button onClick={() => navigate('/dashboard')} className="bg-[#16223b]/80 border border-white/[0.08] text-accent-400 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-white/[0.06] transition cursor-pointer">Start Learning</button>
+                      <button onClick={() => navigate('/dashboard')} className="bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-indigo-100 transition cursor-pointer shadow-xs">Start Learning</button>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -286,14 +286,14 @@ export default function Profile() {
                         <div
                           key={cert.certId}
                           onClick={() => setActiveCert(cert)}
-                          className="glass-panel rounded-2xl p-5 border border-amber-500/20 hover:border-amber-500/60 bg-amber-500/5 hover:scale-[1.02] cursor-pointer transition-all duration-300 shadow-sm flex items-start gap-4"
+                          className="surface-card rounded-2xl p-5 border border-amber-300 hover:border-amber-400 bg-amber-50/40 hover:scale-[1.02] cursor-pointer transition-all duration-300 shadow-card flex items-start gap-4"
                         >
                           <div className="text-3xl mt-0.5">🏆</div>
                           <div>
-                            <h4 className="font-extrabold text-sm text-slate-100 leading-tight">Mastery Certificate</h4>
-                            <p className="text-[10px] font-bold text-accent-400 mt-0.5 uppercase tracking-wider">{cert.skill}</p>
-                            <p className="text-[10px] text-slate-400 font-semibold mt-1">Accuracy: {cert.quizScore}%</p>
-                            <span className="text-[8px] bg-amber-950/40 text-amber-400 border border-amber-900/50 px-2 py-0.5 rounded-full mt-2 inline-block">Click to view</span>
+                            <h4 className="font-extrabold text-sm text-slate-900 leading-tight">Mastery Certificate</h4>
+                            <p className="text-[10px] font-bold text-indigo-600 mt-0.5 uppercase tracking-wider">{cert.skill}</p>
+                            <p className="text-[10px] text-slate-600 font-semibold mt-1">Accuracy: {cert.quizScore}%</p>
+                            <span className="text-[8px] bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 rounded-full mt-2 inline-block font-bold">Click to view</span>
                           </div>
                         </div>
                       ))}
@@ -303,7 +303,7 @@ export default function Profile() {
 
                 {/* Roadmaps in progress */}
                 <div className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up animation-delay-100">
-                  <h3 className="text-xl font-black text-slate-100 tracking-tight mb-5">Learning Progress</h3>
+                  <h3 className="text-xl font-black text-slate-950 tracking-tight mb-5 font-heading">Learning Progress</h3>
 
                   {loading ? (
                     <div className="text-center py-6 text-slate-400 text-xs font-bold animate-pulse">Loading progress...</div>
@@ -312,9 +312,9 @@ export default function Profile() {
                   ) : (
                     <div className="space-y-4">
                       {roadmaps.map(r => (
-                        <div key={r._id} className="p-4 bg-[#16223b]/40 rounded-2xl border border-white/[0.04] flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                        <div key={r._id} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row justify-between sm:items-center gap-4 shadow-xs">
                           <div>
-                            <h4 className="font-extrabold text-sm text-slate-100">{r.skill} Roadmap</h4>
+                            <h4 className="font-extrabold text-sm text-slate-900">{r.skill} Roadmap</h4>
                             <p className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{r.level} · {r.duration} weeks</p>
                           </div>
                           <div className="flex-1 sm:max-w-xs">
@@ -322,8 +322,8 @@ export default function Profile() {
                               <span>Progress</span>
                               <span>{r.progress}%</span>
                             </div>
-                            <div className="bg-slate-950/60 shadow-inner rounded-full h-1.5 overflow-hidden">
-                              <div className="bg-accent-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
+                            <div className="bg-slate-100 shadow-inner rounded-full h-1.5 overflow-hidden border border-slate-200">
+                              <div className="bg-indigo-600 h-1.5 rounded-full transition-all duration-500" style={{ width: `${r.progress}%` }} />
                             </div>
                           </div>
                         </div>

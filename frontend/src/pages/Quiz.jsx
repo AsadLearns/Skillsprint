@@ -93,22 +93,22 @@ export default function Quiz() {
   }
 
   return (
-    <div className="min-h-screen hero-bg relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 relative overflow-hidden">
       <div className="sticky top-0 z-50 w-full">
         {/* Announcement Marquee Ticker */}
-        <div className="w-full bg-[#131d33] font-mono text-[10px] uppercase tracking-widest text-slate-500 py-1.5 border-b border-white/[0.06] overflow-hidden whitespace-nowrap select-none relative z-50">
+        <div className="w-full bg-slate-100 font-mono text-[10px] uppercase tracking-widest text-slate-600 py-1.5 border-b border-slate-200 overflow-hidden whitespace-nowrap select-none relative z-50">
           <div className="inline-block animate-marquee">
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
         </div>
 
-        <nav className="nav-blur border-b border-white/[0.06] px-4 md:px-6 py-4 flex items-center justify-between bg-[#0b1220]/75 backdrop-blur-xl">
+        <nav className="border-b border-slate-200 px-4 md:px-6 py-4 flex items-center justify-between bg-white/90 backdrop-blur-xl shadow-xs">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
             <Logo />
             <span className="text-lg md:text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
           </div>
-          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-400 hover:text-slate-200 transition cursor-pointer">← Dashboard</button>
+          <button onClick={() => navigate('/dashboard')} className="text-xs font-bold text-slate-600 hover:text-slate-950 font-bold transition cursor-pointer">← Dashboard</button>
         </nav>
       </div>
 
@@ -117,12 +117,12 @@ export default function Quiz() {
         {step === 'select' && (
           <div>
             <div className="text-center mb-10">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent-500/10 border border-accent-500/25 mb-4 text-accent-300 font-mono text-[10px] font-bold uppercase tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyber-400 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-50 border border-indigo-200 mb-4 text-indigo-700 font-mono text-[10px] font-bold uppercase tracking-wider shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></span>
                 AI Milestone Verification
               </div>
-              <h1 className="text-4xl md:text-5xl font-black text-slate-100 tracking-tight mb-2">Quiz Generator</h1>
-              <p className="text-slate-400 font-medium text-base md:text-lg max-w-lg mx-auto">Validate your concept mastery. AI generates customized assessment scenarios instantly.</p>
+              <h1 className="text-4xl md:text-5xl font-black text-slate-950 tracking-tight mb-2 font-heading">Quiz Generator</h1>
+              <p className="text-slate-600 font-medium text-base md:text-lg max-w-lg mx-auto">Validate your concept mastery. AI generates customized assessment scenarios instantly.</p>
             </div>
 
             {error && (
@@ -131,41 +131,41 @@ export default function Quiz() {
               </div>
             )}
 
-            <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6 mb-5">
-              <h2 className="text-xs font-mono font-bold text-cyber-400 uppercase tracking-widest block mb-4 ml-1">// 01. SELECT DOMAIN</h2>
+            <div className="surface-card rounded-3xl border border-slate-200 bg-white p-6 mb-5 shadow-card">
+              <h2 className="text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block mb-4 ml-1">// 01. SELECT DOMAIN</h2>
               <div className="grid grid-cols-2 gap-3 mb-4">
                 {skills.map(s => (
                   <button key={s} onClick={() => { setSkill(s); setTopic('') }}
-                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border cursor-pointer ${skill === s ? 'border-accent-500 bg-accent-500/20 text-white shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-accent-500/40 hover:bg-white/[0.06]'}`}>
+                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 border cursor-pointer ${skill === s ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-xs' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:bg-slate-50'}`}>
                     {s}
                   </button>
                 ))}
               </div>
               <div>
-                <label className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Or enter custom skill / language:</label>
+                <label className="text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider block mb-2 ml-1">Or enter custom skill / language:</label>
                 <input type="text" value={skills.includes(skill) ? '' : skill} onChange={(e) => { setSkill(e.target.value); setTopic('') }} placeholder="e.g. Rust, Go, C++, SQL, Ruby, GraphQL..."
-                  className="w-full bg-[#080d19] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#0c1324] rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                 />
               </div>
             </div>
 
             {skill && (
-              <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6 mb-5 fade-up">
-                <h2 className="text-xs font-mono font-bold text-accent-400 uppercase tracking-widest block mb-4 ml-1">// 02. SELECT TOPIC</h2>
+              <div className="surface-card rounded-3xl border border-slate-200 bg-white p-6 mb-5 shadow-card fade-up">
+                <h2 className="text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block mb-4 ml-1">// 02. SELECT TOPIC</h2>
                 {topicsBySkill[skill] ? (
                   <div className="grid grid-cols-1 gap-2.5">
                     {topicsBySkill[skill]?.map(t => (
                       <button key={t} onClick={() => setTopic(t)}
-                        className={`py-3.5 px-5 rounded-xl font-bold text-sm transition-all duration-300 border text-left cursor-pointer ${topic === t ? 'border-accent-500 bg-accent-500/20 text-white shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-accent-500/40 hover:bg-white/[0.06]'}`}>
+                        className={`py-3.5 px-5 rounded-xl font-bold text-sm transition-all duration-300 border text-left cursor-pointer ${topic === t ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-xs' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:bg-slate-50'}`}>
                         {t}
                       </button>
                     ))}
                   </div>
                 ) : (
                   <div>
-                    <label className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2 ml-1">Type custom topic to generate quiz on:</label>
+                    <label className="text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider block mb-2 ml-1">Type custom topic to generate quiz on:</label>
                     <input type="text" value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="e.g. Memory management, Pointers, Concurrency, Joins..."
-                      className="w-full bg-[#080d19] border border-white/[0.08] text-white focus:border-accent-500/60 focus:bg-[#0c1324] rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
+                      className="w-full bg-slate-50 border border-slate-300 text-slate-900 focus:border-indigo-500 focus:bg-white rounded-xl px-4 py-3 text-sm font-semibold transition-all outline-none"
                     />
                   </div>
                 )}
@@ -173,12 +173,12 @@ export default function Quiz() {
             )}
 
             {skill && topic && (
-              <div className="surface-card rounded-3xl border border-white/[0.08] bg-[#0c1324]/80 backdrop-blur-xl p-6 mb-6 fade-up">
-                <h2 className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest block mb-4 ml-1">// 03. QUESTION COUNT</h2>
+              <div className="surface-card rounded-3xl border border-slate-200 bg-white p-6 mb-6 shadow-card fade-up">
+                <h2 className="text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block mb-4 ml-1">// 03. QUESTION COUNT</h2>
                 <div className="flex gap-3">
                   {[5, 10, 15, 20].map(n => (
                     <button key={n} onClick={() => setCount(n)}
-                      className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all duration-300 border cursor-pointer ${count === n ? 'border-accent-500 bg-accent-500/20 text-white shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-accent-500/40 hover:bg-white/[0.06]'}`}>
+                      className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all duration-300 border cursor-pointer ${count === n ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-xs' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:bg-slate-50'}`}>
                       {n} Qs
                     </button>
                   ))}
@@ -188,7 +188,7 @@ export default function Quiz() {
 
             {skill && topic && (
               <button onClick={handleGenerate} disabled={loading}
-                className="w-full bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white py-4 rounded-xl font-bold text-base shadow-glow-sm hover:shadow-glow disabled:opacity-50 cursor-pointer transition-all duration-300 flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white py-4 rounded-xl font-bold text-base shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer transition-all duration-300 flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -208,18 +208,18 @@ export default function Quiz() {
           <div className="fade-up">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-2xl font-black text-slate-100 tracking-tight">{quiz.topic}</h1>
-                <p className="text-slate-400 font-mono text-xs mt-0.5 uppercase tracking-wider">{quiz.skill} · {quiz.questions.length} questions</p>
+                <h1 className="text-2xl font-black text-slate-950 tracking-tight font-heading">{quiz.topic}</h1>
+                <p className="text-slate-500 font-mono text-xs mt-0.5 uppercase tracking-wider">{quiz.skill} · {quiz.questions.length} questions</p>
               </div>
-              <div className="text-xs font-mono font-bold text-cyber-400 bg-cyber-500/10 border border-cyber-500/20 px-3.5 py-1.5 rounded-full">
+              <div className="text-xs font-mono font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-3.5 py-1.5 rounded-full shadow-xs">
                 {Object.keys(answers).length} / {quiz.questions.length} Answered
               </div>
             </div>
 
             {/* Sleek Progress Bar */}
-            <div className="w-full bg-slate-950/80 h-2 rounded-full overflow-hidden mb-6 border border-white/[0.04]">
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden mb-6 border border-slate-200">
               <div
-                className="bg-gradient-to-r from-accent-500 to-cyber-400 h-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(139,92,246,0.6)]"
+                className="bg-gradient-to-r from-indigo-500 to-cyan-500 h-full transition-all duration-500 ease-out shadow-xs"
                 style={{ width: `${((current + 1) / quiz.questions.length) * 100}%` }}
               />
             </div>
@@ -228,20 +228,20 @@ export default function Quiz() {
             <div className="flex flex-wrap gap-2 mb-6">
               {quiz.questions.map((_, i) => (
                 <button key={i} onClick={() => setCurrent(i)}
-                  className={`w-9 h-9 rounded-xl text-xs font-mono font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm' : answers[i] !== undefined ? 'bg-accent-500/15 text-accent-300 border border-accent-500/30' : 'bg-white/[0.03] border border-white/[0.08] text-slate-400 hover:border-white/[0.2]'}`}>
+                  className={`w-9 h-9 rounded-xl text-xs font-mono font-bold transition-all duration-300 cursor-pointer ${current === i ? 'bg-indigo-600 text-white shadow-xs' : answers[i] !== undefined ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-white border border-slate-200 text-slate-600 hover:border-slate-400'}`}>
                   {i + 1}
                 </button>
               ))}
             </div>
 
             {/* Question Panel */}
-            <div key={current} className="surface-card rounded-3xl p-6 md:p-8 mb-6 border border-white/[0.08] bg-[#0c1324]/85 backdrop-blur-xl shadow-2xl animate-slide-up">
-              <p className="text-[10px] text-cyber-400 font-mono font-bold uppercase tracking-wider mb-2">Question {current + 1} of {quiz.questions.length}</p>
-              <h2 className="text-xl font-bold text-slate-100 leading-snug mb-8">{quiz.questions[current].question}</h2>
+            <div key={current} className="surface-card rounded-3xl p-6 md:p-8 mb-6 border border-slate-200 bg-white shadow-card animate-slide-up">
+              <p className="text-[10px] text-indigo-600 font-mono font-bold uppercase tracking-wider mb-2">Question {current + 1} of {quiz.questions.length}</p>
+              <h2 className="text-xl font-bold text-slate-950 leading-snug mb-8 font-heading">{quiz.questions[current].question}</h2>
               <div className="space-y-3">
                 {quiz.questions[current].options.map((opt, i) => (
                   <button key={i} onClick={() => handleAnswer(current, i)}
-                    className={`w-full text-left py-3.5 px-5 rounded-xl border font-medium text-sm transition-all duration-300 cursor-pointer hover:scale-[1.01] ${answers[current] === i ? 'border-accent-500 bg-accent-500/20 text-white font-bold shadow-glow-sm' : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/[0.16] hover:bg-white/[0.06]'}`}>
+                    className={`w-full text-left py-3.5 px-5 rounded-xl border font-medium text-sm transition-all duration-300 cursor-pointer hover:scale-[1.01] ${answers[current] === i ? 'border-indigo-600 bg-indigo-50 text-indigo-900 font-bold shadow-xs' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:bg-slate-50'}`}>
                     <span className="font-mono font-bold mr-3 text-slate-500">{['A', 'B', 'C', 'D'][i]}.</span>{opt}
                   </button>
                 ))}
@@ -252,13 +252,13 @@ export default function Quiz() {
 
             <div className="flex gap-3">
               {current > 0 && (
-                <button onClick={() => setCurrent(c => c - 1)} className="flex-1 border border-white/[0.1] bg-white/[0.03] text-slate-300 py-3.5 rounded-xl font-bold text-sm hover:bg-white/[0.06] transition cursor-pointer">← Previous</button>
+                <button onClick={() => setCurrent(c => c - 1)} className="flex-1 border border-slate-300 bg-white text-slate-700 py-3.5 rounded-xl font-bold text-sm hover:bg-slate-50 transition cursor-pointer shadow-xs">← Previous</button>
               )}
               {current < quiz.questions.length - 1 ? (
-                <button onClick={() => setCurrent(c => c + 1)} className="flex-1 bg-white/[0.06] hover:bg-white/[0.1] text-slate-200 py-3.5 rounded-xl font-bold text-sm transition cursor-pointer">Next →</button>
+                <button onClick={() => setCurrent(c => c + 1)} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 py-3.5 rounded-xl font-bold text-sm transition cursor-pointer shadow-xs">Next →</button>
               ) : (
                 <button onClick={handleSubmit} disabled={loading || Object.keys(answers).length < quiz.questions.length}
-                  className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 py-3.5 rounded-xl font-bold text-sm disabled:opacity-50 cursor-pointer transition shadow-sm"
+                  className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white py-3.5 rounded-xl font-bold text-sm disabled:opacity-50 cursor-pointer transition shadow-md"
                 >
                   {loading ? 'Evaluating...' : '✅ Submit Assessment'}
                 </button>
@@ -274,13 +274,13 @@ export default function Quiz() {
             </div>
             
             {/* Luminous visual score badge */}
-            <div className="my-6 inline-flex flex-col items-center justify-center p-8 bg-[#0c1324]/90 border border-white/[0.1] rounded-full w-48 h-48 shadow-2xl relative">
+            <div className="my-6 inline-flex flex-col items-center justify-center p-8 bg-white border border-slate-200 rounded-full w-48 h-48 shadow-card relative">
               <span className={`text-5xl font-mono font-black ${result.quiz.score >= 80 ? 'text-emerald-400' : result.quiz.score >= 50 ? 'text-amber-400' : 'text-rose-400'}`}>{result.quiz.score}%</span>
               <span className="text-[10px] text-slate-400 font-mono font-bold uppercase tracking-widest mt-1">Accuracy</span>
             </div>
 
-            <h1 className="text-3xl font-extrabold text-slate-100 mb-1.5 tracking-tight">Assessment Complete</h1>
-            <p className="text-slate-400 font-medium mb-10">{result.correct} out of {result.total} answers correct · {quiz.topic}</p>
+            <h1 className="text-3xl font-extrabold text-slate-950 mb-1.5 tracking-tight font-heading">Assessment Complete</h1>
+            <p className="text-slate-600 font-medium mb-10">{result.correct} out of {result.total} answers correct · {quiz.topic}</p>
 
             {/* Answer review list */}
             <div className="space-y-4 text-left mb-10">
@@ -288,10 +288,10 @@ export default function Quiz() {
                 const isCorrect = q.userAnswer === q.correct
                 return (
                   <div key={i} className={`surface-card rounded-2xl p-6 border ${isCorrect ? 'border-emerald-500/20 bg-emerald-950/10' : 'border-rose-500/20 bg-rose-950/10'}`}>
-                    <p className="font-extrabold text-slate-100 mb-4 text-sm leading-tight">{i + 1}. {q.question}</p>
+                    <p className="font-extrabold text-slate-900 mb-4 text-sm leading-tight">{i + 1}. {q.question}</p>
                     <div className="space-y-2">
                       {q.options.map((opt, j) => (
-                        <div key={j} className={`py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-between ${j === q.correct ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/25' : j === q.userAnswer && !isCorrect ? 'bg-rose-500/10 text-rose-300 border border-rose-500/25' : 'text-slate-400 bg-white/[0.02]'}`}>
+                        <div key={j} className={`py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-between ${j === q.correct ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : j === q.userAnswer && !isCorrect ? 'bg-rose-100 text-rose-800 border border-rose-200' : 'text-slate-600 bg-slate-50 border border-slate-200'}`}>
                           <div>
                             <span className="font-mono font-bold mr-2 text-slate-500">{['A', 'B', 'C', 'D'][j]}.</span>{opt}
                           </div>
@@ -307,12 +307,12 @@ export default function Quiz() {
 
             <div className="flex gap-3">
               <button onClick={() => { setStep('select'); setQuiz(null); setResult(null); setAnswers({}) }}
-                className="flex-1 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-slate-300 py-3.5 rounded-xl font-bold text-sm transition cursor-pointer"
+                className="flex-1 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 py-3.5 rounded-xl font-bold text-sm transition cursor-pointer shadow-xs"
               >
                 Take another quiz
               </button>
               <button onClick={() => navigate('/dashboard')}
-                className="flex-1 bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white py-3.5 rounded-xl font-bold text-sm cursor-pointer transition shadow-glow-sm"
+                className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white py-3.5 rounded-xl font-bold text-sm cursor-pointer transition shadow-md"
               >
                 Back to Terminal
               </button>

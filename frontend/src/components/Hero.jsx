@@ -28,59 +28,59 @@ function Hero() {
   const handleStart = () => navigate(user ? "/dashboard" : "/signup")
 
   return (
-    <section className="grid-bg relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#0b1220]/40 via-[#0b1220]/85 to-[#0b1220]/70 md:bg-gradient-to-r md:from-[#0b1220] md:via-[#0b1220]/55 md:to-transparent"></div>
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white text-slate-900">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60"></div>
 
-      {/* Ambient background glow */}
-      <div className="absolute top-0 right-0 w-[400px] h-[300px] bg-accent-500/[0.06] rounded-full blur-[100px] pointer-events-none lg:w-[700px] lg:h-[450px] lg:blur-[150px]"></div>
+      {/* Ambient background soft glow */}
+      <div className="absolute top-0 right-0 w-[450px] h-[350px] bg-indigo-500/[0.08] rounded-full blur-[100px] pointer-events-none lg:w-[750px] lg:h-[450px] lg:blur-[140px]"></div>
 
       <div className="max-w-6xl mx-auto px-6 pt-16 pb-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
         {/* Left: copy */}
         <div className="animate-slide-up">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-[0.2em] bg-accent-500/10 border border-accent-500/30 text-accent-300 mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(139,92,246,0.2)]">
-            <span className="w-2 h-2 rounded-full bg-cyber-400 animate-pulse"></span>
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-[0.2em] bg-indigo-50 border border-indigo-200/80 text-indigo-700 mb-6 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
             <span>ENGINEERING CURRICULUM // AUTONOMOUS ROADMAPS</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.08] mb-6 text-slate-100">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.08] mb-6 text-slate-950 font-heading">
             Stop collecting tutorials. <br className="hidden sm:inline" />
             <span className="gradient-text">Master production engineering.</span>
           </h1>
 
-          <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg mb-8 font-medium">
+          <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-lg mb-8 font-medium">
             Select an engineering track. Receive an autonomous milestone graph, prove conceptual mastery through verified technical evaluations, and generate cryptographic proof of proficiency.
           </p>
 
           <div className="flex items-center gap-3.5 flex-wrap mb-8">
             <button
               onClick={handleStart}
-              className="bg-gradient-to-r from-accent-500 via-indigo-500 to-cyber-500 hover:from-accent-400 hover:to-cyber-400 text-white shadow-glow-sm hover:shadow-glow px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+              className="bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white shadow-md hover:shadow-indigo-500/25 px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
             >
               Start your first sprint →
             </button>
             <a
-              href="#ai-video-demo"
-              className="border border-cyber-500/30 bg-cyber-500/10 hover:bg-cyber-500/20 hover:border-cyber-500/50 text-cyber-300 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 inline-flex items-center gap-2.5 backdrop-blur-md shadow-sm"
+              href="#prompt-builder"
+              className="border border-slate-300 bg-white hover:bg-slate-50 hover:border-indigo-300 text-slate-800 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 inline-flex items-center gap-2.5 shadow-sm"
             >
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 fill-indigo-600" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
-              <span>Engine Walkthrough</span>
+              <span>AI Prompt Builder</span>
             </a>
             <Link
               to="/how-it-works"
-              className="border border-white/[0.12] bg-white/[0.03] text-slate-300 hover:bg-white/[0.08] px-5 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 inline-block backdrop-blur-md"
+              className="border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 px-5 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 inline-block shadow-sm"
             >
               Architecture
             </Link>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
-            <span className="flex items-center gap-1.5"><span className="text-emerald-400">✓</span> Free Forever</span>
-            <span className="text-slate-600">•</span>
-            <span className="flex items-center gap-1.5"><span className="text-accent-400">✓</span> No Card Required</span>
-            <span className="text-slate-600">•</span>
-            <span className="flex items-center gap-1.5"><span className="text-cyber-400">✓</span> Production Stacks</span>
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-500 font-medium">
+            <span className="flex items-center gap-1.5"><span className="text-emerald-600 font-bold">✓</span> Free Forever</span>
+            <span className="text-slate-300">•</span>
+            <span className="flex items-center gap-1.5"><span className="text-indigo-600 font-bold">✓</span> No Card Required</span>
+            <span className="text-slate-300">•</span>
+            <span className="flex items-center gap-1.5"><span className="text-cyan-600 font-bold">✓</span> Production Stacks</span>
           </div>
         </div>
 
@@ -89,12 +89,12 @@ function Hero() {
           <div className="animate-slide-up animation-delay-200">
             {/* View Mode Switcher */}
             <div className="flex items-center justify-between mb-3 px-1">
-              <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest font-bold">Interactive Stage</span>
-              <div className="flex items-center gap-1 p-1 rounded-xl bg-[#0c1324]/80 border border-white/[0.08] backdrop-blur-md">
+              <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest font-bold">Interactive Stage</span>
+              <div className="flex items-center gap-1 p-1 rounded-xl bg-white border border-slate-200 shadow-sm">
                 <button
                   onClick={() => setHeroMode("3d")}
                   className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
-                    heroMode === "3d" ? "bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm" : "text-slate-400 hover:text-white"
+                    heroMode === "3d" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   3D Topology
@@ -102,7 +102,7 @@ function Hero() {
                 <button
                   onClick={() => setHeroMode("terminal")}
                   className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
-                    heroMode === "terminal" ? "bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm" : "text-slate-400 hover:text-white"
+                    heroMode === "terminal" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Live CLI
@@ -111,26 +111,26 @@ function Hero() {
             </div>
 
             {heroMode === "3d" ? (
-              <div className="surface-card rounded-3xl border border-white/[0.1] bg-[#0c1324]/85 backdrop-blur-2xl p-4 overflow-hidden shadow-2xl relative group">
+              <div className="surface-card rounded-3xl border border-slate-200 bg-white p-4 overflow-hidden shadow-xl relative group">
                 <ThreeWelcomeCanvas />
               </div>
             ) : (
-              <div className="surface-card rounded-2xl border border-white/[0.08] bg-[#0c1324]/90 overflow-hidden shadow-2xl backdrop-blur-xl">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+              <div className="surface-card rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden shadow-2xl">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-800 bg-slate-900/60">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
                   <span className="ml-3 font-mono text-[10px] text-slate-400 font-semibold">skillsprint-cli — v2.4.0</span>
                 </div>
-                <div className="p-5 font-mono text-[12px] md:text-[13px]">
+                <div className="p-5 font-mono text-[12px] md:text-[13px] text-slate-200">
                   <p className="text-slate-400 mb-1.5">
-                    $ <span className="text-cyber-400 font-bold">sprint compile</span>{" "}
-                    <span className="text-cyber-400">--track</span> react-systems{" "}
-                    <span className="text-cyber-400">--tier</span> senior
+                    $ <span className="text-cyan-400 font-bold">sprint compile</span>{" "}
+                    <span className="text-cyan-400">--track</span> react-systems{" "}
+                    <span className="text-cyan-400">--tier</span> senior
                   </p>
-                  <p className="text-accent-400 mb-4 font-bold">✓ 4-week dependency graph resolved</p>
+                  <p className="text-indigo-400 mb-4 font-bold">✓ 4-week dependency graph resolved</p>
 
-                  <div className="divide-y divide-white/[0.04] border-t border-white/[0.04]">
+                  <div className="divide-y divide-white/[0.06] border-t border-white/[0.06]">
                     {weeks.map((w, i) => (
                       <div
                         key={w.n}
@@ -138,7 +138,7 @@ function Hero() {
                         style={{ animationDelay: `${300 + i * 120}ms` }}
                       >
                         <span className="text-slate-500 font-mono w-7 shrink-0">W{w.n}</span>
-                        <span className={w.state === "active" ? "text-slate-100 font-bold" : "text-slate-400"}>
+                        <span className={w.state === "active" ? "text-white font-bold" : "text-slate-400"}>
                           {w.topic}
                         </span>
                         {w.state === "done" && (
@@ -146,10 +146,10 @@ function Hero() {
                         )}
                         {w.state === "active" && (
                           <span className="ml-auto flex items-center gap-2 shrink-0">
-                            <span className="w-16 h-1.5 bg-white/[0.07] rounded-full overflow-hidden">
-                              <span className="block w-[65%] h-full bg-accent-500 rounded-full shadow-glow-sm"></span>
+                            <span className="w-16 h-1.5 bg-white/[0.1] rounded-full overflow-hidden">
+                              <span className="block w-[65%] h-full bg-indigo-500 rounded-full shadow-glow-sm"></span>
                             </span>
-                            <span className="text-accent-400 font-bold">{w.pct}%</span>
+                            <span className="text-indigo-400 font-bold">{w.pct}%</span>
                           </span>
                         )}
                         {w.state === "locked" && (
@@ -161,7 +161,7 @@ function Hero() {
 
                   <p className="text-slate-500 mt-4 font-mono">
                     ${" "}
-                    <span aria-hidden="true" className="inline-block w-2 h-4 bg-cyber-400 align-middle animate-blink"></span>
+                    <span aria-hidden="true" className="inline-block w-2 h-4 bg-cyan-400 align-middle animate-blink"></span>
                   </p>
                 </div>
               </div>
@@ -169,25 +169,25 @@ function Hero() {
           </div>
 
           {/* floating quiz chip */}
-          <div className="absolute -bottom-5 -left-3 md:-left-7 rounded-2xl border border-white/[0.08] bg-[#0c1324]/90 px-4 py-3 shadow-2xl backdrop-blur-xl animate-slide-up animation-delay-500">
-            <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mb-0.5">Runtime Evaluation</p>
-            <p className="text-sm font-black text-emerald-400">PASSED · 92% VERIFIED</p>
+          <div className="absolute -bottom-5 -left-3 md:-left-7 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl backdrop-blur-xl animate-slide-up animation-delay-500">
+            <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-0.5">Runtime Evaluation</p>
+            <p className="text-sm font-black text-emerald-600">PASSED · 92% VERIFIED</p>
           </div>
         </div>
       </div>
 
       {/* Specialized Skills Ribbon */}
-      <div className="border-t border-white/[0.06] bg-[#070b16]/70 backdrop-blur-md py-4 relative z-10">
+      <div className="border-t border-slate-200 bg-white/90 backdrop-blur-md py-4 relative z-10">
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between gap-4 flex-wrap md:flex-nowrap">
-          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-400 shrink-0 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-400 animate-ping"></span>
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 shrink-0 flex items-center gap-2 font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-ping"></span>
             Specialized Tracks:
           </span>
           <div className="flex items-center gap-2 flex-wrap">
             {skills.map((s) => (
               <span
                 key={s}
-                className="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-white/[0.03] border border-white/[0.06] text-slate-300 hover:border-accent-500/40 hover:text-accent-300 hover:bg-accent-500/10 transition-all duration-300 cursor-default"
+                className="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-slate-100 border border-slate-200 text-slate-700 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200 cursor-default"
               >
                 {s}
               </span>
