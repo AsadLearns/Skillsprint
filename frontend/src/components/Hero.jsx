@@ -4,13 +4,22 @@ import { useAuth } from "../context/AuthContext"
 import ThreeWelcomeCanvas from "./ThreeWelcomeCanvas"
 
 const weeks = [
-  { n: 1, topic: "Components & JSX", state: "done" },
-  { n: 2, topic: "Hooks & State", state: "active", pct: 45 },
-  { n: 3, topic: "Routing & Data Fetching", state: "locked" },
-  { n: 4, topic: "Testing & Deployment", state: "locked" }
+  { n: 1, topic: "Architecture, AST & Virtual DOM", state: "done" },
+  { n: 2, topic: "Concurrent Mode & State Lifecycles", state: "active", pct: 65 },
+  { n: 3, topic: "Streaming SSR & Hydration Boundary", state: "locked" },
+  { n: 4, topic: "Memory Profiling & Bundle Optimization", state: "locked" }
 ]
 
-const skills = ["React", "Python", "Java", "Web Dev", "Node.js", "AI/ML", "MongoDB", "DevOps"]
+const skills = [
+  "Go Systems",
+  "Rust Core",
+  "React 19",
+  "Kubernetes",
+  "PostgreSQL",
+  "TypeScript",
+  "FastAPI",
+  "LLM / RAG"
+]
 
 function Hero() {
   const { user } = useAuth()
@@ -30,16 +39,16 @@ function Hero() {
         <div className="animate-slide-up">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-[0.2em] bg-accent-500/10 border border-accent-500/30 text-accent-300 mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(139,92,246,0.2)]">
             <span className="w-2 h-2 rounded-full bg-cyber-400 animate-pulse"></span>
-            <span>AI-Accelerated Learning Engine</span>
+            <span>ENGINEERING CURRICULUM // AUTONOMOUS ROADMAPS</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.08] mb-6 text-slate-100">
             Stop collecting tutorials. <br className="hidden sm:inline" />
-            <span className="gradient-text">Start conquering skills.</span>
+            <span className="gradient-text">Master production engineering.</span>
           </h1>
 
           <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg mb-8 font-medium">
-            Pick a high-demand tech stack. Receive an autonomous milestone roadmap, prove proficiency through AI concept quizzes, and unlock verifiable certificates.
+            Select an engineering track. Receive an autonomous milestone graph, prove conceptual mastery through verified technical evaluations, and generate cryptographic proof of proficiency.
           </p>
 
           <div className="flex items-center gap-3.5 flex-wrap mb-8">
@@ -51,15 +60,18 @@ function Hero() {
             </button>
             <a
               href="#ai-video-demo"
-              className="border border-cyber-500/30 bg-cyber-500/10 hover:bg-cyber-500/20 hover:border-cyber-500/50 text-cyber-300 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 inline-flex items-center gap-2 backdrop-blur-md shadow-sm"
+              className="border border-cyber-500/30 bg-cyber-500/10 hover:bg-cyber-500/20 hover:border-cyber-500/50 text-cyber-300 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 inline-flex items-center gap-2.5 backdrop-blur-md shadow-sm"
             >
-              <span>▶ 30s AI Demo Video</span>
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <span>Engine Walkthrough</span>
             </a>
             <Link
               to="/how-it-works"
               className="border border-white/[0.12] bg-white/[0.03] text-slate-300 hover:bg-white/[0.08] px-5 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 inline-block backdrop-blur-md"
             >
-              Process
+              Architecture
             </Link>
           </div>
 
@@ -68,7 +80,7 @@ function Hero() {
             <span className="text-slate-600">•</span>
             <span className="flex items-center gap-1.5"><span className="text-accent-400">✓</span> No Card Required</span>
             <span className="text-slate-600">•</span>
-            <span className="flex items-center gap-1.5"><span className="text-cyber-400">✓</span> 8+ Pro Tracks</span>
+            <span className="flex items-center gap-1.5"><span className="text-cyber-400">✓</span> Production Stacks</span>
           </div>
         </div>
 
@@ -85,7 +97,7 @@ function Hero() {
                     heroMode === "3d" ? "bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm" : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  ⚡ 3D Hologram
+                  3D Topology
                 </button>
                 <button
                   onClick={() => setHeroMode("terminal")}
@@ -93,7 +105,7 @@ function Hero() {
                     heroMode === "terminal" ? "bg-gradient-to-r from-accent-500 to-indigo-600 text-white shadow-glow-sm" : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  💻 Sprint Terminal
+                  Live CLI
                 </button>
               </div>
             </div>
@@ -108,15 +120,15 @@ function Hero() {
                   <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
-                  <span className="ml-3 font-mono text-[10px] text-slate-400 font-semibold">sprinty — react-sprint</span>
+                  <span className="ml-3 font-mono text-[10px] text-slate-400 font-semibold">skillsprint-cli — v2.4.0</span>
                 </div>
                 <div className="p-5 font-mono text-[12px] md:text-[13px]">
                   <p className="text-slate-400 mb-1.5">
-                    $ <span className="text-cyber-400 font-bold">sprint new</span>{" "}
-                    <span className="text-cyber-400">--skill</span> react{" "}
-                    <span className="text-cyber-400">--level</span> intermediate
+                    $ <span className="text-cyber-400 font-bold">sprint compile</span>{" "}
+                    <span className="text-cyber-400">--track</span> react-systems{" "}
+                    <span className="text-cyber-400">--tier</span> senior
                   </p>
-                  <p className="text-accent-400 mb-4 font-bold">✓ 4-week roadmap generated</p>
+                  <p className="text-accent-400 mb-4 font-bold">✓ 4-week dependency graph resolved</p>
 
                   <div className="divide-y divide-white/[0.04] border-t border-white/[0.04]">
                     {weeks.map((w, i) => (
@@ -135,13 +147,13 @@ function Hero() {
                         {w.state === "active" && (
                           <span className="ml-auto flex items-center gap-2 shrink-0">
                             <span className="w-16 h-1.5 bg-white/[0.07] rounded-full overflow-hidden">
-                              <span className="block w-[45%] h-full bg-accent-500 rounded-full shadow-glow-sm"></span>
+                              <span className="block w-[65%] h-full bg-accent-500 rounded-full shadow-glow-sm"></span>
                             </span>
                             <span className="text-accent-400 font-bold">{w.pct}%</span>
                           </span>
                         )}
                         {w.state === "locked" && (
-                          <span className="ml-auto text-slate-600 shrink-0 font-mono">locked</span>
+                          <span className="ml-auto text-slate-600 shrink-0 font-mono">queued</span>
                         )}
                       </div>
                     ))}
@@ -158,8 +170,8 @@ function Hero() {
 
           {/* floating quiz chip */}
           <div className="absolute -bottom-5 -left-3 md:-left-7 rounded-2xl border border-white/[0.08] bg-[#0c1324]/90 px-4 py-3 shadow-2xl backdrop-blur-xl animate-slide-up animation-delay-500">
-            <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mb-0.5">Milestone quiz</p>
-            <p className="text-sm font-black text-emerald-400">Passed · 80% ✓</p>
+            <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mb-0.5">Runtime Evaluation</p>
+            <p className="text-sm font-black text-emerald-400">PASSED · 92% VERIFIED</p>
           </div>
         </div>
       </div>
