@@ -41,6 +41,12 @@ function Navbar() {
               NEW
             </span>
           </Link>
+          <a
+            href="/#fullpage-scroll-effects"
+            className="hover:text-slate-950 transition flex items-center gap-1"
+          >
+            <span>Scroll 3D</span>
+          </a>
           <Link to="/features" className={`transition ${isActive('/features') ? 'text-indigo-600 font-bold border-b-2 border-indigo-600 pb-0.5' : 'hover:text-slate-950'}`}>Features</Link>
           <Link to="/how-it-works" className={`transition ${isActive('/how-it-works') ? 'text-indigo-600 font-bold border-b-2 border-indigo-600 pb-0.5' : 'hover:text-slate-950'}`}>Process</Link>
           <Link to="/faq" className={`transition ${isActive('/faq') ? 'text-indigo-600 font-bold border-b-2 border-indigo-600 pb-0.5' : 'hover:text-slate-950'}`}>FAQ</Link>
@@ -85,6 +91,14 @@ function Navbar() {
               <span>AI Builder (Prompt to Work)</span>
               <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-indigo-600 text-white font-bold">NEW</span>
             </Link>
+            <a
+              href="/#fullpage-scroll-effects"
+              onClick={() => setIsOpen(false)}
+              className="text-slate-700 hover:text-slate-950 font-bold transition py-3 border-b border-slate-100 flex items-center justify-between"
+            >
+              <span>Scroll 3D Effects</span>
+              <span className="text-xs text-indigo-600 font-mono font-bold">fullPage</span>
+            </a>
             <Link to="/features" onClick={() => setIsOpen(false)} className={`${isActive('/features') ? 'text-indigo-600 font-extrabold' : 'text-slate-700 hover:text-slate-950'} font-bold transition py-3 border-b border-slate-100`}>Features</Link>
             <Link to="/how-it-works" onClick={() => setIsOpen(false)} className={`${isActive('/how-it-works') ? 'text-indigo-600 font-extrabold' : 'text-slate-700 hover:text-slate-950'} font-bold transition py-3 border-b border-slate-100`}>Process</Link>
             <Link to="/faq" onClick={() => setIsOpen(false)} className={`${isActive('/faq') ? 'text-indigo-600 font-extrabold' : 'text-slate-700 hover:text-slate-950'} font-bold transition py-3 border-b border-slate-100`}>FAQ</Link>
