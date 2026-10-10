@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SkillSprint — AI learning roadmaps that you actually finish</title>
     <meta name="description" content="Pick a skill, get an AI-built week-by-week roadmap with study guides and milestone quizzes, and earn a certificate when you finish. Free, no credit card." />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="canonical" href="https://skillsprint-navy.vercel.app/" />
 
     <meta property="og:type" content="website" />
@@ -21,6 +21,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Auto-recover from stale browser caches & service workers -->
+    <script>
+      try {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(regs) {
+            for (var r of regs) r.unregister();
+          });
+        }
+      } catch (e) {}
+      window.addEventListener('error', function(e) {
+        var msg = (e && e.message) ? e.message : '';
+        if (msg.indexOf('dynamically imported module') !== -1 || msg.indexOf('Loading chunk') !== -1) {
+          if (!sessionStorage.getItem('skillsprint_reload_once')) {
+            sessionStorage.setItem('skillsprint_reload_once', '1');
+            window.location.reload();
+          }
+        }
+      });
+    </script>
 
     <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZY93MW636"></script>

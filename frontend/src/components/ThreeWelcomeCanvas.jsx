@@ -180,19 +180,25 @@ function ThreeWelcomeCanvas() {
     window.addEventListener("resize", onResize)
 
     return () => {
-      cancelAnimationFrame(animationId)
-      window.removeEventListener("resize", onResize)
-      container.removeEventListener("pointermove", onPointerMove)
-      if (renderer.domElement && container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement)
+      try {
+        cancelAnimationFrame(animationId)
+        window.removeEventListener("resize", onResize)
+        if (container) {
+          container.removeEventListener("pointermove", onPointerMove)
+          if (renderer.domElement && container.contains(renderer.domElement)) {
+            container.removeChild(renderer.domElement)
+          }
+        }
+        sphereGeo?.dispose?.()
+        lineMat?.dispose?.()
+        horizonGeo?.dispose?.()
+        horizonMat?.dispose?.()
+        particleGeo?.dispose?.()
+        particleMat?.dispose?.()
+        renderer?.dispose?.()
+      } catch (err) {
+        console.warn("Cleanup error in ThreeWelcomeCanvas:", err)
       }
-      sphereGeo.dispose()
-      lineMat.dispose()
-      horizonGeo.dispose()
-      horizonMat.dispose()
-      particleGeo.dispose()
-      particleMat.dispose()
-      renderer.dispose()
     }
   }, [])
 

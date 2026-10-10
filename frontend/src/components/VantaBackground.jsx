@@ -110,10 +110,14 @@ function VantaBackground() {
 
     return () => {
       cancelled = true
-      if (window.cancelIdleCallback) window.cancelIdleCallback(handle)
-      if (effect.current) {
-        effect.current.destroy()
-        effect.current = null
+      try {
+        if (window.cancelIdleCallback) window.cancelIdleCallback(handle)
+        if (effect.current) {
+          effect.current.destroy()
+          effect.current = null
+        }
+      } catch (err) {
+        console.warn("Vanta cleanup error:", err)
       }
     }
   }, [])

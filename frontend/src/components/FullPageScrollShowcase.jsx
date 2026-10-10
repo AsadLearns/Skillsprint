@@ -363,8 +363,12 @@ export default function FullPageScrollShowcase() {
     render()
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
+      try {
+        window.removeEventListener("resize", handleResize)
+        if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
+      } catch (err) {
+        console.warn("FullPageScrollShowcase cleanup error:", err)
+      }
     }
   }, [currentSlide])
 
