@@ -15,15 +15,31 @@ function ScrollReveal() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const native =
-      typeof CSS !== "undefined" &&
-      CSS.supports &&
-      CSS.supports("animation-timeline: view()")
-    if (native) return
+    // Fail-safe: ensure elements are never permanently invisible
+    const makeVisible = () => {
+      const nodes = document.querySelectorAll(".reveal")
+      nodes.forEach((n) => {
+        const box = n.getBoundingClientRect()
+        // If within or near the viewport, or if scroll position is 0, reveal immediately
+        if (box.top < window.innerHeight * 1.2 || window.scrollY === 0) {
+          n.classList.add("revealed")
+        }
+      })
+    }
 
-    // Motion sensitivity wins: leave everything static and visible.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    if (!("IntersectionObserver" in window)) return
+    // Run immediately and after paint
+    makeVisible()
+    const timer = setTimeout(makeVisible, 50)
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll(".reveal").forEach((n) => n.classList.add("revealed"))
+      return () => clearTimeout(timer)
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".reveal").forEach((n) => n.classList.add("revealed"))
+      return () => clearTimeout(timer)
+    }
 
     const root = document.documentElement
     root.classList.add("js-reveal")
@@ -34,15 +50,13 @@ function ScrollReveal() {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return
           entry.target.classList.add("revealed")
-          io.unobserve(entry.target) // one-way; do not re-hide on scroll up
+          io.unobserve(entry.target)
         })
       },
-      // start the transition slightly before the section is fully on screen
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
+      { rootMargin: "50px 0px 50px 0px", threshold: 0.01 }
     )
 
     nodes.forEach((n) => {
-      // Anything already on screen at mount should not animate in late.
       const box = n.getBoundingClientRect()
       if (box.top < window.innerHeight && box.bottom > 0) {
         n.classList.add("revealed")
@@ -51,7 +65,10 @@ function ScrollReveal() {
       }
     })
 
-    return () => io.disconnect()
+    return () => {
+      clearTimeout(timer)
+      io.disconnect()
+    }
   }, [pathname])
 
   return null

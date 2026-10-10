@@ -112,9 +112,10 @@ function Roadmap() {
   const fetchMyRoadmaps = async () => {
     try {
       const res = await api.get('/roadmap')
-      setMyRoadmaps(res.data.roadmaps)
+      setMyRoadmaps(Array.isArray(res.data?.roadmaps) ? res.data.roadmaps : [])
     } catch (err) {
       console.error(err)
+      setMyRoadmaps([])
     }
   }
 

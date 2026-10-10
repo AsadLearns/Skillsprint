@@ -34,9 +34,10 @@ export default function Quiz() {
     if (location.state?.resumeQuiz) {
       const resumed = location.state.resumeQuiz
       setQuiz(resumed)
-      if (resumed.completed) {
-        const correct = resumed.questions.filter(q => q.userAnswer === q.correct).length
-        setResult({ quiz: resumed, correct, total: resumed.questions.length })
+      const questions = Array.isArray(resumed?.questions) ? resumed.questions : []
+      if (resumed?.completed) {
+        const correct = questions.filter(q => q?.userAnswer === q?.correct).length
+        setResult({ quiz: resumed, correct, total: questions.length })
         setStep('result')
       } else {
         setAnswers({})

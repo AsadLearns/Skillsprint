@@ -147,11 +147,15 @@ export default function Dashboard() {
 
   function handleLogout() { logout(); navigate('/') }
 
-  const totalProgress = roadmaps.length
-    ? Math.round(roadmaps.reduce((s, r) => s + r.progress, 0) / roadmaps.length) : 0
-  const completedWeeks = roadmaps.reduce((s, r) => s + r.weeks.filter(w => w.completed).length, 0)
-  const avgQuizScore = quizzes.filter(q => q.completed).length
-    ? Math.round(quizzes.filter(q => q.completed).reduce((s, q) => s + q.score, 0) / quizzes.filter(q => q.completed).length) : 0
+  const safeRoadmaps = Array.isArray(roadmaps) ? roadmaps : []
+  const safeQuizzes = Array.isArray(quizzes) ? quizzes : []
+
+  const totalProgress = safeRoadmaps.length
+    ? Math.round(safeRoadmaps.reduce((s, r) => s + (r?.progress || 0), 0) / safeRoadmaps.length) : 0
+  const completedWeeks = safeRoadmaps.reduce((s, r) => s + (Array.isArray(r?.weeks) ? r.weeks.filter(w => w?.completed).length : 0), 0)
+  const completedQuizzes = safeQuizzes.filter(q => q?.completed)
+  const avgQuizScore = completedQuizzes.length
+    ? Math.round(completedQuizzes.reduce((s, q) => s + (q?.score || 0), 0) / completedQuizzes.length) : 0
 
   const tabs = ['overview', 'roadmaps', 'quizzes']
 

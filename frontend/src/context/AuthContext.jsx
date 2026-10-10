@@ -8,12 +8,20 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    const savedUser = localStorage.getItem('user')
-    if (token && savedUser) {
-      setUser(JSON.parse(savedUser))
+    try {
+      const token = localStorage.getItem('token')
+      const savedUser = localStorage.getItem('user')
+      if (token && savedUser && savedUser !== 'undefined' && savedUser !== 'null') {
+        setUser(JSON.parse(savedUser))
+      }
+    } catch (err) {
+      console.warn('Failed to parse saved user in AuthContext, clearing session:', err)
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      setUser(null)
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }, [])
 
   const register = async (name, email, password) => {
