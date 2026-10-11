@@ -22,8 +22,16 @@ function Navbar() {
         <Link to="/" className="flex items-center gap-2.5 group">
           <Logo />
           <div className="flex items-center gap-2">
-            <span className="text-xl font-black tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">SkillSprint</span>
+            <span className="font-sans text-xl font-black tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+              Skill
+              <span className="font-cursive text-2xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-0.5">
+                Sprint
+              </span>
+            </span>
             <span className="text-[9px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 font-bold">PRO</span>
+            <span className="hidden xl:inline-block font-cursive text-sm text-purple-700 font-bold -rotate-2 ml-1">
+              &ldquo;speed &amp; mastery&rdquo; ✨
+            </span>
           </div>
         </Link>
 

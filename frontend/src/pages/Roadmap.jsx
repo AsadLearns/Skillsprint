@@ -9,6 +9,7 @@ import { getComprehensiveStudyGuide } from '../utils/studyGuideGenerator'
 import VideoGuideSection from '../components/VideoGuideSection'
 import WarRoomModal from '../components/WarRoomModal'
 import VivaDefenseModal from '../components/VivaDefenseModal'
+import CoolHeader from '../components/CoolHeader'
 
 const skills = ['Java', 'Python', 'React', 'Web Development', 'Node.js', 'AI/ML', 'MongoDB', 'DevOps']
 const levels = ['Beginner', 'Intermediate', 'Advanced']
@@ -222,26 +223,11 @@ function Roadmap() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 relative overflow-hidden">
-      <div className="sticky top-0 z-50 w-full">
-        {/* Announcement Marquee Ticker */}
-        <div className="w-full bg-slate-100 font-mono text-[10px] uppercase tracking-widest text-slate-600 py-1.5 border-b border-slate-200 overflow-hidden whitespace-nowrap select-none relative z-50">
-          <div className="inline-block animate-marquee">
-            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
-          </div>
-        </div>
-
-        <nav className="border-b border-slate-200 px-6 py-4 flex items-center justify-between bg-white/90 backdrop-blur-xl shadow-xs">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-            <Logo />
-            <span className="text-xl font-bold gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/quiz')} className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 text-xs px-4 py-2 rounded-xl font-semibold transition cursor-pointer shadow-xs">🧠 Take Quiz</button>
-            <button onClick={() => navigate('/dashboard')} className="text-xs text-slate-600 hover:text-slate-950 font-bold transition cursor-pointer">← Dashboard</button>
-          </div>
-        </nav>
-      </div>
+      <CoolHeader
+        activePage="roadmap"
+        onOpenWarRoom={() => setWarRoomState({ week: 1, topic: roadmap?.weeks?.[0]?.topic || 'Production Architecture & Scaling' })}
+        onOpenViva={() => setVivaState({ week: 1, topic: roadmap?.weeks?.[0]?.topic || 'Production Architecture & Scaling' })}
+      />
 
       <div className="max-w-4xl mx-auto px-6 py-10 relative z-10">
 

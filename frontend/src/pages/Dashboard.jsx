@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import Logo from '../components/Logo'
 import ChatBot from '../components/ChatBot'
+import CoolHeader from '../components/CoolHeader'
 import AnimatedCounter from '../components/AnimatedCounter'
 
 const skillColors = {
@@ -161,33 +162,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 relative overflow-hidden">
-      <div className="sticky top-0 z-50 w-full">
-        {/* Announcement Marquee Ticker */}
-        <div className="w-full bg-slate-100 font-mono text-[10px] uppercase tracking-widest text-slate-600 py-1.5 border-b border-slate-200 overflow-hidden whitespace-nowrap select-none relative z-50">
-          <div className="inline-block animate-marquee">
-            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span>⚡ SPRINT TO YOUR GOALS WITH SPRINTY CHATBOT ⚡ COMPLETE ROADMAP MILESTONES TO EARN EXCLUSIVE REWARDS ⚡ GAIN &gt;60% IN QUIZZES TO UNLOCK MASTERY CERTIFICATES 🎓 &nbsp;&nbsp;&nbsp;&nbsp;</span>
-          </div>
-        </div>
-
-        <nav className="border-b border-slate-200 px-4 md:px-6 py-4 flex items-center justify-between bg-white/90 backdrop-blur-xl shadow-xs">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-            <Logo size="w-8 h-8 md:w-9 md:h-9" />
-            <span className="text-lg md:text-2xl font-black gradient-text tracking-tight hover:scale-[1.02] transition-transform duration-300">SkillSprint</span>
-          </div>
-          <div className="flex items-center gap-2 md:gap-3">
-            <button onClick={() => navigate('/roadmap')} className="bg-gradient-to-r from-accent-500 to-indigo-600 hover:from-accent-400 hover:to-indigo-500 text-white text-[10px] md:text-xs px-3 md:px-4 py-2 md:py-2.5 rounded-xl font-bold transition-all shadow-glow-sm hover:shadow-glow cursor-pointer">
-              <span className="md:inline hidden">+ New Roadmap</span>
-              <span className="md:hidden">🗺️ New</span>
-            </button>
-            <button onClick={() => navigate('/quiz')} className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 text-[10px] md:text-xs px-2.5 md:px-4 py-2 md:py-2.5 rounded-xl font-semibold transition cursor-pointer shadow-xs">
-              <span className="md:inline hidden">🧠 Take Quiz</span>
-              <span className="md:hidden">🧠 Quiz</span>
-            </button>
-            <button onClick={handleLogout} className="text-[10px] md:text-xs text-slate-500 hover:text-rose-600 font-bold transition px-2 py-1 cursor-pointer">Log out</button>
-          </div>
-        </nav>
-      </div>
+      <CoolHeader activePage="dashboard" />
 
       <div className="max-w-6xl mx-auto px-6 py-10 relative z-10">
         

@@ -19,6 +19,22 @@
     background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
   }
 
+  .font-cursive {
+    font-family: 'Caveat', 'Dancing Script', cursive;
+  }
+
+  .font-script {
+    font-family: 'Dancing Script', 'Pacifico', cursive;
+  }
+
+  .font-handwriting {
+    font-family: 'Pacifico', 'Caveat', cursive;
+  }
+
+  .text-glow-cursive {
+    text-shadow: 0 0 16px rgba(168, 85, 247, 0.4), 0 0 30px rgba(99, 102, 241, 0.25);
+  }
+
   .badge-niche {
     @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-[0.2em] bg-white border border-slate-200 text-slate-700 shadow-sm backdrop-blur-md;
   }
