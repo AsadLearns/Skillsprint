@@ -5,6 +5,8 @@ import Logo from '../components/Logo'
 import ChatBot from '../components/ChatBot'
 import RoadmapGenerating from '../components/RoadmapGenerating'
 import { generateEngineeringSolution } from '../utils/solutionGenerator'
+import { getComprehensiveStudyGuide } from '../utils/studyGuideGenerator'
+import VideoGuideSection from '../components/VideoGuideSection'
 
 const skills = ['Java', 'Python', 'React', 'Web Development', 'Node.js', 'AI/ML', 'MongoDB', 'DevOps']
 const levels = ['Beginner', 'Intermediate', 'Advanced']
@@ -45,11 +47,23 @@ function Roadmap() {
     setStudyLoading(true)
     setStudyContent('')
     try {
+      // If it's a synthetic roadmap or offline, generate immediately
+      if (!roadmap?._id || String(roadmap._id).startsWith('sprint_')) {
+        const fallback = getComprehensiveStudyGuide(roadmap?.skill || 'Engineering', topicName, weekNumber, roadmap?.level || 'Beginner')
+        setStudyContent(fallback)
+        setStudyLoading(false)
+        return
+      }
       const res = await api.get(`/roadmap/${roadmap._id}/weeks/${weekNumber}/study`)
-      setStudyContent(res.data.studyContent)
+      if (res.data?.studyContent) {
+        setStudyContent(res.data.studyContent)
+      } else {
+        throw new Error('Empty response')
+      }
     } catch (err) {
-      console.error(err)
-      setStudyContent("### ⚠️ Error\nFailed to load study guide. Please try again.")
+      console.warn('Backend study guide unavailable, using resilient generator:', err.message)
+      const fallback = getComprehensiveStudyGuide(roadmap?.skill || 'Engineering', topicName, weekNumber, roadmap?.level || 'Beginner')
+      setStudyContent(fallback)
     } finally {
       setStudyLoading(false)
     }
@@ -531,7 +545,12 @@ function Roadmap() {
                   <p className="text-slate-500 font-mono font-bold animate-pulse text-xs uppercase tracking-widest">Synthesizing study guide...</p>
                 </div>
               ) : (
-                <div className="prose max-w-none select-text" dangerouslySetInnerHTML={{ __html: renderMarkdown(studyContent) }} />
+                <div>
+                  <div className="prose max-w-none select-text" dangerouslySetInnerHTML={{ __html: renderMarkdown(studyContent) }} />
+                  
+                  {/* Recommended Filtered Video Guides (Most Viewed & Highest Reviews) */}
+                  <VideoGuideSection skill={roadmap?.skill} topic={studyTopic} />
+                </div>
               )}
             </div>
             
