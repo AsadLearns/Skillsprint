@@ -7,6 +7,8 @@ import RoadmapGenerating from '../components/RoadmapGenerating'
 import { generateEngineeringSolution } from '../utils/solutionGenerator'
 import { getComprehensiveStudyGuide } from '../utils/studyGuideGenerator'
 import VideoGuideSection from '../components/VideoGuideSection'
+import WarRoomModal from '../components/WarRoomModal'
+import VivaDefenseModal from '../components/VivaDefenseModal'
 
 const skills = ['Java', 'Python', 'React', 'Web Development', 'Node.js', 'AI/ML', 'MongoDB', 'DevOps']
 const levels = ['Beginner', 'Intermediate', 'Advanced']
@@ -41,6 +43,10 @@ function Roadmap() {
   const [studyLoading, setStudyLoading] = useState(false)
   const [studyContent, setStudyContent] = useState('')
 
+  // Unique Industry-First Features: Chaos Incident War Room & AI Viva Defense
+  const [warRoomState, setWarRoomState] = useState(null) // { week, topic } | null
+  const [vivaState, setVivaState] = useState(null) // { week, topic } | null
+
   const openStudyGuide = async (weekNumber, topicName) => {
     setStudyWeek(weekNumber)
     setStudyTopic(topicName)
@@ -55,10 +61,12 @@ function Roadmap() {
         return
       }
       const res = await api.get(`/roadmap/${roadmap._id}/weeks/${weekNumber}/study`)
-      if (res.data?.studyContent) {
+      // Ensure we discard any legacy error strings previously cached or returned
+      if (res.data?.studyContent && !res.data.studyContent.includes('⚠️ Error') && !res.data.studyContent.includes('Failed to load') && res.data.studyContent.length > 50) {
         setStudyContent(res.data.studyContent)
       } else {
-        throw new Error('Empty response')
+        const fallback = getComprehensiveStudyGuide(roadmap?.skill || 'Engineering', topicName, weekNumber, roadmap?.level || 'Beginner')
+        setStudyContent(fallback)
       }
     } catch (err) {
       console.warn('Backend study guide unavailable, using resilient generator:', err.message)
@@ -498,13 +506,26 @@ function Roadmap() {
 
                         <div className="flex gap-2 self-start md:self-auto flex-wrap">
                           <button onClick={() => openStudyGuide(week.week, week.topic)}
-                            className="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold px-4 py-3 rounded-xl transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                            className="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold px-3.5 py-2.5 rounded-xl transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
                           >
                             📖 Study Guide
                           </button>
+                          <button onClick={() => setWarRoomState({ week: week.week, topic: week.topic })}
+                            className="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold px-3.5 py-2.5 rounded-xl transition cursor-pointer flex items-center gap-1.5 shadow-2xs group"
+                            title="Enter Chaos War Room to debug a live simulated production incident"
+                          >
+                            <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
+                            🚨 War Room
+                          </button>
+                          <button onClick={() => setVivaState({ week: week.week, topic: week.topic })}
+                            className="bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 text-xs font-bold px-3.5 py-2.5 rounded-xl transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                            title="Defend this milestone with an AI Senior Architect Viva"
+                          >
+                            🛡️ Viva Defense
+                          </button>
                           {!isCompleted && (
                             <button onClick={() => handleCompleteWeek(roadmap._id, week.week)}
-                              className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold px-5 py-3 rounded-xl transition shadow-xs cursor-pointer"
+                              className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-xs cursor-pointer"
                             >
                               Mark Done ✓
                             </button>
@@ -568,6 +589,26 @@ function Roadmap() {
           </div>
         </div>
       )}
+      {/* AI Production Incident War Room Modal */}
+      {warRoomState && (
+        <WarRoomModal
+          skill={roadmap?.skill || 'Engineering'}
+          topic={warRoomState.topic}
+          weekNumber={warRoomState.week}
+          onClose={() => setWarRoomState(null)}
+        />
+      )}
+
+      {/* AI Architectural Viva Defense Modal */}
+      {vivaState && (
+        <VivaDefenseModal
+          skill={roadmap?.skill || 'Engineering'}
+          topic={vivaState.topic}
+          weekNumber={vivaState.week}
+          onClose={() => setVivaState(null)}
+        />
+      )}
+
       <ChatBot />
     </div>
   )
