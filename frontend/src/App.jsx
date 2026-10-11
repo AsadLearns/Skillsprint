@@ -21,6 +21,7 @@ import Skills from "./pages/Skills";
 import VantaBackground from "./components/VantaBackground";
 import ScrollReveal from "./components/ScrollReveal";
 import CardTilt from "./components/CardTilt";
+import Cursor3DManager from "./components/Cursor3DManager";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -43,6 +44,7 @@ function App() {
         <ScrollToTop />
         <ScrollReveal />
         <CardTilt />
+        <Cursor3DManager />
         
         <div className="relative z-10">
           <Routes>
