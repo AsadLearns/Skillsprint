@@ -5,6 +5,7 @@ import {
   login,
   getMe,
   forgotPassword,
+  verifyOTP,
   resetPassword,
   updateProfile,
 } from '../controllers/authController.js'
@@ -18,6 +19,8 @@ router.post('/register', register)
 router.post('/login', login)
 
 router.post('/forgot-password', forgotPassword)
+
+router.post('/verify-otp', verifyOTP)
 
 router.post('/reset-password', resetPassword)
 

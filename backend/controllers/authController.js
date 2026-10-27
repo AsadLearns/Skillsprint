@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
 import dotenv from 'dotenv'
+import { sendOTPEmail } from '../utils/emailService.js'
 dotenv.config()
 
 const generateToken = (id) => {
@@ -110,45 +111,107 @@ export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body
     if (!email) {
-      return res.status(400).json({ message: 'Email is required' })
+      return res.status(400).json({ message: 'Email address is required' })
     }
 
-    const user = await User.findOne({ email })
+    const cleanEmail = email.trim().toLowerCase()
+    const user = await User.findOne({ email: cleanEmail })
     if (!user) {
-      return res.status(404).json({ message: 'User not found with this email' })
+      return res.status(404).json({ message: 'No account found with this email address' })
     }
 
-    // Generate a secure 6-digit random code
+    // Generate a secure 6-digit random OTP
     const resetToken = Math.floor(100000 + Math.random() * 900000).toString()
 
     user.resetPasswordToken = resetToken
-    user.resetPasswordExpires = Date.now() + 3600000 // 1 hour
+    user.resetPasswordExpires = Date.now() + 15 * 60 * 1000 // 15 minutes validity
 
     await user.save()
 
+    // Send the OTP via email
+    const emailResult = await sendOTPEmail(user.email, resetToken, user.name)
+
+    const responsePayload = {
+      message: `A 6-digit verification code has been sent to ${user.email}.`,
+      email: user.email,
+    }
+
+    // If running in development or simulated mode without configured SMTP, attach preview info
+    if (emailResult.previewUrl) {
+      responsePayload.previewUrl = emailResult.previewUrl
+    }
+    if (emailResult.simulated || process.env.NODE_ENV !== 'production') {
+      responsePayload.demoToken = resetToken
+    }
+
+    res.status(200).json(responsePayload)
+  } catch (error) {
+    console.error('❌ [authController] forgotPassword error:', error)
+    res.status(500).json({ message: error.message || 'Failed to process password reset request' })
+  }
+}
+
+export const verifyOTP = async (req, res) => {
+  try {
+    const { email, otp, token } = req.body
+    const code = (otp || token || '').trim()
+
+    if (!code) {
+      return res.status(400).json({ message: 'Verification code is required' })
+    }
+
+    const query = {
+      resetPasswordToken: code,
+      resetPasswordExpires: { $gt: Date.now() },
+    }
+
+    if (email) {
+      query.email = email.trim().toLowerCase()
+    }
+
+    const user = await User.findOne(query)
+
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid or expired verification code. Please request a new code.' })
+    }
+
     res.status(200).json({
-      message: 'Password reset code generated successfully',
-      demoToken: resetToken
+      message: 'Code verified successfully! You may now set your new password.',
+      verified: true,
+      email: user.email,
     })
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    console.error('❌ [authController] verifyOTP error:', error)
+    res.status(500).json({ message: error.message || 'Failed to verify code' })
   }
 }
 
 export const resetPassword = async (req, res) => {
   try {
-    const { token, newPassword } = req.body
-    if (!token || !newPassword) {
-      return res.status(400).json({ message: 'Code and new password are required' })
+    const { email, otp, token, newPassword } = req.body
+    const code = (otp || token || '').trim()
+
+    if (!code || !newPassword) {
+      return res.status(400).json({ message: 'Verification code and new password are required' })
     }
 
-    const user = await User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() }
-    })
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters long' })
+    }
+
+    const query = {
+      resetPasswordToken: code,
+      resetPasswordExpires: { $gt: Date.now() },
+    }
+
+    if (email) {
+      query.email = email.trim().toLowerCase()
+    }
+
+    const user = await User.findOne(query)
 
     if (!user) {
-      return res.status(400).json({ message: 'Invalid or expired reset code' })
+      return res.status(400).json({ message: 'Invalid or expired verification code. Please request a new one.' })
     }
 
     const salt = await bcrypt.genSalt(10)
@@ -160,9 +223,10 @@ export const resetPassword = async (req, res) => {
 
     await user.save()
 
-    res.status(200).json({ message: 'Password reset successful' })
+    res.status(200).json({ message: 'Password reset successfully! You can now log in.' })
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    console.error('❌ [authController] resetPassword error:', error)
+    res.status(500).json({ message: error.message || 'Failed to reset password' })
   }
 }
 
