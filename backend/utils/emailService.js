@@ -18,6 +18,9 @@ const createTransporter = async () => {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
+      connectionTimeout: 8000,
+      greetingTimeout: 8000,
+      socketTimeout: 8000,
     })
   }
 
@@ -28,13 +31,13 @@ const createTransporter = async () => {
     if (isGmail) {
       return nodemailer.createTransport({
         service: 'gmail',
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
         auth: {
           user: process.env.EMAIL_USER.trim(),
           pass: cleanPass,
         },
+        connectionTimeout: 8000,
+        greetingTimeout: 8000,
+        socketTimeout: 8000,
       })
     }
     return nodemailer.createTransport({
@@ -44,6 +47,9 @@ const createTransporter = async () => {
         user: process.env.EMAIL_USER.trim(),
         pass: cleanPass,
       },
+      connectionTimeout: 8000,
+      greetingTimeout: 8000,
+      socketTimeout: 8000,
     })
   }
 
@@ -59,6 +65,9 @@ const createTransporter = async () => {
         user: testAccount.user,
         pass: testAccount.pass,
       },
+      connectionTimeout: 6000,
+      greetingTimeout: 6000,
+      socketTimeout: 6000,
     })
   } catch (err) {
     console.error('❌ [EmailService] Failed to create test account:', err.message)

@@ -135,19 +135,28 @@ export const forgotPassword = async (req, res) => {
 
     await user.save()
 
-    // Send the OTP via email
-    const emailResult = await sendOTPEmail(user.email, resetToken, user.name)
+    // Send the OTP via email with timeout protection (max 7s)
+    let emailResult = { success: false }
+    try {
+      emailResult = await Promise.race([
+        sendOTPEmail(user.email, resetToken, user.name),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Email dispatch timeout')), 7000)),
+      ])
+    } catch (err) {
+      console.warn('⚠️ [forgotPassword] sendOTPEmail timeout or failed:', err.message)
+      emailResult = { success: false, error: err.message, simulated: true }
+    }
 
     const responsePayload = {
       message: `A 6-digit verification code has been sent to ${user.email}.`,
       email: user.email,
     }
 
-    // If running in development or simulated mode without configured SMTP, attach preview info
+    // If running in development, preview, or if live email timed out, attach preview info so user is never locked out
     if (emailResult.previewUrl) {
       responsePayload.previewUrl = emailResult.previewUrl
     }
-    if (emailResult.simulated || process.env.NODE_ENV !== 'production') {
+    if (emailResult.simulated || !emailResult.success || process.env.NODE_ENV !== 'production') {
       responsePayload.demoToken = resetToken
     }
 
