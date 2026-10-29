@@ -4,7 +4,7 @@ import User from '../models/User.js'
 import Roadmap from '../models/roadmap.js'
 import Quiz from '../models/quiz.js'
 import dotenv from 'dotenv'
-import { sendOTPEmail } from '../utils/emailService.js'
+import { sendOTPEmail, sendWelcomeEmail } from '../utils/emailService.js'
 dotenv.config()
 
 const generateToken = (id) => {
@@ -40,6 +40,11 @@ export const register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+    })
+
+    // Dispatch welcome email asynchronously without blocking signup response
+    sendWelcomeEmail(user.email, user.name).catch((err) => {
+      console.warn('⚠️ [Register] Welcome email notice:', err.message)
     })
 
     res.status(201).json({
