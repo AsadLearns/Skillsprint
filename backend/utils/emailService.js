@@ -23,13 +23,17 @@ const createTransporter = async () => {
 
   // Option 2: Gmail or standard email provider
   if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+    const cleanPass = process.env.EMAIL_PASS.replace(/\s+/g, '') // Strip any accidental spaces
     const isGmail = process.env.EMAIL_USER.toLowerCase().includes('@gmail.com')
     if (isGmail) {
       return nodemailer.createTransport({
         service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS, // 16-character Google App Password
+          user: process.env.EMAIL_USER.trim(),
+          pass: cleanPass,
         },
       })
     }
@@ -37,8 +41,8 @@ const createTransporter = async () => {
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: Number(process.env.SMTP_PORT) || 587,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER.trim(),
+        pass: cleanPass,
       },
     })
   }
