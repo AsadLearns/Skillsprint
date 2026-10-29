@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -22,6 +22,8 @@ import VantaBackground from "./components/VantaBackground";
 import ScrollReveal from "./components/ScrollReveal";
 import CardTilt from "./components/CardTilt";
 import Cursor3DManager from "./components/Cursor3DManager";
+import CookieConsent from "./components/CookieConsent";
+import ComplianceModal from "./components/ComplianceModal";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -36,6 +38,14 @@ function ScrollToTop() {
 }
 
 function App() {
+  const [isComplianceOpen, setIsComplianceOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setIsComplianceOpen(true);
+    window.addEventListener("skillsprint:open-compliance", handler);
+    return () => window.removeEventListener("skillsprint:open-compliance", handler);
+  }, []);
+
   return (
     <ErrorBoundary>
       <AuthProvider>
@@ -65,6 +75,10 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
+
+        {/* Global Privacy/Cookie Banner and Compliance Modal */}
+        <CookieConsent onOpenCompliance={() => setIsComplianceOpen(true)} />
+        <ComplianceModal isOpen={isComplianceOpen} onClose={() => setIsComplianceOpen(false)} />
       </AuthProvider>
     </ErrorBoundary>
   );

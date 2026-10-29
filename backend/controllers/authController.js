@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
+import Roadmap from '../models/roadmap.js'
+import Quiz from '../models/quiz.js'
 import dotenv from 'dotenv'
 import { sendOTPEmail } from '../utils/emailService.js'
 dotenv.config()
@@ -270,5 +272,34 @@ export const updateProfile = async (req, res) => {
     })
   } catch (error) {
     res.status(500).json({ message: error.message })
+  }
+}
+
+/**
+ * DPDP Act 2023 Section 12 & CCPA Compliance:
+ * Right to erasure ("Right to be Forgotten") - allows user to permanently delete their account and associated data.
+ */
+export const deleteAccount = async (req, res) => {
+  try {
+    const userId = req.user._id
+    const user = await User.findById(userId)
+
+    if (!user) {
+      return res.status(404).json({ message: 'User account not found' })
+    }
+
+    // Permanently wipe user account, generated roadmaps, and quiz records
+    await Promise.all([
+      User.findByIdAndDelete(userId),
+      Roadmap.deleteMany({ userId }),
+      Quiz.deleteMany({ userId }),
+    ])
+
+    res.status(200).json({
+      message: 'Your account and personal data have been permanently erased in compliance with the DPDP Act 2023.',
+    })
+  } catch (error) {
+    console.error('❌ [authController] deleteAccount error:', error)
+    res.status(500).json({ message: error.message || 'Failed to erase account data' })
   }
 }

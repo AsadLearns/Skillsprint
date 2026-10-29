@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import api from '../services/api'
 import Logo from '../components/Logo'
+import ComplianceModal from '../components/ComplianceModal'
 
 const skillColors = {
   'Java': 'bg-orange-500/15 text-orange-300 border border-orange-500/25',
@@ -16,7 +17,7 @@ const skillColors = {
 }
 
 export default function Profile() {
-  const { user, login } = useAuth()
+  const { user, login, logout } = useAuth()
   const navigate = useNavigate()
   const [roadmaps, setRoadmaps] = useState([])
   const [quizzes, setQuizzes] = useState([])
@@ -25,6 +26,10 @@ export default function Profile() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [showCompliance, setShowCompliance] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [planNotice, setPlanNotice] = useState('')
 
   // Edit fields
   const [form, setForm] = useState({
@@ -76,6 +81,21 @@ export default function Profile() {
       setError(err.response?.data?.message || 'Failed to save profile changes.')
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleDeleteAccount = async () => {
+    setDeleting(true)
+    setError('')
+    try {
+      await api.delete('/auth/delete-account')
+      logout()
+      navigate('/')
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to erase account data.')
+      setShowDeleteModal(false)
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -332,6 +352,71 @@ export default function Profile() {
                   )}
                 </div>
 
+                {/* Account, Subscription & DPDP Privacy Controls */}
+                <div className="glass-panel rounded-3xl p-6 md:p-8 animate-slide-up animation-delay-200 border border-slate-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">🛡️</span>
+                      <h3 className="text-lg font-black text-slate-950 tracking-tight font-heading">
+                        Subscription, Trust &amp; Privacy Controls
+                      </h3>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowCompliance(true)}
+                      className="text-xs text-indigo-600 hover:text-indigo-800 font-bold underline cursor-pointer"
+                    >
+                      View Compliance Notice ↗
+                    </button>
+                  </div>
+
+                  {planNotice && (
+                    <div className="mb-4 p-3.5 bg-indigo-50 border border-indigo-200 rounded-xl text-xs text-indigo-900 font-medium">
+                      ℹ️ {planNotice}
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Subscription & Anti-Dark Pattern Cancellation */}
+                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Current Membership</span>
+                        <span className="text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-200">Active</span>
+                      </div>
+                      <div className="text-base font-extrabold text-slate-900">Community Free Tier</div>
+                      <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
+                        Zero auto-renewing or hidden recurring fees. In accordance with RBI e-mandate rules, any future plan requires a 24-hour pre-debit notice and a 1-click cancel button.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setPlanNotice('You are currently on the Free Community Tier. There are zero active recurring debits or cancellation penalties on your account.')}
+                        className="mt-3.5 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white border border-slate-300 px-3 py-1.5 rounded-lg shadow-xs cursor-pointer transition"
+                      >
+                        Manage / Cancel Plan (1-Click)
+                      </button>
+                    </div>
+
+                    {/* DPDP Section 12 Data Erasure */}
+                    <div className="p-4 bg-rose-50/40 rounded-2xl border border-rose-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-bold text-rose-700 uppercase tracking-wider">DPDP Right to Erasure</span>
+                        <span className="text-[10px] font-bold uppercase bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full border border-rose-200">Section 12</span>
+                      </div>
+                      <div className="text-base font-extrabold text-slate-900">Erase Account &amp; Data</div>
+                      <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
+                        Under India's DPDP Act 2023, you have the right to request permanent erasure of your personal data, roadmaps, and account credentials.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setShowDeleteModal(true)}
+                        className="mt-3.5 text-xs font-bold text-rose-700 hover:text-rose-900 bg-rose-100/80 hover:bg-rose-200 border border-rose-300 px-3 py-1.5 rounded-lg shadow-xs cursor-pointer transition"
+                      >
+                        Delete My Account &amp; Data
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
@@ -399,6 +484,42 @@ export default function Profile() {
           </div>
         </div>
       )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in">
+          <div className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-slate-200 text-slate-900 text-center">
+            <div className="text-4xl mb-3">⚠️</div>
+            <h3 className="text-xl font-black tracking-tight font-heading">Permanently Erase Account?</h3>
+            <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+              In accordance with Section 12 of the DPDP Act 2023, this will immediately delete your account credentials, all completed learning roadmaps, and quiz milestones. This action is <strong>irreversible</strong>.
+            </p>
+            <div className="flex gap-3 mt-6">
+              <button
+                type="button"
+                disabled={deleting}
+                onClick={handleDeleteAccount}
+                className="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-3 rounded-xl cursor-pointer transition shadow-xs disabled:opacity-50"
+              >
+                {deleting ? 'Erasing Data...' : 'Yes, Permanently Delete'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowDeleteModal(false)}
+                className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-3 rounded-xl cursor-pointer transition border border-slate-200"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Compliance Modal */}
+      <ComplianceModal
+        isOpen={showCompliance}
+        onClose={() => setShowCompliance(false)}
+      />
     </div>
   )
 }

@@ -8,6 +8,7 @@ import {
   verifyOTP,
   resetPassword,
   updateProfile,
+  deleteAccount,
 } from '../controllers/authController.js'
 
 import protect from '../middleware/authMiddleware.js'
@@ -27,5 +28,7 @@ router.post('/reset-password', resetPassword)
 router.get('/me', protect, getMe)
 
 router.put('/update-profile', protect, updateProfile)
+
+router.delete('/delete-account', protect, deleteAccount)
 
 export default router
